@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wirfi-app": {
+    "wirfi-frontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/wirfi-app",
+            "outputPath": "dist/wirfi-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wirfi-app:build"
+            "browserTarget": "wirfi-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "wirfi-app:build:production"
+              "browserTarget": "wirfi-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wirfi-app:build"
+            "browserTarget": "wirfi-frontend:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "wirfi-app-e2e": {
+    "wirfi-frontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "wirfi-app:serve"
+            "devServerTarget": "wirfi-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "wirfi-app:serve:production"
+              "devServerTarget": "wirfi-frontend:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "wirfi-app"
+  "defaultProject": "wirfi-frontend"
 }
