@@ -1,0 +1,103 @@
+<div class="container-fluid vh-100" style="background-color:#252b33;">
+    <div class="mx-auto mw-460">
+
+        <div class="mx-auto mw-460 text-center" style="padding-top:100px; padding-bottom: 100px; ">
+            <img src="../../assets/images/wirfi-logo.png" class="img img-fluid logo"/>
+        </div>
+        <form action="#" method="POST">
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_o7PR3DYdjOhH3bINtvDfCxTy"
+                    data-amount="999"
+                    data-name="Demo Site"
+                    data-description="Example charge"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="auto">
+            </script>
+        </form>
+
+
+        <div class="" [hidden]="hide">
+            <!--<div class="panel-heading">-->
+            <!--<app-alert></app-alert>-->
+            <!--</div>-->
+            <div class="panel-body">
+                <form class="form-horizontal" [class.was-validated]="loginForm.submitted" role="form"
+                      #loginForm='ngForm' (ngSubmit)='onSubmit(loginForm)'>
+
+                    <div class="form-group">
+                        <label class="text-white">Email</label>
+                        <input id="email" type="email" class="form-control" name="email" placeholder="Email" required
+                               email autofocus ngModel #email="ngModel">
+                        <div class="invalid-feedback text-right">
+              <span *ngIf="email.hasError('required')">
+                This is required field.
+              </span>
+                            <span *ngIf="email.hasError('email')">
+                Enter a valid email.
+              </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="text-white">Password</label>
+                        <div class="input-group">
+                            <input id="password" [type]="passwordType" class="form-control" name="password"
+                                   placeholder="Password" ngModel #password="ngModel"
+                                   required>
+                            <div class="input-group-append">
+                                <a class="input-group-text" style="cursor: pointer;" (click)="togglePassword()"><i
+                                        [class]="toggleClass"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="invalid-feedback text-right">
+              <span *ngIf="password.hasError('required')">
+                This is required field.
+              </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="w-50 btn btn-primary float-right bordered">
+                            Login
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <p class="forget-account text-white" href="#" (click)="loadMyChildComponent();">
+                            Forgot Password?
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div *ngIf='loadComponent && hide'>
+            <form class="form-horizontal" id="forgot_password_form" style="display: block;" action=""
+                  accept-charset="UTF-8" method="post">
+
+                <p class="text-white">
+                    Enter your Email and we will send you a link to change your password.
+                </p>
+                <div class="form-group">
+                    <label for="email_adr" class="text-white">Email</label>
+
+                    <input id="email_adr" type="email" class="form-control" placeholder="Your email address">
+
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="w-50 btn btn-primary float-right bordered">
+                        Request Password
+                    </button>
+                </div>
+                <div class="form-group">
+                    <div class="text-center pull-left">
+                        <p class="forget-account text-white" href="#" (click)="loadMyChildComponent($event);">
+                            Back to Login
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
