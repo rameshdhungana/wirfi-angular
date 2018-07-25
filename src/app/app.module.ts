@@ -19,6 +19,7 @@ import {FormsModule} from "@angular/forms";
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {StripeComponent} from "./stripe/stripe.component";
+import {StripeService} from "./_services/stripe.service";
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {StripeComponent} from "./stripe/stripe.component";
         AuthGuard,
         PreventLoggedInAccess,
         AlertService,
+        StripeService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
 
