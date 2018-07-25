@@ -72,3 +72,4 @@ Thumbs.db
 /out-tsc
 
 .idea/workspace.xml
+node_modules/rxjs
