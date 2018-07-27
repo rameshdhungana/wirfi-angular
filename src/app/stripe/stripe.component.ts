@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../_services/authentication.service';
 import {AlertService} from '../_services/alert.service';
+import {StripeService} from '../_services/stripe.service'
 
 @Component({
     selector: 'app-stripe',
@@ -14,6 +15,10 @@ export class StripeComponent implements OnInit {
     ngOnInit() {
     }
 
+    constructor(private stripeService: StripeService) {
+    }
+
+
     openCheckout() {
         console.log('hello i am inside opencheckout');
         var handler = (<any>window).StripeCheckout.configure({
@@ -21,9 +26,12 @@ export class StripeComponent implements OnInit {
             locale: 'auto',
             token: function (token: any) {
                 // You can access the token ID with `token.id`.
-             console.log(token.id)
+                console.log(token.id)
                 // Get the token ID to your server-side code for use.
-            }
+                this.stripeService.registerStripeToken(token).subscribe(response => {
+                    console.log(response)
+                })
+            }.bind(this)
         });
 
         handler.open({
