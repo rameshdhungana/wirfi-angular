@@ -20,6 +20,9 @@ import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {StripeComponent} from "./stripe/stripe.component";
 import {StripeService} from "./_services/stripe.service";
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 
 @NgModule({
@@ -27,13 +30,16 @@ import {StripeService} from "./_services/stripe.service";
         AppComponent,
         LoginComponent,
         LogoutComponent,
-        StripeComponent
+        StripeComponent,
+        DashboardComponent,
+        SidebarComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
         HttpClientModule,
+        AngularFontAwesomeModule
 
 
     ],

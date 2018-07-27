@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
                         if (response['key']) {
                             localStorage.setItem('token', response['key']);
                             this.authService.isLoggedInObs();
-                            // this.router.navigateByUrl('add-quiz');
+                            this.router.navigateByUrl('dashboard');
                             console.log('inside the response table');
                         }
                     }

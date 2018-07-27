@@ -23,9 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/assets/css/sb-admin.css",
-              "src/assets/css/styles.css",
+              "src/assets/scss/app.scss"
             ],
             "scripts": []
           },

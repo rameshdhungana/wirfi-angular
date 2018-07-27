@@ -1,0 +1,7 @@
+.content {
+  margin-left: $sidebar-width;
+
+  &--no-sidebar {
+    margin-left: 0;
+  }
+}

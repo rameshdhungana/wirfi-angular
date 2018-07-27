@@ -1,0 +1,35 @@
+.sidebar {
+  position: fixed;
+  width: $sidebar-width;
+  height: 100vh;
+  background: rgb(232, 232, 232);
+}
+
+.sidebar-user-logo {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+}
+
+.nav-item {
+  padding: 5px !important;
+  width: $sidebar-width;
+}
+
+.nav-item:hover {
+  //background-color: #bdbdbd;
+  background-color: rgb(204, 204, 204);
+}
+
+.nav-item a {
+  text-decoration: none !important;
+  display:block;
+
+}
+
+.nav-item-span-font-size {
+  font-size: $nav-item-span-font-size;
+  padding-left: 20px;
+  color: #000 !important;
+
+}
