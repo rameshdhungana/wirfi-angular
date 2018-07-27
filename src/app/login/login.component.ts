@@ -27,9 +27,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(data: NgForm) {
-        console.log('hello');
         if (data.valid) {
-            console.log(data.value);
 
             this.authService.login(data.value)
                 .subscribe(
@@ -37,8 +35,7 @@ export class LoginComponent implements OnInit {
                         if (response['key']) {
                             localStorage.setItem('token', response['key']);
                             this.authService.isLoggedInObs();
-                            // this.router.navigateByUrl('add-quiz');
-                            console.log('inside the response table');
+                            this.router.navigateByUrl('device');
                         }
                     }
                 );

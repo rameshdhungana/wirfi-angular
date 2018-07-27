@@ -30,12 +30,12 @@
                         <input id="email" type="email" class="form-control" name="email" placeholder="Email" required
                                email autofocus ngModel #email="ngModel">
                         <div class="invalid-feedback text-right">
-              <span *ngIf="email.hasError('required')">
-                This is required field.
-              </span>
+                            <span *ngIf="email.hasError('required')">
+                              This is required field.
+                            </span>
                             <span *ngIf="email.hasError('email')">
-                Enter a valid email.
-              </span>
+                              Enter a valid email.
+                            </span>
                         </div>
                     </div>
 
@@ -46,15 +46,15 @@
                                    placeholder="Password" ngModel #password="ngModel"
                                    required>
                             <div class="input-group-append">
-                                <a class="input-group-text" style="cursor: pointer;" (click)="togglePassword()"><i
-                                        [class]="toggleClass"></i></a>
+                                <a class="input-group-text" style="cursor: pointer;" (click)="togglePassword()">
+                                    <i [class]="toggleClass"></i></a>
                             </div>
                         </div>
 
                         <div class="invalid-feedback text-right">
-              <span *ngIf="password.hasError('required')">
-                This is required field.
-              </span>
+                            <span *ngIf="password.hasError('required')">
+                              This is required field.
+                            </span>
                         </div>
                     </div>
 
