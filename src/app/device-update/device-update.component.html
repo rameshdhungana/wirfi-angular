@@ -1,0 +1,38 @@
+<div class="container-fluid vh-100" style="background-color:#252b33;">
+    <div class="mx-auto mw-460">
+
+        <div class="mx-auto mw-460 text-center pb-5" style="padding-top:100px;">
+            <h4 class="text-white">Configure Wirfi device</h4>
+        </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal" role="form"
+                  #deviceDetailForm='ngForm' (ngSubmit)='onSubmit(deviceDetailForm)'>
+
+                <div class="form-group">
+                    <label class="text-white">Name</label>
+                    <input id="name" type="text" class="form-control" name="name" placeholder="Device Name" required
+                           autofocus ngModel #name="ngModel">
+                    <div class="invalid-feedback text-right">
+                      <span *ngIf="name.hasError('required')">
+                        This is required field.
+                      </span>
+                        <!--<span *ngIf="name.hasError('name')">-->
+                        <!--Enter a valid serial number of device.-->
+                        <!--</span>-->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-danger float-right bordered ml-2" (click)="onCancel()">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary float-right bordered">
+                        Update
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
