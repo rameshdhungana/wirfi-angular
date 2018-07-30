@@ -1,6 +1,13 @@
 <div>
     <app-sidebar *ngIf="isLoggedIn"></app-sidebar>
     <div class="content" [class.content--no-sidebar]="!isLoggedIn">
+        <div class="col-12 dashboard-top-bar" *ngIf="isLoggedIn">
+            <a (click)="onToggle()" style="cursor: pointer;">
+                <span class="align-middle">
+                    <i class="fa fa-bars fa-2x " style="color:white;"></i>
+                </span>
+            </a>
+        </div>
         <router-outlet></router-outlet>
     </div>
 </div>

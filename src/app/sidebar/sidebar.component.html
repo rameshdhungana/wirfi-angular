@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar--collapsed" [class.sidebar--collapsed]="isCollapsed">
     <div class="row">
 
         <div class="col text-center  pt-1 pb-1">
@@ -23,7 +23,7 @@
                 <li class="nav-item " [routerLinkActive]="'active'">
                     <a class="pl-3" [routerLink]="['dashboard']">
                         <i class="fa fa-fw fa-2x fa-dashboard"></i>
-                        <span class="nav-item-span-font-size">Dashboard</span>
+                        <span class="nav-item-text">Dashboard</span>
                     </a>
 
                 </li>
@@ -31,14 +31,14 @@
 
                     <a class="pl-3" [routerLink]="['device']">
                         <i class="fa fa-fw fa-2x fa-mobile"></i>
-                        <span class="nav-item-span-font-size">Devices</span>
+                        <span class="nav-item-text">Devices</span>
                     </a>
                 </li>
                 <li class="nav-item  pl-3" [routerLinkActive]="'active'">
                     <a class="pl-3" [routerLink]="['logout']">
                         <i class="fa fa-fw fa-2x fa-sign-out"></i>
 
-                        <span class="nav-item-span-font-size">Logout</span>
+                        <span class="nav-item-text">Logout</span>
                     </a>
                 </li>
 

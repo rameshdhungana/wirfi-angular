@@ -3,33 +3,34 @@
   width: $sidebar-width;
   height: 100vh;
   background: rgb(232, 232, 232);
-}
 
-.sidebar-user-logo {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  &--collapsed {
+    width: $sidebar-width-collapsed;
 
-}
+    .nav-item-text {
+      display: none;
+    }
 
-.nav-item {
-  padding: 5px !important;
-  width: $sidebar-width;
-}
+  }
 
-.nav-item:hover {
-  //background-color: #bdbdbd;
-  background-color: rgb(204, 204, 204);
-}
+  .nav-item {
+    padding: 5px;
+    width: $sidebar-width;
+  }
 
-.nav-item a {
-  text-decoration: none !important;
-  display:block;
+  .nav-item:hover {
+    //background-color: #bdbdbd;
+    background-color: rgb(204, 204, 204);
+  }
 
-}
-
-.nav-item-span-font-size {
-  font-size: $nav-item-span-font-size;
-  padding-left: 20px;
-  color: #000 !important;
+  .nav-item a {
+    text-decoration: none;
+    display: block;
+  }
+  .nav-item-text {
+    font-size:$font-size-lg;
+    padding-left: $spacer*2;
+    color: $black;
+  }
 
 }
