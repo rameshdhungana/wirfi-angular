@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input,Output,EventEmitter} from '@angular/core';
 
 export class AppModule {
 }
@@ -9,21 +9,28 @@ export class AppModule {
     styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-    public isCollapsed: boolean;
 
-
+    
+    @Input() isVisible;
+    @Input() isCollapsed;
+    @Input() isCollapseContent;
+    @Output() isCollapseContentChange = new EventEmitter();
     constructor() {
+        console.log('text',this.isVisible);
     }
 
     ngOnInit() {
-        this.isCollapsed = false;
-       console.log(this.isCollapsed)
+        
+
+        
+    }
+    ShowText(){
+        this.isVisible=true;
+    }
+    hideText(){
+        this.isVisible=false;
     }
 
-    toggleTopBar() {
-        this.isCollapsed = !this.isCollapsed;
-        console.log('this is sidebar toggled')
-        console.log(this.isCollapsed)
-    }
 
+  
 }

@@ -1,49 +1,41 @@
-<div class="sidebar--collapsed" [class.sidebar--collapsed]="isCollapsed">
-    <div class="row">
+<div class="sidebar"  [class.sidebar--collapsed]="isCollapsed" (mouseenter)="ShowText()" (mouseleave)="$event.target.classList.contains('sidebar--collapsed') && hideText()">
+        <div class="row">
 
-        <div class="col text-center  pt-1 pb-1">
-            <img src="../../assets/images/user-logo.png" class="img-round text-center" height="100" width="100"/>
-            <h4 class="text-center" style="margin-bottom: .01rem !important;">Test User</h4>
-            <p class="text-center text-muted mb-0">test data</p>
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="p-2 mb-2" style="background-color: rgb(204, 204, 204);">
-
-
+            <div class="col text-center sidebar__user">
+                <img src="../../assets/images/user-logo.png" class="img-round sidebar__user-icon"/>
+                <h4 class="text-center" [ngClass]="{'invisible': !isVisible}" style="margin-bottom: .01rem !important;">Test User</h4>
+                <p class="text-center text-muted mb-0" [ngClass]="{'invisible': !isVisible}">test data</p>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
+    <div class="wrapper">
+        <div class="row">
+            <div class="col">
 
-            <ul class="nav flex-column">
-                <li class="nav-item " [routerLinkActive]="'active'">
-                    <a class="pl-3" [routerLink]="['dashboard']">
-                        <i class="fa fa-fw fa-2x fa-dashboard"></i>
-                        <span class="nav-item-text">Dashboard</span>
-                    </a>
+                <ul class="nav flex-column">
+                    <li class="nav-item "  [routerLink]="['dashboard']"  [routerLinkActive]="'active'">
+                      
+                            <i class="fa fa-fw fa-dashboard"></i>
+                            <span class="nav-item-text">Dashboard</span>
+                       
 
-                </li>
-                <li class="nav-item " [routerLinkActive]="'active'">
+                    </li>
+                    <li class="nav-item " [routerLink]="['device']"  [routerLinkActive]="'active'">
+                       
+                            <i class="fa fa-fw fa-mobile"></i>
+                            <span class="nav-item-text">Devices</span>
+                       
+                    </li>
+                    <li class="nav-item">
+                       
+                            <i class="fa fa-fw fa-sign-out"></i>
 
-                    <a class="pl-3" [routerLink]="['device']">
-                        <i class="fa fa-fw fa-2x fa-mobile"></i>
-                        <span class="nav-item-text">Devices</span>
-                    </a>
-                </li>
-                <li class="nav-item  pl-3" [routerLinkActive]="'active'">
-                    <a class="pl-3" [routerLink]="['logout']">
-                        <i class="fa fa-fw fa-2x fa-sign-out"></i>
-
-                        <span class="nav-item-text">Logout</span>
-                    </a>
-                </li>
+                            <span class="nav-item-text">Logout</span>
+                     
+                    </li>
 
 
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

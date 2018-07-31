@@ -12,6 +12,9 @@ import {SidebarComponent} from "./sidebar/sidebar.component";
 export class AppComponent implements OnInit, OnDestroy {
     title = 'app';
     isLoggedIn: boolean;
+    isCollapsed: boolean = false;
+    isCollapseContent: boolean = false;
+    isVisible: boolean = true;
     private subscription: Subscription;
 
     constructor(
@@ -32,9 +35,5 @@ export class AppComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    onToggle() {
-        this.sidebar.toggleTopBar();
-    }
-
-
+ 
 }

@@ -1,48 +1,44 @@
 <div class="container-fluid vh-100" style="background-color:#252b33;">
-    <div class="mx-auto mw-460">
+    <div class="mx-auto w-50">
 
-        <div class="mx-auto mw-460 text-center pb-5" style="padding-top:100px;">
-            <h4 class="text-white">Add Wirfi device</h4>
-        </div>
-
-        <div class="panel-body">
-          <form class="form-horizontal" role="form"
+            <h4 class="text-white pt-5">Add Wirfi device</h4>
+     
+        <form class="form-horizontal" role="form"
                 #deviceForm='ngForm' (ngSubmit)='onSubmit(deviceForm)'>
 
-              <div class="form-group">
-                  <!--<label class="text-white">Serial Number</label>-->
-                  <input id="serial_number" type="text" class="form-control" name="serial_number" placeholder="Device's Serial Number" required
-                         autofocus ngModel #serial_number="ngModel">
-                  <div class="invalid-feedback text-right">
-                      <span *ngIf="serial_number.hasError('required')">
+            <div class="form-group">
+                <!--<label class="text-white">Serial Number</label>-->
+                <input id="serial_number" type="text" class="form-control" name="serial_number" placeholder="Device's Serial Number" required
+                        autofocus ngModel #serial_number="ngModel">
+                <div class="invalid-feedback text-right">
+                    <span *ngIf="serial_number.hasError('required')">
                         This is required field.
-                      </span>
-                      <!--<span *ngIf="serial_number.hasError('serial_number')">-->
+                    </span>
+                    <!--<span *ngIf="serial_number.hasError('serial_number')">-->
                         <!--Enter a valid serial number of device.-->
-                      <!--</span>-->
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="text-white">Name</label>
-                  <input id="name" type="text" class="form-control" name="name" placeholder="Device Name" required
-                         autofocus ngModel #name="ngModel">
-                  <div class="invalid-feedback text-right">
-                      <span *ngIf="name.hasError('required')">
+                    <!--</span>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="text-white">Name</label>
+                <input id="name" type="text" class="form-control" name="name" placeholder="Device Name" required
+                        autofocus ngModel #name="ngModel">
+                <div class="invalid-feedback text-right">
+                    <span *ngIf="name.hasError('required')">
                         This is required field.
-                      </span>
-                      <!--<span *ngIf="name.hasError('name')">-->
-                      <!--Enter a valid serial number of device.-->
-                      <!--</span>-->
-                  </div>
-              </div>
+                    </span>
+                    <!--<span *ngIf="name.hasError('name')">-->
+                    <!--Enter a valid serial number of device.-->
+                    <!--</span>-->
+                </div>
+            </div>
 
-              <div class="form-group">
-                  <button type="submit" class="w-50 btn btn-primary float-right bordered">
-                      Next
-                  </button>
-              </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary ">
+                    Next
+                </button>
+            </div>
 
-          </form>
-        </div>
+        </form>
     </div>
 </div>
