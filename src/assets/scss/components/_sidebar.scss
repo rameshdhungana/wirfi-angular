@@ -1,66 +1,40 @@
 .sidebar {
   position: fixed;
   width: $sidebar-width;
-  overflow: hidden;
   height: 100vh;
   background: rgb(232, 232, 232);
-  transition: width 300ms;
-  z-index: 1;
-
-
-  &__user {
-    height: 200px;
-    &-icon {
-      width: 100px;
-      transition: width 300ms;
-    }
-  }
 
   &--collapsed {
+    position: fixed;
+    height: 100vh;
+    background: rgb(232, 232, 232);
+
     width: $sidebar-width-collapsed;
 
-    .sidebar__user-icon {
-      width: $sidebar-width-collapsed;
-      transition: width 300ms;
+    .nav-item-text {
+      display: none;
     }
-
-    &:hover{
-      width:$sidebar-width;
-    }
-
 
   }
 
   .nav-item {
-    padding-top: $spacer/2;
-    padding-bottom: $spacer/2;
+    padding: 5px;
     width: $sidebar-width;
+  }
 
-    .fa {
-      width: $sidebar-width-collapsed;
-    }
-    &:hover{
+  .nav-item:hover {
+    //background-color: #bdbdbd;
     background-color: rgb(204, 204, 204);
-    }
-    a{
+  }
+
+  .nav-item a {
     text-decoration: none;
     display: block;
-    }
-    &-text{
-      color: $black;
-    }
-    &.active{
-      border-left:2px solid red;
-      background-color: rgb(204, 204, 204);
-    }
   }
-
-  .wrapper{
-    position: absolute;
-    width: 250px;
-  }
-  .invisible{
-    display: block;
+  .nav-item-text {
+    font-size: $font-size-lg;
+    padding-left: $spacer*2;
+    color: $black;
   }
 
 }
