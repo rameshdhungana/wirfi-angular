@@ -1,0 +1,51 @@
+
+.billing-list, .billing-detail {
+
+  list-style-type: none;
+  padding: 1px;
+
+  li {
+    border-bottom: 1px solid #C0C0C0;
+    padding-top: $spacer;
+    padding-bottom: $spacer;
+
+    &:first-child {
+      border-top: 1px solid #C0C0C0;
+
+    }
+    a {
+      display: block;
+      cursor: pointer;
+    }
+    span.bold-text {
+      display: block;
+      font-weight: 900;
+      color: #0070BA;
+
+    }
+
+  }
+
+}
+
+.billing-detail {
+
+  li {
+    border-bottom: 1px dotted #C0C0C0;
+
+    &:first-child {
+      border-top: 1px dotted #C0C0C0;
+
+    }
+
+    span.bold-text {
+      color: #000;
+
+    }
+
+  }
+
+}
+
+
+

@@ -24,6 +24,7 @@ import {DeviceUpdateComponent} from './device-update/device-update.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopbarComponent } from './topbar/topbar.component';
+import { BillingComponent } from './billing/billing.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { TopbarComponent } from './topbar/topbar.component';
         DeviceListComponent,
         DeviceUpdateComponent,
         DeviceNetworkComponent,
-        TopbarComponent
+        TopbarComponent,
+        BillingComponent
     ],
     imports: [
         BrowserModule,

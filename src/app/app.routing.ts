@@ -11,6 +11,7 @@ import {DeviceListComponent} from './device-list/device-list.component';
 import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
+import {BillingComponent} from "./billing/billing.component";
 
 
 const routes: Routes = [
@@ -23,7 +24,8 @@ const routes: Routes = [
     {path: 'device', component: DevicesComponent},
     {path: 'device/:id', component: DeviceDetailComponent},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
-    {path: 'device/:id/setup', component: DeviceNetworkComponent}
+    {path: 'device/:id/setup', component: DeviceNetworkComponent},
+    {path: 'billing', component: BillingComponent}
 ];
 
 @NgModule({
