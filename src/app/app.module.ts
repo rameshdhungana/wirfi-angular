@@ -27,7 +27,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopbarComponent } from './topbar/topbar.component';
 import { RegisterComponent } from './register/register.component';
 import { TextComparatorDirective } from './shared/text-comparator.directive';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
         TopbarComponent,
         RegisterComponent,
         TextComparatorDirective,
-        ResetPasswordComponent
+        ChangePasswordComponent,
+        VerifyEmailComponent
     ],
     imports: [
         BrowserModule,

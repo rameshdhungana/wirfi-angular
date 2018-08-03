@@ -12,7 +12,8 @@ import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
 import { RegisterComponent } from './register/register.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 
 const routes: Routes = [
@@ -25,9 +26,10 @@ const routes: Routes = [
     {path: 'device', component: DevicesComponent},
     {path: 'device/:id', component: DeviceDetailComponent},
     {path:'register',component:RegisterComponent},
-    {path:'reset',component:ResetPasswordComponent},
+    {path:'reset/:uid/:token',component:ChangePasswordComponent},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
-    {path: 'device/:id/setup', component: DeviceNetworkComponent}
+    {path: 'device/:id/setup', component: DeviceNetworkComponent},
+    { path: 'account-confirm-email/:key', component: VerifyEmailComponent, canActivate: [PreventLoggedInAccess] },
 ];
 
 @NgModule({

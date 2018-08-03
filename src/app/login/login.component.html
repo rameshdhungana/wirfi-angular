@@ -72,7 +72,7 @@
                     <div class="form-group">
                         <label for="email_address" class="text-white">Email</label>
 
-                        <input name="email_address" id="email_address" type="email" class="form-control" placeholder="Your email address" required email ngModel #resetemail="ngModel" >
+                        <input name="email" id="email_address" type="email" class="form-control" placeholder="Your email address" required email ngModel #resetemail="ngModel" >
                         <div class="invalid-feedback text-right">
                                 <span *ngIf="resetemail.hasError('required')">
                                     This is required field.

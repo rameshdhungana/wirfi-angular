@@ -19,13 +19,14 @@ export class LoginComponent implements OnInit {
     loadMainComponent:boolean=true;
     hide = false;
 
-    constructor(private messageService: MessageService,private router: Router,
+    constructor(
+                private messageService: MessageService,
+                private router: Router,
                 private authService: AuthenticationService,
                 private alertService: AlertService) {
     }
 
     ngOnInit() {
-        this.messageService.add("logged in");
     }
 
     onSubmit(data: NgForm) {
@@ -52,12 +53,9 @@ export class LoginComponent implements OnInit {
             this.authService.forgetPassword(data.value)
                 .subscribe(
                     (response) => {
-                        if (response['code'] =="0001") {
-                         //sucess code
-                        }else{
-                            //not successful code
+                        console.log("response",response);
+                        this.messageService.add(response["detail"]);
                         }
-                    }
                 );
         }
     }
