@@ -6,8 +6,8 @@
                     PAYMENT METHODS
                 </header>
 
-                <ul class="billing-list" *ngFor = "let card in cards">
-                    <li>
+                <ul class="billing-list">
+                    <li *ngFor="let billing of billings; let i = index">
                         <a>
                             <div class="row">
                                 <div class="col-4">
@@ -15,6 +15,7 @@
                                     <i class="fa fa-3x fa-university p-2 "></i></div>
                                 <div class="col-8">
                                     <span class="bold-text">Visa</span>
+                                    <span class="bold-text">{{billing}}}</span>
 
                                     <span>
                                 122........
@@ -23,6 +24,7 @@
                             </div>
                         </a>
                     </li>
+
 
                     <li>
                         <a>

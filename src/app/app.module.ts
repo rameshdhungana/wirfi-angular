@@ -30,6 +30,7 @@ import { RegisterComponent } from './register/register.component';
 import { TextComparatorDirective } from './shared/text-comparator.directive';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import {BillingService} from "./_services/billing.service";
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
         DeviceService,
         StripeService,
         MessageService,
+        BillingService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],

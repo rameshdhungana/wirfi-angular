@@ -13,10 +13,10 @@ export class AuthenticationService {
   ) { }
 
   login(loginData) {
-    return this.http.post('api/auth/login/', loginData);
+    return this.http.post('login/', loginData);
   }
   register(registerdata) {
-    return this.http.post('api/auth/registration/', registerdata);
+    return this.http.post('register/', registerdata);
   }
   resetPassword(passworddata){
     return this.http.post('rest-auth/password/reset/confirm/',passworddata);
