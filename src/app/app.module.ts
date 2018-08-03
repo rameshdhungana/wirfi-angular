@@ -17,6 +17,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {DeviceService} from './_services/device.service';
+import {MessageService} from './_services/message.service';
 import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceListComponent} from './device-list/device-list.component';
@@ -24,6 +25,9 @@ import {DeviceUpdateComponent} from './device-update/device-update.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopbarComponent } from './topbar/topbar.component';
+import { RegisterComponent } from './register/register.component';
+import { TextComparatorDirective } from './shared/text-comparator.directive';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -39,7 +43,10 @@ import { TopbarComponent } from './topbar/topbar.component';
         DeviceListComponent,
         DeviceUpdateComponent,
         DeviceNetworkComponent,
-        TopbarComponent
+        TopbarComponent,
+        RegisterComponent,
+        TextComparatorDirective,
+        ResetPasswordComponent
     ],
     imports: [
         BrowserModule,
@@ -58,6 +65,7 @@ import { TopbarComponent } from './topbar/topbar.component';
         AlertService,
         DeviceService,
         StripeService,
+        MessageService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],

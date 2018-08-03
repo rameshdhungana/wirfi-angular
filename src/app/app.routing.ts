@@ -11,10 +11,12 @@ import {DeviceListComponent} from './device-list/device-list.component';
 import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
+import { RegisterComponent } from './register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 const routes: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: 'full'},
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'login', component: LoginComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'logout', component: LogoutComponent},
     {path: 'stripe', component: StripeComponent, canActivate: [AuthGuard]},
@@ -22,6 +24,8 @@ const routes: Routes = [
     {path: 'devices', component: DeviceListComponent},
     {path: 'device', component: DevicesComponent},
     {path: 'device/:id', component: DeviceDetailComponent},
+    {path:'register',component:RegisterComponent},
+    {path:'reset',component:ResetPasswordComponent},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent}
 ];

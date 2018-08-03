@@ -1,0 +1,14 @@
+.login-container{
+    background-color:$primary;
+    min-height: 100vh;
+
+  
+}
+
+.forget-account {
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  

@@ -25,13 +25,21 @@
                             <span class="nav-item-text">Devices</span>
                        
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" [routerLink]="['reset']"  [routerLinkActive]="'active'">
+                       
+                        <i class="fa fa-fw fa-sign-out"></i>
+
+                        <span class="nav-item-text">Reset Password</span>
+                 
+                    </li>
+                    <li class="nav-item" [routerLink]="['logout']">
                        
                             <i class="fa fa-fw fa-sign-out"></i>
 
                             <span class="nav-item-text">Logout</span>
                      
                     </li>
+                   
 
 
                 </ul>

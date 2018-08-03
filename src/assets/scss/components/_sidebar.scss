@@ -3,9 +3,10 @@
   width: $sidebar-width;
   overflow: hidden;
   height: 100vh;
-  background: rgb(232, 232, 232);
+  background:$secondary;
   transition: width 300ms;
   z-index: 1;
+  border-right: 2px solid white;
 
 
   &__user {
@@ -50,8 +51,13 @@
       color: $black;
     }
     &.active{
+      color:$white;
       border-left:2px solid red;
-      background-color: rgb(204, 204, 204);
+      background-color: $primary;
+
+     .nav-item-text{
+       color:$white;
+     } 
     }
   }
 

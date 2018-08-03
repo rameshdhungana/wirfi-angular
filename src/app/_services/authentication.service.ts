@@ -15,6 +15,16 @@ export class AuthenticationService {
   login(loginData) {
     return this.http.post('api/auth/login/', loginData);
   }
+  register(registerdata) {
+    return this.http.post('api/auth/registration/', registerdata);
+  }
+  resetPassword(passworddata){
+    return this.http.post('/reset/',passworddata);
+  }
+  forgetPassword(forgetdata){
+    return this.http.post('/forget/',forgetdata);
+  }
+
 
   logout() {
     localStorage.removeItem('token');
