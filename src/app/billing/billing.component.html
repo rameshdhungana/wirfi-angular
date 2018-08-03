@@ -5,7 +5,8 @@
                 <header class="pb-2 pl-1" style="font-weight: 900">
                     PAYMENT METHODS
                 </header>
-                <ul class="billing-list">
+
+                <ul class="billing-list" *ngFor = "let card in cards">
                     <li>
                         <a>
                             <div class="row">

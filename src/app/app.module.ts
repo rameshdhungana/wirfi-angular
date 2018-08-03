@@ -25,6 +25,7 @@ import {DeviceNetworkComponent} from './device-network/device-network.component'
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopbarComponent } from './topbar/topbar.component';
 import { BillingComponent } from './billing/billing.component';
+import {VerifyEmailComponent} from "./verify-email/verify-email.component";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { BillingComponent } from './billing/billing.component';
         DeviceUpdateComponent,
         DeviceNetworkComponent,
         TopbarComponent,
-        BillingComponent
+        BillingComponent,
+        VerifyEmailComponent
     ],
     imports: [
         BrowserModule,

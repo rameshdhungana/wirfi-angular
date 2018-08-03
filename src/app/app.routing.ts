@@ -12,6 +12,7 @@ import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
 import {BillingComponent} from "./billing/billing.component";
+import  {VerifyEmailComponent} from "./verify-email/verify-email.component";
 
 
 const routes: Routes = [
@@ -25,7 +26,9 @@ const routes: Routes = [
     {path: 'device/:id', component: DeviceDetailComponent},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
-    {path: 'billing', component: BillingComponent}
+    {path: 'billing', component: BillingComponent},
+    {path: 'verify-email/:key', component: VerifyEmailComponent, canActivate: [PreventLoggedInAccess]},
+
 ];
 
 @NgModule({
