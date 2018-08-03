@@ -1,12 +1,13 @@
 .dashboard-top-bar {
-  height: 50px;
+  height: $topbar-height;
   background-color: black;
 
   __hamburger{
-    color: white;
+    color: rgb(126, 122, 122);
   }
 }
 
 .topbar-container{
-  background-color: black;
+  background-color:$primary;
+  border-bottom: 1px solid $secondary;
 }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services/user.service';
+import { AuthenticationService } from '../_services/authentication.service';
+import { MessageService } from '../_services/message.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService } from '../_services/alert.service';
-
 @Component({
   selector: 'app-verify-email',
   templateUrl: './verify-email.component.html',
@@ -11,16 +10,19 @@ import { AlertService } from '../_services/alert.service';
 export class VerifyEmailComponent implements OnInit {
 
   constructor(
-    private userService: UserService,
+    private authenticationService:AuthenticationService,
+    private messageService:MessageService,
     private router: Router,
-    private route: ActivatedRoute,
-    private alertService: AlertService) { }
+    private route:ActivatedRoute
+
+  ) { }
 
   ngOnInit() {
-    this.userService.verify_email(this.route.snapshot.paramMap.get('key')).subscribe(response => {
-      this.alertService.success('Email verified.')
-      this.router.navigateByUrl('login');
-    })
+    this.authenticationService.verify_email(this.route.snapshot.paramMap.get('key')).subscribe(response => {
+         this.messageService.add("email verified")
+            this.router.navigateByUrl('login')
+          })
+       }
   }
 
-}
+

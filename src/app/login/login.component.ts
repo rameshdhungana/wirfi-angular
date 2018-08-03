@@ -3,7 +3,7 @@ import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../_services/authentication.service';
 import {AlertService} from '../_services/alert.service';
-
+import { MessageService } from '../_services/message.service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -15,10 +15,13 @@ export class LoginComponent implements OnInit {
     passwordType = 'password';
     passwordShown = false;
     toggleClass = 'fa fa-eye';
-    loadComponent: boolean;
+    loadComponent_forget_password: boolean =false;
+    loadMainComponent:boolean=true;
     hide = false;
 
-    constructor(private router: Router,
+    constructor(
+                private messageService: MessageService,
+                private router: Router,
                 private authService: AuthenticationService,
                 private alertService: AlertService) {
     }
@@ -27,7 +30,6 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit(data: NgForm) {
-        console.log('hello');
         if (data.valid) {
             console.log(data.value);
 
@@ -44,6 +46,19 @@ export class LoginComponent implements OnInit {
                 );
         }
     }
+    forgetPassword(data: NgForm) {
+        if (data.valid) {
+            console.log(data.value);
+
+            this.authService.forgetPassword(data.value)
+                .subscribe(
+                    (response) => {
+                        console.log("response",response);
+                        this.messageService.add(response["detail"]);
+                        }
+                );
+        }
+    }
 
     togglePassword() {
         if (this.passwordShown) {
@@ -57,11 +72,13 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    loadMyChildComponent(event = null) {
-        this.loadComponent = true;
-        this.hide = true;
-        if (event) {
-            this.hide = false;
-        }
+    showForgetPassword() {
+        this.loadComponent_forget_password = true;
+        this.loadMainComponent=false; 
+    }
+  
+    showMainComponent(){
+        this.loadMainComponent=true;
+        this.loadComponent_forget_password=false;
     }
 }

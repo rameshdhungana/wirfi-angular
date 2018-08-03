@@ -1,16 +1,11 @@
-<div class="container" >
-    <div class="row justify-content-center" >
-        <div class="col-md-6 col-lg-4">
+<div class="container-fluid login-container" >
+    <div class="row justify-content-center " >
+        <div class="col-md-6 col-lg-4 mt-5 login-container__box">
 
-            <div class="mx-auto mw-460 text-center" style="padding-top:100px; padding-bottom: 100px; ">
+            <div class="mx-auto mw-460 text-center mt-5">
                 <img src="../../assets/images/wirfi-logo.png" class="img img-fluid logo"/>
             </div>
-
-
-            <div class="" [hidden]="hide">
-                <!--<div class="panel-heading">-->
-                <!--<app-alert></app-alert>-->
-                <!--</div>-->
+            <div  *ngIf="loadMainComponent && !loadComponent_forget_password">
                 <div class="panel-body">
                     <form class="form-horizontal" [class.was-validated]="loginForm.submitted" role="form"
                           #loginForm='ngForm' (ngSubmit)='onSubmit(loginForm)'>
@@ -21,12 +16,12 @@
                                    required
                                    email autofocus ngModel #email="ngModel">
                             <div class="invalid-feedback text-right">
-                  <span *ngIf="email.hasError('required')">
-                    This is required field.
-                  </span>
+                                <span *ngIf="email.hasError('required')">
+                                    This is required field.
+                                </span>
                                 <span *ngIf="email.hasError('email')">
-                    Enter a valid email.
-                  </span>
+                                    Enter a valid email.
+                                </span>
                             </div>
                         </div>
 
@@ -55,25 +50,37 @@
                             </button>
                         </div>
                         <div class="form-group">
-                            <p class="forget-account text-white" href="#" (click)="loadMyChildComponent();">
+                            <p class="forget-account text-white" href="#" (click)="showForgetPassword();">
                                 Forgot Password?
                             </p>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <a  href="/register"  class="text-white">Create Account</a>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <div *ngIf='loadComponent && hide'>
-                <form class="form-horizontal" id="forgot_password_form" style="display: block;" action=""
-                      accept-charset="UTF-8" method="post">
+            <div  *ngIf="loadComponent_forget_password  && !loadMainComponent" class="mt-2">
+                <form class="form-horizontal" id="forgot_password_form" style="display: block;"(ngSubmit)='forgetPassword(forgetForm)'
+                      accept-charset="UTF-8" method="post"   #forgetForm='ngForm'>
 
                     <p class="text-white">
                         Enter your Email and we will send you a link to change your password.
                     </p>
                     <div class="form-group">
-                        <label for="email_adr" class="text-white">Email</label>
+                        <label for="email_address" class="text-white">Email</label>
 
-                        <input id="email_adr" type="email" class="form-control" placeholder="Your email address">
-
+                        <input name="email" id="email_address" type="email" class="form-control" placeholder="Your email address" required email ngModel #resetemail="ngModel" >
+                        <div class="invalid-feedback text-right">
+                                <span *ngIf="resetemail.hasError('required')">
+                                    This is required field.
+                                </span>
+                                <span *ngIf="resetemail.hasError('email')">
+                                    Enter a valid email.
+                                </span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="w-50 btn btn-primary float-right bordered">
@@ -82,7 +89,7 @@
                     </div>
                     <div class="form-group">
                         <div class="text-center pull-left">
-                            <p class="forget-account text-white" href="#" (click)="loadMyChildComponent($event);">
+                            <p class="forget-account text-white" href="#" (click)="showMainComponent()">
                                 Back to Login
                             </p>
                         </div>

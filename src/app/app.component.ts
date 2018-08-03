@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from 'rxjs';
 import {AuthenticationService} from './_services/authentication.service';
 import {SidebarComponent} from "./sidebar/sidebar.component";
-
+import { MessageService } from './_services/message.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
 
     constructor(
+        private messageService: MessageService,
         private authService: AuthenticationService,
         private sidebar: SidebarComponent
     ) {

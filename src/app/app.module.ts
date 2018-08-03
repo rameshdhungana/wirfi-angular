@@ -17,6 +17,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {DeviceService} from './_services/device.service';
+import {MessageService} from './_services/message.service';
 import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceListComponent} from './device-list/device-list.component';
@@ -25,7 +26,10 @@ import {DeviceNetworkComponent} from './device-network/device-network.component'
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopbarComponent } from './topbar/topbar.component';
 import { BillingComponent } from './billing/billing.component';
-import {VerifyEmailComponent} from "./verify-email/verify-email.component";
+import { RegisterComponent } from './register/register.component';
+import { TextComparatorDirective } from './shared/text-comparator.directive';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 
 @NgModule({
@@ -43,6 +47,9 @@ import {VerifyEmailComponent} from "./verify-email/verify-email.component";
         DeviceNetworkComponent,
         TopbarComponent,
         BillingComponent,
+        RegisterComponent,
+        TextComparatorDirective,
+        ChangePasswordComponent,
         VerifyEmailComponent
     ],
     imports: [
@@ -62,6 +69,7 @@ import {VerifyEmailComponent} from "./verify-email/verify-email.component";
         AlertService,
         DeviceService,
         StripeService,
+        MessageService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],

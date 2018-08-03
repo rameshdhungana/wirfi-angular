@@ -15,6 +15,19 @@ export class AuthenticationService {
   login(loginData) {
     return this.http.post('api/auth/login/', loginData);
   }
+  register(registerdata) {
+    return this.http.post('api/auth/registration/', registerdata);
+  }
+  resetPassword(passworddata){
+    return this.http.post('rest-auth/password/reset/confirm/',passworddata);
+  }
+  forgetPassword(forgetdata){
+    return this.http.post('api/auth/password/reset/',forgetdata);
+  }
+  verify_email(key) {
+    return this.http.post('api/auth/registration/verify-email/', { 'key': key })
+  }
+
 
   logout() {
     localStorage.removeItem('token');
