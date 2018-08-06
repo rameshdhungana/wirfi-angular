@@ -34,6 +34,7 @@ const routes: Routes = [
     {path:'change-password',component:ChangepasswordComponent},
     {path:'bussiness',component:BusinessComponent},
     {path:'list',component:BusinessListComponent},
+    {path:'billing',component:BillingComponent},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
     { path: 'account_confirm_email/:key', component: VerifyEmailComponent },
