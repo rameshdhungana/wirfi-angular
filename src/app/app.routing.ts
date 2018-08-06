@@ -11,6 +11,7 @@ import {DeviceListComponent} from './device-list/device-list.component';
 import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
+import {BillingComponent} from "./billing/billing.component";
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';

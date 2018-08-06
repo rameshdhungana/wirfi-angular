@@ -1,31 +1,44 @@
-<div class="sidebar"  [class.sidebar--collapsed]="isCollapsed" (mouseenter)="ShowText()" (mouseleave)="$event.target.classList.contains('sidebar--collapsed') && hideText()">
-        <div class="row">
+<div class="sidebar" [class.sidebar--collapsed]="isCollapsed" (mouseenter)="ShowText()"
+     (mouseleave)="$event.target.classList.contains('sidebar--collapsed') && hideText()">
+    <div class="row">
 
-            <div class="col text-center sidebar__user">
-                <img src="../../assets/images/user-logo.png" class="img-round sidebar__user-icon"/>
-                <h4 class="text-center" [ngClass]="{'invisible': !isVisible}" style="margin-bottom: .01rem !important;">Test User</h4>
-                <p class="text-center text-muted mb-0" [ngClass]="{'invisible': !isVisible}">test data</p>
-            </div>
+        <div class="col text-center sidebar__user">
+            <img src="../../assets/images/user-logo.png" class="img-round sidebar__user-icon"/>
+            <h4 class="text-center" [ngClass]="{'invisible': !isVisible}" style="margin-bottom: .01rem !important;">Test
+                User</h4>
+            <p class="text-center text-muted mb-0" [ngClass]="{'invisible': !isVisible}">test data</p>
         </div>
+    </div>
     <div class="wrapper">
         <div class="row">
             <div class="col">
 
                 <ul class="nav flex-column">
-                    <li class="nav-item "  [routerLink]="['dashboard']"  [routerLinkActive]="'active'">
-                      
-                            <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-item-text">Dashboard</span>
-                       
+                    <li class="nav-item " [routerLink]="['dashboard']" [routerLinkActive]="'active'">
+
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-item-text">Dashboard</span>
+
 
                     </li>
-                    <li class="nav-item " [routerLink]="['device']"  [routerLinkActive]="'active'">
-                       
-                            <i class="fa fa-fw fa-mobile"></i>
-                            <span class="nav-item-text">Devices</span>
-                       
+                    <li class="nav-item " [routerLink]="['device']" [routerLinkActive]="'active'">
+
+                        <i class="fa fa-fw fa-mobile"></i>
+                        <span class="nav-item-text">Devices</span>
+
                     </li>
+
+                    <li class="nav-item" [routerLink]="['billing']" routerLinkActive="active">
+                        <i class="fa fa-fw fa-money"></i>
+                        <span class="nav-item-text">Billing</span>
+                    </li>
+<<<<<<< HEAD
                     <li class="nav-item" [routerLink]="['change-password']"  [routerLinkActive]="'active'">
+=======
+
+                    <li class="nav-item">
+                    <li class="nav-item" [routerLink]="['reset']"  [routerLinkActive]="'active'">
+>>>>>>> ae983d03e2515a54bcd0ce21d554eee30009edde
                        
                         <i class="fa fa-fw fa-sign-out"></i>
 
@@ -36,8 +49,10 @@
                        
                             <i class="fa fa-fw fa-sign-out"></i>
 
-                            <span class="nav-item-text">Logout</span>
-                     
+                        <i class="fa fa-fw fa-sign-out"></i>
+
+                        <span class="nav-item-text">Logout</span>
+
                     </li>
                    
 
@@ -48,5 +63,3 @@
     </div>
 </div>
 
-<!--rgb(204, 204, 204)-->
-<!--rgb(232, 232, 232)-->

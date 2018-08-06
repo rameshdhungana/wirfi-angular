@@ -25,13 +25,18 @@ import {DeviceUpdateComponent} from './device-update/device-update.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopbarComponent } from './topbar/topbar.component';
+import { BillingComponent } from './billing/billing.component';
 import { RegisterComponent } from './register/register.component';
 import { TextComparatorDirective } from './shared/text-comparator.directive';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+<<<<<<< HEAD
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { BusinessComponent } from './business/business.component';
 import { BusinessListComponent } from './business-list/business-list.component';
+=======
+import {BillingService} from "./_services/billing.service";
+>>>>>>> ae983d03e2515a54bcd0ce21d554eee30009edde
 
 
 @NgModule({
@@ -48,6 +53,7 @@ import { BusinessListComponent } from './business-list/business-list.component';
         DeviceUpdateComponent,
         DeviceNetworkComponent,
         TopbarComponent,
+        BillingComponent,
         RegisterComponent,
         TextComparatorDirective,
         ResetPasswordComponent,
@@ -74,6 +80,7 @@ import { BusinessListComponent } from './business-list/business-list.component';
         DeviceService,
         StripeService,
         MessageService,
+        BillingService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],
