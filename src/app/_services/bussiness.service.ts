@@ -12,7 +12,7 @@ export class BussinessService {
   getBusiness(){
     return this.http.get('business/');
   }
-  uppdateBusiness(id,data){
-    return this.http.get('business/'+id,data);
+  updateBusiness(id,data){
+    return this.http.put('business/'+id+'/',data);
   }
 }

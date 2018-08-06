@@ -10,27 +10,66 @@ import { BussinessService } from '../_services/bussiness.service';
   styleUrls: ['./business.component.css']
 })
 export class BusinessComponent implements OnInit {
+  private code:Number
+  private business_id:Number
+  public business_data:Object
+  loading;
 
   constructor(
     private bussinessService:BussinessService,
     private messageService: MessageService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.loading = true;
+    this.bussinessService.getBusiness().subscribe(
+      (response) => {
+          console.log(response["code"]);
+          console.log(response);
+          
+          if(response["code"] == 1){
+            this.business_id = response["data"]["business_info"]["id"];
+            this.business_data = response["data"].business_info;
+            
+          }else{
+            this.business_data={
+              name:'',
+              address:'',
+              phone_number:''
+            }
+            console.log(this.business_data);
+          }
+          this.loading = false;
+      }
+  );
   }
   addBussiness(data: NgForm) {
     if (data.valid) {
       data.value['latitude']=37.33;
       data.value['longitude']=34.34;
         console.log(data.value);
-        this.bussinessService.addBussiness(data.value)
-            .subscribe(
-                (response) => {
-                    this.messageService.add('Bussiness Info succesfully created');
-                }
-            );
+
+        if (this.code == 1){
+          this.bussinessService.updateBusiness(this.business_id,data.value)
+          .subscribe(
+            (response) =>{
+            this.messageService.add("updated");
+          }
+          );
+        
+
+        }else if(this.code ==2){
+          this.bussinessService.addBussiness(data.value)
+          .subscribe(
+              (response) => {
+                  this.messageService.add('Bussiness Info succesfully created');
+              }
+          );
+          
+        }
+     
   }
 
 }

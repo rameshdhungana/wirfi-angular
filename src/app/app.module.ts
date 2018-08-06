@@ -34,6 +34,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { BusinessComponent } from './business/business.component';
 import { BusinessListComponent } from './business-list/business-list.component';
 import {BillingService} from "./_services/billing.service";
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {BillingService} from "./_services/billing.service";
         VerifyEmailComponent,
         ChangepasswordComponent,
         BusinessComponent,
-        BusinessListComponent
+        BusinessListComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserModule,

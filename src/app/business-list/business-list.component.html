@@ -1,5 +1,32 @@
 <div class="container-fluid p-0">
   <div class="register-container d-flex align-items-center justify-content-center">
-  {{business_info}}
+
+    <div class="row">
+      <div class="col">
+
+        <table class="table">
+         
+          <tbody>
+            <tr>
+              <td scope="row">Bussiness Name</td>
+              <td> {{business_info["data"]["business_info"]["name"]}}</td>
+            </tr>
+            <tr>
+              <td scope="row">Address</td>
+              <td>{{business_info["data"]["business_info"]["address"]}}</td>
+             
+            </tr>
+            <tr>
+              <td scope="row">Phone Number</td>
+              <td>{{business_info["data"]["business_info"]["phone_number"]}}</td>
+             
+            </tr>
+          </tbody>
+          </table>
+     
+      </div>
+    </div>
+
+
   </div>
-</div>
+  </div>

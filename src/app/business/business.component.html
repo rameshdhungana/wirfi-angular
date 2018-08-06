@@ -2,19 +2,19 @@
   <div class="register-container d-flex align-items-center justify-content-center">
     <div class="w-50">
       <h1 class="text-center text-white">
-          Add Bussiness
+          Business Info
       </h1>
-      <form   #bussinessForm="ngForm" (ngSubmit)="addBussiness(bussinessForm)">
+      <form *ngIf="!loading"   #bussinessForm="ngForm" (ngSubmit)="addBussiness(bussinessForm)">
         <div class="form-group">
-          <label for="name" class="text-white">Bussiness Name</label>
-          <input type="text" name="name" class="form-control" id="bussiness-name" placeholder="Bussiness Name"  required   ngModel #name="ngModel">
+          <label for="name" class="text-white">Business Name</label>
+          <input type="text" name="name" class="form-control" id="bussiness-name" placeholder="Bussiness Name"  required    [ngModel]="business_data.name">
           <div class="invisible-text text-right  text-white">
        
             </div>
         </div>
           <div class="form-group">
             <label for="password_one" class="text-white">Enter Address</label>
-            <input type="text" name="address" class="form-control" id="password_one" placeholder="Address"  required    ngModel #address="ngModel">
+            <input type="text" name="address" class="form-control" id="password_one" placeholder="Address"  required     [ngModel]="business_data.address">
             <div class="invisible-text text-right  text-white">
                 <small *ngIf="bussinessForm.submitted && address.hasError('required')">
                   This is required field.
@@ -22,17 +22,9 @@
                 
               </div>
           </div>
-          <div class="form-group">
-              <label for="passowrd_two" class="text-white">Email Address</label>
-              <input type="text" name="email" class="form-control" id="email" placeholder="Enter email address" required    ngModel #email="ngModel">
-              <div class="invisible-text text-right text-white">
-              
-                 
-                </div>
-            </div>
             <div class="form-group">
               <label for="phone-number" class="text-white">Phone Number</label>
-              <input type="text" name="phone_number" class="form-control" id="phone-number" placeholder="Enter Phone Number" required    ngModel #phonenumber="ngModel">
+              <input type="text" name="phone_number" class="form-control" id="phone-number" placeholder="Enter Phone Number" required  [ngModel]="business_data.phone_number">
               <div class="invisible-text text-right text-white">
                   
                 

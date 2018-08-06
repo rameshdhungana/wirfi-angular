@@ -33,8 +33,8 @@ export class AuthenticationService {
 
 
   logout() {
-    localStorage.removeItem('token');
 
+    localStorage.removeItem('token');
     return this.http.post('logout/',{});
   }
 

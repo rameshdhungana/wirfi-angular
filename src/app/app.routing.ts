@@ -18,26 +18,28 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { BusinessComponent } from './business/business.component';
 import { BusinessListComponent } from './business-list/business-list.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'login', component: LoginComponent, canActivate: [PreventLoggedInAccess]},
-    {path: 'logout', component: LogoutComponent},
+    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    {path: 'logout', component: LogoutComponent , canActivate: [AuthGuard]},
     {path: 'stripe', component: StripeComponent, canActivate: [AuthGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-    {path: 'devices', component: DeviceListComponent},
-    {path: 'device', component: DevicesComponent},
-    {path: 'device/:id', component: DeviceDetailComponent},
-    {path:'register',component:RegisterComponent},
-    {path:'reset/:uid/:token',component:ResetPasswordComponent},
-    {path:'change-password',component:ChangepasswordComponent},
-    {path:'bussiness',component:BusinessComponent},
-    {path:'list',component:BusinessListComponent},
-    {path:'billing',component:BillingComponent},
+    {path: 'devices', component: DeviceListComponent,canActivate: [AuthGuard]},
+    {path: 'device', component: DevicesComponent,canActivate: [AuthGuard]},
+    {path: 'device/:id', component: DeviceDetailComponent,canActivate: [AuthGuard]},
+    {path:'register',component:RegisterComponent,canActivate: [PreventLoggedInAccess]},
+    {path:'reset/:uid/:token',component:ResetPasswordComponent,canActivate: [AuthGuard]},
+    {path:'change-password',component:ChangepasswordComponent,canActivate: [AuthGuard]},
+    {path:'bussiness',component:BusinessComponent,canActivate: [AuthGuard]},
+    {path:'list',component:BusinessListComponent,canActivate: [AuthGuard]},
+    {path:'billing',component:BillingComponent,canActivate: [AuthGuard]},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
-    { path: 'account_confirm_email/:key', component: VerifyEmailComponent },
+    { path: 'account_confirm_email/:key', component: VerifyEmailComponent ,canActivate: [PreventLoggedInAccess]},
 ];
 
 @NgModule({
