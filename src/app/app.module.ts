@@ -30,13 +30,10 @@ import { RegisterComponent } from './register/register.component';
 import { TextComparatorDirective } from './shared/text-comparator.directive';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
-<<<<<<< HEAD
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { BusinessComponent } from './business/business.component';
 import { BusinessListComponent } from './business-list/business-list.component';
-=======
 import {BillingService} from "./_services/billing.service";
->>>>>>> ae983d03e2515a54bcd0ce21d554eee30009edde
 
 
 @NgModule({
