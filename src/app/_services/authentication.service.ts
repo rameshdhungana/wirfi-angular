@@ -13,24 +13,29 @@ export class AuthenticationService {
   ) { }
 
   login(loginData) {
-    return this.http.post('api/auth/login/', loginData);
+    return this.http.post('login/', loginData);
   }
   register(registerdata) {
-    return this.http.post('api/auth/registration/', registerdata);
+    return this.http.post('register/', registerdata);
   }
   resetPassword(passworddata){
-    return this.http.post('rest-auth/password/reset/confirm/',passworddata);
+    return this.http.post('reset-password/confirm/',passworddata);
   }
   forgetPassword(forgetdata){
-    return this.http.post('api/auth/password/reset/',forgetdata);
+    return this.http.post('reset-password/',forgetdata);
+  }
+  changePassword(passworddata){
+    return this.http.post('change-password/',passworddata);
   }
   verify_email(key) {
-    return this.http.post('api/auth/registration/verify-email/', { 'key': key })
+    return this.http.post('register/verify-email/', { 'key': key })
   }
 
 
   logout() {
     localStorage.removeItem('token');
+
+    return this.http.post('logout/',{});
   }
 
   isLoggedIn() {

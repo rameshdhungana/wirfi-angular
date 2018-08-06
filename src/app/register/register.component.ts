@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthenticationService} from '../_services/authentication.service';
 import {Router} from '@angular/router';
+import { MessageService } from '../_services/message.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -9,7 +10,11 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor( private authService: AuthenticationService,private router: Router) { }
+  constructor( 
+    private authService: AuthenticationService,
+    private router: Router,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit() {
   }
@@ -21,12 +26,13 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 (response) => {
                   console.log(response);
-                  if (response['code'] == "0001"){
-                    this.router.navigate(['/login'])
-                  }else if(response['code']=="0000")
-                    {
-
-                    }
+                  if(response["code"] ==1){
+                    this.messageService.add(' Succesfully Registered');
+                    this.router.navigateByUrl('/login');
+                  }else{
+                    this.messageService.add(response["message"]);
+                  }
+                  
                   }
                    
                 

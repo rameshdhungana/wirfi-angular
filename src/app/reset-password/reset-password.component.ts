@@ -4,11 +4,11 @@ import {AuthenticationService} from '../_services/authentication.service'
 import { MessageService } from '../_services/message.service';
 import { Router, ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'app-change-password',
-  templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.css']
 })
-export class ChangePasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
     private uid:string;
     private token:string;
   constructor(
@@ -21,6 +21,7 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() {
   }
   resetPassword(data: NgForm) {
+      console.log("hello world");
     if (data.valid) {
         this.uid=this.route.snapshot.paramMap.get('uid');
         this.token=this.route.snapshot.paramMap.get('token');
@@ -30,9 +31,8 @@ export class ChangePasswordComponent implements OnInit {
         this.authService.resetPassword(data.value)
             .subscribe(
                 (response) => {
-                    console.log(response);
-                    if (response['key'] == "0001") {
-                      //success code
+                    if (response['code'] == 1) {
+                      this.messageService.add('Password Succesfully Changed');
                     }else{
                     //unsuccessful code
                     }

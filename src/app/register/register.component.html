@@ -28,15 +28,7 @@
                           
                       </div>
                     </div>
-                <div class="form-group">
-                    <label for="input_username" class="text-white">Username</label>
-                    <input type="text" name="username" class="form-control" id="input_username" aria-describedby="emailHelp" placeholder="Enter username" required   ngModel #username="ngModel">
-                    <div class="invisible-text text-right text-white">
-                        <small *ngIf="registerForm.submitted && username.hasError('required')">
-                          This is required field.
-                        </small>
-                    </div>
-                  </div>
+         
                 <div class="form-group">
                   <label for="input_email" class="text-white">Email address</label>
                   <input type="email" name="email" class="form-control" id="input_email" aria-describedby="emailHelp" placeholder="Enter email" required email  ngModel #email="ngModel">

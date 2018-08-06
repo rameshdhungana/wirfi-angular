@@ -36,11 +36,12 @@ export class LoginComponent implements OnInit {
             this.authService.login(data.value)
                 .subscribe(
                     (response) => {
-                        if (response['key']) {
-                            localStorage.setItem('token', response['key']);
+                        if (response['code']==1) {
+                            localStorage.setItem('token', response['data']['auth_token']);
                             this.authService.isLoggedInObs();
                             this.router.navigateByUrl('dashboard');
-                            console.log('inside the response table');
+                        }else{
+                            this.messageService.add('Invalid Credentials');
                         }
                     }
                 );

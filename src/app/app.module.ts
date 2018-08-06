@@ -27,8 +27,11 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TopbarComponent } from './topbar/topbar.component';
 import { RegisterComponent } from './register/register.component';
 import { TextComparatorDirective } from './shared/text-comparator.directive';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { BusinessComponent } from './business/business.component';
+import { BusinessListComponent } from './business-list/business-list.component';
 
 
 @NgModule({
@@ -47,8 +50,11 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
         TopbarComponent,
         RegisterComponent,
         TextComparatorDirective,
-        ChangePasswordComponent,
-        VerifyEmailComponent
+        ResetPasswordComponent,
+        VerifyEmailComponent,
+        ChangepasswordComponent,
+        BusinessComponent,
+        BusinessListComponent
     ],
     imports: [
         BrowserModule,
