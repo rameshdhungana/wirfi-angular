@@ -36,7 +36,7 @@ const routes: Routes = [
     {path:'list',component:BusinessListComponent},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
-    { path: 'account_confirm_email/:key', component: VerifyEmailComponent, canActivate: [PreventLoggedInAccess] },
+    { path: 'account_confirm_email/:key', component: VerifyEmailComponent },
 ];
 
 @NgModule({
