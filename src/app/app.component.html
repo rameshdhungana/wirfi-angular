@@ -1,8 +1,10 @@
 <div>
-    <app-sidebar *ngIf="isLoggedIn"(onToggle)="togglefunction($event)" [isCollapsed]="isCollapsed"  [isVisible]="isVisible"></app-sidebar>
-    <div  class="content"   [ngClass]="{'content--collapsed': isCollapseContent,'content--login': !isLoggedIn}" >
-           
-        <app-topbar  *ngIf="isLoggedIn" [(isCollapsed)]="isCollapsed" [(isVisible)]="isVisible" [(isCollapseContent)]="isCollapseContent"></app-topbar>
+    <app-sidebar *ngIf="isLoggedIn" (onToggle)="togglefunction($event)" [isCollapsed]="isCollapsed"
+                 [isVisible]="isVisible"></app-sidebar>
+    <div class="content" [ngClass]="{'content--collapsed': isCollapseContent,'content--login': !isLoggedIn}">
+
+        <app-topbar *ngIf="isLoggedIn" [(isCollapsed)]="isCollapsed" [(isVisible)]="isVisible"
+                    [(isCollapseContent)]="isCollapseContent"></app-topbar>
         <router-outlet></router-outlet>
         <div *ngIf="messageService.messages.length" class="alert alert-success alert-box">
           
@@ -10,9 +12,9 @@
             <span class=" float-right">
                
             </span>
-            <div *ngFor='let message of messageService.messages'> {{message}} </div>
-          
-          </div>
+            <div *ngFor='let message of messageService.messages'> {{message}}</div>
+
+        </div>
     </div>
 </div>
 

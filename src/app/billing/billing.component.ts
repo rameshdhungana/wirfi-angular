@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StripeService} from "../_services/stripe.service";
-import  { BillingService } from "../_services/billing.service"
+import {BillingService} from "../_services/billing.service"
 
 @Component({
     selector: 'app-billing',
@@ -8,17 +8,18 @@ import  { BillingService } from "../_services/billing.service"
     styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
-  public billings: Array<object> = [];
+    public billings: Array<object> = [];
 
-    constructor(private stripeService: StripeService,private billingService:BillingService) {
+    constructor(private stripeService: StripeService, private billingService: BillingService) {
 
 
     }
-      ngOnInit() {
-    this.billingService.getBillingList().subscribe(
-      (response: Array<object>) => this.billings = response
-    );
-  }
+
+    ngOnInit() {
+        this.billingService.getBillingList().subscribe(
+            (response: Array<object>) => this.billings = response
+        );
+    }
 
     openCheckout() {
         console.log('hello i am inside opencheckout');
@@ -42,7 +43,6 @@ export class BillingComponent implements OnInit {
         });
 
     }
-
 
 
 }
