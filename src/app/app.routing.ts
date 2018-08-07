@@ -19,6 +19,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { BusinessComponent } from './business/business.component';
 import { BusinessListComponent } from './business-list/business-list.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DeviceInfoComponent } from './device-info/device-info.component';
 
 
 const routes: Routes = [
@@ -28,18 +29,19 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent , canActivate: [AuthGuard]},
     {path: 'stripe', component: StripeComponent, canActivate: [AuthGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-    {path: 'devices', component: DeviceListComponent,canActivate: [AuthGuard]},
+    {path: 'devices', component: DeviceListComponent},
     {path: 'device', component: DevicesComponent,canActivate: [AuthGuard]},
     {path: 'device/:id', component: DeviceDetailComponent,canActivate: [AuthGuard]},
     {path:'register',component:RegisterComponent,canActivate: [PreventLoggedInAccess]},
-    {path:'reset/:uid/:token',component:ResetPasswordComponent,canActivate: [AuthGuard]},
+    {path:'reset/:uid/:token',component:ResetPasswordComponent},
     {path:'change-password',component:ChangepasswordComponent,canActivate: [AuthGuard]},
     {path:'bussiness',component:BusinessComponent,canActivate: [AuthGuard]},
     {path:'list',component:BusinessListComponent,canActivate: [AuthGuard]},
     {path:'billing',component:BillingComponent,canActivate: [AuthGuard]},
+    {path:'device-info',component:DeviceInfoComponent,canActivate: [AuthGuard]},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
-    { path: 'account_confirm_email/:key', component: VerifyEmailComponent ,canActivate: [PreventLoggedInAccess]},
+    { path: 'account_confirm_email/:key', component: VerifyEmailComponent},
 ];
 
 @NgModule({

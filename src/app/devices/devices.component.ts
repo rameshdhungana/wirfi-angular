@@ -22,8 +22,8 @@ export class DevicesComponent implements OnInit {
         if (data.valid) {
             this.device.postDeviceSno(data.value).subscribe(
                 (response) => {
-                    const id = response['id'];
-                    console.log(response);
+                    const id = response["data"].id;
+                    console.log(id);
                     localStorage.setItem('device_id', id);
                     this.router.navigateByUrl(`/device/${id}/setup`);
                 }
