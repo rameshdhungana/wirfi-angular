@@ -26,6 +26,8 @@ export class BillingComponent implements OnInit {
         var handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
             locale: 'auto',
+            // code: true,
+            // address: true,
             token: function (token: any) {
                 // You can access the token ID with `token.id`.
                 console.log(token.id, token.email)
@@ -37,8 +39,11 @@ export class BillingComponent implements OnInit {
         });
 
         handler.open({
-            name: 'Demo Site',
-            description: '2 widgets',
+            name: 'Wirfi',
+            description: 'Card Details',
+            code: true,
+            address: true,
+            label: 'Submit'
             // amount: 100
         });
 
