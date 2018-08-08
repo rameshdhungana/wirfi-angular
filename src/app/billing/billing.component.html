@@ -5,17 +5,22 @@
                 <header class="pb-2 pl-1" style="font-weight: 900">
                     PAYMENT METHODS
                 </header>
-
+                23423432r23rwerewrwe{{billings}}
                 <ul class="billing-list">
                     <li *ngFor="let billing of billings; let i = index">
-                        <a>
+                        <a (click)="OpenDetail(billing)">
                             <div class="row">
                                 <div class="col-4">
 
                                     <i class="fa fa-3x fa-university p-2 "></i></div>
                                 <div class="col-8">
                                     <span class="bold-text">Visa</span>
-                                    <span class="bold-text">{{billing}}}</span>
+                                    <span class="bold-text">{{billing.id}}</span>
+                                    <span class="bold-text">{{billing.name}}</span>
+                                    <span class="bold-text">{{billing.address}}</span>
+                                    <span class="bold-text">{{billing.latitude }}</span>
+                                    <span class="bold-text">{{billing.longitude}}</span>
+                                    <span class="bold-text">{{billing.email}}</span>
 
                                     <span>
                                 122........
@@ -26,21 +31,6 @@
                     </li>
 
 
-                    <li>
-                        <a>
-                            <div class="row">
-                                <div class="col-4">
-
-                                    <i class="fa fa-3x fa-university p-2"></i></div>
-                                <div class="col-8">
-                                    <span class="bold-text">Visa</span>
-                                    <span>
-                                122........
-                            </span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
                     <li>
                         <a (click)="openCheckout()">
                             <div class="row">
@@ -73,19 +63,26 @@
                     <ul class="billing-detail">
                         <li>
                             <span class="bold-text">Type</span>
-                            <span>Prepaid</span>
+                            <span>{{billingDetail.card_type}}</span>
 
                         </li>
                         <li>
                             <span class="bold-text">Expiration Date</span>
-                            <span>Prepaid</span>
+                            <span>{{billingDetail.expiration_date}}</span>
+
+                        </li>
+
+                        <li>
+                            <span class="bold-text">Card Holder's Name</span>
+                            <span>{{ billingDetail.name}}</span>
 
                         </li>
                         <li>
                             <span class="bold-text"> Billing Address</span>
-                            <span>Prepaid</span>
+                            <span>{{billingDetail.address}}</span>
 
                         </li>
+
                     </ul>
                 </div>
 
