@@ -22,6 +22,9 @@ export class DeviceService {
       return this.http.put(`device/${id}/`, device.getRawValue);
     }
 
+    postDeviceDetail(data, id) {
+        return this.http.post(`device/${id}/`, data);
+      }
     setupDeviceNetwork(network, id) {
       return this.http.put(`device/${id}/network/`, network);
     }

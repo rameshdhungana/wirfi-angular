@@ -25,8 +25,9 @@ export class DeviceNetworkComponent implements OnInit {
         if (data.valid) {
             this.device.setupDeviceNetwork(data.value, this.device_id).subscribe(
                 (response) => {
-                    localStorage.removeItem('device_id');
-                    this.router.navigateByUrl(`/devices`);
+                    console.log(response);
+                   
+                    this.router.navigateByUrl(`/device-info`);
                 }
             );
         }
