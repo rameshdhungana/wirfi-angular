@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {MatDialogModule} from '@angular/material';
 import {AppComponent} from './app.component';
 import {LoginComponent} from "./login/login.component";
 import {LogoutComponent} from './logout/logout.component';
@@ -72,7 +73,8 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
         AngularFontAwesomeModule,
         NgxMaterialTimepickerModule.forRoot(),
         BrowserAnimationsModule,
-        UiSwitchModule
+        UiSwitchModule,
+        MatDialogModule,
 
 
     ],
