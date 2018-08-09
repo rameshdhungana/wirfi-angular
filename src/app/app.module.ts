@@ -36,7 +36,9 @@ import { BusinessListComponent } from './business-list/business-list.component';
 import {BillingService} from "./_services/billing.service";
 import { ProfileComponent } from './profile/profile.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { UiSwitchModule } from 'ngx-toggle-switch';
 @NgModule({
     declarations: [
         AppComponent,
@@ -67,7 +69,10 @@ import { DeviceInfoComponent } from './device-info/device-info.component';
         FormsModule,
         AppRoutingModule,
         HttpClientModule,
-        AngularFontAwesomeModule
+        AngularFontAwesomeModule,
+        NgxMaterialTimepickerModule.forRoot(),
+        BrowserAnimationsModule,
+        UiSwitchModule
 
 
     ],
