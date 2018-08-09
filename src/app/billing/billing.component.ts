@@ -20,7 +20,7 @@ export class BillingComponent implements OnInit {
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
                 if (response['code'] == 1) {
-                    this.billings = response['data']['billing_info'];
+                    this.billings = response['data']['billing_info']['sources']['data'];
                     console.log(this.billings);
                     this.billingDetail = this.billings[0];
                     console.log(this.billingDetail);
@@ -31,8 +31,8 @@ export class BillingComponent implements OnInit {
         );
 
     }
-    OpenDetail(billings){
-        this.billingDetail = billings;
+    OpenDetail(billing){
+        this.billingDetail = billing;
 
     }
 
@@ -42,11 +42,11 @@ export class BillingComponent implements OnInit {
         var handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
             locale: 'auto',
-            // code: true,
-            // address: true,
+
             token: function (token: any) {
                 // You can access the token ID with `token.id`.
-                console.log(token.id, token.email)
+                console.log(token.id, token.email);
+
                 // Get the token ID to your server-side code for use.
                 this.stripeService.registerStripeToken(token).subscribe(response => {
                     console.log(response)
@@ -59,8 +59,8 @@ export class BillingComponent implements OnInit {
             description: 'Card Details',
             code: true,
             address: true,
-            label: 'Submit'
-            // amount: 100
+            label: 'Submit',
+
         });
 
     }
