@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StripeService} from "../_services/stripe.service";
 import {BillingService} from "../_services/billing.service"
+import {DeletecardComponent} from "./deletecard/deletecard.component";
+import {MatDialog,MatDialogRef} from "@angular/material";
 
 @Component({
     selector: 'app-billing',
@@ -11,7 +13,13 @@ export class BillingComponent implements OnInit {
     public billings: Array<object> = [];
     public billingDetail : object = [];
 
-    constructor(private stripeService: StripeService, private billingService: BillingService) {
+    deletecardDialog:MatDialogRef<DeletecardComponent>;
+
+
+
+    constructor(private stripeService: StripeService,
+                private billingService: BillingService,
+                private  dialog:MatDialog) {
 
 
     }
@@ -63,6 +71,10 @@ export class BillingComponent implements OnInit {
 
         });
 
+    }
+
+    OpenDeleteDailog(){
+        this.deletecardDialog = this.dialog.open(DeletecardComponent);
     }
 
 

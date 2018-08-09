@@ -40,6 +40,7 @@ import { DeviceInfoComponent } from './device-info/device-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { UiSwitchModule } from 'ngx-toggle-switch';
+import { DeletecardComponent } from './billing/deletecard/deletecard.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -64,6 +65,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
         BusinessListComponent,
         ProfileComponent,
         DeviceInfoComponent,
+        DeletecardComponent,
     ],
     imports: [
         BrowserModule,
