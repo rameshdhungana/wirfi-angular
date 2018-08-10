@@ -10,8 +10,8 @@ import {MatDialog,MatDialogRef} from "@angular/material";
     styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
-    public billings: Array<object> = [];
-    public billingDetail : object = [];
+    public billings: Array<any> = [];
+    public billingDetail : any = [];
 
     deletecardDialog:MatDialogRef<DeletecardComponent>;
 
