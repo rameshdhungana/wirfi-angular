@@ -18,6 +18,13 @@ export class DeviceService {
         return this.http.post('device/', device);
     }
 
+    postDeviceinfo(data){
+        return this.http.post('device/',data);
+    }
+    postDeviceImages(data,id){
+        return this.http.post(`device/${id}/images/`,data)
+    }
+
     updateDeviceDetail(device, id) {
       return this.http.put(`device/${id}/`, device.getRawValue);
     }

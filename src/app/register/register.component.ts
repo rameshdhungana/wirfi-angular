@@ -33,7 +33,11 @@ export class RegisterComponent implements OnInit {
                     this.messageService.add(response["message"]);
                   }
                   
+                  },(error)=>{
+                    this.messageService.add(error);
+
                   }
+
                    
                 
             );

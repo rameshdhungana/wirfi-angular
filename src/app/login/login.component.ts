@@ -39,13 +39,15 @@ export class LoginComponent implements OnInit {
             this.authService.login(data.value)
                 .subscribe(
                     (response) => {
+                        console.log(response);
                         if (response['code']==1) {
                             localStorage.setItem('token', response['data']['auth_token']);
                             this.authService.isLoggedInObs();
                             this.router.navigateByUrl('dashboard');
-                        }else{
-                            this.messageService.add('Invalid Credentials');
                         }
+                    },
+                    (error) =>{
+                        this.messageService.add('Invalid Credentials');
                     }
                 );
         }
@@ -58,7 +60,11 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     (response) => {
                         console.log("response",response);
-                        this.messageService.add(response["detail"]);
+                        this.messageService.add('Please check your email for forget password link');
+                        this.showMainComponent()
+                        },
+                        (error) =>{
+                            this.messageService.add('Something went wrong');
                         }
                 );
         }

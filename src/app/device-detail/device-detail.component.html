@@ -1,3 +1,26 @@
-<p>
-  device-detail works!
-</p>
+
+
+<div class="container-fluid login-container" >
+
+
+  <div class="card text-white bg-primary text-center">
+    <img class="card-img-top" src="holder.js/100px180/" alt="">
+    <div class="card-body">
+      <h4 class="card-title">{{device_data.data.name}}</h4>
+      <p class="card-text">
+          serial no:{{device_data.data.serial_number}}<br>
+          latitude:{{device_data.data.latitude}}<br>
+          longitude:{{device_data.data.longitude}}<br>
+      </p>
+      <ul style="list-style-type: none;">
+          <li *ngFor="let info of device_data.data.location_hours">
+             Day: {{info.day_id}} From:{{info.from_time}} To:{{info.to_time}}
+          </li>
+        </ul>
+    </div>
+  </div>
+
+
+
+
+</div>

@@ -33,6 +33,8 @@ export class ResetPasswordComponent implements OnInit {
                 (response) => {
                     if (response['code'] == 1) {
                       this.messageService.add('Password Succesfully Changed');
+                      this.router.navigateByUrl('/logout');
+                      
                     }else{
                     //unsuccessful code
                     }

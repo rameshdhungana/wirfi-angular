@@ -8,7 +8,7 @@ import {AuthenticationService} from './_services/authentication.service';
 import {AlertService} from './_services/alert.service';
 import {AppRoutingModule} from './app.routing';
 import {UserService} from './_services/user.service';
-import {FormsModule} from "@angular/forms";
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {StripeComponent} from "./stripe/stripe.component";
@@ -37,8 +37,8 @@ import {BillingService} from "./_services/billing.service";
 import { ProfileComponent } from './profile/profile.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { UiSwitchModule } from 'ngx-toggle-switch';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     declarations: [
         AppComponent,
@@ -67,12 +67,13 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
         HttpClientModule,
         AngularFontAwesomeModule,
-        NgxMaterialTimepickerModule.forRoot(),
         BrowserAnimationsModule,
-        UiSwitchModule
+        UiSwitchModule,
+        NgbModule.forRoot()
 
 
     ],

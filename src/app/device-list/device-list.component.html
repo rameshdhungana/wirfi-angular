@@ -2,15 +2,17 @@
 
 <div class="container-fluid login-container" >
 
-    <div class="row pt-4">
-      <div *ngFor="let device of device_list" class="col-md-6 text-white">
-        <div class="card text-center">
-          <img src="http://via.placeholder.com/800x150" class="img-fluid">
-          <div class="card-body">
-            <h4 class="card-title"><span>{{device.name}}</span></h4>
-            <p class="card-text">Serial Number:<span>{{device.serial_number}}</span></p>
+    <div class="row pt-4 ">
+      <div *ngFor="let device of device_list" class="col-md-6 mt-2 text-white ">
+        <a class="nounderline text-white" href="/device/{{device.id}}">
+          <div class="card text-center">
+            <img src="http://via.placeholder.com/200x150" class="img-fluid mx-auto d-block"  style="max-width:200px;">
+            <div class="card-body">
+              <h4 class="card-title"><span>{{device.name}}</span></h4>
+              <p class="card-text">Serial Number:<span>{{device.serial_number}}</span></p>
+            </div>
           </div>
-        </div>
+          </a>
       </div>
       <div class="col-md-6"></div>
       <div class="col-md-6"></div>

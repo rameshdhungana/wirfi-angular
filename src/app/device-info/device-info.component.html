@@ -1,181 +1,197 @@
 <div class="container-fluid login-container ">
-    <div class="  d-flex align-items-center justify-content-center">
-    
-      <form    #deviceInfoform='ngForm' (ngSubmit)='deviceInfo(deviceInfoform)'>
-          <h2 class="text-white text-center">Device Info</h2>
-
-
+    <div class="  d-flex align-items-center text-white justify-content-center">
+       
+     <div>
+          <h2 class="text-center mt-5">Add Device</h2>
+        <form  [class.was-validated]="deviceInfoform.submitted" #deviceInfoform='ngForm' (ngSubmit)='deviceInfo(deviceInfoform)'>
+        <div class="row">   
+            <div class="col-md-8 offset-md-2">
+           
+                <div class="form-group">
+                    <label class="text-white" for="device_name">Device Name</label>
+                    <input type="text" class="form-control-file" name="device_name" id="device_name" placeholder="" aria-describedby="fileHelpId"  ngModel #name="ngModel" required minlength="3" maxlength="30" #device_name="ngModel"> 
+                    <div class="invisible-text text-right text-white">
+                        <small *ngIf="deviceInfoform.submitted && device_name.hasError('required')">
+                            This is required field.
+                        </small>
+                    </div>
+                    <div class="invisible-text text-right text-white">
+                        <small *ngIf="deviceInfoform.submitted && device_name.hasError('maxlength')">
+                            Device name exceeds 30 characters
+                        </small>
+                    </div>
+                    <div class="invisible-text text-right text-white">
+                        <small *ngIf="deviceInfoform.submitted && device_name.hasError('minlength')">
+                            Device name should be greater than 3 characters
+                        </small>
+                    </div>
+                   
+                  </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="form-group">
+                        <label class="text-white" for="serial_number">Device Serial No</label>
+                        <input type="text" class="form-control-file" name="serial_number" id="serial_number" placeholder="" aria-describedby="fileHelpId" ngModel  pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel"> 
+                        <div class="invisible-text text-right text-white">
+                            <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('required')">
+                                This is required field.
+                            </small>
+                        </div>
+                        <div class="invisible-text text-right text-white">
+                            <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('pattern')">
+                                Must be alphanumeric
+                            </small>
+                        </div>
+                    </div>
+            </div>
+         
+            </div>
+      
         <div class="row mt-4">
           <div class="col-md-4 offset-md-2">
               <div class="form-group">
-                  <label class="text-white" for="location_logo">Upload the logo for the Logo</label>
-                  <input type="file" class="form-control-file" name="logo" id="location_logo" placeholder="" aria-describedby="fileHelpId" ngModel #name="ngModel">
-                  <small  class="form-text text-muted">location logo</small>
+                  <label class="text-white" for="location_logo">Location Image</label>
+                  <input type="file" class="form-control-file" name="logo"  (change)="onChangeLocation($event)" id="location_logo" placeholder="" aria-describedby="fileHelpId" ngModel #name="ngModel">
+                
                 </div>
           </div>
           <div class="col-md-4">
               <div class="form-group">
-                  <label class="text-white" for="location_photo"></label>
-                  <input type="file" class="form-control-file" name="name" id="location_photo" placeholder="" aria-describedby="fileHelpId" ngModel #name="ngModel">
-                  <small class="form-text text-muted">Location Photo</small>
+                  <label class="text-white" for="location_photo">Device Image</label>
+                  <input type="file" class="form-control-file" name="name" (change)="onChangeImage($event)"   id="location_photo" placeholder="" aria-describedby="fileHelpId" ngModel #name="ngModel">
+                
               </div>
           </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 offset-md-2">
-                <div class="form-group">
-                    <label for="latitude"></label>
-                    <input type="text" class="form-control-file" name="latitude" id="latitude" placeholder="" aria-describedby="fileHelpId" ngModel #name="ngModel">
-                    <small class="form-text text-muted">Latitude</small>
-                  </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="longitude"></label>
-                    <input type="text" class="form-control-file" name="longitude" id="longitude" placeholder="" aria-describedby="fileHelpId" ngModel #name="ngModel">
-                    <small class="form-text text-muted">Longitude</small>
-                  </div>
-              </div>
-        </div>
+       
 
         <div class="row">
-          <div class="col-md-2">Sunday</div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="sun_time_start" [ngxTimepicker]="picker_sun_start"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_sun_start></ngx-material-timepicker>
+                <div class="col-md-2 d-flex align-items-center text-white">
+                    Sunday
+
+                </div>
+                <div class="col-md-4">
+                        <label for=""></label>
+                        <ngb-timepicker name="sun_time_start" [seconds]="seconds" ngModel></ngb-timepicker>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <ngb-timepicker name="sun_time_end" [seconds]="seconds" ngModel></ngb-timepicker>
+                        </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-center text-white">
+                    <ui-switch size="small" [checked]="false" name="toggle_sun"  ngModel></ui-switch>
                 </div>
           </div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="sun_time_end" [ngxTimepicker]="picker_sun_end"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_sun_end></ngx-material-timepicker>
+          <div class="row">
+                <div class="col-md-2 d-flex align-items-center text-white">Monday</div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <ngb-timepicker name="mon_time_start" [seconds]="seconds" ngModel></ngb-timepicker>
+                        
+                    </div>
                 </div>
-          </div>
-          <div class="col-md-2"><ui-switch size="small" name="toggle_sun"  ngModel></ui-switch></div>
-          <div class="col-md-2">Monday</div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="mon_time_start" [ngxTimepicker]="picker_mon_start"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_mon_start></ngx-material-timepicker>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <ngb-timepicker name="mon_time_end" [seconds]="seconds" ngModel></ngb-timepicker>
+                        </div>
                 </div>
-          </div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="mon_time_end" [ngxTimepicker]="picker_mon_end"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_mon_end></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-2"><ui-switch size="small" name="toggle_mon"  ngModel></ui-switch></div>
-          <div class="col-md-2">Tuesday</div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="tue_time_start" [ngxTimepicker]="picker_tue_start"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_tue_start></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="tue_time_end" [ngxTimepicker]="picker_tue_end"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_tue_end></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-2"><ui-switch size="small" name="toggle_tue"  ngModel></ui-switch></div>
-          <div class="col-md-2">Wednesday</div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="wed_time_start" [ngxTimepicker]="picker_wed_start"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_wed_start></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="wed_time_end" [ngxTimepicker]="picker_wed_end"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_wed_end></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-2"><ui-switch size="small" name="toggle_wed"  ngModel></ui-switch></div>
-          <div class="col-md-2">Thrusday</div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="thur_time_start" [ngxTimepicker]="picker_thur_start"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_thur_start></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="thur_time_end" [ngxTimepicker]="picker_thur_end"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_thur_end></ngx-material-timepicker>
-                </div>
-          </div>  
-          <div class="col-md-2"><ui-switch size="small" name="toggle_thur"  ngModel></ui-switch></div>
-          <div class="col-md-2">Friday</div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="fri_time_start" [ngxTimepicker]="picker_fri_start"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_fri_start></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-4">
-              <div class="form-group">
-                  <label for=""></label>
-                  <input name="fri_time_end" [ngxTimepicker]="picker_fri_end"  [format]="24"  ngModel >
-                 
-                  <ngx-material-timepicker #picker_fri_end></ngx-material-timepicker>
-                </div>
-          </div>
-          <div class="col-md-2"><ui-switch size="small"  name="toggle_fri"  ngModel></ui-switch ></div>
-          <div class="col-md-2">Saturday</div>
-          <div class="col-md-4">
-          <div class="form-group">
-              <label for=""></label>
-              <input name="sat_time_start" [ngxTimepicker]="picker_sat_start"  [format]="24"  ngModel >
-             
-              <ngx-material-timepicker #picker_sat_start></ngx-material-timepicker>
+                <div class="col-md-2 d-flex align-items-center text-white"><ui-switch size="small" [checked]="false" name="toggle_mon"  ngModel></ui-switch></div>
             </div>
-      </div>
-      <div class="col-md-4">
-          <div class="form-group">
-              <label for=""></label>
-              <input name="sat_time_end" [ngxTimepicker]="picker_sat_end"  [format]="24"  ngModel >
-             
-              <ngx-material-timepicker #picker_sat_end></ngx-material-timepicker>
-            </div>
-      </div>
-      <div class="col-md-2">
-          <ui-switch size="small"  name="toggle_sat"  ngModel></ui-switch>
-      </div>
-          
+            <div class="row">
+                    <div class="col-md-2 d-flex align-items-center text-white">Tuesday</div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for=""></label>
+                            <ngb-timepicker name="tue_time_start" [seconds]="seconds" ngModel></ngb-timepicker>
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for=""></label>
+                            <ngb-timepicker name="tue_time_end" [seconds]="seconds" ngModel></ngb-timepicker>
+                            </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-center text-white"><ui-switch size="small" [checked]="false" name="toggle_tue"  ngModel></ui-switch></div>
+                </div>
+                <div class="row">
+                        <div class="col-md-2 d-flex align-items-center text-white">Wednesday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="wed_time_start" [seconds]="seconds" ngModel></ngb-timepicker>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="wed_time_end" [seconds]="seconds" ngModel></ngb-timepicker>
+                                </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white"><ui-switch size="small" [checked]="false" name="toggle_wed"  ngModel></ui-switch></div>
+                </div>
+                <div class="row">
+                        <div class="col-md-2 d-flex align-items-center text-white">Thursday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="thu_time_start" [seconds]="seconds" ngModel></ngb-timepicker>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="thu_time_end" [seconds]="seconds" ngModel></ngb-timepicker>
+                                </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white"><ui-switch size="small" [checked]="false" name="toggle_thu"  ngModel></ui-switch></div>
+                </div>
+                <div class="row">
+                        <div class="col-md-2 d-flex align-items-center text-white">Friday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="fri_time_start" [seconds]="seconds" ngModel></ngb-timepicker>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="fri_time_end" [seconds]="seconds" ngModel></ngb-timepicker>
+                                </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white"><ui-switch size="small" [checked]="false" name="toggle_fri"  ngModel></ui-switch></div>
+                </div>
+                <div class="row">
+                        <div class="col-md-2 d-flex align-items-center text-white">Saturday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="sat_time_start" [seconds]="seconds" ngModel></ngb-timepicker>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="sat_time_end" [seconds]="seconds" ngModel></ngb-timepicker>
+                                </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white"><ui-switch size="small" [checked]="false" name="toggle_sat"  ngModel></ui-switch></div>
+                </div>
         
-          
-        </div>
-        
+          <button type="submit" class="btn btn-primary text-center">Submit</button>
       
-      
-      <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-
+</div>
     </div>
   </div>

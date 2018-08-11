@@ -26,11 +26,11 @@ export class ErrorInterceptor implements HttpInterceptor {
 
       if (err.status === 400) {
         console.log(err);
-        if (err.error.errors.non_field_errors) {
-          console.log(err.error.errors.non_field_errors[0]);
-          const error_message = err.error.errors.non_field_errors[0];
-          this.alertService.error(error_message);
-        }
+        // if (err.error.errors.non_field_errors) {
+        //   console.log(err.error.errors.non_field_errors[0]);
+        //   const error_message = err.error.errors.non_field_errors[0];
+        //   this.alertService.error(error_message);
+        // }
         // for (const key in error) {
         //   for (const message of error[key]) {
         //     const msg = key + ':' + message;
