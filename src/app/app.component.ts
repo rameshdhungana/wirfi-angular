@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
 
     constructor(
-        private messageService: MessageService,
+        public messageService: MessageService,
         private authService: AuthenticationService,
         private sidebar: SidebarComponent
     ) {

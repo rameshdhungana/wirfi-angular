@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StripeService} from "../_services/stripe.service";
 import {BillingService} from "../_services/billing.service"
+import {DeletecardComponent} from "./deletecard/deletecard.component";
+import {MatDialog,MatDialogRef} from "@angular/material";
 
 @Component({
     selector: 'app-billing',
@@ -8,10 +10,16 @@ import {BillingService} from "../_services/billing.service"
     styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
-    public billings: Array<object> = [];
-    public billingDetail : object = [];
+    public billings: Array<any> = [];
+    public billingDetail : any = [];
 
-    constructor(private stripeService: StripeService, private billingService: BillingService) {
+    deletecardDialog:MatDialogRef<DeletecardComponent>;
+
+
+
+    constructor(private stripeService: StripeService,
+                private billingService: BillingService,
+                private  dialog:MatDialog) {
 
 
     }
@@ -20,7 +28,7 @@ export class BillingComponent implements OnInit {
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
                 if (response['code'] == 1) {
-                    this.billings = response['data']['billing_info'];
+                    this.billings = response['data']['billing_info']['sources']['data'];
                     console.log(this.billings);
                     this.billingDetail = this.billings[0];
                     console.log(this.billingDetail);
@@ -31,8 +39,8 @@ export class BillingComponent implements OnInit {
         );
 
     }
-    OpenDetail(billings){
-        this.billingDetail = billings;
+    OpenDetail(billing){
+        this.billingDetail = billing;
 
     }
 
@@ -42,11 +50,11 @@ export class BillingComponent implements OnInit {
         var handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
             locale: 'auto',
-            // code: true,
-            // address: true,
+
             token: function (token: any) {
                 // You can access the token ID with `token.id`.
-                console.log(token.id, token.email)
+                console.log(token.id, token.email);
+
                 // Get the token ID to your server-side code for use.
                 this.stripeService.registerStripeToken(token).subscribe(response => {
                     console.log(response)
@@ -59,10 +67,14 @@ export class BillingComponent implements OnInit {
             description: 'Card Details',
             code: true,
             address: true,
-            label: 'Submit'
-            // amount: 100
+            label: 'Submit',
+
         });
 
+    }
+
+    OpenDeleteDailog(){
+        this.deletecardDialog = this.dialog.open(DeletecardComponent);
     }
 
 

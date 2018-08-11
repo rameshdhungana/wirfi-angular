@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {MatDialogModule} from '@angular/material';
 import {AppComponent} from './app.component';
 import {LoginComponent} from "./login/login.component";
 import {LogoutComponent} from './logout/logout.component';
@@ -39,6 +40,7 @@ import { DeviceInfoComponent } from './device-info/device-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DeletecardComponent } from './billing/deletecard/deletecard.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -63,6 +65,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         BusinessListComponent,
         ProfileComponent,
         DeviceInfoComponent,
+        DeletecardComponent,
     ],
     imports: [
         BrowserModule,
@@ -73,7 +76,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         AngularFontAwesomeModule,
         BrowserAnimationsModule,
         UiSwitchModule,
-        NgbModule.forRoot()
+        NgbModule.forRoot(),
+        MatDialogModule,
 
 
     ],

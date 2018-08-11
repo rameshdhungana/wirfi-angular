@@ -8,7 +8,7 @@ export class StripeService {
     }
 
     registerStripeToken(token) {
-        return this.http.post('stripe/register-token/', token);
+        return this.http.post('billing/', token);
     }
 
 }
