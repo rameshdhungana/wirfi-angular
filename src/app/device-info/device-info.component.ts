@@ -190,7 +190,7 @@ export class DeviceInfoComponent  implements OnInit {
            },
         (error) =>{
             this.messageservice.add('Could not add device');
-        });        
+        });
     }
 }
 

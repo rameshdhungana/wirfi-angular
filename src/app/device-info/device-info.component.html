@@ -9,14 +9,14 @@
            
                 <div class="form-group">
                     <label class="text-white" for="device_name">Device Name</label>
-                    <input type="text" class="form-control-file" name="device_name" id="device_name" placeholder="" aria-describedby="fileHelpId"  ngModel #name="ngModel" required minlength="3" maxlength="30" #device_name="ngModel"> 
+                    <input type="text" class="form-control-file" name="device_name" id="device_name" placeholder="Enter Device Name" aria-describedby="fileHelpId"  ngModel #name="ngModel" required minlength="3" maxlength="30" #device_name="ngModel">
                     <div class="invisible-text text-right text-white">
                         <small *ngIf="deviceInfoform.submitted && device_name.hasError('required')">
                             This is required field.
                         </small>
                     </div>
                     <div class="invisible-text text-right text-white">
-                        <small *ngIf="deviceInfoform.submitted && device_name.hasError('maxlength')">
+                        <small *ngIf="device_name.hasError('maxlength')">
                             Device name exceeds 30 characters
                         </small>
                     </div>
@@ -25,29 +25,27 @@
                             Device name should be greater than 3 characters
                         </small>
                     </div>
-                   
                   </div>
             </div>
         </div>
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="form-group">
-                        <label class="text-white" for="serial_number">Device Serial No</label>
-                        <input type="text" class="form-control-file" name="serial_number" id="serial_number" placeholder="" aria-describedby="fileHelpId" ngModel  pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel"> 
-                        <div class="invisible-text text-right text-white">
-                            <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('required')">
-                                This is required field.
-                            </small>
-                        </div>
-                        <div class="invisible-text text-right text-white">
-                            <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('pattern')">
-                                Must be alphanumeric
-                            </small>
-                        </div>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="form-group">
+                    <label class="text-white" for="serial_number">Device Serial No</label>
+                    <input type="text" class="form-control-file" name="serial_number" id="serial_number" placeholder="Enter Device's Serial Number" aria-describedby="fileHelpId" required ngModel  pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel">
+                    <div class="invisible-text text-right text-white">
+                        <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('required')">
+                            This is required field.
+                        </small>
                     </div>
+                    <div class="invisible-text text-right text-white">
+                        <small *ngIf="serialnumber.hasError('pattern')">
+                            Must be alphanumeric
+                        </small>
+                    </div>
+                </div>
             </div>
-         
-            </div>
+        </div>
       
         <div class="row mt-4">
           <div class="col-md-4 offset-md-2">
