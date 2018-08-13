@@ -34,7 +34,8 @@ export class RegisterComponent implements OnInit {
                   }
                   
                   },(error)=>{
-                    this.messageService.add(error);
+                    console.log(error);
+                    this.messageService.add(error.error["message"]);
 
                   }
 
