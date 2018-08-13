@@ -33,8 +33,6 @@ export class AuthenticationService {
 
 
   logout() {
-
-    localStorage.removeItem('token');
     return this.http.post('logout/',{});
   }
 
@@ -52,6 +50,10 @@ export class AuthenticationService {
       this.loggedIn.next(false);
     }
     return this.loggedIn.asObservable();
+  }
+
+  me() {
+    return this.http.get('me/');
   }
 }
 

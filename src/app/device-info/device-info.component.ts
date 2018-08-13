@@ -44,13 +44,11 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   providers: [{provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}]
 })
 export class DeviceInfoComponent  implements OnInit {
-    fileLocation: File;
-    fileLocation_name:any
-    fileImage_name:any
-    fileImage: File;
-
-
-     formData = new FormData();
+  fileLocation: File;
+  fileLocation_name:any
+  fileImage_name:any
+  fileImage: File;
+  formData = new FormData();
 
   private json: object = {}
   public device_id:any
@@ -71,15 +69,15 @@ export class DeviceInfoComponent  implements OnInit {
     this.fileLocation = files[0];
     this.fileLocation_name=files[0].name
     console.log(this.fileLocation);
-}
-onChangeImage(event: EventTarget) {
-    let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-    let files: FileList = target.files;
-    this.fileImage = files[0];
-    this.fileImage_name=files[0].name
-    console.log(this.fileImage);
-}
+  }
+  onChangeImage(event: EventTarget) {
+      let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+      let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+      let files: FileList = target.files;
+      this.fileImage = files[0];
+      this.fileImage_name=files[0].name
+      console.log(this.fileImage);
+  }
 
   deviceInfo(data: NgForm) {
 
@@ -133,11 +131,11 @@ onChangeImage(event: EventTarget) {
             "to_time": "",
             "is_on": true,
             "whole_day": true
-        }
-    ],
-      "name": "",
-      "serial_number": ""
-    };    
+        }],
+      'name': '',
+      'serial_number': ''
+    };
+
     if (data.valid) {
         this.json['location_hours'][0].from_time = data.value['sun_time_start'];
         this.json['location_hours'][0].to_time = data.value['sun_time_end'];
@@ -148,42 +146,42 @@ onChangeImage(event: EventTarget) {
         this.json['location_hours'][1].from_time = data.value['mon_time_start'];
         this.json['location_hours'][1].to_time = data.value['mon_time_end'];
         if (data.value['toggle_mon']){
-        this.json['location_hours'][1].whole_day = data.value['toggle_mon'];
+            this.json['location_hours'][1].whole_day = data.value['toggle_mon'];
         }
         this.json['location_hours'][2].from_time = data.value['tue_time_start'];
         this.json['location_hours'][2].to_time = data.value['tue_time_end'];
         if (data.value['toggle_tue']){
-        this.json['location_hours'][2].whole_day = data.value['toggle_tue'];
+            this.json['location_hours'][2].whole_day = data.value['toggle_tue'];
         }
 
         this.json['location_hours'][5].from_time = data.value['wed_time_start'];
         this.json['location_hours'][5].to_time = data.value['wed_time_end'];
         if (data.value['toggle_wed']){
-        this.json['location_hours'][5].whole_day = data.value['toggle_wed'];
+            this.json['location_hours'][5].whole_day = data.value['toggle_wed'];
         }
 
         this.json['location_hours'][3].from_time = data.value['thu_time_start'];
         this.json['location_hours'][3].to_time = data.value['thu_time_end'];
         if (data.value['toggle_thu']){
-        this.json['location_hours'][3].whole_day = data.value['toggle_thu'];
+            this.json['location_hours'][3].whole_day = data.value['toggle_thu'];
         }
         this.json['location_hours'][4].from_time = data.value['fri_time_start'];
         this.json['location_hours'][4].to_time = data.value['fri_time_end'];
         if (data.value['toggle_fri']){
-        this.json['location_hours'][4].whole_day = data.value['toggle_fri'];
+            this.json['location_hours'][4].whole_day = data.value['toggle_fri'];
         }
+
         this.json['location_hours'][6].from_time = data.value['sat_time_start'];
         this.json['location_hours'][6].to_time = data.value['sat_time_end'];
         if (data.value['toggle_sat']){
-        this.json['location_hours'][6].whole_day = data.value['toggle_sat'];
+            this.json['location_hours'][6].whole_day = data.value['toggle_sat'];
         }
+
         this.json['name'] =data.value['device_name'];
         this.json['serial_number'] =data.value['serial_number'];
-        console.log(this.json);
-        
+
         this.deviceservice.postDeviceinfo(this.json).subscribe(response => {
             console.log(response);
-          
             this.formData.append('location_logo',this.fileImage)
             this.formData.append('machine_photo',this.fileLocation)
             this.device_id = response['data']['id']
@@ -191,11 +189,7 @@ onChangeImage(event: EventTarget) {
                 this.messageservice.add('succesfully registered');
                 this.router.navigateByUrl(`device/`+this.device_id);
             })
-           });
-
-
-
-        
+        });
     }
 }
 

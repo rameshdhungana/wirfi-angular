@@ -26,18 +26,15 @@ export class BusinessComponent implements OnInit {
     this.loading = true;
     this.bussinessService.getBusiness().subscribe(
       (response) => {
-          console.log(response["code"]);
-          console.log(response);
-          
-          if(response["code"] == 1){
+          if(response['code']==1){
             this.business_id = response["data"]["business_info"]["id"];
             this.business_data = response["data"].business_info;
-            
-          }else{
+          }
+          else{
             this.business_data={
-              name:'',
-              address:'',
-              phone_number:''
+              name: '',
+              address: '',
+              phone_number: ''
             }
             console.log(this.business_data);
           }
