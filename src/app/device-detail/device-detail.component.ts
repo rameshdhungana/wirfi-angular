@@ -9,7 +9,7 @@ import { Route, Router, ActivatedRoute } from '@angular/router';
 })
 export class DeviceDetailComponent implements OnInit {
   device_id:any
-  public device_data:object
+  public device_data:any
 
 
   constructor(

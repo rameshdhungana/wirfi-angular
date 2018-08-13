@@ -41,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DeletecardComponent } from './billing/deletecard/deletecard.component';
+import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -66,6 +67,7 @@ import { DeletecardComponent } from './billing/deletecard/deletecard.component';
         ProfileComponent,
         DeviceInfoComponent,
         DeletecardComponent,
+        UpdatecardComponent,
     ],
     imports: [
         BrowserModule,
@@ -96,7 +98,12 @@ import { DeletecardComponent } from './billing/deletecard/deletecard.component';
     ],
     bootstrap:
         [AppComponent,
-        ]
+        ],
+    entryComponents:[
+        DeletecardComponent,
+        UpdatecardComponent,
+    ]
+
 })
 
 export class AppModule {
