@@ -11,9 +11,12 @@ export class LogoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.logout();
-    this.auth.isLoggedInObs();
-    this.router.navigate(['login']);
+    this.auth.logout().subscribe(response=> {
+      localStorage.removeItem('token');
+      this.auth.isLoggedInObs();
+      this.router.navigate(['login']);
+    });
+
   }
 
 }

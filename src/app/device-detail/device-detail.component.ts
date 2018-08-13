@@ -8,9 +8,8 @@ import { Route, Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./device-detail.component.css']
 })
 export class DeviceDetailComponent implements OnInit {
-  device_id:any
+  public device_id:any
   public device_data:object
-
 
   constructor(
     private deviceService:DeviceService,
@@ -19,9 +18,7 @@ export class DeviceDetailComponent implements OnInit {
     this.device_id = this.route.snapshot.paramMap.get('id');
 
     this.deviceService.getDevice(this.device_id).subscribe(response => {
-            
-      console.log(response);
-      this.device_data=response;
+      this.device_data = response;
      });
    }
 
