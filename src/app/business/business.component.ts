@@ -30,10 +30,12 @@ export class BusinessComponent implements OnInit {
           console.log(response);
           
           if(response["code"] == 1){
+            this.code=1;
             this.business_id = response["data"]["business_info"]["id"];
             this.business_data = response["data"].business_info;
             
           }else{
+            this.code=2;
             this.business_data={
               name:'',
               address:'',
@@ -50,7 +52,7 @@ export class BusinessComponent implements OnInit {
       data.value['latitude']=37.33;
       data.value['longitude']=34.34;
         console.log(data.value);
-
+      console.log(this.code);
         if (this.code == 1){
           this.bussinessService.updateBusiness(this.business_id,data.value)
           .subscribe(
