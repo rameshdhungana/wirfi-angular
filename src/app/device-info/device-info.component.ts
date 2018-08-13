@@ -86,102 +86,99 @@ onChangeImage(event: EventTarget) {
     this.json = {
       "location_hours": [
         {
-            "day": "Sunday",
+            "day_id": "1",
             "from_time": "",
             "to_time": "",
-            "is_on": true,
-            "whole_day": false
+            "is_on": true
         },
         {
-            "day": "Monday",
+            "day_id": "2",
             "from_time": "",
             "to_time": "",
-            "is_on": true,
-            "whole_day": false
+            "is_on": true
         },
         {
-            "day": "Tuesday",
+            "day_id": "3",
             "from_time": "",
             "to_time": "",
-            "is_on": true,
-            "whole_day": false
+            "is_on": true
         },
         {
-            "day": "Wednesday",
+            "day_id": "4",
             "from_time": "",
             "to_time": "",
-            "is_on": true,
-            "whole_day": false
+            "is_on": true
         },
         {
-            "day": "Thursday",
+            "day_id": "5",
             "from_time": "",
             "to_time": "",
-            "is_on": true,
-            "whole_day": false
+            "is_on": true
         },
         {
-            "day": "Friday",
+            "day_id": "6",
             "from_time": "",
             "to_time": "",
-            "is_on": true,
-            "whole_day": false
+            "is_on": true
         },
         {
-            "day": "Saturday",
+            "day_id": "7",
             "from_time": "",
             "to_time": "",
-            "is_on": true,
-            "whole_day": true
+            "is_on": true
         }
     ],
       "name": "",
-      "serial_number": ""
+      "serial_number": "",
+      "latitude":27.22,
+      "longitude":32.222,
+      "address":"test-address"
     };    
     if (data.valid) {
         this.json['location_hours'][0].from_time = data.value['sun_time_start'];
         this.json['location_hours'][0].to_time = data.value['sun_time_end'];
         if (data.value['toggle_sun']){
-            this.json['location_hours'][0].whole_day = data.value['toggle_sun'];
+            this.json['location_hours'][0].is_on = data.value['toggle_sun'];
         }
 
         this.json['location_hours'][1].from_time = data.value['mon_time_start'];
         this.json['location_hours'][1].to_time = data.value['mon_time_end'];
         if (data.value['toggle_mon']){
-        this.json['location_hours'][1].whole_day = data.value['toggle_mon'];
+        this.json['location_hours'][1].is_on = data.value['toggle_mon'];
         }
         this.json['location_hours'][2].from_time = data.value['tue_time_start'];
         this.json['location_hours'][2].to_time = data.value['tue_time_end'];
         if (data.value['toggle_tue']){
-        this.json['location_hours'][2].whole_day = data.value['toggle_tue'];
+        this.json['location_hours'][2].is_on = data.value['toggle_tue'];
         }
 
         this.json['location_hours'][5].from_time = data.value['wed_time_start'];
         this.json['location_hours'][5].to_time = data.value['wed_time_end'];
         if (data.value['toggle_wed']){
-        this.json['location_hours'][5].whole_day = data.value['toggle_wed'];
+        this.json['location_hours'][5].is_on = data.value['toggle_wed'];
         }
 
         this.json['location_hours'][3].from_time = data.value['thu_time_start'];
         this.json['location_hours'][3].to_time = data.value['thu_time_end'];
         if (data.value['toggle_thu']){
-        this.json['location_hours'][3].whole_day = data.value['toggle_thu'];
+        this.json['location_hours'][3].is_on = data.value['toggle_thu'];
         }
         this.json['location_hours'][4].from_time = data.value['fri_time_start'];
         this.json['location_hours'][4].to_time = data.value['fri_time_end'];
         if (data.value['toggle_fri']){
-        this.json['location_hours'][4].whole_day = data.value['toggle_fri'];
+        this.json['location_hours'][4].is_on = data.value['toggle_fri'];
         }
         this.json['location_hours'][6].from_time = data.value['sat_time_start'];
         this.json['location_hours'][6].to_time = data.value['sat_time_end'];
         if (data.value['toggle_sat']){
-        this.json['location_hours'][6].whole_day = data.value['toggle_sat'];
+        this.json['location_hours'][6].is_on = data.value['toggle_sat'];
         }
         this.json['name'] =data.value['device_name'];
         this.json['serial_number'] =data.value['serial_number'];
         console.log(this.json);
         
-        this.deviceservice.postDeviceinfo(this.json).subscribe(response => {
+        this.deviceservice.postDeviceinfo(this.json).subscribe(
+            response => {
             console.log(response);
           
             this.formData.append('location_logo',this.fileImage)
@@ -191,7 +188,10 @@ onChangeImage(event: EventTarget) {
                 this.messageservice.add('succesfully registered');
                 this.router.navigateByUrl(`device/`+this.device_id);
             })
-           });
+           },
+        (error) =>{
+            this.messageservice.add('Could not add device');
+        });
 
 
 
