@@ -44,13 +44,11 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   providers: [{provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}]
 })
 export class DeviceInfoComponent  implements OnInit {
-    fileLocation: File;
-    fileLocation_name:any
-    fileImage_name:any
-    fileImage: File;
-
-
-     formData = new FormData();
+  fileLocation: File;
+  fileLocation_name:any
+  fileImage_name:any
+  fileImage: File;
+  formData = new FormData();
 
   private json: object = {}
   public device_id:any
@@ -71,15 +69,15 @@ export class DeviceInfoComponent  implements OnInit {
     this.fileLocation = files[0];
     this.fileLocation_name=files[0].name
     console.log(this.fileLocation);
-}
-onChangeImage(event: EventTarget) {
-    let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-    let files: FileList = target.files;
-    this.fileImage = files[0];
-    this.fileImage_name=files[0].name
-    console.log(this.fileImage);
-}
+  }
+  onChangeImage(event: EventTarget) {
+      let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+      let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+      let files: FileList = target.files;
+      this.fileImage = files[0];
+      this.fileImage_name=files[0].name
+      console.log(this.fileImage);
+  }
 
   deviceInfo(data: NgForm) {
 
@@ -133,7 +131,7 @@ onChangeImage(event: EventTarget) {
       "latitude":27.22,
       "longitude":32.222,
       "address":"test-address"
-    };    
+    };
     if (data.valid) {
         this.json['location_hours'][0].from_time = data.value['sun_time_start'];
         this.json['location_hours'][0].to_time = data.value['sun_time_end'];
@@ -168,19 +166,20 @@ onChangeImage(event: EventTarget) {
         if (data.value['toggle_fri']){
         this.json['location_hours'][4].is_on = data.value['toggle_fri'];
         }
+
         this.json['location_hours'][6].from_time = data.value['sat_time_start'];
         this.json['location_hours'][6].to_time = data.value['sat_time_end'];
         if (data.value['toggle_sat']){
         this.json['location_hours'][6].is_on = data.value['toggle_sat'];
         }
+
         this.json['name'] =data.value['device_name'];
         this.json['serial_number'] =data.value['serial_number'];
         console.log(this.json);
-        
+
         this.deviceservice.postDeviceinfo(this.json).subscribe(
             response => {
             console.log(response);
-          
             this.formData.append('location_logo',this.fileImage)
             this.formData.append('machine_photo',this.fileLocation)
             this.device_id = response['data']['id']
@@ -192,10 +191,6 @@ onChangeImage(event: EventTarget) {
         (error) =>{
             this.messageservice.add('Could not add device');
         });
-
-
-
-        
     }
 }
 
