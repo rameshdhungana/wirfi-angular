@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     @Input() isCollapseContent;
     @Output() isCollapseContentChange = new EventEmitter();
 
-    public logged_in_user: object;
+    public logged_in_user: any;
 
     constructor(private authService: AuthenticationService) {
     }
