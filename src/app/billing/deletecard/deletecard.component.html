@@ -1,12 +1,22 @@
-<p>
-  deletecard works!
-  ;lkjsdfklj
-  lkfhsadklfhlsd
-  lksdahflkhsdf
-  klasdhflksdhl
-  klsdfhaklsdflks
-  sklafhklsdflksd
-  fkjalskdfjlk
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <img style="border-radius:8px;" src="../../assets/images/visa.JPG" width="50%"/>
 
-</p>
-fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff{{data}}
+        </div>
+        <div class="col-12 text-center">
+            <h3 class="pt-3 pb-3">Remove card</h3>
+            <h5>{{data.brand}} ••••{{data.last4}}</h5>
+        </div>
+        <div class="col-12 text-center ">
+            <span class="text-justify pt-4">Any pending payments on this card will be processed even after you remove it.
+                Are you sure you want to remove your {{data.brand}} {{data.funding}} ••••{{data.last4}} from your Wirfi account?
+            </span>
+        </div>
+        <div class="col-12 text-center pt-5">
+            <button (click)="deleteCardConfirmed(data)" class="btn-primary btn-lg rounded">Remove This Card</button>
+        </div>
+    </div>
+</div>
+
+

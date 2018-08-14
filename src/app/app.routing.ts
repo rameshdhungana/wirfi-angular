@@ -5,7 +5,6 @@ import {AuthGuard, PreventLoggedInAccess} from './_guards/auth.guard';
 
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
-import {StripeComponent} from "./stripe/stripe.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {DeviceListComponent} from './device-list/device-list.component';
 import {DevicesComponent} from './devices/devices.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'logout', component: LogoutComponent , canActivate: [AuthGuard]},
-    {path: 'stripe', component: StripeComponent, canActivate: [AuthGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     {path: 'devices', component: DeviceListComponent},
     {path: 'device', component: DevicesComponent,canActivate: [AuthGuard]},

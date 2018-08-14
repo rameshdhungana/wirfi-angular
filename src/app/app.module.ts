@@ -12,7 +12,6 @@ import {UserService} from './_services/user.service';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from './_helpers/error.interceptor';
-import {StripeComponent} from "./stripe/stripe.component";
 import {StripeService} from "./_services/stripe.service";
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
@@ -47,7 +46,6 @@ import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
         AppComponent,
         LoginComponent,
         LogoutComponent,
-        StripeComponent,
         DashboardComponent,
         SidebarComponent,
         DevicesComponent,
