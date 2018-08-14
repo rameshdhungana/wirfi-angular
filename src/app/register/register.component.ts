@@ -26,23 +26,20 @@ export class RegisterComponent implements OnInit {
             .subscribe(
                 (response) => {
                   console.log(response);
-                  if(response["code"] ==1){
+                  if(response["code"] == 1) {
                     this.messageService.add(' Succesfully Registered');
                     this.router.navigateByUrl('/login');
-                  }else{
+                  }
+                  else {
                     this.messageService.add(response["message"]);
                   }
-                  
-                  },(error)=>{
+                },
+                (error) => {
                     console.log(error);
                     this.messageService.add(error.error["message"]);
 
-                  }
-
-                   
-                
+                }
             );
     }
-}
-
+  }
 }

@@ -40,7 +40,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DeletecardComponent } from './billing/deletecard/deletecard.component';
+import { AgmCoreModule } from '@agm/core';
 import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
+import { TimeComparatorDirective } from './shared/time-comparator.directive';
 @NgModule({
     declarations: [
         AppComponent,
@@ -66,6 +68,7 @@ import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
         DeviceInfoComponent,
         DeletecardComponent,
         UpdatecardComponent,
+        TimeComparatorDirective,
     ],
     imports: [
         BrowserModule,
@@ -78,6 +81,10 @@ import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
         UiSwitchModule,
         NgbModule.forRoot(),
         MatDialogModule,
+        AgmCoreModule.forRoot({
+            apiKey: "AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4",
+            libraries: ["places"]
+          }),
 
 
     ],
