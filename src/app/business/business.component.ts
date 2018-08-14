@@ -56,7 +56,10 @@ export class BusinessComponent implements OnInit {
           .subscribe(
             (response) =>{
             this.messageService.add("updated");
-          }
+          },
+              (error) =>{
+              this.messageService.add(error.message);
+              }
           );
         
 

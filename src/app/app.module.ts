@@ -42,7 +42,7 @@ import { UiSwitchModule } from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DeletecardComponent } from './billing/deletecard/deletecard.component';
 import { AgmCoreModule } from '@agm/core';
-
+import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -68,7 +68,7 @@ import { AgmCoreModule } from '@agm/core';
         ProfileComponent,
         DeviceInfoComponent,
         DeletecardComponent,
-        
+        UpdatecardComponent,
     ],
     imports: [
         BrowserModule,
@@ -103,7 +103,12 @@ import { AgmCoreModule } from '@agm/core';
     ],
     bootstrap:
         [AppComponent,
-        ]
+        ],
+    entryComponents:[
+        DeletecardComponent,
+        UpdatecardComponent,
+    ]
+
 })
 
 export class AppModule {
