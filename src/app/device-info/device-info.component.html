@@ -3,6 +3,10 @@
        
      <div>
           <h2 class="text-center mt-5">Add Device</h2>
+          <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+          <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+          </agm-map>
         <form  [class.was-validated]="deviceInfoform.submitted" #deviceInfoform='ngForm' (ngSubmit)='deviceInfo(deviceInfoform)'>
         <div class="row">   
             <div class="col-md-8 offset-md-2">
