@@ -43,6 +43,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DeletecardComponent } from './billing/deletecard/deletecard.component';
 import { AgmCoreModule } from '@agm/core';
 import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
+import { TimeComparatorDirective } from './shared/time-comparator.directive';
 @NgModule({
     declarations: [
         AppComponent,
@@ -69,6 +70,7 @@ import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
         DeviceInfoComponent,
         DeletecardComponent,
         UpdatecardComponent,
+        TimeComparatorDirective,
     ],
     imports: [
         BrowserModule,
