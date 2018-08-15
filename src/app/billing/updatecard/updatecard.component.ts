@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, NgZone} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material";
 
 
@@ -8,7 +8,6 @@ import {MAT_DIALOG_DATA} from "@angular/material";
     styleUrls: ['./updatecard.component.css'],
 })
 export class UpdatecardComponent implements OnInit {
-
     cardNumber: string;
     expiryMonth: string;
     expiryYear: string;
@@ -16,7 +15,8 @@ export class UpdatecardComponent implements OnInit {
     message: string;
 
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+                private _zone: NgZone) {
     }
 
     ngOnInit() {
@@ -27,19 +27,21 @@ export class UpdatecardComponent implements OnInit {
         this.message = 'Loading...';
 
         (<any>window).Stripe.card.createToken({
+
             number: this.cardNumber,
             exp_month: this.expiryMonth,
             exp_year: this.expiryYear,
             cvc: this.cvc
         }, (status: number, response: any) => {
-            if (status === 200) {
-                this.message = `Success! Card token ${response.card.id}.`;
-                console.log(this.message, response)
-            } else {
-                this.message = response.error.message;
-                console.log(this.message)
-            }
+
+            // Wrapping inside the Angular zone
+            this._zone.run(() => {
+                if (status === 200) {
+                    this.message = `Success! Card token ${response.card.id}.`;
+                } else {
+                    this.message = response.error.message;
+                }
+            });
         });
     }
-
 }

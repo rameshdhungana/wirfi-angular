@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material";
-import {StripeService} from "../_services/stripe.service";
 import {BillingService} from "../_services/billing.service"
 import {DeletecardComponent} from "./deletecard/deletecard.component";
 import {UpdatecardComponent} from "./updatecard/updatecard.component";
@@ -19,8 +18,7 @@ export class BillingComponent implements OnInit {
     updateCardForm: MatDialogRef<UpdatecardComponent>;
 
 
-    constructor(private stripeService: StripeService,
-                private billingService: BillingService,
+    constructor(private billingService: BillingService,
                 private  dialog: MatDialog) {
 
 
@@ -55,7 +53,7 @@ export class BillingComponent implements OnInit {
                 console.log(token.id, token.email);
 
                 // Get the token ID to your server-side code for use.
-                this.stripeService.registerStripeToken(token).subscribe(response => {
+                this.billingService.registerStripeToken(token).subscribe(response => {
                     console.log(response)
                 })
             }.bind(this)

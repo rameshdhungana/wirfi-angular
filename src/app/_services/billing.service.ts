@@ -7,8 +7,17 @@ export class BillingService {
 
     }
 
+
     getBillingList() {
         return this.http.get('billing/');
+    }
+
+    registerStripeToken(token) {
+        return this.http.post('billing/', token);
+    }
+
+    deleteCard(data) {
+        return this.http.delete('billing/', data)
     }
 
 }
