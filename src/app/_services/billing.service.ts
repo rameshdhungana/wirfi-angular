@@ -17,7 +17,7 @@ export class BillingService {
     }
 
     deleteCard(data) {
-        return this.http.delete('billing/', data)
+        return this.http.post('delete-billing-card/', data);
     }
 
 }

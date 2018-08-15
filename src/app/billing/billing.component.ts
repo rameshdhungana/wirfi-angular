@@ -11,8 +11,9 @@ import {UpdatecardComponent} from "./updatecard/updatecard.component";
     styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
-    public billings: Array<any> = [];
+    public customerStripeInfo: Array<any> = [];
     public billingDetail: any = [];
+    public billingId: number;
 
     deleteCardDialog: MatDialogRef<DeletecardComponent>;
     updateCardForm: MatDialogRef<UpdatecardComponent>;
@@ -28,9 +29,11 @@ export class BillingComponent implements OnInit {
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
                 if (response['code'] == 1) {
-                    this.billings = response['data']['billing_info']['sources']['data'];
-                    console.log(this.billings);
-                    this.billingDetail = this.billings[0];
+                    console.log(response)
+                    this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
+                    this.billingId = response['data']['billings']['id']
+                    console.log(this.customerStripeInfo, this.billingId);
+                    this.billingDetail = this.customerStripeInfo[0];
                     console.log(this.billingDetail);
 
                 }
@@ -77,16 +80,16 @@ export class BillingComponent implements OnInit {
 
 
     OpenDeleteDailog(billingDetail) {
+        console.log(billingDetail,'11111111111111111111111111111')
         this.deleteCardDialog = this.dialog.open(DeletecardComponent, {
-            data: billingDetail,
+            data: {
+                "cardDetail": billingDetail,
+            },
             height: '800px',
             width: '600px'
         });
-        console.log(DeletecardComponent)
 
-        this.deleteCardDialog.afterClosed().subscribe(result => {
-            console.log('Dialog is closed');
-        });
+
         // this.deleteCardDialog.updatePosition({
         //     left: '40%',
         //
@@ -102,7 +105,6 @@ export class BillingComponent implements OnInit {
 
         });
 
-        console.log(UpdatecardComponent);
     }
 
 }

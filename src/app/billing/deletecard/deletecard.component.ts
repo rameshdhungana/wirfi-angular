@@ -9,6 +9,7 @@ import {BillingService} from "../../_services/billing.service";
 })
 export class DeletecardComponent implements OnInit {
 
+
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                 private billingService: BillingService) {
     }
@@ -17,7 +18,10 @@ export class DeletecardComponent implements OnInit {
     }
 
     deleteCardConfirmed(data) {
-        this.billingService.deleteCard(data)
+        console.log(data, 'billing detail passed data for card')
+        this.billingService.deleteCard(data).subscribe(response => {
+            console.log(response)
+        })
 
 
     }
