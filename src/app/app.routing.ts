@@ -19,6 +19,7 @@ import { SidebarComponent} from './sidebar/sidebar.component';
 import { BusinessComponent } from './business/business.component';
 import { BusinessListComponent } from './business-list/business-list.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
     {path: 'login', component: LoginComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    {path: 'profile-update', component: ProfileFormComponent, canActivate: [AuthGuard]},
     {path: 'logout', component: LogoutComponent , canActivate: [AuthGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     {path: 'devices', component: DeviceListComponent},
@@ -50,6 +52,3 @@ const routes: Routes = [
 })
 export class AppRoutingModule {
 }
-
-
-

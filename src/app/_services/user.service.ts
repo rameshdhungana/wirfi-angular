@@ -6,17 +6,11 @@ export class UserService {
     constructor(private http: HttpClient) {
     }
 
-    registerUser(user) {
-        return this.http.post('api/auth/registration/', user);
+    updateUser(user, id) {
+        return this.http.put(`user/${id}/`, user);
     }
 
-    sendInvitationEmail(email) {
-        return this.http.post('tenant/send-invitation-email/', email);
+    uploadProfile(profile, id) {
+        return this.http.post(`user/${id}/image/`, profile);
     }
-
-    verify_email(key) {
-        return this.http.post('api/auth/registration/verify-email/', {'key': key})
-    }
-
-
 }

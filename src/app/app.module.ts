@@ -42,6 +42,7 @@ import { DeletecardComponent } from './billing/deletecard/deletecard.component';
 import { AgmCoreModule } from '@agm/core';
 import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
 import { TimeComparatorDirective } from './shared/time-comparator.directive';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -68,6 +69,7 @@ import { TimeComparatorDirective } from './shared/time-comparator.directive';
         DeletecardComponent,
         UpdatecardComponent,
         TimeComparatorDirective,
+        ProfileFormComponent,
     ],
     imports: [
         BrowserModule,
