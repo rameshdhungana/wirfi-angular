@@ -1,7 +1,5 @@
 import {Injectable} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material";
-import {DeletecardComponent} from "../billing/deletecard/deletecard.component";
-import {UpdatecardComponent} from "../billing/updatecard/updatecard.component";
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +20,7 @@ export class MaterialDialogService {
         });
     }
 
-    closeCurrentDialog(dialogComponent) {
+    closeCurrentDialog() {
         this.currentDialog.close()
 
     }

@@ -26,7 +26,7 @@ export class DeletecardComponent implements OnInit {
         console.log(data, 'billing detail passed data for card')
         this.billingService.deleteCard(data).subscribe(response => {
             this.billingService.getBillingList();
-            this.dialogService.closeCurrentDialog(DeletecardComponent);
+            this.dialogService.closeCurrentDialog();
 
 
         })
