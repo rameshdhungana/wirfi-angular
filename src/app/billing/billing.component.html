@@ -1,19 +1,20 @@
-<div class="container">
+<div class="container device-container">
     <div class="row">
         <div class="col-lg-4 col-md- col-sm-12 pt-5">
             <section>
-                <header class="pb-2 pl-1" style="font-weight: 900">
+                <header class="pb-2 pl-1 text-white" style="font-weight: 900">
                     PAYMENT METHODS
+                    {{customerStripeInfo.length}}
                 </header>
-                <ul class="billing-list">
-                    <li *ngFor="let billing of billings; let i = index">
+                <ul class="billing-list text-white">
+                    <li *ngFor="let billing of customerStripeInfo;  let i = index;">
                         <a (click)="OpenDetail(billing)">
                             <div class="row">
                                 <div class="col-4">
 
                                     <i class="fa fa-3x fa-university p-2 "></i></div>
                                 <div class="col-8">
-                                    <span class="bold-text">{{billing.brand}}</span>
+                                    <span class="bold-text text-white">{{billing.brand}}</span>
 
                                     <span>
                                 {{billing.funding}} ••••{{billing.last4}}
@@ -82,9 +83,9 @@
                     </ul>
                 </div>
                 <div class="col-12 col-md-8 mx-auto  pt-3">
-                    <span (click)="OpenCardUpdateForm(billingDetail)"> Update Card </span>| <span (click)="OpenDeleteDailog(billingDetail)">Delete Card</span>
+                    <span (click)="OpenCardUpdateForm(billingDetail)"> Update Card </span>| <span
+                        (click)="OpenDeleteDailog(billingDetail)">Delete Card</span>
                 </div>
-
 
 
             </div>
