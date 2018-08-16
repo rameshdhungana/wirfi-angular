@@ -43,7 +43,16 @@ export class LoginComponent implements OnInit {
                         if (response['code']==1) {
                             localStorage.setItem('token', response['data']['auth_token']);
                             this.authService.isLoggedInObs();
+                            if(response['data']['is_first_login']==true){
+                                localStorage.setItem('first_login', 'true');
+                                this.messageService.add('Please add your business info');
+                                this.router.navigateByUrl('bussiness');
+                            }else{
+
+                            localStorage.setItem('first_login', 'false');
                             this.router.navigateByUrl('dashboard');
+
+                            }
                         }
                     },
                     (error) =>{

@@ -13,6 +13,7 @@ export class BusinessComponent implements OnInit {
   private code:Number
   private business_id:Number
   public business_data:Object
+  public first_login:String
   loading;
 
   constructor(
@@ -24,6 +25,7 @@ export class BusinessComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
+    this.first_login = localStorage.getItem('first_login');
     this.bussinessService.getBusiness().subscribe(
       (response) => {
 
@@ -45,6 +47,9 @@ export class BusinessComponent implements OnInit {
       }
   );
   }
+  gotoBilling(){
+    this.router.navigateByUrl('/billing');
+  }
   addBussiness(data: NgForm) {
     if (data.valid) {
       data.value['latitude']=37.33;
@@ -56,6 +61,7 @@ export class BusinessComponent implements OnInit {
           .subscribe(
             (response) =>{
             this.messageService.add("updated");
+            
           },
               (error) =>{
               this.messageService.add(error.message);
@@ -67,7 +73,13 @@ export class BusinessComponent implements OnInit {
           this.bussinessService.addBussiness(data.value)
           .subscribe(
               (response) => {
+                if (this.first_login =='true'){
+                  this.messageService.add('Please fill the card details');
+                  this.router.navigateByUrl('/billing');
+                }else{
+
                   this.messageService.add('Bussiness Info succesfully created');
+                }
               }
           );
           
