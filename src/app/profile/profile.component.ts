@@ -7,6 +7,7 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  loading:boolean
 
   person:object
 
@@ -15,6 +16,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.authService.me().subscribe( response=>{
       this.person = response['data'];
+      this.loading=true;
       console.log(this.person);
     });
   }
