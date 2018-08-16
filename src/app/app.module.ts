@@ -12,7 +12,6 @@ import {UserService} from './_services/user.service';
 import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from './_helpers/error.interceptor';
-import {StripeService} from "./_services/stripe.service";
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
@@ -95,7 +94,6 @@ import { TimeComparatorDirective } from './shared/time-comparator.directive';
         PreventLoggedInAccess,
         AlertService,
         DeviceService,
-        StripeService,
         MessageService,
         BillingService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

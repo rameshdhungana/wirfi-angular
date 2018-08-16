@@ -3,6 +3,8 @@ import {MatDialog, MatDialogRef} from "@angular/material";
 import {BillingService} from "../_services/billing.service"
 import {DeletecardComponent} from "./deletecard/deletecard.component";
 import {UpdatecardComponent} from "./updatecard/updatecard.component";
+import {RouterModule} from "@angular/router";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -11,15 +13,19 @@ import {UpdatecardComponent} from "./updatecard/updatecard.component";
     styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
-    public billings: Array<any> = [];
+    
+    public customerStripeInfo: Array<any> = [];
     public billingDetail: any = [];
+    public billingId: number;
 
     deleteCardDialog: MatDialogRef<DeletecardComponent>;
     updateCardForm: MatDialogRef<UpdatecardComponent>;
 
 
     constructor(private billingService: BillingService,
-                private  dialog: MatDialog) {
+                private  dialog: MatDialog,
+                private router: Router,
+            ) {
 
 
     }
@@ -28,10 +34,17 @@ export class BillingComponent implements OnInit {
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
                 if (response['code'] == 1) {
-                    this.billings = response['data']['billing_info']['sources']['data'];
-                    console.log(this.billings);
-                    this.billingDetail = this.billings[0];
+                    console.log(response)
+                    this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
+                    this.billingId = response['data']['billings']['id']
+                    console.log(this.customerStripeInfo, this.billingId);
+                    this.billingDetail = this.customerStripeInfo[0];
                     console.log(this.billingDetail);
+
+                }
+
+                else if (response['code'] == 2){
+
 
                 }
 
@@ -39,14 +52,12 @@ export class BillingComponent implements OnInit {
         );
 
     }
-
-
+  
     openCheckout() {
         console.log('hello i am inside opencheckout');
         var handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
             locale: 'auto',
-            label: "Submit",
 
             token: function (token: any) {
                 // You can access the token ID with `token.id`.
@@ -54,7 +65,9 @@ export class BillingComponent implements OnInit {
 
                 // Get the token ID to your server-side code for use.
                 this.billingService.registerStripeToken(token).subscribe(response => {
-                    console.log(response)
+                    console.log(response,'card is added')
+                this.billingService.getBillingList();
+                
                 })
             }.bind(this)
         });
@@ -62,9 +75,9 @@ export class BillingComponent implements OnInit {
         handler.open({
             name: 'Wirfi',
             description: 'Card Details',
-            code: true,
-            address: true,
-            label: 'Submit',
+            zipCode: true,
+            billingAddress: true,
+            panelLabel: 'Submit',
 
         });
 
@@ -78,15 +91,14 @@ export class BillingComponent implements OnInit {
 
     OpenDeleteDailog(billingDetail) {
         this.deleteCardDialog = this.dialog.open(DeletecardComponent, {
-            data: billingDetail,
+            data: {
+                "cardDetail": billingDetail,
+            },
             height: '800px',
             width: '600px'
         });
-        console.log(DeletecardComponent)
 
-        this.deleteCardDialog.afterClosed().subscribe(result => {
-            console.log('Dialog is closed');
-        });
+
         // this.deleteCardDialog.updatePosition({
         //     left: '40%',
         //
@@ -102,7 +114,6 @@ export class BillingComponent implements OnInit {
 
         });
 
-        console.log(UpdatecardComponent);
     }
 
 }
