@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material";
 import {BillingService} from "../_services/billing.service"
-import {DeletecardComponent} from "./deletecard/deletecard.component";
-import {UpdatecardComponent} from "./updatecard/updatecard.component";
 import {RouterModule} from "@angular/router";
 import {Router} from "@angular/router";
+import {MaterialDialogService} from "../_services/material-dialog.service";
+import {DeletecardComponent} from "./deletecard/deletecard.component";
+import {UpdatecardComponent} from "./updatecard/updatecard.component";
 
 
 @Component({
@@ -13,28 +14,39 @@ import {Router} from "@angular/router";
     styleUrls: ['./billing.component.css']
 })
 export class BillingComponent implements OnInit {
-    
+
     public customerStripeInfo: Array<any> = [];
     public billingDetail: any = [];
     public billingId: number;
-
-    deleteCardDialog: MatDialogRef<DeletecardComponent>;
-    updateCardForm: MatDialogRef<UpdatecardComponent>;
+    public noBillingData: boolean;
+    public billingLoaded: boolean;
 
 
     constructor(private billingService: BillingService,
                 private  dialog: MatDialog,
                 private router: Router,
-            ) {
+                private dialogService: MaterialDialogService,
+                private renderer: Renderer2) {
+
+        this.renderer.addClass(document.body, 'bg-white');
 
 
     }
 
+    ngOnDestroy() {
+        this.renderer.removeClass(document.body, 'bg-white');
+
+    }
+
     ngOnInit() {
+        this.billingLoaded = false;
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
                 if (response['code'] == 1) {
-                    console.log(response)
+                    this.billingLoaded = true;
+                    console.log(this.billingLoaded, 'billing is loadded ')
+                    this.noBillingData = false;
+                    console.log(response);
                     this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
                     this.billingId = response['data']['billings']['id']
                     console.log(this.customerStripeInfo, this.billingId);
@@ -43,7 +55,9 @@ export class BillingComponent implements OnInit {
 
                 }
 
-                else if (response['code'] == 2){
+                else if (response['code'] == 2) {
+                    this.billingLoaded = true;
+                    this.noBillingData = true;
 
 
                 }
@@ -52,7 +66,7 @@ export class BillingComponent implements OnInit {
         );
 
     }
-  
+
     openCheckout() {
         console.log('hello i am inside opencheckout');
         var handler = (<any>window).StripeCheckout.configure({
@@ -65,9 +79,8 @@ export class BillingComponent implements OnInit {
 
                 // Get the token ID to your server-side code for use.
                 this.billingService.registerStripeToken(token).subscribe(response => {
-                    console.log(response,'card is added')
-                this.billingService.getBillingList();
-                
+                    console.log(response, 'card is added')
+                    this.billingService.getBillingList();
                 })
             }.bind(this)
         });
@@ -90,30 +103,25 @@ export class BillingComponent implements OnInit {
 
 
     OpenDeleteDailog(billingDetail) {
-        this.deleteCardDialog = this.dialog.open(DeletecardComponent, {
-            data: {
-                "cardDetail": billingDetail,
-            },
-            height: '800px',
-            width: '600px'
-        });
+
+        const data = {
+            "cardDetail": billingDetail,
+        };
 
 
-        // this.deleteCardDialog.updatePosition({
-        //     left: '40%',
-        //
-        // });
+        this.dialogService.openDialog(DeletecardComponent, data)
+
+
     }
 
     OpenCardUpdateForm(billingDetail) {
 
-        this.updateCardForm = this.dialog.open(UpdatecardComponent, {
-            data: billingDetail,
-            height: '800px',
-            width: '600px',
+        const data = {
+            "cardDetail": billingDetail,
+        };
 
-        });
 
+        this.dialogService.openDialog(UpdatecardComponent, data)
     }
 
 }
