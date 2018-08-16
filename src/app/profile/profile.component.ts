@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  loading:boolean
 
-  constructor() { }
+  person:object
+
+  constructor(private authService:AuthenticationService) { }
 
   ngOnInit() {
+    this.authService.me().subscribe( response=>{
+      this.person = response['data'];
+      this.loading=true;
+      console.log(this.person);
+    });
   }
 
 }

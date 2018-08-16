@@ -15,7 +15,7 @@
 
                         <div class="form-group">
                             <label class="text-white" for="device_name">Device Name</label>
-                            <input type="text" class="form-control-file" name="device_name" id="device_name"
+                            <input type="text" class="form-control" name="device_name" id="device_name"
                                    placeholder="Enter Device Name" aria-describedby="fileHelpId" ngModel #name="ngModel"
                                    required minlength="3" maxlength="30" #device_name="ngModel">
                             <div class="invisible-text text-right text-white">
@@ -40,7 +40,7 @@
                     <div class="col-md-8 offset-md-2">
                         <div class="form-group">
                             <label class="text-white" for="serial_number">Device Serial No</label>
-                            <input type="text" class="form-control-file" name="serial_number" id="serial_number"
+                            <input type="text" class="form-control" name="serial_number" id="serial_number"
                                    placeholder="Enter Device's Serial Number" aria-describedby="fileHelpId" required
                                    ngModel pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel">
                             <div class="invisible-text text-right text-white">
@@ -262,10 +262,11 @@
                             </div>
                         </div>
                     </div>
+                     <div class="col-md-2 d-flex align-items-center text-white">
+                        <ui-switch size="small" [checked]="false" name="toggle_sat" ngModel></ui-switch>
+                    </div>
                 </div>
-                <div class="col-md-2 d-flex align-items-center text-white">
-                    <ui-switch size="small" [checked]="false" name="toggle_sat" ngModel></ui-switch>
-                </div>
+
                 <button type="submit" class="btn btn-primary text-center">Submit</button>
             </form>
         </div>

@@ -1,20 +1,15 @@
 <div class="container-fluid device-container" >
     <div class="row  d-flex align-items-center text-white " >
-
-  
- 
       <div class="col-12">
         <div class="card">
-          <div class="card-body">
-            <h3 class="card-title">Person's Name</h3>
-            <p class="card-text">address</p>
-            <p class="card-text">Location</p>
-            <p class="card-text">Phone Number</p>
+          <div *ngIf="loading" class="card-body">
+            <img src="http://localhost:8000{{person['profile']['profile_picture']}}">
+            <h3 class="card-title">Person's Name:{{person['full_name']}}</h3>
+            <p class="card-text">address:{{person['profile']['address']}}</p>
+            <p class="card-text">Phone Number:{{person['profile']['phone_number']}}</p>
+              <button class="btn btn-outline-light" routerLink="/profile-update">Edit</button>
           </div>
         </div>
       </div>
-     
-      
-
     </div>
 </div>

@@ -19,16 +19,16 @@ export class AuthenticationService {
     return this.http.post('register/', registerdata);
   }
   resetPassword(passworddata){
-    return this.http.post('reset-password/confirm/',passworddata);
+    return this.http.post('reset-password/confirm/', passworddata);
   }
   forgetPassword(forgetdata){
-    return this.http.post('reset-password/',forgetdata);
+    return this.http.post('reset-password/', forgetdata);
   }
   changePassword(passworddata){
-    return this.http.post('change-password/',passworddata);
+    return this.http.post('change-password/', passworddata);
   }
   verify_email(key) {
-    return this.http.post('register/verify-email/', { 'key': key })
+    return this.http.post('register/verify-email/', { 'key': key });
   }
 
 

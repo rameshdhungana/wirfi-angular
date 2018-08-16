@@ -1,5 +1,5 @@
-import { Component,Injectable, OnInit,ElementRef,ViewChild, NgZone } from '@angular/core';
-import { NgForm,FormControl } from '@angular/forms';
+import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone } from '@angular/core';
+import { NgForm, FormControl } from '@angular/forms';
 import { DeviceService } from '../_services/device.service';
 import { MessageService } from '../_services/message.service';
 import { } from 'googlemaps';
@@ -48,9 +48,8 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
 
   providers: [{provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}]
 })
+
 export class DeviceInfoComponent  implements OnInit {
-
-
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -71,11 +70,12 @@ export class DeviceInfoComponent  implements OnInit {
   time: '13:30:00';
 
   constructor(
-      private deviceservice:DeviceService,
-      private messageservice:MessageService,
-        private mapsAPILoader: MapsAPILoader,
-        private ngZone: NgZone,
-      private router:Router) { }
+      private deviceservice: DeviceService,
+      private messageservice: MessageService,
+      private mapsAPILoader: MapsAPILoader,
+      private ngZone: NgZone,
+      private router: Router
+  ) { }
 
   ngOnInit() {
       //set google maps defaults
@@ -111,8 +111,9 @@ export class DeviceInfoComponent  implements OnInit {
         });
       });
     });
-      
+
   }
+
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -195,60 +196,60 @@ export class DeviceInfoComponent  implements OnInit {
     if (data.valid) {
         this.json['location_hours'][0].from_time = data.value['sun_time_start'];
         this.json['location_hours'][0].to_time = data.value['sun_time_end'];
-        if (data.value['toggle_sun']){
+        if (data.value['toggle_sun']) {
             this.json['location_hours'][0].is_on = data.value['toggle_sun'];
         }
 
         this.json['location_hours'][1].from_time = data.value['mon_time_start'];
         this.json['location_hours'][1].to_time = data.value['mon_time_end'];
-        if (data.value['toggle_mon']){
+        if (data.value['toggle_mon']) {
         this.json['location_hours'][1].is_on = data.value['toggle_mon'];
         }
         this.json['location_hours'][2].from_time = data.value['tue_time_start'];
         this.json['location_hours'][2].to_time = data.value['tue_time_end'];
-        if (data.value['toggle_tue']){
+        if (data.value['toggle_tue']) {
         this.json['location_hours'][2].is_on = data.value['toggle_tue'];
         }
 
         this.json['location_hours'][5].from_time = data.value['wed_time_start'];
         this.json['location_hours'][5].to_time = data.value['wed_time_end'];
-        if (data.value['toggle_wed']){
+        if (data.value['toggle_wed']) {
         this.json['location_hours'][5].is_on = data.value['toggle_wed'];
         }
 
         this.json['location_hours'][3].from_time = data.value['thu_time_start'];
         this.json['location_hours'][3].to_time = data.value['thu_time_end'];
-        if (data.value['toggle_thu']){
+        if (data.value['toggle_thu']) {
         this.json['location_hours'][3].is_on = data.value['toggle_thu'];
         }
         this.json['location_hours'][4].from_time = data.value['fri_time_start'];
         this.json['location_hours'][4].to_time = data.value['fri_time_end'];
-        if (data.value['toggle_fri']){
+        if (data.value['toggle_fri']) {
         this.json['location_hours'][4].is_on = data.value['toggle_fri'];
         }
 
         this.json['location_hours'][6].from_time = data.value['sat_time_start'];
         this.json['location_hours'][6].to_time = data.value['sat_time_end'];
-        if (data.value['toggle_sat']){
+        if (data.value['toggle_sat']) {
         this.json['location_hours'][6].is_on = data.value['toggle_sat'];
         }
 
-        this.json['name'] =data.value['device_name'];
-        this.json['serial_number'] =data.value['serial_number'];
+        this.json['name'] = data.value['device_name'];
+        this.json['serial_number'] = data.value['serial_number'];
         console.log(this.json);
 
         this.deviceservice.postDeviceinfo(this.json).subscribe(
             response => {
             console.log(response);
-            this.formData.append('location_logo',this.fileImage)
-            this.formData.append('machine_photo',this.fileLocation)
+            this.formData.append('location_logo', this.fileImage)
+            this.formData.append('machine_photo', this.fileLocation)
             this.device_id = response['data']['id']
-            this.deviceservice.postDeviceImages(this.formData,response['data']['id']).subscribe(response=>{
+            this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(response => {
                 this.messageservice.add('succesfully registered');
-                this.router.navigateByUrl(`device/`+this.device_id);
+                this.router.navigateByUrl(`device/` + this.device_id);
             })
            },
-        (error) =>{
+        (error) => {
             this.messageservice.add('Could not add device');
         });
     }
