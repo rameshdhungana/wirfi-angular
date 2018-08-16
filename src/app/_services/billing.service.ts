@@ -17,6 +17,7 @@ export class BillingService {
     }
 
     deleteCard(data) {
+        console.log(data, '#######################')
         return this.http.post('delete-billing-card/', data);
     }
 

@@ -3,6 +3,8 @@ import {MatDialog, MatDialogRef} from "@angular/material";
 import {BillingService} from "../_services/billing.service"
 import {DeletecardComponent} from "./deletecard/deletecard.component";
 import {UpdatecardComponent} from "./updatecard/updatecard.component";
+import {RouterModule} from "@angular/router";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -20,7 +22,8 @@ export class BillingComponent implements OnInit {
 
 
     constructor(private billingService: BillingService,
-                private  dialog: MatDialog) {
+                private  dialog: MatDialog,
+                private router: Router) {
 
 
     }
@@ -38,6 +41,11 @@ export class BillingComponent implements OnInit {
 
                 }
 
+                else if (response['code'] == 2){
+
+
+                }
+
             }
         );
 
@@ -49,7 +57,6 @@ export class BillingComponent implements OnInit {
         var handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
             locale: 'auto',
-            label: "Submit",
 
             token: function (token: any) {
                 // You can access the token ID with `token.id`.
@@ -57,7 +64,8 @@ export class BillingComponent implements OnInit {
 
                 // Get the token ID to your server-side code for use.
                 this.billingService.registerStripeToken(token).subscribe(response => {
-                    console.log(response)
+                    console.log(response,'card is added')
+                    this.router.navigateByUrl('billing');
                 })
             }.bind(this)
         });
@@ -65,9 +73,9 @@ export class BillingComponent implements OnInit {
         handler.open({
             name: 'Wirfi',
             description: 'Card Details',
-            code: true,
-            address: true,
-            label: 'Submit',
+            zipCode: true,
+            billingAddress: true,
+            panelLabel: 'Submit',
 
         });
 
@@ -80,7 +88,6 @@ export class BillingComponent implements OnInit {
 
 
     OpenDeleteDailog(billingDetail) {
-        console.log(billingDetail,'11111111111111111111111111111')
         this.deleteCardDialog = this.dialog.open(DeletecardComponent, {
             data: {
                 "cardDetail": billingDetail,

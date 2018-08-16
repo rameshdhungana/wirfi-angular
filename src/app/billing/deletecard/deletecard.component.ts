@@ -1,4 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
+import {Router} from "@angular/router";
 import {MAT_DIALOG_DATA} from "@angular/material";
 import {BillingService} from "../../_services/billing.service";
 
@@ -11,7 +12,8 @@ export class DeletecardComponent implements OnInit {
 
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-                private billingService: BillingService) {
+                private billingService: BillingService,
+                private  router: Router) {
     }
 
     ngOnInit() {
@@ -20,7 +22,8 @@ export class DeletecardComponent implements OnInit {
     deleteCardConfirmed(data) {
         console.log(data, 'billing detail passed data for card')
         this.billingService.deleteCard(data).subscribe(response => {
-            console.log(response)
+            this.router.navigateByUrl('/billing');
+
         })
 
 
