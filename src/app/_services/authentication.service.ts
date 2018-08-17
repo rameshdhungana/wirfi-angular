@@ -6,6 +6,7 @@ import {BehaviorSubject, Subject} from 'rxjs';
 @Injectable()
 export class AuthenticationService {
   private loggedIn = new BehaviorSubject<boolean>(false);
+  public getProfile = new Subject<Object>();
 
   constructor(
     private router: Router ,
@@ -53,7 +54,10 @@ export class AuthenticationService {
   }
 
   me() {
-    return this.http.get('me/');
+    this.http.get('me/').subscribe(res=>{
+      this.getProfile.next(res);
+    });
+    return this.getProfile.asObservable();
   }
 }
 
