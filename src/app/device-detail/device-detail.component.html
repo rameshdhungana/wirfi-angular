@@ -6,17 +6,38 @@
   <div class="card text-white bg-primary text-center">
     <img class="card-img-top" src="holder.js/100px180/" alt="">
     <div class="card-body">
-      <h4 class="card-title">{{device_data['data']['name']}}</h4>
+      <h4 class="card-title">Device : {{device_data['data']['name']}}</h4>
       <p class="card-text">
-          serial no:{{device_data['data']['serial_number']}}<br>
-          latitude:{{device_data['data']['latitude']}}<br>
-          longitude:{{device_data['data']['longitude']}}<br>
+          serial no: {{device_data['data']['serial_number']}}<br>
+          
       </p>
-      <ul style="list-style-type: none;">
-          <li *ngFor="let info of device_data['data']['location_hours']">
-             Day: {{info.day_id}} From:{{info.from_time}} To:{{info.to_time}}
-          </li>
-        </ul>
+      <!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let info of device_data['data']['location_hours']">
+                <td>{{info.day_id}}</td>
+                <td>{{info.from_time}}</td>
+                <td>{{info.to_time}}</td>
+              </tr>
+            <tr>
+              <td scope="row"></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+         
     </div>
   </div>
 
