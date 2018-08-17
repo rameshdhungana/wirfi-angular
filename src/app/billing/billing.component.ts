@@ -17,7 +17,6 @@ export class BillingComponent implements OnInit {
 
     public customerStripeInfo: Array<any> = [];
     public billingDetail: any = [];
-    public billingId: number;
     public noBillingData: boolean;
     public billingLoaded: boolean;
 
@@ -45,13 +44,20 @@ export class BillingComponent implements OnInit {
                 if (response['code'] == 1) {
                     this.billingLoaded = true;
                     console.log(this.billingLoaded, 'billing is loadded ')
-                    this.noBillingData = false;
                     console.log(response);
                     this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
-                    this.billingId = response['data']['billings']['id']
-                    console.log(this.customerStripeInfo, this.billingId);
-                    this.billingDetail = this.customerStripeInfo[0];
-                    console.log(this.billingDetail);
+                    if (this.customerStripeInfo.length) {
+                        this.noBillingData = false;
+                        this.billingDetail = this.customerStripeInfo[0];
+                        console.log(this.billingDetail);
+                        console.log('there is no card', this.customerStripeInfo.length)
+
+                    }
+                    else {
+                        this.noBillingData = true;
+
+                    }
+
 
                 }
 

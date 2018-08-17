@@ -12,6 +12,7 @@ import {MaterialDialogService} from "../../_services/material-dialog.service";
 })
 export class DeletecardComponent implements OnInit {
 
+    public loading: boolean;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                 private billingService: BillingService,
@@ -20,9 +21,12 @@ export class DeletecardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loading = false;
     }
 
     deleteCardConfirmed(data) {
+        this.loading = true;
+
         console.log(data, 'billing detail passed data for card')
         this.billingService.deleteCard(data).subscribe(response => {
             this.billingService.getBillingList();
