@@ -39,7 +39,7 @@
          </div>
         <button type="submit" class="btn btn-outline-light float-right ">Submit</button>
         </form>
-        <button type="skip" (click)="gotoBilling()" class="btn btn-outline-light float-left ">Skip</button>
+        <button type="skip" *ngIf="!first_login" (click)="gotoBilling()" class="btn btn-outline-light float-left ">Skip</button>
         
     </div>
 </div>
