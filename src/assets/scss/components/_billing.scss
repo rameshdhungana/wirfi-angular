@@ -1,5 +1,5 @@
 
-.billing-list, .billing-detail {
+.billing-list, .billing-detail, .billing-list-add-card {
 
   list-style-type: none;
   padding: 1px;
@@ -45,6 +45,17 @@
 
   }
 
+}
+
+.billing-list-add-card {
+  li {
+
+    &:first-child {
+      border-top: none;
+
+    }
+
+  }
 }
 
 

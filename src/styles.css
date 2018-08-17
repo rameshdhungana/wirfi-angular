@@ -3,5 +3,9 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 .cdk-overlay-dark-backdrop {
-    background: #f4f6f9;
+    background: #0084ff0a;
+}
+
+.text-primary {
+    color: #007bff !important
 }
