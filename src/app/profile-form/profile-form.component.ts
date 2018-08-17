@@ -4,6 +4,7 @@ import { UserService } from '../_services/user.service';
 import {AuthenticationService} from '../_services/authentication.service';
 import {MessageService} from '../_services/message.service';
 import {Router} from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile-form',
@@ -16,6 +17,19 @@ export class ProfileFormComponent implements OnInit {
   formData = new FormData();
   fileImage: File;
   fileImage_name:string;
+  activate_image_file:boolean = true;
+  public user = {
+    'first_name': '',
+    'last_name': '',
+    'email':'',
+    'profile': {
+      'address': '',
+      'phone_number': '',
+      'profile_picture':''
+    }
+  }
+
+  private subscription:Subscription
 
   constructor(
       private userService: UserService,
@@ -25,11 +39,38 @@ export class ProfileFormComponent implements OnInit {
   ) {}
 
     ngOnInit() {
+      console.log(this.authService.me())
       this.authService.me().subscribe(
           response => {
+            console.log(response);
           this.user_id = response['data']['id'];
           this.user_email = response['data']['email'];
+          this.user.email = response['data']['email'];
+          this.user.first_name = response['data']['first_name']
+          this.user.last_name = response['data']['last_name']
+          if (response['data']['profile']!==null){
+            this.activate_image_file = true;
+          this.user.profile.address = response['data']['profile']['address']
+          this.user.profile.phone_number = response['data']['profile']['phone_number']
+          this.user.profile.profile_picture=response['data']['profile']['profile_picture']
+        }else{
+          this.activate_image_file = false;
+        }
         });
+    }
+    urls = new Array<string>();
+    detectFiles(event) {
+      this.urls = [];
+      let files = event.target.files;
+      if (files) {
+        for (let file of files) {
+          let reader = new FileReader();
+          reader.onload = (e: any) => {
+            this.urls.push(e.target.result);
+          }
+          reader.readAsDataURL(file);
+        }
+      }
     }
 
     onChangeImage(event: EventTarget) {
@@ -42,33 +83,35 @@ export class ProfileFormComponent implements OnInit {
   }
 
     userInfo(data: NgForm) {
-      const user = {
-        'first_name': '',
-        'last_name': '',
-        'email': this.user_email,
-        'profile': {
-          'address': '',
-          'phone_number': ''
-        }
-      }
-      console.log(data.value);
-      user['first_name'] = data.value['first_name'];
-      user['last_name'] = data.value['last_name'];
-      user['profile']['address'] = data.value['address'];
-      user['profile']['phone_number'] = data.value['phone_number'];
+     
+      if(data.valid){
+        this.user['first_name'] = data.value['first_name'];
+        this.user['last_name'] = data.value['last_name'];
+        this.user['profile']['address'] = data.value['address'];
+        this.user['profile']['phone_number'] = data.value['phone_number'];
+  
+        this.userService.updateUser(this.user, this.user_id).subscribe(
+          response => {
+            console.log(response);
+            console.log(this.fileImage_name);
+            if(this.fileImage_name==undefined){
+              this.messageService.add('succesfully registered');
+              this.routeService.navigateByUrl('profile');
+            }else{
+              this.formData.append('profile_picture', this.fileImage);
+              console.log(this.formData);
+            this.userService.uploadProfile(this.formData, this.user_id).subscribe(
+                response => {
+                  this.messageService.add('succesfully registered');
+                  this.routeService.navigateByUrl('profile');
+                }
+            );
+            }
+          
+          }
+        );
 
-      this.userService.updateUser(user, this.user_id).subscribe(
-        response => {
-          console.log(response);
-          this.formData.append('profile_picture', this.fileImage);
-            console.log(this.formData);
-          this.userService.uploadProfile(this.formData, this.user_id).subscribe(
-              response => {
-                this.messageService.add('succesfully registered');
-                this.routeService.navigateByUrl('profile');
-              }
-          );
-        }
-      );
+      }
+     
     }
 }

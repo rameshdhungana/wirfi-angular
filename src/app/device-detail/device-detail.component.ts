@@ -10,6 +10,8 @@ import {Route, Router, ActivatedRoute} from '@angular/router';
 export class DeviceDetailComponent implements OnInit {
     device_id: any
     public device_data: any
+    lat: number;
+    lng: number;
 
     constructor(private deviceService: DeviceService,
                 private router: Router,
@@ -18,6 +20,8 @@ export class DeviceDetailComponent implements OnInit {
 
         this.deviceService.getDevice(this.device_id).subscribe(response => {
             this.device_data = response;
+            this.lat = response['data']['latitude']
+            this.lng = response['data']['longitude']
         });
     }
 

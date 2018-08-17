@@ -2,12 +2,11 @@
   <div class=" d-flex justify-content-center">
     <div class="w-50 mt-5">
       <h1 class="text-center text-white">
-          Business Info
       </h1>
       <form *ngIf="!loading"   #bussinessForm="ngForm" (ngSubmit)="addBussiness(bussinessForm)">
         <div class="form-group">
           <label for="name" class="text-white">Business Name</label>
-          <input type="text" name="name" class="form-control" id="bussiness-name" placeholder="Enter Business Name" required ngModel #name="ngModel">
+          <input type="text" name="name" class="form-control" id="bussiness-name" placeholder="Enter Business Name" required [ngModel]="business_data.name" #name="ngModel">
           <div class="invisible-text text-right  text-white">
             <small *ngIf="bussinessForm.submitted && name.hasError('required')">
               This is required field.
@@ -16,7 +15,7 @@
         </div>
           <div class="form-group">
             <label for="password_one" class="text-white">Address</label>
-            <input type="text" name="address" class="form-control" id="address" placeholder="Enter Address" required ngModel #address="ngModel">
+            <input type="text" name="address" class="form-control" id="address" placeholder="Enter Address" required [ngModel]="business_data.address" #address="ngModel">
             <div class="invisible-text text-right  text-white">
               <small *ngIf="bussinessForm.submitted && address.hasError('required')">
                 This is required field.
@@ -26,7 +25,7 @@
           
             <div class="form-group">
               <label for="phone-number" class="text-white">Phone Number</label>
-              <input type="text" name="phone_number" class="form-control" id="phone-number" placeholder="Enter Phone Number" required ngModel #phone_number="ngModel" pattern="^[0-9+-]+$">
+              <input type="text" name="phone_number" class="form-control" id="phone-number" placeholder="Enter Phone Number" required  [ngModel]="business_data.phone_number"  pattern="^[0-9+-]+$" #phone_number="ngModel">
               <div class="invisible-text text-right text-white">
                 <small *ngIf="bussinessForm.submitted && phone_number.hasError('required')">
                   This is required field.
@@ -39,7 +38,7 @@
          </div>
         <button type="submit" class="btn btn-outline-light float-right ">Submit</button>
         </form>
-        <button type="skip" (click)="gotoBilling()" class="btn btn-outline-light float-left ">Skip</button>
+        <button type="skip" *ngIf="first_login=='true'" (click)="gotoBilling()" class="btn btn-outline-light float-left ">Skip</button>
         
     </div>
 </div>
