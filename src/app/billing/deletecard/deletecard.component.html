@@ -14,10 +14,10 @@
             </span>
         </div>
         <div class="col-12 text-center pt-5">
-            <button *ngIf="!loading;else loadingDiv" (click)="deleteCardConfirmed(data.cardDetail)"
+            <button *ngIf="!buffering;else bufferingDiv" (click)="deleteCardConfirmed(data.cardDetail)"
                     class="btn-primary btn-lg rounded">Remove This Card
             </button>
-            <ng-template #loadingDiv>Loading...</ng-template>
+            <ng-template #bufferingDiv>Deleting...</ng-template>
         </div>
     </div>
 </div>
