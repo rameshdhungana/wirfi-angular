@@ -58,5 +58,17 @@
   }
 }
 
+.larger-card-size {
+  font-size: 20rem;
+
+}
+
+@media screen and (max-width: 764px) {
+
+  .larger-card-size {
+    font-size: 12rem;
+
+  }
+}
 
 
