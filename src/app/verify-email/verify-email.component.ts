@@ -23,6 +23,7 @@ export class VerifyEmailComponent implements OnInit {
     this.authenticationService.verify_email(this.route.snapshot.paramMap.get('key')).subscribe(response => {
          this.messageService.add("email verified");
          this.status = "Verified";
+         this.router.navigateByUrl("/");
           });
 
        }
