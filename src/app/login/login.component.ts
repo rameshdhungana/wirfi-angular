@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
             this.authService.login(data.value)
                 .subscribe(
                     (response) => {
-                        console.log(response);
                         if (response['code']==1) {
                             localStorage.setItem('token', response['data']['auth_token']);
                             this.authService.isLoggedInObs();
@@ -56,19 +55,18 @@ export class LoginComponent implements OnInit {
                         }
                     },
                     (error) =>{
-                        this.messageService.add('Invalid Credentials');
+                        console.log(error);
+                        this.messageService.add(error.error.message);
                     }
                 );
         }
     }
     forgetPassword(data: NgForm) {
         if (data.valid) {
-            console.log(data.value);
 
             this.authService.forgetPassword(data.value)
                 .subscribe(
                     (response) => {
-                        console.log("response",response);
                         this.messageService.add('Please check your email for forget password link');
                         this.showMainComponent()
                         },
