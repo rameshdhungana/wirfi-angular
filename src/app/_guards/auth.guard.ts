@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        console.log("logged in check")
 
         if (this.authService.isLoggedIn()) {
             // logged in so return true
@@ -39,6 +40,7 @@ export class PreventLoggedInAccess implements CanActivate {
   }
 
   canActivate() {
+      console.log("here")
     return !this.authService.isLoggedIn();
   }
 }

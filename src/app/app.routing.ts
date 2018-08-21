@@ -24,7 +24,7 @@ import { DeviceInfoComponent } from './device-info/device-info.component';
 
 
 const routes: Routes = [
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'profile-update', component: ProfileFormComponent, canActivate: [AuthGuard]},
