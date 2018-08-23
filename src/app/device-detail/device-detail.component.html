@@ -1,12 +1,15 @@
 
 
-<div class="container-fluid login-container" >
+<div *ngIf="loading" class="container-fluid login-container" >
 
 
   <div class="card text-white bg-primary text-center">
     <img class="card-img-top" src="holder.js/100px180/" alt="">
     <div class="card-body">
-      <h4 class="card-title">Device : {{device_data['data']['name']}}</h4>
+
+        <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
+      </ui-switch>
+     <h4 class="card-title">Device : {{device_data['data']['name']}}</h4>
       <p class="card-text">
           serial no: {{device_data['data']['serial_number']}}<br>
           
