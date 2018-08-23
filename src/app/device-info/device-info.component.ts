@@ -54,6 +54,9 @@ export class DeviceInfoComponent  implements OnInit {
   public longitude: number;
   public searchControl: FormControl;
   public zoom: number;
+  public industryType: Array<any>;
+  public industry_type: string;
+  public add_type: boolean;
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -99,7 +102,7 @@ export class DeviceInfoComponent  implements OnInit {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
           this.address = place.name;
-         
+
 
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
@@ -115,6 +118,10 @@ export class DeviceInfoComponent  implements OnInit {
       });
     });
 
+    this.deviceservice.getIndustryList().subscribe(
+      response => {
+        this.industryType=response["data"];
+    });
   }
 
   private setCurrentPosition() {
@@ -126,6 +133,7 @@ export class DeviceInfoComponent  implements OnInit {
       });
     }
   }
+
   onChangeLocation(event: EventTarget) {
     let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
     let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
@@ -134,6 +142,7 @@ export class DeviceInfoComponent  implements OnInit {
     this.fileLocation_name=files[0].name
     console.log(this.fileLocation);
   }
+
   onChangeImage(event: EventTarget) {
       let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
       let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
@@ -141,6 +150,17 @@ export class DeviceInfoComponent  implements OnInit {
       this.fileImage = files[0];
       this.fileImage_name=files[0].name
       console.log(this.fileImage);
+  }
+
+  addIndustryType(event, data) {
+    console.log(data)
+    if (data=="") {
+      this.add_type = true;
+    }
+    else {
+      this.add_type = false;
+    }
+
   }
 
   deviceInfo(data: NgForm) {
@@ -194,7 +214,10 @@ export class DeviceInfoComponent  implements OnInit {
       "serial_number": "",
       "latitude":this.latitude,
       "longitude":this.longitude,
-      "address":this.address
+      "address":this.address,
+      "industry_type": "",
+      "industry_name": ""
+
     };
     if (data.valid) {
 
@@ -240,8 +263,18 @@ export class DeviceInfoComponent  implements OnInit {
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
+        console.log(data.value['industry_type'])
+        console.log(data.value['industry_name'])
+        if (data.value['industry_type']) {
+          this.json['industry_type'] = data.value['industry_type'];
+        }
+
+        if (data.value['industry_name']) {
+          this.json['industry_name'] = data.value['industry_name'];
+        }
+
         console.log(this.json);
-        
+
 
         this.deviceservice.postDeviceinfo(this.json).subscribe(
             response => {
@@ -258,6 +291,5 @@ export class DeviceInfoComponent  implements OnInit {
             this.messageservice.add(error.error.message);
         });
     }
-}
-
+  }
 }

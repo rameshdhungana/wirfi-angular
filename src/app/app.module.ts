@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {MatDialogModule} from '@angular/material';
 import {AppComponent} from './app.component';
-import {LoginComponent} from "./login/login.component";
+import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {AuthGuard, PreventLoggedInAccess} from './_guards/auth.guard';
 import {AuthenticationService} from './_services/authentication.service';
@@ -32,7 +32,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { BusinessComponent } from './business/business.component';
 import { BusinessListComponent } from './business-list/business-list.component';
-import {BillingService} from "./_services/billing.service";
+import {BillingService} from './_services/billing.service';
 import { ProfileComponent } from './profile/profile.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,6 +43,7 @@ import { AgmCoreModule } from '@agm/core';
 import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
 import { TimeComparatorDirective } from './shared/time-comparator.directive';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
+
 @NgModule({
     declarations: [
         AppComponent,
