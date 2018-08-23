@@ -6,6 +6,10 @@ export class DeviceService {
     constructor(private http: HttpClient) {
     }
 
+    getIndustryList() {
+        return this.http.get('industry-type/');
+    }
+
     getDeviceList() {
         return this.http.get('device/');
     }
