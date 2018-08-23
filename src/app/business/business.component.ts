@@ -48,6 +48,7 @@ export class BusinessComponent implements OnInit {
   );
   }
   gotoBilling(){
+    this.messageService.add('Please fill the billing details');
     this.router.navigateByUrl('/billing');
   }
   addBussiness(data: NgForm) {

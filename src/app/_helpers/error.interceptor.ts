@@ -4,19 +4,22 @@ import {Injectable} from '@angular/core';
 import {AuthenticationService} from '../_services/authentication.service';
 import {catchError} from 'rxjs/operators';
 import {AlertService} from '../_services/alert.service';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(
     private authService: AuthenticationService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private router: Router
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError( err => {
       if (err.status === 401) {
-        this.authService.logout();
+        localStorage.removeItem('token');
+        this.router.navigateByUrl('login');
         location.reload(true);
       }
 

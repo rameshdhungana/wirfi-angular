@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {MaterialDialogService} from "../_services/material-dialog.service";
 import {DeletecardComponent} from "./deletecard/deletecard.component";
 import {UpdatecardComponent} from "./updatecard/updatecard.component";
+import {AuthenticationService} from "../_services/authentication.service";
 
 
 @Component({
@@ -17,15 +18,17 @@ export class BillingComponent implements OnInit {
 
     public customerStripeInfo: Array<any> = [];
     public billingDetail: any = [];
-    public billingId: number;
-    public noBillingData: boolean;
-    public billingLoaded: boolean;
+    public noBillingData: boolean; //when there is no card associated to user, it does not load card preview div
+    public billingLoaded: boolean; // stripe api takes few seconds , so cards not shown until fully loaded response obtained
+    public buffering: boolean; // once link card button is clicked it does not let to click it again
+    private current_user_email: string;
 
 
     constructor(private billingService: BillingService,
                 private  dialog: MatDialog,
                 private router: Router,
                 private dialogService: MaterialDialogService,
+                private authenticateService: AuthenticationService,
                 private renderer: Renderer2) {
 
         this.renderer.addClass(document.body, 'bg-white');
@@ -40,18 +43,26 @@ export class BillingComponent implements OnInit {
 
     ngOnInit() {
         this.billingLoaded = false;
+        this.buffering = false;
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
                 if (response['code'] == 1) {
                     this.billingLoaded = true;
                     console.log(this.billingLoaded, 'billing is loadded ')
-                    this.noBillingData = false;
                     console.log(response);
                     this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
-                    this.billingId = response['data']['billings']['id']
-                    console.log(this.customerStripeInfo, this.billingId);
-                    this.billingDetail = this.customerStripeInfo[0];
-                    console.log(this.billingDetail);
+                    if (this.customerStripeInfo.length) {
+                        this.noBillingData = false;
+                        this.billingDetail = this.customerStripeInfo[0];
+                        console.log(this.billingDetail);
+                        console.log('there is no card', this.customerStripeInfo.length)
+
+                    }
+                    else {
+                        this.noBillingData = true;
+
+                    }
+
 
                 }
 
@@ -65,10 +76,15 @@ export class BillingComponent implements OnInit {
             }
         );
 
+        this.authenticateService.me().subscribe(res => {
+            this.current_user_email = res['data']['email'];
+        })
+
     }
 
     openCheckout() {
         console.log('hello i am inside opencheckout');
+        this.buffering = true;
         var handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
             locale: 'auto',
@@ -86,13 +102,20 @@ export class BillingComponent implements OnInit {
         });
 
         handler.open({
-            name: 'Wirfi',
-            description: 'Card Details',
-            zipCode: true,
-            billingAddress: true,
-            panelLabel: 'Submit',
+                name: 'Wirfi',
+                description: 'Card Details',
+                zipCode: true,
+                billingAddress: true,
+                panelLabel: 'Submit',
+                email: this.current_user_email,
+                allowRememberMe: false,
+                closed: () => {
+                    this.buffering = false;
+                }
 
-        });
+
+            }
+        );
 
     }
 

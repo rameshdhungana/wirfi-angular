@@ -1,11 +1,11 @@
-<div class="container-fluid device-container" >
-    <div class="row justify-content-center " >
+<div class="container-fluid device-container">
+    <div class="row justify-content-center ">
         <div class="col-md-6 col-lg-4 mt-5 login-container__box">
 
             <div class="mx-auto mw-460 text-center mt-5">
                 <img src="../../assets/images/wirfi-logo.png" class="img img-fluid logo"/>
             </div>
-            <div  *ngIf="loadMainComponent && !loadComponent_forget_password">
+            <div *ngIf="loadMainComponent && !loadComponent_forget_password">
                 <div class="panel-body">
                     <form class="form-horizontal" [class.was-validated]="loginForm.submitted" role="form"
                           #loginForm='ngForm' (ngSubmit)='onSubmit(loginForm)'>
@@ -15,6 +15,8 @@
                             <input id="email" type="email" class="form-control" name="email" placeholder="Email"
                                    required
                                    email autofocus ngModel #email="ngModel">
+                            <span *ngIf="passwordResetClicked"
+                                  class="text-right text-danger">{{resetPasswordMessage}}</span>
                             <div class="invalid-feedback text-right">
                                 <span *ngIf="email.hasError('required')">
                                     This is required field.
@@ -38,9 +40,9 @@
                             </div>
 
                             <div class="invalid-feedback text-right">
-                  <span *ngIf="password.hasError('required')">
-                    This is required field.
-                  </span>
+                                  <span *ngIf="password.hasError('required')">
+                                    This is required field.
+                                  </span>
                             </div>
                         </div>
 
@@ -50,21 +52,22 @@
                             </button>
                         </div>
                         <div class="form-group">
-                            <p class="forget-account text-white" href="#" (click)="showForgetPassword();">
+                            <p class="forget-account text-white" href="#" (click)="forgetPasswordValidate(email)">
                                 Forgot Password?
                             </p>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <a  href="/register"  class="text-white">Create Account</a>
+                                <a href="/register" class="text-white">Create Account</a>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            <div  *ngIf="loadComponent_forget_password  && !loadMainComponent" class="mt-2">
-                <form class="form-horizontal" id="forgot_password_form" style="display: block;"(ngSubmit)='forgetPassword(forgetForm)'
-                      accept-charset="UTF-8" method="post"   #forgetForm='ngForm'>
+            <div *ngIf="loadComponent_forget_password  && !loadMainComponent" class="mt-2">
+                <form class="form-horizontal" id="forgot_password_form" style="display: block;"
+                      (ngSubmit)='forgetPassword(forgetForm)'
+                      accept-charset="UTF-8" method="post" #forgetForm='ngForm'>
 
                     <p class="text-white">
                         Enter your Email and we will send you a link to change your password.
@@ -72,12 +75,13 @@
                     <div class="form-group">
                         <label for="email_address" class="text-white">Email</label>
 
-                        <input name="email" id="email_address" type="email" class="form-control" placeholder="Your email address" required email ngModel #resetemail="ngModel" >
+                        <input name="email" id="email_address" type="email" class="form-control"
+                               placeholder="Your email address" required email ngModel #resetemail="ngModel">
                         <div class="invalid-feedback text-right">
                                 <span *ngIf="resetemail.hasError('required')">
                                     This is required field.
                                 </span>
-                                <span *ngIf="resetemail.hasError('email')">
+                            <span *ngIf="resetemail.hasError('email')">
                                     Enter a valid email.
                                 </span>
                         </div>

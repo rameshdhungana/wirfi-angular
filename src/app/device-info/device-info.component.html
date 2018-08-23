@@ -1,4 +1,4 @@
-<div class="container-fluid login-container ">
+<div class="container-fluid device-container ">
     <div class="  d-flex align-items-center text-white justify-content-center">
 
         <div>
@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="text-white" for="serial_number">Device Serial No</label>
                             <input type="text" class="form-control" name="serial_number" id="serial_number"
-                                   placeholder="Enter Device's Serial Number" aria-describedby="fileHelpId" required
+                                   placeholder="Enter Device's Serial Number" maxlength="30" aria-describedby="fileHelpId" required
                                    ngModel pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel">
                             <div class="invisible-text text-right text-white">
                                 <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('required')">
@@ -51,6 +51,11 @@
                             <div class="invisible-text text-right text-white">
                                 <small *ngIf="serialnumber.hasError('pattern')">
                                     Must be alphanumeric
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="serialnumber.hasError('maxlength')">
+                                    Must not exceed 30 characters.
                                 </small>
                             </div>
                         </div>
@@ -266,8 +271,9 @@
                         <ui-switch size="small" [checked]="false" name="toggle_sat" ngModel></ui-switch>
                     </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary text-center">Submit</button>
+                <button type="submit" class="btn btn-outline-light float-right ">Submit</button>
+       
+                
             </form>
         </div>
     </div>

@@ -99,6 +99,7 @@ export class DeviceInfoComponent  implements OnInit {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
           this.address = place.name;
+         
 
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
@@ -107,6 +108,8 @@ export class DeviceInfoComponent  implements OnInit {
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
+          console.log(this.latitude);
+          console.log(this.longitude);
           this.zoom = 12;
         });
       });
@@ -190,10 +193,11 @@ export class DeviceInfoComponent  implements OnInit {
       "name": "",
       "serial_number": "",
       "latitude":this.latitude,
-      "longitude":this.latitude,
+      "longitude":this.longitude,
       "address":this.address
     };
     if (data.valid) {
+
         this.json['location_hours'][0].from_time = data.value['sun_time_start'];
         this.json['location_hours'][0].to_time = data.value['sun_time_end'];
         if (data.value['toggle_sun']) {
@@ -237,6 +241,7 @@ export class DeviceInfoComponent  implements OnInit {
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
         console.log(this.json);
+        
 
         this.deviceservice.postDeviceinfo(this.json).subscribe(
             response => {
@@ -250,7 +255,7 @@ export class DeviceInfoComponent  implements OnInit {
             })
            },
         (error) => {
-            this.messageservice.add('Could not add device');
+            this.messageservice.add(error.error.message);
         });
     }
 }
