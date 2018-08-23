@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
     hide = false;
     passwordResetClicked: boolean = false;
     resetPasswordMessage: string;
+    disableClass: string = '';
+
 
     constructor(private messageService: MessageService,
                 private router: Router,
@@ -34,9 +36,9 @@ export class LoginComponent implements OnInit {
     onSubmit(data: NgForm) {
         if (data.valid) {
             console.log(data.value);
-            data.value["push_notification_token"] = "asdasda13"
-            data.value["device_id"] = "fdjghdfhgdj4354545"
-            data.value["device_type"] = 0
+            data.value["push_notification_token"] = "asdasda13";
+            data.value["device_id"] = "fdjghdfhgdj4354545";
+            data.value["device_type"] = 0;
 
             this.authService.login(data.value)
                 .subscribe(
@@ -88,8 +90,17 @@ export class LoginComponent implements OnInit {
             this.authService.forgetPassword(json_data)
                 .subscribe(
                     (response) => {
-                        this.messageService.add('Please check your email for forget password link');
-                        this.showMainComponent()
+                        this.disableClass = '';
+
+                        if (response['code'] == 1) {
+                            this.messageService.add(response['message']);
+
+                        }
+                        else {
+
+                            this.messageService.add(response['message']);
+
+                        }
                     },
                     (error) => {
                         this.messageService.add('Something went wrong');
@@ -122,13 +133,11 @@ export class LoginComponent implements OnInit {
     }
 
     forgetPasswordValidate(email) {
-        console.log('reset password', email)
+
 
         if (!email.value) {
             this.resetPasswordMessage = "Please enter your email address";
             this.passwordResetClicked = true;
-
-            console.log('no email');
 
 
         }
@@ -136,13 +145,14 @@ export class LoginComponent implements OnInit {
             if (email.hasError('email')) {
                 this.resetPasswordMessage = "Please enter valid email address ";
                 this.passwordResetClicked = true;
-                console.log('invalid email');
 
 
             }
             else {
                 this.forgetPassword(email);
-                console.log('function is called');
+                this.disableClass = 'disabled';
+                this.passwordResetClicked = false;
+
 
             }
 
