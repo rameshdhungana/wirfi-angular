@@ -67,7 +67,7 @@
                   <div class="col-md-8 offset-md-2">
                     <div class="form-group">
                       <label class="text-white">Industry Type</label>
-                      <select [(ngModel)]="industry_type" id="industry_type" name="industry_type" class="form-control" #industry (change)="addIndustryType($event, industry.value)">
+                      <select [(ngModel)]="industry_type_id" id="industry_type_id" name="industry_type_id" class="form-control" #industry (change)="addIndustryType($event, industry.value)">
                         <option value="" disabled selected>Select a Industry Type</option>
                         <option *ngFor="let industry of industryType" [value]="industry.id">{{industry.name}}</option>
                         <option value="">Add Other...</option>
@@ -295,8 +295,8 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-light float-right ">Submit</button>
-       
-                
+
+
             </form>
         </div>
     </div>

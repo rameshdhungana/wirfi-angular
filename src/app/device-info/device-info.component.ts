@@ -55,7 +55,7 @@ export class DeviceInfoComponent  implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   public industryType: Array<any>;
-  public industry_type: string;
+  public industry_type_id: string;
   public add_type: boolean;
 
   @ViewChild("search")
@@ -215,7 +215,7 @@ export class DeviceInfoComponent  implements OnInit {
       "latitude":this.latitude,
       "longitude":this.longitude,
       "address":this.address,
-      "industry_type": "",
+      "industry_type_id": "",
       "industry_name": ""
 
     };
@@ -263,10 +263,10 @@ export class DeviceInfoComponent  implements OnInit {
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
-        console.log(data.value['industry_type'])
+        console.log(data.value['industry_type_id'])
         console.log(data.value['industry_name'])
-        if (data.value['industry_type']) {
-          this.json['industry_type'] = data.value['industry_type'];
+        if (data.value['industry_type_id']) {
+          this.json['industry_type_id'] = data.value['industry_type_id'];
         }
 
         if (data.value['industry_name']) {
