@@ -43,6 +43,9 @@ import { AgmCoreModule } from '@agm/core';
 import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
 import { TimeComparatorDirective } from './shared/time-comparator.directive';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { ErrorComponent } from './error/error.component';
+import {CustomErrorService} from "./_services/custom-error.service";
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -70,6 +73,7 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
         UpdatecardComponent,
         TimeComparatorDirective,
         ProfileFormComponent,
+        ErrorComponent,
     ],
     imports: [
         BrowserModule,
@@ -98,6 +102,7 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
         DeviceService,
         MessageService,
         BillingService,
+        CustomErrorService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],

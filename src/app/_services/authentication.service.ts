@@ -20,6 +20,11 @@ export class AuthenticationService {
         return this.http.post('register/', registerdata);
     }
 
+    validateResetPassword(uid, token) {
+
+        return this.http.get('validate-reset-password/' + uid + '/' + token + '/')
+    }
+
     resetPassword(passworddata) {
         return this.http.post('reset-password/confirm/', passworddata);
     }
