@@ -5,6 +5,9 @@ import {HttpClient} from "@angular/common/http";
 export class DeviceService {
     constructor(private http: HttpClient) {
     }
+    togglePriority(id,data){
+        return this.http.put(`device/${id}/priority`,data);
+    }
 
     getIndustryList() {
         return this.http.get('industry-type/');
