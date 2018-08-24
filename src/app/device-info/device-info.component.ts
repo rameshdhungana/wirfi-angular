@@ -68,9 +68,9 @@ export class DeviceInfoComponent  implements OnInit {
 
   private json: object = {}
   public device_id:any
-  seconds = true;
+  seconds = false;
   private address:any;
-  time: '13:30:00';
+  // time: '13:30:00';
 
   constructor(
       private deviceservice: DeviceService,
