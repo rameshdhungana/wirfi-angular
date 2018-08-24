@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
             data.value["push_notification_token"] = "asdasda13";
             data.value["device_id"] = "fdjghdfhgdj4354545";
             data.value["device_type"] = 0;
+            this.passwordResetClicked = false;
 
             this.authService.login(data.value)
                 .subscribe(
