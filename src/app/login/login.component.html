@@ -1,7 +1,7 @@
-<div class="device-container d-flex align-items-center justify-content-center">
+<div class="device-container d-flex align-items-center">
     <div class="container">
         <div class="row justify-content-center ">
-            <div class="col-md-8 col-lg-4 pb-5  text-white text-center">
+            <div class="col-md-8  pb-5  text-white text-center">
 
                 <img src="../../assets/images/wirfi-logo.png" class="img img-fluid logo"/>
                 <h3>
@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-8">
+            <div class="col-md-8">
                 <div *ngIf="loadMainComponent && !loadComponent_forget_password">
                     <div class="panel-body">
                         <form class="form-horizontal" [class.was-validated]="loginForm.submitted" role="form"
@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-light float-right">
+                                <button type="submit" class="btn btn-light  float-right">
                                     Login
                                 </button>
                             </div>
