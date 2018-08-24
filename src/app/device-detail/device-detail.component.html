@@ -42,6 +42,8 @@
                 <div class="card text-white text-center">
                     <img class="card-img-top" src="holder.js/100px180/" alt="">
                     <div class="card-body">
+                        <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
+                          </ui-switch>
                         <h4 class="card-title">Device : {{device_data['data']['name']}}</h4>
                         <p class="card-text">
                             serial no: {{device_data['data']['serial_number']}}<br>
