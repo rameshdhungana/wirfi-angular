@@ -1,17 +1,29 @@
 <div class="container-fluid device-container" >
-    <div class=" d-flex justify-content-center">
-        <div class="w-50 mt-5 text-white">
-    
-        <div class="card">
-          <div *ngIf="loading" class="card-body">
-            <img src="http://api.wirfi.testiw.codesamaj.com{{person['profile']['profile_picture']}}">
-            <h3 class="card-title">Person's Name: {{person['full_name']}}</h3>
-            <p class="card-text">Address: {{person['profile']['address']}}</p>
-            <p class="card-text">Phone Number: {{person['profile']['phone_number']}}</p>
-              <button class="btn btn-outline-light" routerLink="/profile-update">Edit</button>
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class=" d-flex justify-content-center">
+            <div class="w-50 mt-5 text-white panel">
+            <div class="card">
+              <div *ngIf="loading" class="card-body">
+                <div *ngIf="person.profile">
+                  <img src="http://api.wirfi.testiw.codesamaj.com{{person['profile']['profile_picture']}}">
+                </div>
+                <h3 class="card-title">Name: {{person['full_name']}}</h3>
+                <div *ngIf="person.profile">
+                  <p  class="card-text">Address: {{person['profile']['address']}}</p>
+                  <p class="card-text">Phone Number: {{person['profile']['phone_number']}}</p>
+                </div>
+                <div *ngIf="!person.profile">
+                    
+                    <p class="card-text">Please add your profile information</p>
+                  </div>
+                  <button class="btn btn-outline-light mt-2" routerLink="/profile-update">Edit</button>
+              </div>
+            </div>
+        
           </div>
         </div>
-    
       </div>
     </div>
 </div>

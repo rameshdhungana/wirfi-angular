@@ -1,13 +1,16 @@
-import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone } from '@angular/core';
+import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone,Inject } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { DeviceService } from '../_services/device.service';
 import { MessageService } from '../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
-
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material";
+import { MatDialogRef} from "@angular/material";
 import {NgbTimeStruct, NgbTimeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-
+import {MaterialDialogService} from "../_services/material-dialog.service";
+import { AddIndustryTypeComponent } from '../add-industry-type/add-industry-type.component';
+import { MouseEvent } from '@agm/core';
 /**
  * Example of a String Time adapter
  */
@@ -68,11 +71,12 @@ export class DeviceInfoComponent  implements OnInit {
 
   private json: object = {}
   public device_id:any
-  seconds = true;
+  seconds = false;
   private address:any;
   time: '13:30:00';
 
   constructor(
+      private dialogService: MaterialDialogService,
       private deviceservice: DeviceService,
       private messageservice: MessageService,
       private mapsAPILoader: MapsAPILoader,
@@ -92,6 +96,7 @@ export class DeviceInfoComponent  implements OnInit {
     //set current position
     this.setCurrentPosition();
 
+    
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
@@ -124,6 +129,15 @@ export class DeviceInfoComponent  implements OnInit {
     });
   }
 
+  mapClicked($event: MouseEvent) {
+   
+      console.log("clicked", $event.coords.lat,$event.coords.lng);
+      this.latitude =  $event.coords.lat;
+      this.longitude = $event.coords.lng;
+      this.zoom = 12;
+     
+   
+  }
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -155,10 +169,9 @@ export class DeviceInfoComponent  implements OnInit {
   addIndustryType(event, data) {
     console.log(data)
     if (data=="") {
-      this.add_type = true;
-    }
-    else {
-      this.add_type = false;
+        const data = {
+      };
+      this.dialogService.openDialog(AddIndustryTypeComponent, data)
     }
 
   }
@@ -215,7 +228,7 @@ export class DeviceInfoComponent  implements OnInit {
       "latitude":this.latitude,
       "longitude":this.longitude,
       "address":this.address,
-      "industry_type": "",
+      "industry_type_id": "",
       "industry_name": ""
 
     };
@@ -266,7 +279,7 @@ export class DeviceInfoComponent  implements OnInit {
         console.log(data.value['industry_type'])
         console.log(data.value['industry_name'])
         if (data.value['industry_type']) {
-          this.json['industry_type'] = data.value['industry_type'];
+          this.json['industry_type_id'] = data.value['industry_type'];
         }
 
         if (data.value['industry_name']) {
