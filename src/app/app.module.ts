@@ -9,14 +9,15 @@ import {AuthenticationService} from './_services/authentication.service';
 import {AlertService} from './_services/alert.service';
 import {AppRoutingModule} from './app.routing';
 import {UserService} from './_services/user.service';
-import {FormsModule,ReactiveFormsModule} from "@angular/forms";
-import {JwtInterceptor} from "./_helpers/jwt.interceptor";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {DeviceService} from './_services/device.service';
 import {MessageService} from './_services/message.service';
+import {IndustryService} from './_services/industry-type.service';
 import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceListComponent} from './device-list/device-list.component';
@@ -43,6 +44,7 @@ import { AgmCoreModule } from '@agm/core';
 import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
 import { TimeComparatorDirective } from './shared/time-comparator.directive';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { IndustryListComponent } from './industry-list/industry-list.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +73,7 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
         UpdatecardComponent,
         TimeComparatorDirective,
         ProfileFormComponent,
+        IndustryListComponent,
     ],
     imports: [
         BrowserModule,
@@ -84,8 +87,8 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
         NgbModule.forRoot(),
         MatDialogModule,
         AgmCoreModule.forRoot({
-            apiKey: "AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4",
-            libraries: ["places"]
+            apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
+            libraries: ['places']
           }),
 
 
@@ -99,13 +102,14 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
         DeviceService,
         MessageService,
         BillingService,
+        IndustryService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],
     bootstrap:
         [AppComponent,
         ],
-    entryComponents:[
+    entryComponents: [
         DeletecardComponent,
         UpdatecardComponent,
     ]

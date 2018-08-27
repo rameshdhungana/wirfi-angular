@@ -26,7 +26,6 @@ export class DeviceNetworkComponent implements OnInit {
             this.device.setupDeviceNetwork(data.value, this.device_id).subscribe(
                 (response) => {
                     console.log(response);
-                   
                     this.router.navigateByUrl(`/device-info`);
                 }
             );

@@ -1,16 +1,12 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class DeviceService {
     constructor(private http: HttpClient) {
     }
-    togglePriority(id,data){
-        return this.http.put(`device/${id}/priority`,data);
-    }
-
-    getIndustryList() {
-        return this.http.get('industry-type/');
+    togglePriority(id, data) {
+        return this.http.put(`device/${id}/priority`, data);
     }
 
     getDeviceList() {
@@ -25,11 +21,11 @@ export class DeviceService {
         return this.http.post('device/', device);
     }
 
-    postDeviceinfo(data){
-        return this.http.post('device/',data);
+    postDeviceinfo(data) {
+        return this.http.post('device/', data);
     }
-    postDeviceImages(data,id){
-        return this.http.post(`device/${id}/images/`,data)
+    postDeviceImages(data, id) {
+        return this.http.post(`device/${id}/images/`, data);
     }
 
     updateDeviceDetail(device, id) {
@@ -45,9 +41,6 @@ export class DeviceService {
 
     deleteDevice(id) {
       return this.http.delete(`device/${id}/`);
-    }
-
-    ngOnInit() {
     }
 
 }

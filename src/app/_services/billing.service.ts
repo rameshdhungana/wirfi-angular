@@ -1,13 +1,12 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import { BehaviorSubject } from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class BillingService {
     public billingList = new BehaviorSubject<Array<any>>([]);
 
     constructor(private http: HttpClient) {
-        
 
     }
 
@@ -18,7 +17,7 @@ export class BillingService {
        });
        return this.billingList;
     }
-  
+
     registerStripeToken(token) {
         return this.http.post('billing/', token);
     }
