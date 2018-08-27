@@ -8,22 +8,22 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./verify-email.component.css']
 })
 export class VerifyEmailComponent implements OnInit {
-  public status:String;
+  public status: String;
 
   constructor(
-    private authenticationService:AuthenticationService,
-    private messageService:MessageService,
+    private authenticationService: AuthenticationService,
+    private messageService: MessageService,
     private router: Router,
-    private route:ActivatedRoute
+    private route: ActivatedRoute
 
   ) { }
 
   ngOnInit() {
-    this.status = "verifying please wait...";
+    this.status = 'verifying please wait...';
     this.authenticationService.verify_email(this.route.snapshot.paramMap.get('key')).subscribe(response => {
-         this.messageService.add("email verified");
-         this.status = "Verified";
-         this.router.navigateByUrl("/");
+         this.messageService.add('email verified');
+         this.status = 'Verified';
+         this.router.navigateByUrl('/');
           });
 
        }

@@ -33,11 +33,11 @@ export class DeviceService {
         return this.http.post('device/', device);
     }
 
-    postDeviceinfo(data){
-        return this.http.post('device/',data);
+    postDeviceinfo(data) {
+        return this.http.post('device/', data);
     }
-    postDeviceImages(data,id){
-        return this.http.post(`device/${id}/images/`,data)
+    postDeviceImages(data, id) {
+        return this.http.post(`device/${id}/images/`, data);
     }
 
     updateDeviceDetail(device, id) {
@@ -53,9 +53,6 @@ export class DeviceService {
 
     deleteDevice(id) {
       return this.http.delete(`device/${id}/`);
-    }
-
-    ngOnInit() {
     }
 
 }

@@ -9,7 +9,7 @@ import { MuteDeviceComponent } from '../mute-device/mute-device.component';
   styleUrls: ['./device-list.component.css']
 })
 export class DeviceListComponent implements OnInit {
-  public device_list:any;
+  public device_list: any;
 
   constructor(
     private deviceService:DeviceService,
@@ -19,9 +19,8 @@ export class DeviceListComponent implements OnInit {
   ngOnInit() {
     this.deviceService.getDeviceList().subscribe(response => {
         console.log(response);
-        this.device_list = response["data"]["device"];
+        this.device_list = response['data']['device'];
        });
-    
   }
   muteDevice(id){
     console.log('test',id);
