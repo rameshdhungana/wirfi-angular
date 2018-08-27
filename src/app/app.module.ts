@@ -9,14 +9,15 @@ import {AuthenticationService} from './_services/authentication.service';
 import {AlertService} from './_services/alert.service';
 import {AppRoutingModule} from './app.routing';
 import {UserService} from './_services/user.service';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {JwtInterceptor} from "./_helpers/jwt.interceptor";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {JwtInterceptor} from './_helpers/jwt.interceptor';
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {DeviceService} from './_services/device.service';
 import {MessageService} from './_services/message.service';
+import {IndustryService} from './_services/industry-type.service';
 import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceListComponent} from './device-list/device-list.component';
@@ -47,6 +48,8 @@ import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.
 import { MuteDeviceComponent } from './mute-device/mute-device.component';
 import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from "./_services/custom-error.service";
+import { IndustryListComponent } from './industry-list/industry-list.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -78,6 +81,7 @@ import {CustomErrorService} from "./_services/custom-error.service";
         MuteDeviceComponent,
         ErrorComponent,
 
+        IndustryListComponent,
     ],
     imports: [
         BrowserModule,
@@ -91,9 +95,9 @@ import {CustomErrorService} from "./_services/custom-error.service";
         NgbModule.forRoot(),
         MatDialogModule,
         AgmCoreModule.forRoot({
-            apiKey: "AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4",
-            libraries: ["places"]
-        }),
+            apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
+            libraries: ['places']
+          }),
 
 
     ],
@@ -107,6 +111,7 @@ import {CustomErrorService} from "./_services/custom-error.service";
         MessageService,
         BillingService,
         CustomErrorService,
+        IndustryService,
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],

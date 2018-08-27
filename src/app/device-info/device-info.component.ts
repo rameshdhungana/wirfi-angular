@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone,Inject } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { DeviceService } from '../_services/device.service';
+import { IndustryService } from '../_services/industry-type.service';
 import { MessageService } from '../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
@@ -61,23 +62,24 @@ export class DeviceInfoComponent  implements OnInit {
   public industry_type_id: string;
   public add_type: boolean;
 
-  @ViewChild("search")
+  @ViewChild('search')
   public searchElementRef: ElementRef;
   fileLocation: File;
-  fileLocation_name:any
-  fileImage_name:any
+  fileLocation_name: any;
+  fileImage_name: any;
   fileImage: File;
   formData = new FormData();
 
-  private json: object = {}
-  public device_id:any
+  private json: object = {};
+  public device_id: any;
   seconds = false;
-  private address:any;
+  private address: any;
   // time: '13:30:00';
 
   constructor(
       private dialogService: MaterialDialogService,
       private deviceservice: DeviceService,
+      private industryservice: IndustryService,
       private messageservice: MessageService,
       private mapsAPILoader: MapsAPILoader,
       private ngZone: NgZone,
@@ -85,35 +87,34 @@ export class DeviceInfoComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-      //set google maps defaults
+      // set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
 
-    //create search FormControl
+    // create search FormControl
     this.searchControl = new FormControl();
 
-    //set current position
+    // set current position
     this.setCurrentPosition();
 
-    
-    //load Places Autocomplete
+    // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
+      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+        types: ['address']
       });
-      autocomplete.addListener("place_changed", () => {
+      autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+          // get the place result
+          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
           this.address = place.name;
 
 
-          //verify result
+          // verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-          //set latitude, longitude and zoom
+          // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
           console.log(this.latitude);
@@ -123,9 +124,9 @@ export class DeviceInfoComponent  implements OnInit {
       });
     });
 
-    this.deviceservice.getIndustryList().subscribe(
+    this.industryservice.getIndustryList().subscribe(
       response => {
-        this.industryType=response["data"];
+        this.industryType = response['data'];
     });
   }
 
@@ -139,7 +140,7 @@ export class DeviceInfoComponent  implements OnInit {
    
   }
   private setCurrentPosition() {
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
@@ -149,20 +150,20 @@ export class DeviceInfoComponent  implements OnInit {
   }
 
   onChangeLocation(event: EventTarget) {
-    let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-    let files: FileList = target.files;
+    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    const files: FileList = target.files;
     this.fileLocation = files[0];
-    this.fileLocation_name=files[0].name
+    this.fileLocation_name = files[0].name;
     console.log(this.fileLocation);
   }
 
   onChangeImage(event: EventTarget) {
-      let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-      let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-      let files: FileList = target.files;
+      const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+      const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+      const files: FileList = target.files;
       this.fileImage = files[0];
-      this.fileImage_name=files[0].name
+      this.fileImage_name = files[0].name;
       console.log(this.fileImage);
   }
 
@@ -179,58 +180,56 @@ export class DeviceInfoComponent  implements OnInit {
   deviceInfo(data: NgForm) {
 
     this.json = {
-      "location_hours": [
+      'location_hours': [
         {
-            "day_id": "1",
-            "from_time": "",
-            "to_time": "",
-            "is_on": true
+            'day_id': '1',
+            'from_time': '',
+            'to_time': '',
+            'is_on': true
         },
         {
-            "day_id": "2",
-            "from_time": "",
-            "to_time": "",
-            "is_on": true
+            'day_id': '2',
+            'from_time': '',
+            'to_time': '',
+            'is_on': true
         },
         {
-            "day_id": "3",
-            "from_time": "",
-            "to_time": "",
-            "is_on": true
+            'day_id': '3',
+            'from_time': '',
+            'to_time': '',
+            'is_on': true
         },
         {
-            "day_id": "4",
-            "from_time": "",
-            "to_time": "",
-            "is_on": true
+            'day_id': '4',
+            'from_time': '',
+            'to_time': '',
+            'is_on': true
         },
         {
-            "day_id": "5",
-            "from_time": "",
-            "to_time": "",
-            "is_on": true
+            'day_id': '5',
+            'from_time': '',
+            'to_time': '',
+            'is_on': true
         },
         {
-            "day_id": "6",
-            "from_time": "",
-            "to_time": "",
-            "is_on": true
+            'day_id': '6',
+            'from_time': '',
+            'to_time': '',
+            'is_on': true
         },
         {
-            "day_id": "7",
-            "from_time": "",
-            "to_time": "",
-            "is_on": true
+            'day_id': '7',
+            'from_time': '',
+            'to_time': '',
+            'is_on': true
         }
     ],
-      "name": "",
-      "serial_number": "",
-      "latitude":this.latitude,
-      "longitude":this.longitude,
-      "address":this.address,
-      "industry_type_id": "",
-      "industry_name": ""
-
+      'name': '',
+      'serial_number': '',
+      'latitude': this.latitude,
+      'longitude': this.longitude,
+      'address': this.address,
+      'industry_type_id': ''
     };
     if (data.valid) {
 
@@ -282,23 +281,19 @@ export class DeviceInfoComponent  implements OnInit {
           this.json['industry_type_id'] = data.value['industry_type'];
         }
 
-        if (data.value['industry_name']) {
-          this.json['industry_name'] = data.value['industry_name'];
-        }
-
         console.log(this.json);
-
 
         this.deviceservice.postDeviceinfo(this.json).subscribe(
             response => {
             console.log(response);
-            this.formData.append('location_logo', this.fileImage)
-            this.formData.append('machine_photo', this.fileLocation)
-            this.device_id = response['data']['id']
-            this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(response => {
+            this.formData.append('location_logo', this.fileImage);
+            this.formData.append('machine_photo', this.fileLocation);
+            this.device_id = response['data']['id'];
+            this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
+              response => {
                 this.messageservice.add('succesfully registered');
                 this.router.navigateByUrl(`device/` + this.device_id);
-            })
+            });
            },
         (error) => {
             this.messageservice.add(error.error.message);
