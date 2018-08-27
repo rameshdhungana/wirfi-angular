@@ -1,46 +1,72 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthenticationService} from '../_services/authentication.service'
-import { MessageService } from '../_services/message.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import {MessageService} from '../_services/message.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {CustomErrorService} from "../_services/custom-error.service";
+
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css']
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.css']
 })
 export class ResetPasswordComponent implements OnInit {
-    private uid:string;
-    private token:string;
-  constructor(
-    private authService:AuthenticationService,
-    private messageService: MessageService,
-    private router: Router,
-    private route: ActivatedRoute
-) { }
+    private uid: string;
+    private token: string;
+    public email: string;
+    public valid_url: boolean;
+    public loading: boolean=true;
 
-  ngOnInit() {
-  }
-  resetPassword(data: NgForm) {
-      console.log("hello world");
-    if (data.valid) {
-        this.uid=this.route.snapshot.paramMap.get('uid');
-        this.token=this.route.snapshot.paramMap.get('token');
-        data.value["token"]=this.token
-        data.value["uid"]=this.uid
-        console.log(data.value);
-        this.authService.resetPassword(data.value)
-            .subscribe(
+    constructor(private authService: AuthenticationService,
+                private messageService: MessageService,
+                private router: Router,
+                private route: ActivatedRoute,
+                private errorService: CustomErrorService) {
+    }
+
+    ngOnInit() {
+        this.uid = this.route.snapshot.paramMap.get('uid');
+        this.token = this.route.snapshot.paramMap.get('token');
+
+
+        this.authService.validateResetPassword(this.uid, this.token).subscribe(res => {
+            if (res['code'] == 1) {
+                this.valid_url = true;
+                this.loading = false;
+                this.email = res['data']['email'];
+
+            }
+            else {
+                console.log('invalid reset link');
+                // this.router.navigateByUrl('/')
+                this.valid_url = false;
+                this.loading = false;
+
+
+            }
+        });
+
+
+    }
+
+    resetPassword(data: NgForm) {
+        console.log("hello world");
+        if (data.valid) {
+            data.value["token"] = this.token;
+            data.value["uid"] = this.uid;
+            console.log(data.value);
+            this.authService.resetPassword(data.value).subscribe(
                 (response) => {
                     if (response['code'] == 1) {
-                      this.messageService.add('Password Succesfully Changed');
-                      this.router.navigateByUrl('/logout');
-                      
-                    }else{
-                    //unsuccessful code
+                        this.messageService.add('Password Succesfully Changed');
+                        this.router.navigateByUrl('/logout');
+
+                    } else {
+                        //unsuccessful code
                     }
                 }
             );
+        }
     }
-}
 
 }

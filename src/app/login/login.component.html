@@ -1,75 +1,87 @@
-<div class="container-fluid device-container">
-    <div class="row justify-content-center ">
-        <div class="col-md-6 col-lg-4 mt-5 login-container__box">
+<div class="device-container d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center ">
+            <div class="col-md-8  pb-5  text-white text-center">
 
-            <div class="mx-auto mw-460 text-center mt-5">
                 <img src="../../assets/images/wirfi-logo.png" class="img img-fluid logo"/>
+                <h3>
+                    LOGIN
+                </h3>
             </div>
-            <div *ngIf="loadMainComponent && !loadComponent_forget_password">
-                <div class="panel-body">
-                    <form class="form-horizontal" [class.was-validated]="loginForm.submitted" role="form"
-                          #loginForm='ngForm' (ngSubmit)='onSubmit(loginForm)'>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div *ngIf="loadMainComponent && !loadComponent_forget_password">
+                    <div class="panel-body">
+                        <form class="form-horizontal" [class.was-validated]="loginForm.submitted" role="form"
+                              #loginForm='ngForm' (ngSubmit)='onSubmit(loginForm)'>
 
-                        <div class="form-group">
-                            <label class="text-white">Email</label>
-                            <input id="email" type="email" class="form-control" name="email" placeholder="Email"
-                                   required
-                                   email autofocus ngModel #email="ngModel">
-                            <span *ngIf="passwordResetClicked"
-                                  class="text-right text-danger">{{resetPasswordMessage}}</span>
-                            <div class="invalid-feedback text-right">
+                            <div class="form-group">
+                                <input id="email" type="email" class="form-control form-control-lg" name="email"
+                                       placeholder="Email"
+                                       required
+                                       email autofocus ngModel #email="ngModel">
+                                <span *ngIf="passwordResetClicked"
+                                      class="text-right text-danger">{{resetPasswordMessage}}</span>
+                                <div class="invalid-feedback text-right">
                                 <span *ngIf="email.hasError('required')">
                                     This is required field.
                                 </span>
-                                <span *ngIf="email.hasError('email')">
+                                    <span *ngIf="email.hasError('email')">
                                     Enter a valid email.
                                 </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="text-white">Password</label>
-                            <div class="input-group">
-                                <input id="password" [type]="passwordType" class="form-control" name="password"
-                                       placeholder="Password" ngModel #password="ngModel"
-                                       required>
-                                <div class="input-group-append">
-                                    <a class="input-group-text" style="cursor: pointer;" (click)="togglePassword()"><i
-                                            [class]="toggleClass"></i></a>
                                 </div>
                             </div>
 
-                            <div class="invalid-feedback text-right">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input id="password" [type]="passwordType"
+                                           class="form-control form-control-lg"
+                                           name="password"
+                                           placeholder="Password" ngModel #password="ngModel"
+                                           required>
+                                    <div class="input-group-append">
+                                        <a class="input-group-text " style="cursor: pointer;"
+                                           (click)="togglePassword()"><i
+                                                [class]="toggleClass"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="invalid-feedback text-right">
                                   <span *ngIf="password.hasError('required')">
                                     This is required field.
                                   </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <button type="submit" class="w-50 btn btn-primary float-right bordered">
-                                Login
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <p class="forget-account text-white" href="#" (click)="forgetPasswordValidate(email)">
-                                Forgot Password?
-                            </p>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <a href="/register" class="text-white">Create Account</a>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-light  float-right">
+                                    Login
+                                </button>
                             </div>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <button type="button" class="text-white btn btn-lg btn-link pl-0 {{disableClass}}"
+                                        (click)="forgetPasswordValidate(email)">
+                                    Forgot Password?
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="/register" class="text-white">Create Account</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="row justify-content-center">
             <div *ngIf="loadComponent_forget_password  && !loadMainComponent" class="mt-2">
                 <form class="form-horizontal" id="forgot_password_form" style="display: block;"
                       (ngSubmit)='forgetPassword(forgetForm)'
                       accept-charset="UTF-8" method="post" #forgetForm='ngForm'>
 
-                    <p class="text-white">
+                    <p clapss="text-white">
                         Enter your Email and we will send you a link to change your password.
                     </p>
                     <div class="form-group">
@@ -101,7 +113,8 @@
                 </form>
             </div>
 
-
         </div>
+
+
     </div>
 </div>

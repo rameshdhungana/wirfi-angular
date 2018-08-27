@@ -58,7 +58,7 @@ export class DeviceInfoComponent  implements OnInit {
   public searchControl: FormControl;
   public zoom: number;
   public industryType: Array<any>;
-  public industry_type: string;
+  public industry_type_id: string;
   public add_type: boolean;
 
   @ViewChild("search")
@@ -73,7 +73,7 @@ export class DeviceInfoComponent  implements OnInit {
   public device_id:any
   seconds = false;
   private address:any;
-  time: '13:30:00';
+  // time: '13:30:00';
 
   constructor(
       private dialogService: MaterialDialogService,
@@ -276,7 +276,7 @@ export class DeviceInfoComponent  implements OnInit {
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
-        console.log(data.value['industry_type'])
+        console.log(data.value['industry_type_id'])
         console.log(data.value['industry_name'])
         if (data.value['industry_type']) {
           this.json['industry_type_id'] = data.value['industry_type'];
