@@ -21,6 +21,8 @@ import { BusinessListComponent } from './business-list/business-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
+import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.component';
+import { MuteDeviceComponent } from './mute-device/mute-device.component';
 
 
 const routes: Routes = [
@@ -44,6 +46,8 @@ const routes: Routes = [
     // {path: 'device/:id/update', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
     {path: 'account_confirm_email/:key', component: VerifyEmailComponent},
+    {path: 'industry', component: AddIndustryTypeComponent},
+    {path: 'mute-device', component: MuteDeviceComponent},
 ];
 
 @NgModule({

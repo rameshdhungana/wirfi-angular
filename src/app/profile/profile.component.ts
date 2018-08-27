@@ -7,8 +7,7 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  loading:boolean
-
+  public loading:boolean=false;
   person:object
 
   constructor(private authService:AuthenticationService) { }
@@ -17,7 +16,7 @@ export class ProfileComponent implements OnInit {
     this.authService.me().subscribe( response=>{
       this.person = response['data'];
       this.loading=true;
-      console.log(this.person);
+      console.log("test",this.person);
     });
   }
 

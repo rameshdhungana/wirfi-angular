@@ -38,11 +38,13 @@ import {DeviceInfoComponent} from './device-info/device-info.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UiSwitchModule} from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DeletecardComponent} from './billing/deletecard/deletecard.component';
-import {AgmCoreModule} from '@agm/core';
-import {UpdatecardComponent} from './billing/updatecard/updatecard.component';
-import {TimeComparatorDirective} from './shared/time-comparator.directive';
-import {ProfileFormComponent} from './profile-form/profile-form.component';
+import { DeletecardComponent } from './billing/deletecard/deletecard.component';
+import { AgmCoreModule } from '@agm/core';
+import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
+import { TimeComparatorDirective } from './shared/time-comparator.directive';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.component';
+import { MuteDeviceComponent } from './mute-device/mute-device.component';
 import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from "./_services/custom-error.service";
 @NgModule({
@@ -72,6 +74,8 @@ import {CustomErrorService} from "./_services/custom-error.service";
         UpdatecardComponent,
         TimeComparatorDirective,
         ProfileFormComponent,
+        AddIndustryTypeComponent,
+        MuteDeviceComponent,
         ErrorComponent,
 
     ],

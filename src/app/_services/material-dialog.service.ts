@@ -15,7 +15,7 @@ export class MaterialDialogService {
 
         this.currentDialog = this.dialog.open(dialogComponent, {
             data: data,
-            height: '800px',
+            height: 'auto',
             width: '600px'
         });
     }

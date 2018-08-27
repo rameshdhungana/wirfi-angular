@@ -1,18 +1,33 @@
 
 
 <div class="container-fluid device-container" >
-
     <div class="row pt-4 ">
-      <div *ngFor="let device of device_list" class="col-md-6 mt-2 text-white ">
-        <a class="nounderline text-white" href="/device/{{device.id}}">
-          <div class="card text-center">
-            <img src="http://api.wirfi.testiw.codesamaj.com{{device.machine_photo}}" class="img-fluid mx-auto d-block"  style="max-width:200px;">
-            <div class="card-body">
-              <h4 class="card-title"><span>{{device.name}}</span></h4>
-              <p class="card-text">Serial Number:<span>{{device.serial_number}}</span></p>
+      <div *ngFor="let device of device_list" class="col-md-6 mt-2 text-white">
+        <div class="panel">
+
+         
+            <div class="card text-center">
+    
+                  <div ngbDropdown class="d-inline-block">
+                      <div class="setting_icon"  id="dropdownBasic1" ngbDropdownToggle><i class="fa fa-cog"></i></div>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button class="dropdown-item"  (click)="muteDevice(device.id)">Mute</button>
+                        <button class="dropdown-item">Another Action</button>
+                        <button class="dropdown-item">Something else is here</button>
+                      </div>
+                    
+             </div>
+              
+              <a class="nounderline text-white" href="/device/{{device.id}}">
+                <img src="http://api.wirfi.testiw.codesamaj.com{{device.machine_photo}}" class="img-fluid mx-auto d-block device-image"  style="max-width:200px;">
+                <div class="card-body">
+                  <h4 class="card-title"><span>{{device.name}}</span></h4>
+                  <p class="card-text">Serial Number:<span>{{device.serial_number}}</span></p>
+                </div>
+              </a>
             </div>
-          </div>
-          </a>
+            
+        </div>
       </div>
       <div class="col-md-6"></div>
       <div class="col-md-6"></div>
