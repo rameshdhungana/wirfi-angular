@@ -51,6 +51,7 @@ export class ResetPasswordComponent implements OnInit {
 
     resetPassword(data: NgForm) {
         console.log("hello world");
+        console.log(data.valid);
         if (data.valid) {
             data.value["token"] = this.token;
             data.value["uid"] = this.uid;
@@ -66,7 +67,7 @@ export class ResetPasswordComponent implements OnInit {
                     }
                 },
                 error => {
-                    this.messageService.add(error.message);
+                    this.messageService.add("Something went wrong");
 
                 }
             );
