@@ -1,0 +1,30 @@
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+          <h1> Add Industry Type </h1>
+          <form [class.was-validated]="add_industry_form.submitted" class="form" #add_industry_form='ngForm'
+            (ngSubmit)='industryTypeForm(add_industry_form)'>
+          <div class="form-group">
+            <label for=""></label>
+            <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="" required ngModel #industry_type="ngModel">
+           
+            <div class="invisible-text text-right text-white">
+                <small *ngIf="add_industry_form.submitted && industry_type.hasError('required')">
+                    This is required field.
+                </small>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+            
+              
+          
+
+        </div>
+     
+    </div>
+</div>
+
+
