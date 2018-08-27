@@ -8,7 +8,7 @@ export class MessageService {
  
   add(message: string) {
     this.messages.push(message);
-    setTimeout(()=>{ this.clear() }, 4000)
+    setTimeout(()=>{ this.clear() }, 10000)
   }
  
   clear() {

@@ -45,7 +45,6 @@ import {TimeComparatorDirective} from './shared/time-comparator.directive';
 import {ProfileFormComponent} from './profile-form/profile-form.component';
 import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from "./_services/custom-error.service";
-import {ValidatePasswordDirective} from "./shared/validate-password.directive"
 @NgModule({
     declarations: [
         AppComponent,
@@ -74,7 +73,6 @@ import {ValidatePasswordDirective} from "./shared/validate-password.directive"
         TimeComparatorDirective,
         ProfileFormComponent,
         ErrorComponent,
-        ValidatePasswordDirective,
 
     ],
     imports: [

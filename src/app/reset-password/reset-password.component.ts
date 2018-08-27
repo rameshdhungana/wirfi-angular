@@ -15,7 +15,7 @@ export class ResetPasswordComponent implements OnInit {
     private token: string;
     public email: string;
     public valid_url: boolean;
-    public loading: boolean=true;
+    public loading: boolean = true;
 
     constructor(private authService: AuthenticationService,
                 private messageService: MessageService,
@@ -62,8 +62,12 @@ export class ResetPasswordComponent implements OnInit {
                         this.router.navigateByUrl('/logout');
 
                     } else {
-                        //unsuccessful code
+                        this.messageService.add('Password must be 6 characters long with at least 1 capital, 1 small and 1 special character.');
                     }
+                },
+                error => {
+                    this.messageService.add(error.message);
+
                 }
             );
         }
