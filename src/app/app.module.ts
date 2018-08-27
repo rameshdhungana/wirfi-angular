@@ -9,7 +9,7 @@ import {AuthenticationService} from './_services/authentication.service';
 import {AlertService} from './_services/alert.service';
 import {AppRoutingModule} from './app.routing';
 import {UserService} from './_services/user.service';
-import {FormsModule,ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from './_helpers/error.interceptor';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -23,29 +23,29 @@ import {DeviceListComponent} from './device-list/device-list.component';
 import {DeviceUpdateComponent} from './device-update/device-update.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { TopbarComponent } from './topbar/topbar.component';
-import { BillingComponent } from './billing/billing.component';
-import { RegisterComponent } from './register/register.component';
-import { TextComparatorDirective } from './shared/text-comparator.directive';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
-import { ChangepasswordComponent } from './changepassword/changepassword.component';
-import { BusinessComponent } from './business/business.component';
-import { BusinessListComponent } from './business-list/business-list.component';
+import {TopbarComponent} from './topbar/topbar.component';
+import {BillingComponent} from './billing/billing.component';
+import {RegisterComponent} from './register/register.component';
+import {TextComparatorDirective} from './shared/text-comparator.directive';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {VerifyEmailComponent} from './verify-email/verify-email.component';
+import {ChangepasswordComponent} from './changepassword/changepassword.component';
+import {BusinessComponent} from './business/business.component';
+import {BusinessListComponent} from './business-list/business-list.component';
 import {BillingService} from './_services/billing.service';
-import { ProfileComponent } from './profile/profile.component';
-import { DeviceInfoComponent } from './device-info/device-info.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UiSwitchModule } from 'ngx-toggle-switch';
+import {ProfileComponent} from './profile/profile.component';
+import {DeviceInfoComponent} from './device-info/device-info.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UiSwitchModule} from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DeletecardComponent } from './billing/deletecard/deletecard.component';
-import { AgmCoreModule } from '@agm/core';
-import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
-import { TimeComparatorDirective } from './shared/time-comparator.directive';
-import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { ErrorComponent } from './error/error.component';
+import {DeletecardComponent} from './billing/deletecard/deletecard.component';
+import {AgmCoreModule} from '@agm/core';
+import {UpdatecardComponent} from './billing/updatecard/updatecard.component';
+import {TimeComparatorDirective} from './shared/time-comparator.directive';
+import {ProfileFormComponent} from './profile-form/profile-form.component';
+import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from "./_services/custom-error.service";
-
+import {ValidatePasswordDirective} from "./shared/validate-password.directive"
 @NgModule({
     declarations: [
         AppComponent,
@@ -74,6 +74,8 @@ import {CustomErrorService} from "./_services/custom-error.service";
         TimeComparatorDirective,
         ProfileFormComponent,
         ErrorComponent,
+        ValidatePasswordDirective,
+
     ],
     imports: [
         BrowserModule,
@@ -89,7 +91,7 @@ import {CustomErrorService} from "./_services/custom-error.service";
         AgmCoreModule.forRoot({
             apiKey: "AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4",
             libraries: ["places"]
-          }),
+        }),
 
 
     ],
@@ -109,7 +111,7 @@ import {CustomErrorService} from "./_services/custom-error.service";
     bootstrap:
         [AppComponent,
         ],
-    entryComponents:[
+    entryComponents: [
         DeletecardComponent,
         UpdatecardComponent,
     ]

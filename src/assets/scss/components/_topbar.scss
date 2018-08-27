@@ -2,12 +2,9 @@
   height: $topbar-height;
   background-color: black;
 
-  __hamburger{
-    color: rgb(126, 122, 122);
-  }
 }
 
-.topbar-container{
-  background-color:$topbar-bg;
+.topbar-container {
+  background-color: $topbar-bg;
   border-bottom: 1px solid $secondary;
 }
