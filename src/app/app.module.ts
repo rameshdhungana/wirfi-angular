@@ -43,6 +43,8 @@ import { AgmCoreModule } from '@agm/core';
 import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
 import { TimeComparatorDirective } from './shared/time-comparator.directive';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.component';
+import { MuteDeviceComponent } from './mute-device/mute-device.component';
 
 @NgModule({
     declarations: [
@@ -71,6 +73,8 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
         UpdatecardComponent,
         TimeComparatorDirective,
         ProfileFormComponent,
+        AddIndustryTypeComponent,
+        MuteDeviceComponent,
     ],
     imports: [
         BrowserModule,
