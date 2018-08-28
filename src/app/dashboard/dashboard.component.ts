@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { GoogleApiService } from '../_services/google-api.service';
+import {DashboardService} from '../_services/dashboard.service';
 import * as d3 from 'd3';
 
 
@@ -10,23 +11,25 @@ import * as d3 from 'd3';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-    chart = [
-        {'status': 'online', 'value': 5},
-        {'status': 'cell', 'value': 4},
-        {'status': 'auto-recover', 'value': 7},
-        {'status': 'weak signal', 'value': 2},
-        {'status': 'offline', 'value': 9},
-        {'status': 'asleep', 'value': 1}
-    ];
+    donut_chart: Array<any>;
 
     private no_of_devices: number;
 
     constructor(
         private googleapiService: GoogleApiService,
+        private dashboardservice: DashboardService
     ) {
     }
 
     ngOnInit() {
+        this.dashboardservice.getDashboard().subscribe(
+            response => {
+                this.donut_chart = response['data']['donut_chart'];
+                this.no_of_devices = this.donut_chart.map(item => item.value).reduce((prev, next) => prev + next);
+                const ctx = document.getElementById('doughnut_chart');
+                this.createDoughnutChart(ctx);
+            }
+        );
     }
 
     getlatlong(data: NgForm) {
@@ -34,13 +37,7 @@ export class DashboardComponent implements OnInit {
         });
     }
 
-    ngAfterContentInit() {
-      this.no_of_devices = this.chart.map(item => item.value).reduce((prev, next) => prev + next);
-      const ctx = document.getElementById('doughnut_chart');
-      this.createChart(ctx);
-    }
-
-    createChart(node) {
+    createDoughnutChart(node) {
       const width = 200;
       const height = 200;
       const radius = Math.min(width, height) / 2;
@@ -67,7 +64,7 @@ export class DashboardComponent implements OnInit {
                         .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
       const arcs = group.selectAll<any, any>('.arc')
-                      .data(pie(this.chart))
+                      .data(pie(this.donut_chart))
                       .enter()
                         .append('g')
                         .attr('class', 'arc');
