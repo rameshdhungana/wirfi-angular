@@ -1,14 +1,14 @@
 
 .line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width: 2px;
-  }
-  
-  body { font: 12px Arial;}
-  
-  .legend {
-      font-size: 16px;
-      font-weight: bold;
-      text-anchor: left;
-  }
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+body { font: 12px Arial;}
+
+.legend {
+  font-size: 16px;
+  font-weight: bold;
+  text-anchor: left;
+}
