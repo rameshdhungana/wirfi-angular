@@ -130,9 +130,14 @@ export class BillingComponent implements OnInit {
         const data = {
             "cardDetail": billingDetail,
         };
+        const modalSize = {
+            'height': '800px',
+            'width': '600px'
+
+        };
 
 
-        this.dialogService.openDialog(DeletecardComponent, data)
+        this.dialogService.openDialog(DeletecardComponent, data, modalSize)
 
 
     }
@@ -142,9 +147,14 @@ export class BillingComponent implements OnInit {
         const data = {
             "cardDetail": billingDetail,
         };
+        const modalSize = {
+            'height': '800px',
+            'width': '600px'
+
+        };
 
 
-        this.dialogService.openDialog(UpdatecardComponent, data)
+        this.dialogService.openDialog(UpdatecardComponent, data, modalSize)
     }
 
 }

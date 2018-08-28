@@ -11,12 +11,12 @@ export class MaterialDialogService {
     }
 
 
-    openDialog(dialogComponent, data) {
+    openDialog(dialogComponent, data,modalSize) {
 
         this.currentDialog = this.dialog.open(dialogComponent, {
             data: data,
-            height: 'auto',
-            width: '600px'
+            height: modalSize['height'],
+            width: modalSize['width']
         });
     }
 

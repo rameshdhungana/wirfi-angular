@@ -172,7 +172,12 @@ export class DeviceInfoComponent  implements OnInit {
     if (data=="") {
         const data = {
       };
-      this.dialogService.openDialog(AddIndustryTypeComponent, data)
+         const modalSize = {
+            'height': '800px',
+            'width': '600px'
+
+        };
+      this.dialogService.openDialog(AddIndustryTypeComponent, data,modalSize)
     }
 
   }
