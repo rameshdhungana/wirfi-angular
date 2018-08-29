@@ -48,7 +48,6 @@ import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.
 import { MuteDeviceComponent } from './mute-device/mute-device.component';
 import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from './_services/custom-error.service';
-import {ValidatePasswordDirective} from './shared/validate-password.directive';
 import { IndustryListComponent } from './industry-list/industry-list.component';
 import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-type.component';
 
@@ -82,7 +81,7 @@ import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-ty
         AddIndustryTypeComponent,
         MuteDeviceComponent,
         ErrorComponent,
-        ValidatePasswordDirective,
+
         IndustryListComponent,
         EditIndustryTypeComponent,
     ],

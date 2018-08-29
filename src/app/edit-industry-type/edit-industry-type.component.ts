@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material";
+import {MAT_DIALOG_DATA} from '@angular/material';
 import { IndustryService } from '../_services/industry-type.service';
 import { MaterialDialogService } from '../_services/material-dialog.service';
 import { NgForm } from '@angular/forms';
