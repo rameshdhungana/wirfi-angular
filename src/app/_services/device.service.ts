@@ -1,24 +1,13 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
 @Injectable()
 export class DeviceService {
     public getIndustryType = new Subject<Object>();
     constructor(private http: HttpClient) {
     }
-    togglePriority(id,data){
-        return this.http.put(`device/${id}/priority/`,data);
-    }
-    addIndustryType(data){
-        return this.http.post('industry-type/',data);
-    }
-    getIndustryList() {
-        this.http.get('industry-type/').subscribe(
-            res=>{
-            this.getIndustryType.next(res);
-            }
-        );
-        return this.getIndustryType.asObservable();
+    togglePriority(id, data) {
+        return this.http.put(`device/${id}/priority/`, data);
     }
 
     getDeviceList() {

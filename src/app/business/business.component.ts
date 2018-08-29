@@ -10,14 +10,14 @@ import { BussinessService } from '../_services/bussiness.service';
   styleUrls: ['./business.component.css']
 })
 export class BusinessComponent implements OnInit {
-  private code:Number
-  private business_id:Number
-  public business_data:Object
-  public first_login:String
+  private code: Number;
+  private business_id: Number;
+  public business_data: Object;
+  public first_login: String;
   loading;
 
   constructor(
-    private bussinessService:BussinessService,
+    private bussinessService: BussinessService,
     private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute,
@@ -29,18 +29,17 @@ export class BusinessComponent implements OnInit {
     this.bussinessService.getBusiness().subscribe(
       (response) => {
 
-          if(response["code"] == 1){
-            this.code=1;
-            this.business_id = response["data"]["business_info"]["id"];
-            this.business_data = response["data"].business_info;
-            
-          }else{
-            this.code=2;
-            this.business_data={
+          if (response['code'] === 1) {
+            this.code = 1;
+            this.business_id = response['data']['business_info']['id'];
+            this.business_data = response['data'].business_info;
+          } else {
+            this.code = 2;
+            this.business_data = {
               name: '',
               address: '',
               phone_number: ''
-            }
+            };
             console.log(this.business_data);
           }
           this.loading = false;
@@ -61,7 +60,7 @@ export class BusinessComponent implements OnInit {
           this.bussinessService.updateBusiness(this.business_id,data.value)
           .subscribe(
             (response) =>{
-            this.messageService.add("updated");
+            this.messageService.add('updated');
             
           },
               (error) =>{

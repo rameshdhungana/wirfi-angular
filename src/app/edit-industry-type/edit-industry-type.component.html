@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+      <div class="col-12 text-center">
+        <h1> Edit Industry Type </h1>
+        <form [class.was-validated]="editIndustryType.submitted" class="form" #editIndustryType='ngForm'
+          (ngSubmit)='updateIndustryType(editIndustryType)'>
+        <div class="form-group">
+          <label for=""></label>
+          <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="" required ngModel #industry_type="ngModel">
+         
+          <div class="invisible-text text-right text-white">
+              <small *ngIf="editIndustryType.submitted && industry_type.hasError('required')">
+                  This is required field.
+              </small>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+   
+  </div>
+</div>
+
+

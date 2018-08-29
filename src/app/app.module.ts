@@ -47,8 +47,9 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.component';
 import { MuteDeviceComponent } from './mute-device/mute-device.component';
 import {ErrorComponent} from './error/error.component';
-import {CustomErrorService} from "./_services/custom-error.service";
+import {CustomErrorService} from './_services/custom-error.service';
 import { IndustryListComponent } from './industry-list/industry-list.component';
+import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-type.component';
 
 @NgModule({
     declarations: [
@@ -82,6 +83,7 @@ import { IndustryListComponent } from './industry-list/industry-list.component';
         ErrorComponent,
 
         IndustryListComponent,
+        EditIndustryTypeComponent,
     ],
     imports: [
         BrowserModule,

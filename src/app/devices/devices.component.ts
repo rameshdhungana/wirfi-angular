@@ -21,68 +21,66 @@ export class DevicesComponent implements OnInit {
 
     onSubmit(data: NgForm) {
         if (data.valid) {
-            data.value["location_hours"]=[
+            data.value['location_hours'] = [
                 {
-                    "day": "Sunday",
-                    "from_time": "08:00:00",
-                    "to_time": "08:00:00",
-                    "is_on": true,
-                    "whole_day": false
+                    'day': 'Sunday',
+                    'from_time': '08:00:00',
+                    'to_time': '08:00:00',
+                    'is_on': true,
+                    'whole_day': false
                 },
                 {
-                    "day": "Monday",
-                    "from_time": "08:00:00",
-                    "to_time": "08:00:00",
-                    "is_on": true,
-                    "whole_day": false
+                    'day': 'Monday',
+                    'from_time': '08:00:00',
+                    'to_time': '08:00:00',
+                    'is_on': true,
+                    'whole_day': false
                 },
                 {
-                    "day": "Tuesday",
-                    "from_time": "08:00:00",
-                    "to_time": "08:00:00",
-                    "is_on": true,
-                    "whole_day": false
+                    'day': 'Tuesday',
+                    'from_time': '08:00:00',
+                    'to_time': '08:00:00',
+                    'is_on': true,
+                    'whole_day': false
                 },
                 {
-                    "day": "Wednesday",
-                    "from_time": "08:00:00",
-                    "to_time": "08:00:00",
-                    "is_on": true,
-                    "whole_day": false
+                    'day': 'Wednesday',
+                    'from_time': '08:00:00',
+                    'to_time': '08:00:00',
+                    'is_on': true,
+                    'whole_day': false
                 },
                 {
-                    "day": "Thursday",
-                    "from_time": "08:00:00",
-                    "to_time": "08:00:00",
-                    "is_on": true,
-                    "whole_day": false
+                    'day': 'Thursday',
+                    'from_time': '08:00:00',
+                    'to_time': '08:00:00',
+                    'is_on': true,
+                    'whole_day': false
                 },
                 {
-                    "day": "Friday",
-                    "from_time": "08:00:00",
-                    "to_time": "08:00:00",
-                    "is_on": true,
-                    "whole_day": false
+                    'day': 'Friday',
+                    'from_time': '08:00:00',
+                    'to_time': '08:00:00',
+                    'is_on': true,
+                    'whole_day': false
                 },
                 {
-                    "day": "Saturday",
-                    "from_time": "08:00:00",
-                    "to_time": "08:00:00",
-                    "is_on": true,
-                    "whole_day": true
+                    'day': 'Saturday',
+                    'from_time': '08:00:00',
+                    'to_time': '08:00:00',
+                    'is_on': true,
+                    'whole_day': true
                 }
             ];
-            
+
             this.device.postDeviceSno(data.value).subscribe(
                 (response) => {
-                    const id = response["data"].id;
+                    const id = response['data'].id;
                     console.log(id);
                     localStorage.setItem('device_id', id);
                     this.router.navigateByUrl(`/device/${id}/setup`);
-                } 
-            ),(err) =>{
-                console.log(err);
-            }
+                }
+            );
         }
 
     }
