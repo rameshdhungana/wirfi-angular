@@ -29,13 +29,21 @@ export class IndustryListComponent implements OnInit {
   }
   addDevice() {
     const data = {};
-    this.dialogService.openDialog(AddIndustryTypeComponent, data);
+    const modalSize = {
+      'height':'auto',
+      'width':'auto'
+    }
+    this.dialogService.openDialog(AddIndustryTypeComponent, data, modalSize);
   }
   onClickEdit(id) {
     const data = {
       'id': id
     };
-    this.dialogService.openDialog(EditIndustryTypeComponent, data);
+    const modalSize = {
+      'height':'auto',
+      'width':'auto'
+    }
+    this.dialogService.openDialog(EditIndustryTypeComponent, data, modalSize);
   }
   onClickDelete(id) {
     this.industryservice.deleteIndustry(id).subscribe(
