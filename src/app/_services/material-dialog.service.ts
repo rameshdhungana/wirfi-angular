@@ -11,7 +11,7 @@ export class MaterialDialogService {
     }
 
 
-    openDialog(dialogComponent, data,modalSize) {
+    openDialog(dialogComponent, data, modalSize) {
 
         this.currentDialog = this.dialog.open(dialogComponent, {
             data: data,

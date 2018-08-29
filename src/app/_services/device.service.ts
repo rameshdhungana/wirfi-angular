@@ -55,4 +55,9 @@ export class DeviceService {
       return this.http.delete(`device/${id}/`);
     }
 
+    muteDevice(id,data){
+        console.log(id,data,'inside service')
+        return this.http.post(`device/mute/${id}/`,data)
+    }
+
 }

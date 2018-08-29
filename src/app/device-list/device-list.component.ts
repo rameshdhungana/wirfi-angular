@@ -19,20 +19,25 @@ export class DeviceListComponent implements OnInit {
         this.deviceService.getDeviceList().subscribe(response => {
             console.log(response);
             this.device_list = response['data']['device'];
+
+
         });
     }
 
-    muteDevice(id) {
-        console.log('test', id);
+    muteDevicePopUp(device_id, mute_status, mute_start_date,mute_duration) {
+        console.log('test', device_id);
         const data = {
-            'id': id
+            'device_id': device_id,
+            'is_muted': mute_status,
+            'mute_start_date': mute_start_date,
+            'mute_duration':mute_duration,
         };
         const modalSize = {
             'height': '325px',
             'width': '450px'
 
         };
-        this.dialogService.openDialog(MuteDeviceComponent, data,modalSize)
+        this.dialogService.openDialog(MuteDeviceComponent, data, modalSize)
     }
 
 }
