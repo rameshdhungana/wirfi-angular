@@ -22,6 +22,9 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+          <select (change)="onChange($event.target.value)">
+              <option *ngFor="let type of industry_types" value="{{type}}">{{type}}</option>
+          </select>
         <div class="linec_chart" id="line_chart"></div>
       </div>
     </div>

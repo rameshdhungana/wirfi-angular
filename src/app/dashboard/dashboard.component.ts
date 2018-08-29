@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { GoogleApiService } from '../_services/google-api.service';
 import {DashboardService} from '../_services/dashboard.service';
 import * as d3 from 'd3';
+import { path } from 'd3';
 
 
 @Component({
@@ -12,6 +13,9 @@ import * as d3 from 'd3';
 })
 export class DashboardComponent implements OnInit {
   donut_chart: Array<any>;
+
+ 
+industry_types = []
 
   data = [
     [
@@ -228,6 +232,144 @@ export class DashboardComponent implements OnInit {
     ]
   ];
 
+  data_new =  {
+    'type1': [{
+      'device_name': 'device1',
+      'address': 'address',
+      'data':  [
+            {
+              'date': '1-May-12',
+              'status': 1
+            },
+            {
+              'date': '30-Apr-12',
+              'status': 2
+            },
+            {
+              'date': '27-Apr-12',
+              'status': 3
+            },
+            {
+              'date': '26-Apr-12',
+              'status': 4
+            },
+            {
+              'date': '25-Apr-12',
+              'status': 5
+            },
+            {
+              'date': '24-Apr-12',
+              'status': 6
+            },
+            {
+              'date': '23-Apr-12',
+              'status': 4
+            }
+          ]
+   }, {
+      'device_name': 'device1',
+      'address': 'address',
+      'data':  [
+            {
+              'date': '1-May-12',
+              'status': 1
+            },
+            {
+              'date': '30-Apr-12',
+              'status': 1
+            },
+            {
+              'date': '27-Apr-12',
+              'status': 3
+            },
+            {
+              'date': '26-Apr-12',
+              'status': 3
+            },
+            {
+              'date': '25-Apr-12',
+              'status': 2
+            },
+            {
+              'date': '24-Apr-12',
+              'status': 4
+            },
+            {
+              'date': '23-Apr-12',
+              'status': 6
+            }
+          ]
+   }],
+   'type2': [{
+      'device_name': 'device1',
+      'address': 'address',
+      'data':  [
+            {
+              'date': '1-May-12',
+              'status': 1
+            },
+            {
+              'date': '30-Apr-12',
+              'status': 2
+            },
+            {
+              'date': '27-Apr-12',
+              'status': 3
+            },
+            {
+              'date': '26-Apr-12',
+              'status': 5
+            },
+            {
+              'date': '25-Apr-12',
+              'status': 3
+            },
+            {
+              'date': '24-Apr-12',
+              'status': 6
+            },
+            {
+              'date': '23-Apr-12',
+              'status': 2
+            }
+          ]
+   },{
+      'device_name': 'device1',
+      'address': 'address',
+      'data':  [
+            {
+              'date': '1-May-12',
+              'status': 5
+            },
+            {
+              'date': '30-Apr-12',
+              'status': 1
+            },
+            {
+              'date': '27-Apr-12',
+              'status': 4
+            },
+            {
+              'date': '26-Apr-12',
+              'status': 2
+            },
+            {
+              'date': '25-Apr-12',
+              'status': 1
+            },
+            {
+              'date': '24-Apr-12',
+              'status': 3
+            },
+            {
+              'date': '23-Apr-12',
+              'status': 2
+            }
+          ]
+   }]
+  };
+
+  filtered_data:object;
   private no_of_devices: number;
 
   constructor(
@@ -247,27 +389,33 @@ export class DashboardComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    const that = this;
-
-    // set the dimensions and margins of the graph
-    const margin = { top: 20, right: 150, bottom: 30, left: 50 },
-      width = 960 - margin.left - margin.right,
-      height = 302 - margin.top - margin.bottom;
-
-    const line_color = 'white';
-
+    for(const industry_type in this.data_new){
+    console.log("industry type",industry_type);
+    this.industry_types.push(industry_type);
+    }
+    this.createLineGraph(this.data_new);
+  }
+  createLineGraph(data){
+    console.log("filtering",data);
+    d3.select('#line_chart svg').remove();
+    const margin = { top: 20, right: 150, bottom: 30, left: 50 }
+    const width = 960 - margin.left - margin.right;
+    const height = 302 - margin.top - margin.bottom;
+ 
+ 
     const status_colors = ['green', 'blue', 'yellow', 'orange', 'red', 'gray'];
-
-    // array of curve functions and tites
-    const daCurve = { 'd3Curve': d3.curveStepBefore, 'curveTitle': 'curveStepBefore' };
-
-    // parse the date / time
-    const parseTime = d3.timeParse('%d-%b-%y');
-
+ 
+    
+    this.filtered_data = data;
     // set the ranges
     const x = d3.scaleTime().range([0, width]);
     const y = d3.scaleLinear().range([height, 0]);
 
+    // parse the date / time
+    const parseTime = d3.timeParse('%d-%b-%y');
+    // array of curve functions and tites
+    const daCurve = { 'd3Curve': d3.curveStepBefore, 'curveTitle': 'curveStepBefore' };
+    const line_color = 'white';
     // define the line
     const valueline = d3.line()
       .curve(d3.curveCatmullRomOpen)
@@ -283,48 +431,55 @@ export class DashboardComponent implements OnInit {
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-    // const svgDefs = svg.append('defs');
-    //
-    // const mainGradient = svgDefs.append('linearGradient')
-    //     .attr('id', 'mainGradient1');
-    //
-    // // Create the stops of the main gradient. Each stop will be assigned
-    // // a class to style the stop using CSS.
-    // mainGradient.append('stop')
-    //     .attr('class', 'stop-left-1')
-    //     .attr('offset', '0');
-    //
-    // mainGradient.append('stop')
-    //     .attr('class', 'stop-right-1')
-    //     .attr('offset', '1');
+      // const svgDefs = svg.append('defs');
+      //
+      // const mainGradient = svgDefs.append('linearGradient')
+      //     .attr('id', 'mainGradient1');
+      //
+      // // Create the stops of the main gradient. Each stop will be assigned
+      // // a class to style the stop using CSS.
+      // mainGradient.append('stop')
+      //     .attr('class', 'stop-left-1')
+      //     .attr('offset', '0');
+      //
+      // mainGradient.append('stop')
+      //     .attr('class', 'stop-right-1')
+      //     .attr('offset', '1');
 
-    for (const index in status_colors) {
-      console.log(index);
-      svg.append('rect')
-          .attr('width', width)
-          .attr('height', (height/6))
-          .attr('transform', 'translate(0,' + (height/6 * index) + ')')
-          .attr('fill', status_colors[index]);
-    }
-
-    for (const index in that.data) {
-      if (this.data[index]) {
+      for (const index in status_colors) {
+        console.log(index);
+        svg.append('rect')
+            .attr('width', width)
+            .attr('height', (height/6))
+            .attr('transform', 'translate(0,' + (height/6 * index) + ')')
+            .attr('fill', status_colors[index]);
+      }
+    
+    for(const index_industry in this.filtered_data){
+      const device_data = this.filtered_data[index_industry];
+      for(const index in device_data){
+        const device_status_data =device_data[index].data;
+        console.log("data",device_status_data);
+      if (device_status_data) {
         // format the data
-        that.data[index].forEach(function (d) {
-          d['date'] = parseTime(d['date']).toDateString();
-          d['status'] = d['status'] - 0.5;
+        device_status_data.forEach(function (d) {
+          console.log(d);
+          //d['date'] = parseTime(d['date']).toDateString();
+          d['date'] = (d['date']);
+          d['status_1'] = d['status'] - 0.5;
         });
 
         // set the colour scale
         const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         // Scale the range of the data
-        x.domain(d3.extent<any, any>(that.data[index], function (d) { return new Date(d['date']); }));
+        x.domain(d3.extent<any, any>(device_status_data, function (d) { return new Date(d['date']); }));
         y.domain([0,6]);
 
         // Add the paths with different curves.
-        svg.append('path')
-          .datum(that.data[index])
+        
+      svg.append('path')
+          .datum(device_status_data)
           .attr('class', 'line')
           .style('stroke-width', '3')
           .style('fill', function(d) { return 'rgba(0, 0, 0, 0)'; })
@@ -335,9 +490,8 @@ export class DashboardComponent implements OnInit {
           .attr('d', d3.line<any>()
             .curve(daCurve.d3Curve)
             .x(function (d) { return x(new Date(d['date'])); })
-            .y(function (d) { return y(d['status']); })
+            .y(function (d) { return y(d['status_1']); })
           );
-
         // Add the Legend
         // svg.append('text')
         //   .attr('x', width + 5)  // space legend
@@ -381,9 +535,18 @@ export class DashboardComponent implements OnInit {
         //   // .ticks(1)
         //   .call(d3.axisLeft(y));
       }
-    }
-  }
 
+      }
+
+      }
+  }
+  onChange(deviceValue) {
+    const filter_data = {};
+    filter_data[deviceValue] = this.data_new[deviceValue];
+    this.createLineGraph(filter_data);
+
+
+}
   getlatlong(data: NgForm) {
     this.googleapiService.get_lat_long(data.value['address']).subscribe(response => {
     });
