@@ -25,6 +25,7 @@ import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.
 import { MuteDeviceComponent } from './mute-device/mute-device.component';
 import { IndustryListComponent } from './industry-list/industry-list.component';
 import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-type.component';
+import {NotificationComponent} from "./notification/notification.component";
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
     {path: 'mute-device', component: MuteDeviceComponent},
     {path: 'industry-list', component: IndustryListComponent},
     {path: 'edit-industry-list', component: EditIndustryTypeComponent},
+    {path: 'notification', component: NotificationComponent},
 ];
 
 @NgModule({

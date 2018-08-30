@@ -2,4 +2,8 @@
   background: #292e3f;
   margin-bottom: $spacer;
   padding: $spacer*2;
+
+  .faded-text {
+    opacity: .35;
+  }
 }

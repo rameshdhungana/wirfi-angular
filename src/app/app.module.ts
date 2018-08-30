@@ -39,17 +39,18 @@ import {DeviceInfoComponent} from './device-info/device-info.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UiSwitchModule} from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DeletecardComponent } from './billing/deletecard/deletecard.component';
-import { AgmCoreModule } from '@agm/core';
-import { UpdatecardComponent } from './billing/updatecard/updatecard.component';
-import { TimeComparatorDirective } from './shared/time-comparator.directive';
-import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.component';
-import { MuteDeviceComponent } from './mute-device/mute-device.component';
+import {DeletecardComponent} from './billing/deletecard/deletecard.component';
+import {AgmCoreModule} from '@agm/core';
+import {UpdatecardComponent} from './billing/updatecard/updatecard.component';
+import {TimeComparatorDirective} from './shared/time-comparator.directive';
+import {ProfileFormComponent} from './profile-form/profile-form.component';
+import {AddIndustryTypeComponent} from './add-industry-type/add-industry-type.component';
+import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from './_services/custom-error.service';
-import { IndustryListComponent } from './industry-list/industry-list.component';
-import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-type.component';
+import {IndustryListComponent} from './industry-list/industry-list.component';
+import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
+import {NotificationComponent} from './notification/notification.component';
 
 @NgModule({
     declarations: [
@@ -81,9 +82,9 @@ import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-ty
         AddIndustryTypeComponent,
         MuteDeviceComponent,
         ErrorComponent,
-
         IndustryListComponent,
         EditIndustryTypeComponent,
+        NotificationComponent,
     ],
     imports: [
         BrowserModule,
@@ -99,7 +100,7 @@ import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-ty
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
             libraries: ['places']
-          }),
+        }),
 
 
     ],
