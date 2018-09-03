@@ -12,8 +12,8 @@ export class DeviceListComponent implements OnInit {
   public device_list: any;
 
   constructor(
-    private deviceService:DeviceService,
-    private dialogService:MaterialDialogService
+    private deviceService: DeviceService,
+    private dialogService: MaterialDialogService
   ) { }
 
   ngOnInit() {
@@ -22,12 +22,12 @@ export class DeviceListComponent implements OnInit {
         this.device_list = response['data']['device'];
        });
   }
-  muteDevice(id){
-    console.log('test',id);
+  muteDevice(id) {
+    console.log('test', id);
     const data = {
-      'id':id
+      'id': id
     };
-    this.dialogService.openDialog(MuteDeviceComponent, data)
+    this.dialogService.openDialog(MuteDeviceComponent, data);
   }
 
 }

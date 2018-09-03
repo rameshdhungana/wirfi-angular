@@ -1,15 +1,15 @@
-import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone,Inject } from '@angular/core';
+import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone, Inject } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { DeviceService } from '../_services/device.service';
 import { IndustryService } from '../_services/industry-type.service';
 import { MessageService } from '../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material";
-import { MatDialogRef} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 import {NgbTimeStruct, NgbTimeAdapter} from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import {MaterialDialogService} from "../_services/material-dialog.service";
+import {MaterialDialogService} from '../_services/material-dialog.service';
 import { AddIndustryTypeComponent } from '../add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
 /**
@@ -17,9 +17,6 @@ import { MouseEvent } from '@agm/core';
  */
 @Injectable()
 export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
-
-
-
   fromModel(value: string): NgbTimeStruct {
     if (!value) {
       return null;
@@ -131,13 +128,13 @@ export class DeviceInfoComponent  implements OnInit {
   }
 
   mapClicked($event: MouseEvent) {
-   
-      console.log("clicked", $event.coords.lat,$event.coords.lng);
+
+      console.log('clicked', $event.coords.lat, $event.coords.lng);
       this.latitude =  $event.coords.lat;
       this.longitude = $event.coords.lng;
       this.zoom = 12;
-     
-   
+
+
   }
   private setCurrentPosition() {
     if ('geolocation' in navigator) {
@@ -168,11 +165,10 @@ export class DeviceInfoComponent  implements OnInit {
   }
 
   addIndustryType(event, data) {
-    console.log(data)
-    if (data=="") {
-        const data = {
-      };
-      this.dialogService.openDialog(AddIndustryTypeComponent, data)
+    console.log(data);
+    if (data === '') {
+      const data = {};
+      this.dialogService.openDialog(AddIndustryTypeComponent, data);
     }
 
   }
@@ -275,8 +271,8 @@ export class DeviceInfoComponent  implements OnInit {
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
-        console.log(data.value['industry_type_id'])
-        console.log(data.value['industry_name'])
+        console.log(data.value['industry_type_id']);
+        console.log(data.value['industry_name']);
         if (data.value['industry_type']) {
           this.json['industry_type_id'] = data.value['industry_type'];
         }
