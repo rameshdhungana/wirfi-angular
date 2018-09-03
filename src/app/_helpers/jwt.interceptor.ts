@@ -8,7 +8,7 @@ export class JwtInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add authorization header with jwt token if available
         const token = localStorage.getItem('token');
-       if (request.headers.get('map_url')){
+       if (request.headers.get('map_url')) {
         request = request.clone({
             url: environment.MAP_URL + request.url
         });
