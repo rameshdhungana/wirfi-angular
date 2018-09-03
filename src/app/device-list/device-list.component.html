@@ -10,9 +10,9 @@
                         <div class="setting_icon" id="dropdownBasic1" ngbDropdownToggle><i class="fa fa-cog"></i></div>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
 
-                            <button *ngIf="device.device_settings;else firstTimeCreated" class="dropdown-item"
-                                    (click)="muteDevicePopUp(device.id,!device.device_settings.is_muted,device.device_settings.mute_start,device.device_settings.mute_duration)">
-                                {{device.device_settings.is_muted ?'UnMute':'Mute'}}
+                            <button *ngIf="device.device_settings.mute_settings;else firstTimeCreated" class="dropdown-item"
+                                    (click)="muteDevicePopUp(device.id,!device.device_settings.mute_settings.is_muted,device.device_settings.mute_settings.mute_start,device.device_settings.mute_settings.mute_duration)">
+                                {{device.device_settings.mute_settings.is_muted ?'UnMute':'Mute'}}
                             </button>
                             <ng-template #firstTimeCreated>
                                 <button

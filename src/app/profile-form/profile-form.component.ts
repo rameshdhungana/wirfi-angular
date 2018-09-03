@@ -27,7 +27,7 @@ export class ProfileFormComponent implements OnInit {
       'phone_number': '',
       'profile_picture':''
     }
-  }
+  };
 
   private subscription:Subscription
 
