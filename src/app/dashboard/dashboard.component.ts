@@ -14,9 +14,64 @@ import { path } from 'd3';
 export class DashboardComponent implements OnInit {
   donut_chart: Array<any>;
 
- 
-industry_types = []
+doughnut_filter_data = [
+  {
+    'status': 'ONLINE',
+    'value': 0
+  },
+  {
+    'status': 'CELL',
+    'value': 0
+  },
+  {
+    'status': 'AUTO RECOVER',
+    'value': 0
+  },
+  {
+    'status': 'WEAK SIGNAL',
+    'value': 0
+  },
+  {
+    'status': 'OFFLINE',
+    'value': 0
+  },
+  {
+    'status': 'ASLEEP',
+    'value': 0
+  }
+]
+doughnut_filter_data_toggle = [
+  {
+    'status': 'ONLINE',
+    'value': 0
+  },
+  {
+    'status': 'CELL',
+    'value': 0
+  },
+  {
+    'status': 'AUTO RECOVER',
+    'value': 0
+  },
+  {
+    'status': 'WEAK SIGNAL',
+    'value': 0
+  },
+  {
+    'status': 'OFFLINE',
+    'value': 0
+  },
+  {
+    'status': 'ASLEEP',
+    'value': 0
+  }
+]
+industry_types_line_graph = [];
+industry_types_doughnut_graph = [];
+filter_data = {};
 
+
+value_of_checkbox = [];
   data = [
     [
       {
@@ -333,7 +388,7 @@ industry_types = []
               'status': 2
             }
           ]
-   },{
+   }, {
       'device_name': 'device1',
       'address': 'address',
       'data':  [
@@ -369,8 +424,10 @@ industry_types = []
    }]
   };
 
-  filtered_data:object;
-  private no_of_devices: number;
+
+  filtered_data: object;
+  filtered_data_toggle: object;
+  private no_of_devices: number = 0;
 
   constructor(
     private googleapiService: GoogleApiService,
@@ -380,23 +437,45 @@ industry_types = []
   ngOnInit() {
     this.dashboardservice.getDashboard().subscribe(
       response => {
+        console.log(response);
         this.donut_chart = response['data']['donut_chart'];
-        this.no_of_devices = this.donut_chart.map(item => item.value).reduce((prev, next) => prev + next);
         const ctx = document.getElementById('doughnut_chart');
-        this.createDoughnutChart(ctx);
+        console.log( response['data']['industry_type'])
+        for (let key in response['data']['industry_type']) {
+          this.industry_types_doughnut_graph.push( response['data']['industry_type'][key]);
+        }
+        this.sumDonutChart( this.donut_chart);
+        this.createDoughnutChart(ctx, this.doughnut_filter_data);
       }
     );
+  }
+  noOfDevice(data){
+    this.no_of_devices = 0;
+    console.log("test",data);
+      for (let key_device in data){
+       this.no_of_devices = this.no_of_devices +data[key_device].value;
+      }
+    
+
+  }
+  sumDonutChart(data){
+    this.filtered_data = {};
+    for (let key in data) {
+      for (let key_device in data[key]){
+        this.doughnut_filter_data[key_device].value = this.doughnut_filter_data[key_device].value +data[key][key_device].value;
+      }
+    }
+
+    this.noOfDevice(this.doughnut_filter_data);
   }
 
   ngAfterViewInit() {
     for(const industry_type in this.data_new){
-    console.log("industry type",industry_type);
-    this.industry_types.push(industry_type);
+    this.industry_types_line_graph.push(industry_type);
     }
     this.createLineGraph(this.data_new);
   }
   createLineGraph(data){
-    console.log("filtering",data);
     d3.select('#line_chart svg').remove();
     const margin = { top: 20, right: 150, bottom: 30, left: 50 }
     const width = 960 - margin.left - margin.right;
@@ -447,11 +526,10 @@ industry_types = []
       //     .attr('offset', '1');
 
       for (const index in status_colors) {
-        console.log(index);
         svg.append('rect')
             .attr('width', width)
             .attr('height', (height/6))
-            .attr('transform', 'translate(0,' + (height/6 * index) + ')')
+            .attr('transform', 'translate(0,' + (height/6 * Number(index)) + ')')
             .attr('fill', status_colors[index]);
       }
     
@@ -459,11 +537,9 @@ industry_types = []
       const device_data = this.filtered_data[index_industry];
       for(const index in device_data){
         const device_status_data =device_data[index].data;
-        console.log("data",device_status_data);
       if (device_status_data) {
         // format the data
         device_status_data.forEach(function (d) {
-          console.log(d);
           //d['date'] = parseTime(d['date']).toDateString();
           d['date'] = (d['date']);
           d['status_1'] = d['status'] - 0.5;
@@ -540,19 +616,51 @@ industry_types = []
 
       }
   }
-  onChange(deviceValue) {
-    const filter_data = {};
-    filter_data[deviceValue] = this.data_new[deviceValue];
-    this.createLineGraph(filter_data);
+  toggleFeatureDoughnut(item, datavalue) {
+    const ctx = document.getElementById('doughnut_chart');
+    if (datavalue === true) {
+      // console.log(this.data_donut['donut_chart'][item]);
+      console.log(this.donut_chart);
+      for (let key in this.donut_chart[item]) {
+        console.log("old_",this.donut_chart[item][key].value);
+        this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value +this.donut_chart[item][key].value;
+      }
 
+  }else{
+    for (let key in this.donut_chart[item]) {
+      console.log("old_",this.donut_chart[item][key].value);
+      this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value -this.donut_chart[item][key].value;
+    }
+  }
+
+    this.noOfDevice(this.doughnut_filter_data_toggle);
+    this.createDoughnutChart(ctx,this.doughnut_filter_data_toggle);
+  
+
+ 
 
 }
+toggleFeature(item, datavalue) {
+  if (datavalue === true) {
+    this.filter_data[item] = this.data_new[item];
+  } else {
+     delete this.filter_data[item];
+  }
+  console.log(this.filter_data);
+  if (Object.keys(this.filter_data).length === 0 ) {
+    this.createLineGraph(this.data_new);
+  } else {
+    this.createLineGraph(this.filter_data);
+  }
+}
+
   getlatlong(data: NgForm) {
     this.googleapiService.get_lat_long(data.value['address']).subscribe(response => {
     });
   }
 
-  createDoughnutChart(node) {
+  createDoughnutChart(node, data) {
+    d3.select('#doughnut_chart svg').remove();
     const width = 200;
     const height = 200;
     const radius = Math.min(width, height) / 2;
@@ -579,7 +687,7 @@ industry_types = []
                       .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
     const arcs = group.selectAll<any, any>('.arc')
-                    .data(pie(this.donut_chart))
+                    .data(pie(data))
                     .enter()
                       .append('g')
                       .attr('class', 'arc');
