@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { GoogleApiService } from '../_services/google-api.service';
 import {DashboardService} from '../_services/dashboard.service';
 import * as d3 from 'd3';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 @Component({
     selector: 'app-dashboard',
@@ -70,142 +71,158 @@ filter_data = {};
 
 value_of_checkbox = [];
 
-  data_new =  {
-    'type1': [{
-      'device_name': 'device1',
-      'address': 'address',
-      'data':  [
-            {
-              'date': '1 May 16 14:49:04',
-              'status': 1
-            },
-            {
-              'date': '30 Apr 16 14:49:04',
-              'status': 2
-            },
-            {
-              'date': '27 Apr 16 14:49:04',
-              'status': 3
-            },
-            {
-              'date': '26 Apr 16 14:49:04',
-              'status': 4
-            },
-            {
-              'date': '25 Apr 16 14:49:04',
-              'status': 5
-            },
-            {
-              'date': '24 Apr 16 14:49:04',
-              'status': 6
-            },
-            {
-              'date': '23 Apr 16 14:49:04',
-              'status': 4
-            }
-          ]
-   }, {
-      'device_name': 'device1',
-      'address': 'address',
-      'data':  [
-            {
-              'date': '1 May 16 14:49:04',
-              'status': 1
-            },
-            {
-              'date': '30 Apr 16 14:49:04',
-              'status': 1
-            },
-            {
-              'date': '27 Apr 16 14:49:04',
-              'status': 3
-            },
-            {
-              'date': '26 Apr 16 14:49:04',
-              'status': 3
-            },
-            {
-              'date': '25 Apr 16 14:49:04',
-              'status': 2
-            },
-            {
-              'date': '24 Apr 16 14:49:04',
-              'status': 4
-            },
-            {
-              'date': '23 Apr 16 14:49:04',
-              'status': 6
-            }
-          ]
-   }],
-   'type2': [{
-      'device_name': 'device1',
-      'address': 'address',
-      'data':  [
-            {
-              'date': '1 May 16 14:49:04',
-              'status': 1
-            },
-            {
-              'date': '30 Apr 16 14:49:04',
-              'status': 2
-            },
-            {
-              'date': '27 Apr 16 14:49:04',
-              'status': 3
-            },
-            {
-              'date': '26 Apr 16 14:49:04',
-              'status': 5
-            },
-            {
-              'date': '25 Apr 16 14:49:04',
-              'status': 3
-            },
-            {
-              'date': '24 Apr 16 14:49:04',
-              'status': 6
-            },
-            {
-              'date': '23 Apr 16 14:49:04',
-              'status': 2
-            }
-          ]
-   }, {
-      'device_name': 'device1',
-      'address': 'address',
-      'data':  [
-            {
-              'date': '1 May 16 14:49:04',
-              'status': 5
-            },
-            {
-              'date': '30 Apr 16 14:49:04',
-              'status': 1
-            },
-            {
-              'date': '27 Apr 16 14:49:04',
-              'status': 4
-            },
-            {
-              'date': '26 Apr 16 14:49:04',
-              'status': 2
-            },
-            {
-              'date': '25 Apr 16 14:49:04',
-              'status': 1
-            },
-            {
-              'date': '24 Apr 16 14:49:04',
-              'status': 3
-            },
-            {
-              'date': '23 Apr 16 14:49:04',
-              'status': 2
-            }
-          ]
-   }]
-  };
+data_new =  {
+  'type1': [{
+    'device_name': 'device1',
+    'address': 'address',
+    'data':  [
+          {
+            'date': '01:49:16',
+            'status': 1
+          },
+          {
+            'date': '02:50:16',
+            'status': 2
+          },
+          {
+            'date': '03:51:16',
+            'status': 3
+          },
+          {
+            'date': '04:52:16',
+            'status': 4
+          },
+          {
+            'date': '05:53:16',
+            'status': 5
+          },
+          {
+            'date': '06:54:16',
+            'status': 6
+          },
+          {
+            'date': '07:55:16',
+            'status': 4
+          },
+          {
+            'date': '08:56:16',
+            'status': 4
+          }
+        ]
+ }, {
+    'device_name': 'device1',
+    'address': 'address',
+    'data':  [
+          {
+            'date': '01:49:16',
+            'status': 1
+          },
+          {
+            'date': '02:50:16',
+            'status': 1
+          },
+          {
+            'date': '03:51:16',
+            'status': 3
+          },
+          {
+            'date': '04:52:16',
+            'status': 3
+          },
+          {
+            'date': '05:53:16',
+            'status': 2
+          },
+          {
+            'date': '06:54:16',
+            'status': 4
+          },
+          {
+            'date': '07:55:16',
+            'status': 6
+          },
+          {
+            'date': '08:56:16',
+            'status': 4
+          }
+        ]
+ }],
+ 'type2': [{
+    'device_name': 'device1',
+    'address': 'address',
+    'data':  [
+          {
+            'date': '01:49:16',
+            'status': 1
+          },
+          {
+            'date': '02:50:16',
+            'status': 2
+          },
+          {
+            'date': '03:51:16',
+            'status': 3
+          },
+          {
+            'date': '04:52:16',
+            'status': 5
+          },
+          {
+            'date': '05:53:16',
+            'status': 3
+          },
+          {
+            'date': '06:54:16',
+            'status': 6
+          },
+          {
+            'date': '07:55:16',
+            'status': 2
+          },
+          {
+            'date': '08:56:16',
+            'status': 4
+          }
+        ]
+ }, {
+    'device_name': 'device1',
+    'address': 'address',
+    'data':  [
+          {
+            'date': '01:49:16',
+            'status': 5
+          },
+          {
+            'date': '02:50:16',
+            'status': 1
+          },
+          {
+            'date': '03:51:16',
+            'status': 4
+          },
+          {
+            'date': '04:52:16',
+            'status': 2
+          },
+          {
+            'date': '05:53:16',
+            'status': 1
+          },
+          {
+            'date': '06:54:16',
+            'status': 3
+          },
+          {
+            'date': '07:55:16',
+            'status': 2
+          },
+          {
+            'date': '08:56:16',
+            'status': 4
+          }
+        ]
+ }]
+};
 
 
   filtered_data: object;
@@ -240,7 +257,8 @@ value_of_checkbox = [];
         this.industry_types_line_graph.push(industry_type);
       }
     }
-    this.createLineGraph(this.data_new);
+    const cloneobj = cloneDeep(this.data_new);
+    this.createLineGraph(cloneobj);
   }
   noOfDevice(data) {
     this.no_of_devices = 0;
@@ -280,16 +298,18 @@ value_of_checkbox = [];
 
 
     // parse the date / time
-    // const parseTime = d3.timeParse('%d %b %y %H:%M:%S');
-    const parseTime = function(date) {
-      return new Date(date); };
+     const parseTime = d3.timeParse('%H:%M:%S');
+    //const parseTime = function(data_date) {
+      // return new Date(data_date);
+      //console.log(new Date(data_date));
+      //};
     // array of curve functions and tites
     const daCurve = { 'd3Curve': d3.curveStepBefore, 'curveTitle': 'curveStepBefore' };
     const line_color = 'white';
     // define the line
     const valueline = d3.line()
       .curve(d3.curveCatmullRomOpen)
-      .x(function (d) { return x( parseTime(d['date'])) ; })
+      .x(function (d) { return x( (d['date'])) ; })
       .y(function (d) { return y(d['status']); });
 
     // append the svg obgect to the body of the page
@@ -343,7 +363,7 @@ value_of_checkbox = [];
               // set the colour scale
               const color = d3.scaleOrdinal(d3.schemeCategory10);
               // Scale the range of the data
-              x.domain(d3.extent<any, any>(device_status_data, function (d) { return parseTime(d['date']); }));
+              x.domain(d3.extent<any, any>(device_status_data, function (d) { return (d['date']); }));
               y.domain([0, 6]);
              // Add the paths with different curves.
             svg.append('path')
@@ -357,7 +377,7 @@ value_of_checkbox = [];
                 // .attr('id', 'tag' + i) // assign ID
                 .attr('d', d3.line<any>()
                   .curve(daCurve.d3Curve)
-                  .x(function (d) { return x(parseTime(d['date'])); })
+                  .x(function (d) { return x((d['date'])); })
                   .y(function (d) { return y(d['status_1']); })
                 );
               // Add the Legend
@@ -392,12 +412,21 @@ value_of_checkbox = [];
               svg.append('g')
                 .attr('class', 'axis')
                 .attr('transform', 'translate(0,' + height + ')')
-                .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%X')));
+                .call(d3.axisBottom(x)
+                .tickSize(-(height))
+                .tickFormat(d3.timeFormat('%H')));
               // Add the Y Axis
               // svg.append('g')
               //   .attr('class', 'axis')
               //   // .ticks(1)
               //   .call(d3.axisLeft(y));
+              d3.selectAll('g.tick')
+              // only ticks that returned true for the filter will be included
+              // in the rest of the method calls:
+              .select('line') // grab the tick line
+              .attr('class', 'quadrantBorder') // style with a custom class and CSS
+              .style('stroke-width', 0.5) // or style directly with attributes or inline styles
+              .style('stroke', '#ffffff' );
             }
             }
 
@@ -411,36 +440,36 @@ value_of_checkbox = [];
     if (datavalue === true) {
       // console.log(this.data_donut['donut_chart'][item]);
       console.log(this.donut_chart);
-      for (const key in this.donut_chart[item]) {
-        if (this.donut_chart[item][key]) {
+      for (let key in this.donut_chart[item]) {
+        if (this.donut_chart[item][key]){
           // console.log("old_",this.donut_chart[item][key].value);
-          this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value + this.donut_chart[item][key].value;
+          this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value +this.donut_chart[item][key].value;
         }
       }
 
   } else {
-    for (const key in this.donut_chart[item]) {
-      if (this.donut_chart[item][key]) {
+    for (let key in this.donut_chart[item]) {
+      if (this.donut_chart[item][key]){
         // console.log("old_",this.donut_chart[item][key].value);
-        this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value - this.donut_chart[item][key].value;
+        this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value -this.donut_chart[item][key].value;
       }
     }
   }
 
     this.noOfDevice(this.doughnut_filter_data_toggle);
-    this.createDoughnutChart(ctx, this.doughnut_filter_data_toggle);
+    this.createDoughnutChart(ctx,this.doughnut_filter_data_toggle);
 
 
 }
 toggleFeature(item, datavalue) {
   if (datavalue === true) {
-    this.filter_data[item] = this.data_new[item];
+    this.filter_data[item] = cloneDeep(this.data_new[item]);
   } else {
      delete this.filter_data[item];
   }
-  console.log(this.filter_data);
   if (Object.keys(this.filter_data).length === 0 ) {
-    this.createLineGraph(this.data_new);
+    const cloneObj = cloneDeep(this.data_new);
+    this.createLineGraph(cloneObj);
   } else {
     this.createLineGraph(this.filter_data);
   }
