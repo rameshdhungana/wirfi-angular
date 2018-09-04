@@ -299,10 +299,10 @@ data_new =  {
 
     // parse the date / time
      const parseTime = d3.timeParse('%H:%M:%S');
-    //const parseTime = function(data_date) {
+    // const parseTime = function(data_date) {
       // return new Date(data_date);
-      //console.log(new Date(data_date));
-      //};
+      // console.log(new Date(data_date));
+      // };
     // array of curve functions and tites
     const daCurve = { 'd3Curve': d3.curveStepBefore, 'curveTitle': 'curveStepBefore' };
     const line_color = 'white';
@@ -440,24 +440,24 @@ data_new =  {
     if (datavalue === true) {
       // console.log(this.data_donut['donut_chart'][item]);
       console.log(this.donut_chart);
-      for (let key in this.donut_chart[item]) {
-        if (this.donut_chart[item][key]){
+      for (const key in this.donut_chart[item]) {
+        if (this.donut_chart[item][key]) {
           // console.log("old_",this.donut_chart[item][key].value);
-          this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value +this.donut_chart[item][key].value;
+          this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value + this.donut_chart[item][key].value;
         }
       }
 
   } else {
-    for (let key in this.donut_chart[item]) {
-      if (this.donut_chart[item][key]){
+    for (const key in this.donut_chart[item]) {
+      if (this.donut_chart[item][key]) {
         // console.log("old_",this.donut_chart[item][key].value);
-        this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value -this.donut_chart[item][key].value;
+        this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value - this.donut_chart[item][key].value;
       }
     }
   }
 
     this.noOfDevice(this.doughnut_filter_data_toggle);
-    this.createDoughnutChart(ctx,this.doughnut_filter_data_toggle);
+    this.createDoughnutChart(ctx, this.doughnut_filter_data_toggle);
 
 
 }
