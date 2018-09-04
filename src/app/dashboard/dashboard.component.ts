@@ -39,7 +39,7 @@ doughnut_filter_data = [
     'status': 'ASLEEP',
     'value': 0
   }
-]
+];
 doughnut_filter_data_toggle = [
   {
     'status': 'ONLINE',
@@ -65,227 +65,13 @@ doughnut_filter_data_toggle = [
     'status': 'ASLEEP',
     'value': 0
   }
-]
+];
 industry_types_line_graph = [];
 industry_types_doughnut_graph = [];
 filter_data = {};
 
 
 value_of_checkbox = [];
-  data = [
-    [
-      {
-        'date': '1-May-12',
-        'status': 1
-      },
-      {
-        'date': '30-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '27-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '26-Apr-12',
-        'status': 6
-      },
-      {
-        'date': '25-Apr-12',
-        'status': 6
-      },
-      {
-        'date': '24-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '23-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '20-Apr-12',
-        'status': 3
-      },
-      {
-        'date': '19-Apr-12',
-        'status': 3
-      },
-      {
-        'date': '18-Apr-12',
-        'status': 2
-      },
-      {
-        'date': '17-Apr-12',
-        'status': 6
-      },
-      {
-        'date': '16-Apr-12',
-        'status': 6
-      },
-      {
-        'date': '13-Apr-12',
-        'status': 4
-      },
-      {
-        'date': '12-Apr-12',
-        'status': 4
-      },
-      {
-        'date': '11-Apr-12',
-        'status': 2
-      },
-      {
-        'date': '10-Apr-12',
-        'status': 2
-      },
-      {
-        'date': '9-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '5-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '4-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '3-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '2-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '30-Mar-12',
-        'status': 5
-      },
-      {
-        'date': '29-Mar-12',
-        'status': 6
-      },
-      {
-        'date': '28-Mar-12',
-        'status': 6
-      },
-      {
-        'date': '27-Mar-12',
-        'status': 6
-      },
-      {
-        'date': '26-Mar-12',
-        'status': 6
-      }
-    ],
-    [
-      {
-        'date': '1-May-12',
-        'status': 5
-      },
-      {
-        'date': '30-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '27-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '26-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '25-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '24-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '23-Apr-12',
-        'status': 5
-      },
-      {
-        'date': '20-Apr-12',
-        'status': 6
-      },
-      {
-        'date': '19-Apr-12',
-        'status': 6
-      },
-      {
-        'date': '18-Apr-12',
-        'status': 6
-      },
-      {
-        'date': '17-Apr-12',
-        'status': 4
-      },
-      {
-        'date': '16-Apr-12',
-        'status': 4
-      },
-      {
-        'date': '13-Apr-12',
-        'status': 4
-      },
-      {
-        'date': '12-Apr-12',
-        'status': 2
-      },
-      {
-        'date': '11-Apr-12',
-        'status': 2
-      },
-      {
-        'date': '10-Apr-12',
-        'status': 2
-      },
-      {
-        'date': '9-Apr-12',
-        'status': 2
-      },
-      {
-        'date': '5-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '4-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '3-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '2-Apr-12',
-        'status': 1
-      },
-      {
-        'date': '30-Mar-12',
-        'status': 1
-      },
-      {
-        'date': '29-Mar-12',
-        'status': 3
-      },
-      {
-        'date': '28-Mar-12',
-        'status': 3
-      },
-      {
-        'date': '27-Mar-12',
-        'status': 3
-      },
-      {
-        'date': '26-Mar-12',
-        'status': 3
-      }
-    ]
-  ];
 
   data_new =  {
     'type1': [{
@@ -293,31 +79,31 @@ value_of_checkbox = [];
       'address': 'address',
       'data':  [
             {
-              'date': '1-May-12',
+              'date': '1 May 16 14:49:04',
               'status': 1
             },
             {
-              'date': '30-Apr-12',
+              'date': '30 Apr 16 14:49:04',
               'status': 2
             },
             {
-              'date': '27-Apr-12',
+              'date': '27 Apr 16 14:49:04',
               'status': 3
             },
             {
-              'date': '26-Apr-12',
+              'date': '26 Apr 16 14:49:04',
               'status': 4
             },
             {
-              'date': '25-Apr-12',
+              'date': '25 Apr 16 14:49:04',
               'status': 5
             },
             {
-              'date': '24-Apr-12',
+              'date': '24 Apr 16 14:49:04',
               'status': 6
             },
             {
-              'date': '23-Apr-12',
+              'date': '23 Apr 16 14:49:04',
               'status': 4
             }
           ]
@@ -326,31 +112,31 @@ value_of_checkbox = [];
       'address': 'address',
       'data':  [
             {
-              'date': '1-May-12',
+              'date': '1 May 16 14:49:04',
               'status': 1
             },
             {
-              'date': '30-Apr-12',
+              'date': '30 Apr 16 14:49:04',
               'status': 1
             },
             {
-              'date': '27-Apr-12',
+              'date': '27 Apr 16 14:49:04',
               'status': 3
             },
             {
-              'date': '26-Apr-12',
+              'date': '26 Apr 16 14:49:04',
               'status': 3
             },
             {
-              'date': '25-Apr-12',
+              'date': '25 Apr 16 14:49:04',
               'status': 2
             },
             {
-              'date': '24-Apr-12',
+              'date': '24 Apr 16 14:49:04',
               'status': 4
             },
             {
-              'date': '23-Apr-12',
+              'date': '23 Apr 16 14:49:04',
               'status': 6
             }
           ]
@@ -360,31 +146,31 @@ value_of_checkbox = [];
       'address': 'address',
       'data':  [
             {
-              'date': '1-May-12',
+              'date': '1 May 16 14:49:04',
               'status': 1
             },
             {
-              'date': '30-Apr-12',
+              'date': '30 Apr 16 14:49:04',
               'status': 2
             },
             {
-              'date': '27-Apr-12',
+              'date': '27 Apr 16 14:49:04',
               'status': 3
             },
             {
-              'date': '26-Apr-12',
+              'date': '26 Apr 16 14:49:04',
               'status': 5
             },
             {
-              'date': '25-Apr-12',
+              'date': '25 Apr 16 14:49:04',
               'status': 3
             },
             {
-              'date': '24-Apr-12',
+              'date': '24 Apr 16 14:49:04',
               'status': 6
             },
             {
-              'date': '23-Apr-12',
+              'date': '23 Apr 16 14:49:04',
               'status': 2
             }
           ]
@@ -393,31 +179,31 @@ value_of_checkbox = [];
       'address': 'address',
       'data':  [
             {
-              'date': '1-May-12',
+              'date': '1 May 16 14:49:04',
               'status': 5
             },
             {
-              'date': '30-Apr-12',
+              'date': '30 Apr 16 14:49:04',
               'status': 1
             },
             {
-              'date': '27-Apr-12',
+              'date': '27 Apr 16 14:49:04',
               'status': 4
             },
             {
-              'date': '26-Apr-12',
+              'date': '26 Apr 16 14:49:04',
               'status': 2
             },
             {
-              'date': '25-Apr-12',
+              'date': '25 Apr 16 14:49:04',
               'status': 1
             },
             {
-              'date': '24-Apr-12',
+              'date': '24 Apr 16 14:49:04',
               'status': 3
             },
             {
-              'date': '23-Apr-12',
+              'date': '23 Apr 16 14:49:04',
               'status': 2
             }
           ]
@@ -427,7 +213,7 @@ value_of_checkbox = [];
 
   filtered_data: object;
   filtered_data_toggle: object;
-  private no_of_devices: number = 0;
+  private no_of_devices = 0;
 
   constructor(
     private googleapiService: GoogleApiService,
@@ -440,65 +226,73 @@ value_of_checkbox = [];
         console.log(response);
         this.donut_chart = response['data']['donut_chart'];
         const ctx = document.getElementById('doughnut_chart');
-        console.log( response['data']['industry_type'])
-        for (let key in response['data']['industry_type']) {
-          this.industry_types_doughnut_graph.push( response['data']['industry_type'][key]);
+        console.log( response['data']['industry_type']);
+        for (const key in response['data']['industry_type']) {
+          if (response['data']['industry_type'][key]) {
+            this.industry_types_doughnut_graph.push( response['data']['industry_type'][key]);
+          }
         }
         this.sumDonutChart( this.donut_chart);
         this.createDoughnutChart(ctx, this.doughnut_filter_data);
       }
     );
   }
-  noOfDevice(data){
-    this.no_of_devices = 0;
-    console.log("test",data);
-      for (let key_device in data){
-       this.no_of_devices = this.no_of_devices +data[key_device].value;
+  ngAfterViewInit() {
+    for (const industry_type in this.data_new) {
+      if (this.data_new[industry_type]) {
+        this.industry_types_line_graph.push(industry_type);
       }
-    
-
+    }
+    this.createLineGraph(this.data_new);
   }
-  sumDonutChart(data){
+  noOfDevice(data) {
+    this.no_of_devices = 0;
+      for (const key_device in data) {
+        if (data[key_device]) {
+          this.no_of_devices = this.no_of_devices + data[key_device].value;
+        }
+      }
+  }
+  sumDonutChart(data) {
     this.filtered_data = {};
-    for (let key in data) {
-      for (let key_device in data[key]){
-        this.doughnut_filter_data[key_device].value = this.doughnut_filter_data[key_device].value +data[key][key_device].value;
+    for (const key in data) {
+      if (data[key]) {
+        for (const key_device in data[key]) {
+          if (data[key][key_device]) {
+            this.doughnut_filter_data[key_device].value = this.doughnut_filter_data[key_device].value + data[key][key_device].value;
+          }
+        }
       }
     }
 
     this.noOfDevice(this.doughnut_filter_data);
   }
 
-  ngAfterViewInit() {
-    for(const industry_type in this.data_new){
-    this.industry_types_line_graph.push(industry_type);
-    }
-    this.createLineGraph(this.data_new);
-  }
-  createLineGraph(data){
+
+  createLineGraph(data) {
     d3.select('#line_chart svg').remove();
-    const margin = { top: 20, right: 150, bottom: 30, left: 50 }
+    const margin = { top: 20, right: 150, bottom: 30, left: 50 };
     const width = 960 - margin.left - margin.right;
     const height = 302 - margin.top - margin.bottom;
- 
- 
     const status_colors = ['green', 'blue', 'yellow', 'orange', 'red', 'gray'];
- 
-    
     this.filtered_data = data;
     // set the ranges
     const x = d3.scaleTime().range([0, width]);
     const y = d3.scaleLinear().range([height, 0]);
 
+
+
     // parse the date / time
-    const parseTime = d3.timeParse('%d-%b-%y');
+    // const parseTime = d3.timeParse('%d %b %y %H:%M:%S');
+    const parseTime = function(date) {
+      return new Date(date); };
     // array of curve functions and tites
     const daCurve = { 'd3Curve': d3.curveStepBefore, 'curveTitle': 'curveStepBefore' };
     const line_color = 'white';
     // define the line
     const valueline = d3.line()
       .curve(d3.curveCatmullRomOpen)
-      .x(function (d) { return x(d['date']); })
+      .x(function (d) { return x( parseTime(d['date'])) ; })
       .y(function (d) { return y(d['status']); });
 
     // append the svg obgect to the body of the page
@@ -526,92 +320,91 @@ value_of_checkbox = [];
       //     .attr('offset', '1');
 
       for (const index in status_colors) {
-        svg.append('rect')
-            .attr('width', width)
-            .attr('height', (height/6))
-            .attr('transform', 'translate(0,' + (height/6 * Number(index)) + ')')
-            .attr('fill', status_colors[index]);
-      }
-    
-    for(const index_industry in this.filtered_data){
-      const device_data = this.filtered_data[index_industry];
-      for(const index in device_data){
-        const device_status_data =device_data[index].data;
-      if (device_status_data) {
-        // format the data
-        device_status_data.forEach(function (d) {
-          //d['date'] = parseTime(d['date']).toDateString();
-          d['date'] = (d['date']);
-          d['status_1'] = d['status'] - 0.5;
-        });
-
-        // set the colour scale
-        const color = d3.scaleOrdinal(d3.schemeCategory10);
-
-        // Scale the range of the data
-        x.domain(d3.extent<any, any>(device_status_data, function (d) { return new Date(d['date']); }));
-        y.domain([0,6]);
-
-        // Add the paths with different curves.
-        
-      svg.append('path')
-          .datum(device_status_data)
-          .attr('class', 'line')
-          .style('stroke-width', '3')
-          .style('fill', function(d) { return 'rgba(0, 0, 0, 0)'; })
-          .style('stroke', function () { // Add the colour
-            return daCurve['color'] = line_color;
-          })
-          // .attr('id', 'tag' + i) // assign ID
-          .attr('d', d3.line<any>()
-            .curve(daCurve.d3Curve)
-            .x(function (d) { return x(new Date(d['date'])); })
-            .y(function (d) { return y(d['status_1']); })
-          );
-        // Add the Legend
-        // svg.append('text')
-        //   .attr('x', width + 5)  // space legend
-        //   .attr('y', margin.top + 20 + (i * 20))
-        //   .attr('class', 'legend')    // style the legend
-        //   .style('fill', function () { // Add the colours dynamically
-        //     return daCurve['color'] = line_color;
-        //   })
-        //   .on('click', function () {
-        //     // Determine if current line is visible
-        //     const active = daCurve['active'] ? false : true,
-        //     newOpacity = active ? 0 : 1;
-        //     // Hide or show the elements based on the ID
-        //     d3.select('#tag' + i)
-        //     .transition().duration(100)
-        //     .style('opacity', newOpacity);
-        //     // Update whether or not the elements are active
-        //     daCurve['active'] = active;
-        //   })
-        //   .text(daCurve.curveTitle);
-
-        // Add the scatterplot
-        // svg.selectAll('dot')
-        //     .data(that.data[index])
-        //     .enter().append('circle')
-        //     .style('fill', function(d) { return '#ffffff'; })
-        //     .attr('r', 2)
-        //     .attr('cx', function (d) { console.log(new Date(d['date'])); return x(new Date(d['date'])); })
-        //     .attr('cy', function (d) { return y(d['status']); });
-
-
-        // Add the X Axis
-        svg.append('g')
-          .attr('class', 'axis')
-          .attr('transform', 'translate(0,' + height + ')')
-          .call(d3.axisBottom(x));
-
-        // Add the Y Axis
-        // svg.append('g')
-        //   .attr('class', 'axis')
-        //   // .ticks(1)
-        //   .call(d3.axisLeft(y));
+        if (status_colors[index]) {
+          svg.append('rect')
+              .attr('width', width)
+              .attr('height', (height / 6))
+              .attr('transform', 'translate(0,' + (height / 6 * Number(index)) + ')')
+              .attr('fill', status_colors[index]);
+        }
       }
 
+    for (const index_industry in this.filtered_data) {
+      if (this.filtered_data[index_industry]) {
+          const device_data = this.filtered_data[index_industry];
+          for (const index in device_data) {
+            if (device_data[index]) {
+
+                const device_status_data = device_data[index].data;
+                if (device_status_data) {
+                  // format the data
+                  device_status_data.forEach(function (d) {
+                    // d['date'] = parseTime(d['date']).toDateString();
+                    d['date'] = (parseTime(d['date']));
+                    d['status_1'] = d['status'] - 0.5;
+                  });
+              // set the colour scale
+              const color = d3.scaleOrdinal(d3.schemeCategory10);
+              // Scale the range of the data
+              x.domain(d3.extent<any, any>(device_status_data, function (d) { return parseTime(d['date']); }));
+              y.domain([0, 6]);
+             // Add the paths with different curves.
+            svg.append('path')
+                .datum(device_status_data)
+                .attr('class', 'line')
+                .style('stroke-width', '3')
+                .style('fill', function(d) { return 'rgba(0, 0, 0, 0)'; })
+                .style('stroke', function () { // Add the colour
+                  return daCurve['color'] = line_color;
+                })
+                // .attr('id', 'tag' + i) // assign ID
+                .attr('d', d3.line<any>()
+                  .curve(daCurve.d3Curve)
+                  .x(function (d) { return x(parseTime(d['date'])); })
+                  .y(function (d) { return y(d['status_1']); })
+                );
+              // Add the Legend
+              // svg.append('text')
+              //   .attr('x', width + 5)  // space legend
+              //   .attr('y', margin.top + 20 + (i * 20))
+              //   .attr('class', 'legend')    // style the legend
+              //   .style('fill', function () { // Add the colours dynamically
+              //     return daCurve['color'] = line_color;
+              //   })
+              //   .on('click', function () {
+              //     // Determine if current line is visible
+              //     const active = daCurve['active'] ? false : true,
+              //     newOpacity = active ? 0 : 1;
+              //     // Hide or show the elements based on the ID
+              //     d3.select('#tag' + i)
+              //     .transition().duration(100)
+              //     .style('opacity', newOpacity);
+              //     // Update whether or not the elements are active
+              //     daCurve['active'] = active;
+              //   })
+              //   .text(daCurve.curveTitle);
+              // Add the scatterplot
+              // svg.selectAll('dot')
+              //     .data(that.data[index])
+              //     .enter().append('circle')
+              //     .style('fill', function(d) { return '#ffffff'; })
+              //     .attr('r', 2)
+              //     .attr('cx', function (d) { console.log(new Date(d['date'])); return x(new Date(d['date'])); })
+              //     .attr('cy', function (d) { return y(d['status']); });
+              // Add the X Axis
+              svg.append('g')
+                .attr('class', 'axis')
+                .attr('transform', 'translate(0,' + height + ')')
+                .call(d3.axisBottom(x).tickFormat(d3.timeFormat('%X')));
+              // Add the Y Axis
+              // svg.append('g')
+              //   .attr('class', 'axis')
+              //   // .ticks(1)
+              //   .call(d3.axisLeft(y));
+            }
+            }
+
+      }
       }
 
       }
@@ -621,23 +414,25 @@ value_of_checkbox = [];
     if (datavalue === true) {
       // console.log(this.data_donut['donut_chart'][item]);
       console.log(this.donut_chart);
-      for (let key in this.donut_chart[item]) {
-        console.log("old_",this.donut_chart[item][key].value);
-        this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value +this.donut_chart[item][key].value;
+      for (const key in this.donut_chart[item]) {
+        if (this.donut_chart[item][key]) {
+          // console.log("old_",this.donut_chart[item][key].value);
+          this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value + this.donut_chart[item][key].value;
+        }
       }
 
-  }else{
-    for (let key in this.donut_chart[item]) {
-      console.log("old_",this.donut_chart[item][key].value);
-      this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value -this.donut_chart[item][key].value;
+  } else {
+    for (const key in this.donut_chart[item]) {
+      if (this.donut_chart[item][key]) {
+        // console.log("old_",this.donut_chart[item][key].value);
+        this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value - this.donut_chart[item][key].value;
+      }
     }
   }
 
     this.noOfDevice(this.doughnut_filter_data_toggle);
-    this.createDoughnutChart(ctx,this.doughnut_filter_data_toggle);
-  
+    this.createDoughnutChart(ctx, this.doughnut_filter_data_toggle);
 
- 
 
 }
 toggleFeature(item, datavalue) {
