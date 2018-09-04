@@ -3,8 +3,6 @@ import { NgForm } from '@angular/forms';
 import { GoogleApiService } from '../_services/google-api.service';
 import {DashboardService} from '../_services/dashboard.service';
 import * as d3 from 'd3';
-import { path } from 'd3';
-
 
 @Component({
     selector: 'app-dashboard',
@@ -69,7 +67,6 @@ doughnut_filter_data_toggle = [
 industry_types_line_graph = [];
 industry_types_doughnut_graph = [];
 filter_data = {};
-
 
 value_of_checkbox = [];
 
