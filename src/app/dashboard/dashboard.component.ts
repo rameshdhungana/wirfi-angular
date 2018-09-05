@@ -79,35 +79,39 @@ data_new =  {
     'address': 'address',
     'data':  [
           {
-            'date': '01:49:16',
+            'date': '01:00:00',
             'status': 1
           },
           {
-            'date': '02:50:16',
+            'date': '02:00:00',
             'status': 2
           },
           {
-            'date': '03:51:16',
+            'date': '03:00:00',
             'status': 3
           },
           {
-            'date': '04:52:16',
+            'date': '04:00:00',
             'status': 4
           },
           {
-            'date': '05:53:16',
+            'date': '05:00:00',
             'status': 5
           },
           {
-            'date': '06:54:16',
+            'date': '06:00:00',
             'status': 6
           },
           {
-            'date': '07:55:16',
+            'date': '07:00:00',
             'status': 4
           },
           {
-            'date': '08:56:16',
+            'date': '08:00:00',
+            'status': 4
+          },
+          {
+            'date': '09:00:00',
             'status': 4
           }
         ]
@@ -116,35 +120,39 @@ data_new =  {
     'address': 'address',
     'data':  [
           {
-            'date': '01:49:16',
+            'date': '01:00:00',
             'status': 1
           },
           {
-            'date': '02:50:16',
+            'date': '02:00:00',
             'status': 1
           },
           {
-            'date': '03:51:16',
+            'date': '03:00:00',
             'status': 3
           },
           {
-            'date': '04:52:16',
+            'date': '04:00:00',
             'status': 3
           },
           {
-            'date': '05:53:16',
+            'date': '05:00:00',
             'status': 2
           },
           {
-            'date': '06:54:16',
+            'date': '06:00:00',
             'status': 4
           },
           {
-            'date': '07:55:16',
+            'date': '07:00:00',
             'status': 6
           },
           {
-            'date': '08:56:16',
+            'date': '08:00:00',
+            'status': 4
+          },
+          {
+            'date': '09:00:00',
             'status': 4
           }
         ]
@@ -154,35 +162,39 @@ data_new =  {
     'address': 'address',
     'data':  [
           {
-            'date': '01:49:16',
+            'date': '01:00:00',
             'status': 1
           },
           {
-            'date': '02:50:16',
+            'date': '02:00:00',
             'status': 2
           },
           {
-            'date': '03:51:16',
+            'date': '03:00:00',
             'status': 3
           },
           {
-            'date': '04:52:16',
+            'date': '04:00:00',
             'status': 5
           },
           {
-            'date': '05:53:16',
+            'date': '05:00:00',
             'status': 3
           },
           {
-            'date': '06:54:16',
+            'date': '06:00:00',
             'status': 6
           },
           {
-            'date': '07:55:16',
+            'date': '07:00:00',
             'status': 2
           },
           {
-            'date': '08:56:16',
+            'date': '08:00:00',
+            'status': 4
+          },
+          {
+            'date': '09:00:00',
             'status': 4
           }
         ]
@@ -191,35 +203,39 @@ data_new =  {
     'address': 'address',
     'data':  [
           {
-            'date': '01:49:16',
+            'date': '01:00:00',
             'status': 5
           },
           {
-            'date': '02:50:16',
+            'date': '02:00:00',
             'status': 1
           },
           {
-            'date': '03:51:16',
+            'date': '03:00:00',
             'status': 4
           },
           {
-            'date': '04:52:16',
+            'date': '04:00:00',
             'status': 2
           },
           {
-            'date': '05:53:16',
+            'date': '05:00:00',
             'status': 1
           },
           {
-            'date': '06:54:16',
+            'date': '06:00:00',
             'status': 3
           },
           {
-            'date': '07:55:16',
+            'date': '07:00:00',
             'status': 2
           },
           {
-            'date': '08:56:16',
+            'date': '08:00:00',
+            'status': 4
+          },
+          {
+            'date': '09:00:00',
             'status': 4
           }
         ]
@@ -322,6 +338,44 @@ data_new =  {
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+    svg.append('text')
+    .attr('x', (width+ 40))
+    .attr('y', (margin.top + 80 ))
+    .style('fill', 'white')
+    .style('font-size', '16px')
+    .text('3 Online');
+
+    svg.append('text')
+    .attr('x', (width+40))
+    .attr('y', (margin.top +100 ))
+    .style('fill', 'white')
+    .style('font-size', '16px')
+    .style('z-index', '1300')
+    .text('3 Cell');
+
+    svg.append('text')
+    .attr('x', (width+40))
+    .attr('y', (margin.top +120 ))
+    .style('fill', 'white')
+    .style('font-size', '16px')
+    .style('z-index', '1300')
+    .text('3 Auto Recover');
+
+    svg.append('text')
+    .attr('x', (width+40))
+    .attr('y', (margin.top +140 ))
+    .style('fill', 'white')
+    .style('font-size', '16px')
+    .style('z-index', '1300')
+    .text('3 Weak Signal');
+
+    svg.append('text')
+    .attr('x', (width+40))
+    .attr('y', (margin.top +160 ))
+    .style('fill', 'white')
+    .style('font-size', '16px')
+    .style('z-index', '1300')
+    .text('3 Offline');
 
       // const svgDefs = svg.append('defs');
       //
@@ -371,7 +425,7 @@ data_new =  {
             svg.append('path')
                 .datum(device_status_data)
                 .attr('class', 'line')
-                .style('stroke-width', '3')
+                .style('stroke-width', '1')
                 .style('fill', function(d) { return 'rgba(0, 0, 0, 0)'; })
                 .style('stroke', function () { // Add the colour
                   return daCurve['color'] = line_color;
@@ -412,11 +466,10 @@ data_new =  {
               //     .attr('cy', function (d) { return y(d['status']); });
               // Add the X Axis
               svg.append('g')
-                .attr('class', 'axis')
                 .attr('transform', 'translate(0,' + height + ')')
                 .call(d3.axisBottom(x)
                 .tickSize(-(height))
-                .tickFormat(d3.timeFormat('%H')));
+                .tickFormat(d3.timeFormat('%H:%M')));
               // Add the Y Axis
               // svg.append('g')
               //   .attr('class', 'axis')

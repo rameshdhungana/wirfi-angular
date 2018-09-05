@@ -27,3 +27,9 @@ g.axis path {
   stroke-width:2;
   stroke:seagreen !important;
 }
+
+
+ text{
+  fill: red;
+}  
+  
