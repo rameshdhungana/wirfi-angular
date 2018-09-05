@@ -53,7 +53,7 @@ const routes: Routes = [
     {path: 'mute-device', component: MuteDeviceComponent},
     {path: 'industry-list', component: IndustryListComponent},
     {path: 'edit-industry-list', component: EditIndustryTypeComponent},
-    {path: 'notification', component: NotificationComponent},
+    {path: 'notifications', component: NotificationComponent},
 ];
 
 @NgModule({
