@@ -1,0 +1,95 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-12 text-white">
+            <button class="btn-link btn-lg" (click)="urgentCollapsed = !urgentCollapsed" aria-controls="urgent"
+                    [attr.aria-expanded]="!isCollapsed">Urgent
+            </button>
+        </div>
+        <div class="col-12" [ngbCollapse]="urgentCollapsed" id="urgent">
+            <div class="row mt-4" *ngFor="let notification of urgentNotifications">
+                <div class="col-md-12 text-white ">
+                    <div class="panel">
+                        <div class="row">
+                            <div class="col-1 text-center">
+                                <img src="https://www.remot3.it/web/img/landing/three_quarter_pi_sm4.png"
+                                     width="100px" height="100px" class="rounded-circle">
+                            </div>
+                            <div class="col-8 pl-5">
+                                <div class="row">
+                                    <div class="col-12 text-left font-weight-bold pb-3">
+                                        <span>Lehi Chevron 002 </span><span
+                                            class="pl-2">ATM</span></div>
+                                    <div class="col-12 text-left"><span>Lost connection to the internet</span></div>
+                                    <div class="col-12 text-left faded-text"><span>11 minutes ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-white">
+            <button class="btn-link btn-lg" (click)="unreadCollapsed = !unreadCollapsed" aria-controls="unread"
+                    [attr.aria-expanded]="!unreadCollapsed">Unread
+            </button>
+        </div>
+        <div class="col-12" [ngbCollapse]="unreadCollapsed" id="unread">
+            <div class="row mt-4" *ngFor="let notification of unreadNotifications">
+                <div class="col-md-12 text-white ">
+                    <div class="panel">
+                        <div class="row">
+                            <div class="col-1 text-center">
+                                <img src="https://www.remot3.it/web/img/landing/three_quarter_pi_sm4.png"
+                                     width="100px" height="100px" class="rounded-circle">
+                            </div>
+                            <div class="col-8 pl-5">
+                                <div class="row">
+                                    <div class="col-12 text-left font-weight-bold pb-3">
+                                        <span>Lehi Chevron 002 </span><span
+                                            class="pl-2">ATM</span></div>
+                                    <div class="col-12 text-left"><span>Lost connection to the internet</span></div>
+                                    <div class="col-12 text-left faded-text"><span>11 minutes ago</span></div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-white">
+            <button class="btn-link btn-lg" (click)="readCollapsed = !readCollapsed" aria-controls="read"
+                    [attr.aria-expanded]="!readCollapsed">Read
+            </button>
+        </div>
+        <div class="col-12" [ngbCollapse]="readCollapsed">
+            <div class="row mt-4" *ngFor="let notification of readNotifications">
+                <div class="col-md-12 text-white ">
+                    <div class="panel">
+                        <div class="row">
+                            <div class="col-1 text-center">
+                                <img src="https://www.remot3.it/web/img/landing/three_quarter_pi_sm4.png"
+                                     width="100px" height="100px" class="rounded-circle">
+                            </div>
+                            <div class="col-8 pl-5">
+                                <div class="row">
+                                    <div class="col-12 text-left font-weight-bold pb-3">
+                                        <span>Lehi Chevron 002 </span><span
+                                            class="pl-2">ATM</span></div>
+                                    <div class="col-12 text-left"><span>Lost connection to the internet</span></div>
+                                    <div class="col-12 text-left faded-text"><span>11 minutes ago</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

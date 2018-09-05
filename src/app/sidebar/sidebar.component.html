@@ -3,7 +3,8 @@
     <div class="row">
         <div class="col text-center sidebar__user">
             <img src="../../assets/images/user-logo.png" class="img-round sidebar__user-icon"/>
-            <h4 class="text-center" [ngClass]="{'invisible': !isVisible}" style="margin-bottom: .01rem !important;">{{logged_in_user?.full_name}}</h4>
+            <h4 class="text-center" [ngClass]="{'invisible': !isVisible}" style="margin-bottom: .01rem !important;">
+                {{logged_in_user?.full_name}}</h4>
             <p class="text-center text-muted mb-0" [ngClass]="{'invisible': !isVisible}">{{logged_in_user?.email}}</p>
         </div>
     </div>
@@ -16,7 +17,7 @@
                         <span class="nav-item-text">Dashboard</span>
                     </li>
 
-                    <li class="nav-item " [routerLink]="['industry']" [routerLinkActive]="'active'">
+                    <li class="nav-item " [routerLink]="['industry-list']" [routerLinkActive]="'active'">
                         <i class="fa fa-fw fa-industry"></i>
                         <span class="nav-item-text">Industry Types</span>
                     </li>
@@ -37,15 +38,18 @@
                     </li>
 
                     <!--<li class="nav-item" [routerLink]="['device-info']" routerLinkActive="active">-->
-                        <!--<i class="fa fa-fw fa-users"></i>-->
-                        <!--<span class="nav-item-text">Add device</span>-->
+                    <!--<i class="fa fa-fw fa-users"></i>-->
+                    <!--<span class="nav-item-text">Add device</span>-->
                     <!--</li>-->
 
                     <li class="nav-item" [routerLink]="['bussiness']" [routerLinkActive]="'active'">
                         <i class="fa fa-fw fa-building"></i>
                         <span class="nav-item-text">Business Info</span>
                     </li>
-
+                    <li class="nav-item" [routerLink]="['notifications']" [routerLinkActive]="'active'">
+                        <i class="fa fa-fw fa-bell"></i>
+                        <span class="nav-item-text">Notification</span>
+                    </li>
                     <li class="nav-item" [routerLink]="['change-password']" [routerLinkActive]="'active'">
                         <i class="fa fa-fw fa-key"></i>
                         <span class="nav-item-text">Change Password</span>

@@ -167,8 +167,14 @@ export class DeviceInfoComponent  implements OnInit {
   addIndustryType(event, data) {
     console.log(data);
     if (data === '') {
-      const data = {};
-      this.dialogService.openDialog(AddIndustryTypeComponent, data);
+        const data = {
+      };
+         const modalSize = {
+            'height': '800px',
+            'width': '600px'
+
+        };
+      this.dialogService.openDialog(AddIndustryTypeComponent, data,modalSize)
     }
 
   }
