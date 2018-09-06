@@ -51,6 +51,7 @@ import {CustomErrorService} from './_services/custom-error.service';
 import {IndustryListComponent} from './industry-list/industry-list.component';
 import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from './notification/notification.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
     declarations: [
@@ -85,6 +86,7 @@ import {NotificationComponent} from './notification/notification.component';
         IndustryListComponent,
         EditIndustryTypeComponent,
         NotificationComponent,
+        TimeAgoPipe,
     ],
     imports: [
         BrowserModule,

@@ -1,9 +1,9 @@
 import {Component, OnInit, Inject} from '@angular/core';
 import {MaterialDialogService} from '../_services/material-dialog.service';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import {NgForm} from '@angular/forms';
-import {DeviceService} from "../_services/device.service";
-import {MessageService} from "../_services/message.service";
+import {DeviceService} from '../_services/device.service';
+import {MessageService} from '../_services/message.service';
 
 @Component({
     selector: 'app-mute-device',
@@ -11,8 +11,8 @@ import {MessageService} from "../_services/message.service";
     styleUrls: ['./mute-device.component.css']
 })
 export class MuteDeviceComponent implements OnInit {
-    public muteButtonClicked: boolean = false;
-    public timeNotEntered: boolean = false;
+    public muteButtonClicked = false;
+    public timeNotEntered = false;
     public mutedUntil: any;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,14 +29,11 @@ export class MuteDeviceComponent implements OnInit {
     }
 
     muteDevice(device_id, is_muted, data: NgForm) {
-        console.log(data.valid);
         if (data.value['device_mute_time']) {
-            let duration_minute = data.value['device_mute_time']['hour'] * 60 + data.value['device_mute_time']['minute'];
-            let payload = {
+            const duration_minute = data.value['device_mute_time']['hour'] * 60 + data.value['device_mute_time']['minute'];
+            const payload = {
                 'mute_duration': duration_minute,
                 'is_muted': is_muted,
-
-
             };
 
             this.muteButtonClicked = true;
@@ -47,19 +44,15 @@ export class MuteDeviceComponent implements OnInit {
 
 
             });
-        }
-        else {
+        } else {
             this.timeNotEntered = true;
         }
-
     }
 
     unMuteDevice(device_id, is_muted, data: NgForm) {
-        let payload = {
+        const payload = {
             'mute_duration': 0,
             'is_muted': is_muted,
-
-
         };
 
         this.muteButtonClicked = true;
@@ -67,9 +60,6 @@ export class MuteDeviceComponent implements OnInit {
             console.log(response, 'after mute device called');
             this.dialogService.closeCurrentDialog();
             this.messageService.add('Device is successfully UnMuted.');
-
         });
-
     }
-
 }

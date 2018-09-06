@@ -4,29 +4,33 @@ import {Subject} from 'rxjs';
 @Injectable()
 export class DeviceService {
     public getIndustryType = new Subject<Object>();
-    constructor(private http: HttpClient) {
-    }
+
+    constructor(
+      private http: HttpClient
+    ) {}
+
     togglePriority(id, data) {
-        return this.http.put(`device/${id}/priority/`, data);
+      return this.http.put(`device/${id}/priority/`, data);
     }
 
     getDeviceList() {
-        return this.http.get('device/');
+      return this.http.get('device/');
     }
 
     getDevice(id) {
-        return this.http.get(`device/${id}/`);
+      return this.http.get(`device/${id}/`);
     }
 
     postDeviceSno(device) {
-        return this.http.post('device/', device);
+      return this.http.post('device/', device);
     }
 
     postDeviceinfo(data) {
-        return this.http.post('device/', data);
+      return this.http.post('device/', data);
     }
+
     postDeviceImages(data, id) {
-        return this.http.post(`device/${id}/images/`, data);
+      return this.http.post(`device/${id}/images/`, data);
     }
 
     updateDeviceDetail(device, id) {
@@ -34,8 +38,9 @@ export class DeviceService {
     }
 
     postDeviceDetail(data, id) {
-        return this.http.post(`device/${id}/`, data);
-      }
+      return this.http.post(`device/${id}/`, data);
+    }
+
     setupDeviceNetwork(network, id) {
       return this.http.put(`device/${id}/network/`, network);
     }
@@ -44,9 +49,7 @@ export class DeviceService {
       return this.http.delete(`device/${id}/`);
     }
 
-    muteDevice(id,data){
-        console.log(id,data,'inside service')
-        return this.http.post(`device/mute/${id}/`,data)
+    muteDevice(id, data) {
+      return this.http.post(`device/${id}/mute`, data);
     }
-
 }
