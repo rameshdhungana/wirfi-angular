@@ -7,7 +7,7 @@
             <div class="card">
               <div *ngIf="loading" class="card-body">
                 <div *ngIf="person.profile">
-                  <img src="http://api.wirfi.testiw.codesamaj.com{{person['profile']['profile_picture']}}">
+                  <img src="{{person['profile']['profile_picture']}}">
                 </div>
                 <h3 class="card-title">Name: {{person['full_name']}}</h3>
                 <div *ngIf="person.profile">
