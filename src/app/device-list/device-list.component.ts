@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DeviceService} from '../_services/device.service';
 import {MaterialDialogService} from '../_services/material-dialog.service';
 import {MuteDeviceComponent} from '../mute-device/mute-device.component';
+import {environment} from "../../environments/environment.prod";
 
 @Component({
     selector: 'app-device-list',
@@ -10,9 +11,11 @@ import {MuteDeviceComponent} from '../mute-device/mute-device.component';
 })
 export class DeviceListComponent implements OnInit {
     public device_list: any;
+    public API_URl:any;
 
     constructor(private deviceService: DeviceService,
                 private dialogService: MaterialDialogService) {
+        this.API_URl = environment.API_URL
     }
 
     ngOnInit() {
