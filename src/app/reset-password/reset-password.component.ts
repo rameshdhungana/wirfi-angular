@@ -16,6 +16,7 @@ export class ResetPasswordComponent implements OnInit {
     public email: string;
     public valid_url: boolean;
     public loading: boolean = true;
+    public resetButtonClicked = false;
 
     constructor(private authService: AuthenticationService,
                 private messageService: MessageService,
@@ -53,6 +54,7 @@ export class ResetPasswordComponent implements OnInit {
         console.log("hello world");
         console.log(data.valid);
         if (data.valid) {
+            this.resetButtonClicked = true;
             data.value["token"] = this.token;
             data.value["uid"] = this.uid;
             console.log(data.value);
