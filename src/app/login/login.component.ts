@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
     onSubmit(data: NgForm) {
         if (data.valid) {
             this.loginButtonClicked = true;
-            console.log(data.value);
             data.value["push_notification_token"] = "asdasda13";
             data.value["device_id"] = "fdjghdfhgdj4354545";
             data.value["device_type"] = 0;
@@ -54,7 +53,7 @@ export class LoginComponent implements OnInit {
                                 this.messageService.add('Please add your business info');
                                 this.router.navigateByUrl('bussiness');
                             } else {
-
+                                
                                 localStorage.setItem('first_login', 'false');
                                 this.router.navigateByUrl('dashboard');
 
@@ -62,7 +61,7 @@ export class LoginComponent implements OnInit {
                         }
                     },
                     (error) => {
-                        console.log(error);
+                        this.loginButtonClicked = false;
                         this.messageService.add(error.error.message);
                     }
                 );
