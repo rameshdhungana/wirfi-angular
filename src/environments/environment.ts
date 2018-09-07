@@ -6,9 +6,9 @@ export const environment = {
     production: false,
     API_URL: 'http://127.0.0.1:8000/',
 
-    MAP_URL:'https://maps.googleapis.com/maps/api/geocode/'
+    MAP_URL: 'https://maps.googleapis.com/maps/api/geocode/'
 
-    //API_URL: 'http://api.wirfi.testiw.codesamaj.com/'
+    // API_URL: 'http://api.wirfi.testiw.codesamaj.com/'
 
 };
 

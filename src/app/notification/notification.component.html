@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12 text-white">
             <button class="btn-link btn-lg" (click)="urgentCollapsed = !urgentCollapsed" aria-controls="urgent"
-                    [attr.aria-expanded]="!isCollapsed">Urgent
+                    attr.aria-expanded="!isCollapsed">Urgent
             </button>
         </div>
         <div class="col-12" [ngbCollapse]="urgentCollapsed" id="urgent">

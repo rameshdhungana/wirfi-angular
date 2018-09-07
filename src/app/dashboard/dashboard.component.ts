@@ -322,7 +322,6 @@ export class DashboardComponent implements OnInit {
                 .attr('class', 'legend')    // style the legend
                 .style('fill', function () { // Add the colours dynamically
 
-                console.log(color(daCurve.curveTitle));
                     return daCurve['color'] = color(daCurve.curveTitle);
                 })
                 .on('click', function () {

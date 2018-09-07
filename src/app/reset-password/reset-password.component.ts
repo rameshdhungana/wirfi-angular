@@ -31,14 +31,13 @@ export class ResetPasswordComponent implements OnInit {
 
 
         this.authService.validateResetPassword(this.uid, this.token).subscribe(res => {
-            if (res['code'] == 1) {
+            if (res['code'] === 1) {
                 this.valid_url = true;
                 this.loading = false;
                 this.email = res['data']['email'];
 
             }
             else {
-                console.log('invalid reset link');
                 // this.router.navigateByUrl('/')
                 this.valid_url = false;
                 this.loading = false;
