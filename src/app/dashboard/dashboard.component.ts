@@ -312,6 +312,11 @@ data_new =  {
     const x = d3.scaleTime().range([0, width]);
     const y = d3.scaleLinear().range([height, 0]);
 
+ // Define the div for the tooltip
+    const div = d3.select('body').append('div')
+    .attr('class', 'tooltip')
+    .style('opacity', 0);
+
     // parse the date / time
      const parseTime = d3.timeParse('%H:%M:%S');
     // const parseTime = function(data_date) {
@@ -420,21 +425,63 @@ data_new =  {
               x.domain(d3.extent<any, any>(device_status_data, function (d) { return (d['date']); }));
               y.domain([0, 6]);
 
+              svg.selectAll('dot')
+                    .datum(device_status_data)
+                    .enter().append('circle')
+                    .attr('r', 5)
+                    .attr('cx', function(d) { return x((d['date'])); })
+                    .attr('cy', function(d) {  return y(d['status_1']); })
+                    .on('mouseover', function(d) {
+                        div.transition()
+                            .duration(200)
+                            .style('opacity', .9);
+                        div	.html(d.date + '<br/>'  + d.status_1)
+                            .style('left', (d3.event.pageX) + 'px')
+                            .style('top', (d3.event.pageY - 28) + 'px');
+                        })
+                    .on('mouseout', function(d) {
+                        div.transition()
+                            .duration(500)
+                            .style('opacity', 0);
+                    });
+
               // Add the paths with different curves.
+              svg.append('circle')
+                  .attr('cx', 100)
+                  .attr('cy', 100)
+                  .style('fill', 'blue')
+                  .attr('r', 20 )
               svg.append('path')
                 .datum(device_status_data)
                 .attr('class', 'line')
-                .style('stroke-width', '1')
+                .style('stroke-width', '4')
                 .style('fill', function(d) { return 'rgba(0, 0, 0, 0)'; })
                 .style('stroke', function () { // Add the colour
                   return daCurve['color'] = line_color;
                 })
-                // .attr('id', 'tag' + i) // assign ID
                 .attr('d', d3.line<any>()
                   .curve(daCurve.d3Curve)
-                  .x(function (d) { return x((d['date'])); })
+                  .x(function (d) {
+                    console.log(x((d['date'])));
+                    return x((d['date'])); })
                   .y(function (d) { return y(d['status_1']); })
-                );
+                )
+                .on('mouseover', function(d) {
+                  // console.log(d['date']);
+                  // div.transition()
+                  //     .duration(200)
+                  //     .style('opacity', .9);
+                  // div
+                  // .html( parseTime(d.date) + '<br/>'  + d.status)
+                  //     .style('left', (d3.event.pageX) + 'px')
+                  //     .style('top', (d3.event.pageY - 28) + 'px');
+                  })
+              .on('mouseout', function(d) {
+                  div.transition()
+                      .duration(500)
+                      .style('opacity', 0);
+              }
+            );
 
               // Add the Legend
               // svg.append('text')
@@ -483,7 +530,7 @@ data_new =  {
                 .select('line') // grab the tick line
                 .attr('class', 'quadrantBorder') // style with a custom class and CSS
                 .style('stroke-width', 0.5) // or style directly with attributes or inline styles
-                .style('stroke', '#ffffff' );
+                .style('stroke', '#232938' );
             }
           }
 
@@ -500,7 +547,7 @@ data_new =  {
       console.log(this.donut_chart);
       for (const key in this.donut_chart[item]) {
         if (this.donut_chart[item][key]) {
-          // console.log("old_",this.donut_chart[item][key].value);
+          // console.log('old_',this.donut_chart[item][key].value);
           this.doughnut_filter_data_toggle[key].value = this.doughnut_filter_data_toggle[key].value + this.donut_chart[item][key].value;
         }
       }
