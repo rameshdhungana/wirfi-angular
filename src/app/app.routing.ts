@@ -1,8 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard, PreventLoggedInAccess} from './_guards/auth.guard';
-
-
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -11,20 +9,20 @@ import {DevicesComponent} from './devices/devices.component';
 import {DeviceDetailComponent} from './device-detail/device-detail.component';
 import {DeviceNetworkComponent} from './device-network/device-network.component';
 import {BillingComponent} from './billing/billing.component';
-import { RegisterComponent } from './register/register.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component';
-import { ChangepasswordComponent } from './changepassword/changepassword.component';
-import { SidebarComponent} from './sidebar/sidebar.component';
-import { BusinessComponent } from './business/business.component';
-import { BusinessListComponent } from './business-list/business-list.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { DeviceInfoComponent } from './device-info/device-info.component';
-import { AddIndustryTypeComponent } from './add-industry-type/add-industry-type.component';
-import { MuteDeviceComponent } from './mute-device/mute-device.component';
-import { IndustryListComponent } from './industry-list/industry-list.component';
-import { EditIndustryTypeComponent } from './edit-industry-type/edit-industry-type.component';
+import {RegisterComponent} from './register/register.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {VerifyEmailComponent} from './verify-email/verify-email.component';
+import {ChangepasswordComponent} from './changepassword/changepassword.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {BusinessComponent} from './business/business.component';
+import {BusinessListComponent} from './business-list/business-list.component';
+import {ProfileComponent} from './profile/profile.component';
+import {ProfileFormComponent} from './profile-form/profile-form.component';
+import {DeviceInfoComponent} from './device-info/device-info.component';
+import {AddIndustryTypeComponent} from './add-industry-type/add-industry-type.component';
+import {MuteDeviceComponent} from './mute-device/mute-device.component';
+import {IndustryListComponent} from './industry-list/industry-list.component';
+import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from "./notification/notification.component";
 
 
@@ -33,7 +31,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'profile-update', component: ProfileFormComponent, canActivate: [AuthGuard]},
-    {path: 'logout', component: LogoutComponent , canActivate: [AuthGuard]},
+    {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     {path: 'devices', component: DeviceListComponent},
     {path: 'device', component: DevicesComponent, canActivate: [AuthGuard]},

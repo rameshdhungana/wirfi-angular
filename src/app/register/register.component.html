@@ -65,7 +65,8 @@
                             </small>
 
                             <small *ngIf="password_1.errors?.pattern">
-                                Password must be 6 characters long with at least 1 capital, 1 small and 1 special character.
+                                Password must be 6 characters long with at least 1 capital, 1 small and 1 special
+                                character.
 
                             </small>
                         </div>
@@ -88,7 +89,8 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-light btn-lg float-right clear ">Submit</button>
+                    <button type="submit" class="btn btn-light btn-lg float-right clear" [disabled]="registerButtonClicked">Submit
+                        <i *ngIf="registerButtonClicked" class="fa fa-spinner fa-spin fa-1x fa-fw"></i></button>
                 </form>
 
                 <a [routerLink]="['/login']" class="text-white float-left">back to login page</a>

@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     passwordResetClicked: boolean = false;
     resetPasswordMessage: string;
     disableClass: string = '';
+    public loginButtonClicked = false;
 
 
     constructor(private messageService: MessageService,
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
 
     onSubmit(data: NgForm) {
         if (data.valid) {
+            this.loginButtonClicked = true;
             console.log(data.value);
             data.value["push_notification_token"] = "asdasda13";
             data.value["device_id"] = "fdjghdfhgdj4354545";

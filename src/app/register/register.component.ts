@@ -11,6 +11,7 @@ import {MessageService} from '../_services/message.service';
 })
 export class RegisterComponent implements OnInit {
     password: string;
+    public registerButtonClicked = false;
 
     constructor(private authService: AuthenticationService,
                 private router: Router,
@@ -23,6 +24,7 @@ export class RegisterComponent implements OnInit {
     onSubmit(data: NgForm) {
         if (data.valid) {
             console.log(data.value);
+            this.registerButtonClicked = true;
 
             this.authService.register(data.value)
                 .subscribe(
