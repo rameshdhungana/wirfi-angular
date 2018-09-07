@@ -70,6 +70,7 @@ export class ResetPasswordComponent implements OnInit {
                 },
                 error => {
                     this.messageService.add("Something went wrong");
+                    this.resetButtonClicked = false;
 
                 }
             );

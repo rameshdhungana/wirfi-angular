@@ -64,6 +64,8 @@ export class LoginComponent implements OnInit {
                     (error) => {
                         console.log(error);
                         this.messageService.add(error.error.message);
+                        this.loginButtonClicked = false;
+
                     }
                 );
         }

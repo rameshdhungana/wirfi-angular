@@ -41,6 +41,7 @@ export class RegisterComponent implements OnInit {
                     (error) => {
                         console.log(error);
                         this.messageService.add(error.error["message"]);
+                        this.registerButtonClicked = false;
 
                     }
                 );
