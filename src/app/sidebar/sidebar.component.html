@@ -2,7 +2,7 @@
      (mouseleave)="$event.target.classList.contains('sidebar--collapsed') && hideText()">
     <div class="row">
         <div class="col text-center sidebar__user">
-            <img src="../../assets/images/user-logo.png" class="img-round sidebar__user-icon"/>
+            <img src="{{logged_in_user?.profile?.profile_picture}}" class="rounded sidebar__user-icon mt-1"/>
             <h4 class="text-center" [ngClass]="{'invisible': !isVisible}" style="margin-bottom: .01rem !important;">
                 {{logged_in_user?.full_name}}</h4>
             <p class="text-center text-muted mb-0" [ngClass]="{'invisible': !isVisible}">{{logged_in_user?.email}}</p>
