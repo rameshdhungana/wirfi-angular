@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {NotificationService} from '../_services/notification.service';
 import {environment} from "../../environments/environment.prod";
 
@@ -8,40 +8,27 @@ import {environment} from "../../environments/environment.prod";
     styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-    public urgentCollapsed = false;
-    public unreadCollapsed = false;
-    public readCollapsed = false;
-    public urgentNotifications: Array<any> = [];
-    public unreadNotifications: Array<any> = [];
-    public readNotifications: Array<any> = [];
+
+    public notificationList: Array<any> = [];
     public API_URL: string;
 
-    constructor(private notificationService: NotificationService) {
+    constructor(private notificationService: NotificationService,
+                private elementref: ElementRef) {
         this.API_URL = environment.API_URL;
     }
 
     ngOnInit() {
         this.notificationService.getAllNotification().subscribe(response => {
-            console.log(response);
+            console.log(response['data']['notifications']);
+            this.notificationList = response['data']['notifications']
 
 
-            for (const key in response['data']) {
-                if (response['data'][key]) {
-                    const type = response['data'][key]['type'];
-                    if (type === 1) {
-                        this.urgentNotifications.push(response['data'][key]);
-
-                    }
-                    else if (type === 2) {
-                        this.unreadNotifications.push(response['data'][key]);
-
-                    }
-                    else {
-                        this.readNotifications.push(response['data'][key]);
-
-                    }
-                }
-            }
         });
+    }
+
+    toggleNotificationDiv(i) {
+        console.log(i.get('ngbCollapse'))
+
+
     }
 }
