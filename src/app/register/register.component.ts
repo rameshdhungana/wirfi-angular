@@ -30,12 +30,11 @@ export class RegisterComponent implements OnInit {
                 .subscribe(
                     (response) => {
                         console.log(response);
-                        if (response["code"] == 1) {
+                        if (response['code'] === 1) {
                             this.messageService.add(' Succesfully Registered');
                             this.router.navigateByUrl('/login');
-                        }
-                        else {
-                            this.messageService.add(response["message"]);
+                        } else {
+                            this.messageService.add(response['message']);
                         }
                     },
                     (error) => {
