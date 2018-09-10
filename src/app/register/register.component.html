@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                         <input type="password" name="password1" class="form-control form-control-lg" id="password_one"
-                               pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$#^!%*?&])[A-Za-z\d$@$#^!%*?&]{6,}"
+                               pattern="^(?=.*?[A-Za-z])(?=.*?[0-9#?!@$%^&*-]).{8,}$"
                                placeholder="Password" required ngModel #password_1="ngModel">
                         <div class="invisible-text text-right  text-white">
                             <small *ngIf="registerForm.submitted && password_1.hasError('required')">

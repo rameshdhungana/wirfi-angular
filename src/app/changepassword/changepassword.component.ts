@@ -27,17 +27,16 @@ export class ChangepasswordComponent implements OnInit {
                     (response) => {
 
                         console.log(response);
-                        if (response['code'] == 1) {
+                        if (response['code'] === 1) {
                             this.messageService.add('password succesfully changed');
                             this.router.navigateByUrl('/logout');
-                        }
-                        else {
-                            this.messageService.add('Password must be 6 characters long with at least 1 capital, 1 small and 1 special character');
+                        } else {
+                            this.messageService.add('Password must be 8 characters long with at least 1 number or 1 special character');
 
                         }
                     },
-                (error)=>{
-                     this.messageService.add("Invalid Old Password");
+                (error) => {
+                     this.messageService.add('Invalid Old Password');
             }
                 );
         }
