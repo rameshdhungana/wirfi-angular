@@ -114,7 +114,7 @@ data_new =  {
           }
         ]
  }, {
-    'device_name': 'device1',
+    'device_name': 'device2',
     'address': 'address',
     'data':  [
           {
@@ -156,7 +156,7 @@ data_new =  {
         ]
  }],
  'type2': [{
-    'device_name': 'device1',
+    'device_name': 'device3',
     'address': 'address',
     'data':  [
           {
@@ -197,7 +197,7 @@ data_new =  {
           }
         ]
  }, {
-    'device_name': 'device1',
+    'device_name': 'device4',
     'address': 'address',
     'data':  [
           {
@@ -278,6 +278,8 @@ data_new =  {
     this.createLineGraph(cloneobj);
   }
 
+  
+
   noOfDevice(data) {
     this.no_of_devices = 0;
       for (const key_device in data) {
@@ -300,6 +302,8 @@ data_new =  {
     }
     this.noOfDevice(this.doughnut_filter_data);
   }
+
+
 
   createLineGraph(data) {
     d3.select('#line_chart svg').remove();
@@ -409,7 +413,7 @@ data_new =  {
         const device_data = this.filtered_data[index_industry];
         for (const index in device_data) {
           if (device_data[index]) {
-
+            console.log(device_data[index].device_name);
             const device_status_data = device_data[index].data;
             if (device_status_data) {
               // format the data
@@ -425,63 +429,91 @@ data_new =  {
               x.domain(d3.extent<any, any>(device_status_data, function (d) { return (d['date']); }));
               y.domain([0, 6]);
 
-              svg.selectAll('dot')
-                    .datum(device_status_data)
-                    .enter().append('circle')
-                    .attr('r', 5)
-                    .attr('cx', function(d) { return x((d['date'])); })
-                    .attr('cy', function(d) {  return y(d['status_1']); })
-                    .on('mouseover', function(d) {
-                        div.transition()
-                            .duration(200)
-                            .style('opacity', .9);
-                        div	.html(d.date + '<br/>'  + d.status_1)
-                            .style('left', (d3.event.pageX) + 'px')
-                            .style('top', (d3.event.pageY - 28) + 'px');
-                        })
-                    .on('mouseout', function(d) {
-                        div.transition()
-                            .duration(500)
-                            .style('opacity', 0);
-                    });
+              // svg.selectAll('dot')
+              //       .datum(device_status_data)
+              //       .enter().append('circle')
+              //       .attr('r', 5)
+              //       .attr('cx', function(d) { return x((d['date'])); })
+              //       .attr('cy', function(d) {  return y(d['status_1']); })
+              //       .on('mouseover', function(d) {
+              //           div.transition()
+              //               .duration(200)
+              //               .style('opacity', .9);
+              //           div	.html(d.date + '<br/>'  + d.status_1)
+              //               .style('left', (d3.event.pageX) + 'px')
+              //               .style('top', (d3.event.pageY - 28) + 'px');
+              //           })
+              //       .on('mouseout', function(d) {
+              //           div.transition()
+              //               .duration(500)
+              //               .style('opacity', 0);
+              //       });
 
               // Add the paths with different curves.
-              svg.append('circle')
-                  .attr('cx', 100)
-                  .attr('cy', 100)
-                  .style('fill', 'blue')
-                  .attr('r', 20 )
+              console.log(device_status_data);
+
               svg.append('path')
                 .datum(device_status_data)
                 .attr('class', 'line')
                 .style('stroke-width', '4')
                 .style('fill', function(d) { return 'rgba(0, 0, 0, 0)'; })
+                .on('mouseover', function(d) {
+                  div.transition()
+                      .duration(200)
+                      .style('opacity', .9);
+                  div	.html(device_data[index].device_name)
+                      .style('left', (d3.event.pageX) + 'px')
+                      .style('top', (d3.event.pageY - 28) + 'px');
+                  })
+              .on('mouseout', function(d) {
+                  div.transition()
+                      .duration(500)
+                      .style('opacity', 0);
+              })
                 .style('stroke', function () { // Add the colour
                   return daCurve['color'] = line_color;
                 })
                 .attr('d', d3.line<any>()
                   .curve(daCurve.d3Curve)
                   .x(function (d) {
-                    console.log(x((d['date'])));
+                    // add circle in path
+                    // svg.append('circle')
+                    // .attr('cx', x((d['date'])))
+                    // .attr('cy', y(d['status_1']))
+                    // .attr('r', 10)
+                    // .on('mouseover', function(d) {
+                    //   console.log('mouse over');
+                    //     div.transition()
+                    //         .duration(200)
+                    //         .style('opacity', .9);
+                    //     div	.html('hello')
+                    //         .style('left', (d3.event.pageX) + 'px')
+                    //         .style('top', (d3.event.pageY - 28) + 'px');
+                    //     })
+                    // .on('mouseout', function(d) {
+                    //     div.transition()
+                    //         .duration(500)
+                    //         .style('opacity', 0);
+                    // });
                     return x((d['date'])); })
                   .y(function (d) { return y(d['status_1']); })
                 )
-                .on('mouseover', function(d) {
-                  // console.log(d['date']);
-                  // div.transition()
-                  //     .duration(200)
-                  //     .style('opacity', .9);
-                  // div
-                  // .html( parseTime(d.date) + '<br/>'  + d.status)
-                  //     .style('left', (d3.event.pageX) + 'px')
-                  //     .style('top', (d3.event.pageY - 28) + 'px');
-                  })
-              .on('mouseout', function(d) {
-                  div.transition()
-                      .duration(500)
-                      .style('opacity', 0);
-              }
-            );
+            //     .on('mouseover', function(d) {
+            //       console.log(d['date']);
+            //       div.transition()
+            //           .duration(200)
+            //           .style('opacity', .9);
+            //       div
+            //       .html( parseTime(d.date) + '<br/>'  + d.status)
+            //           .style('left', (d3.event.pageX) + 'px')
+            //           .style('top', (d3.event.pageY - 28) + 'px');
+            //       })
+            //   .on('mouseout', function(d) {
+            //       div.transition()
+            //           .duration(500)
+            //           .style('opacity', 0);
+            //   }
+            // );
 
               // Add the Legend
               // svg.append('text')
