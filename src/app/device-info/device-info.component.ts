@@ -117,8 +117,6 @@ export class DeviceInfoComponent  implements OnInit {
           // set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
-          console.log(this.latitude);
-          console.log(this.longitude);
           this.zoom = 12;
         });
       });
@@ -131,14 +129,11 @@ export class DeviceInfoComponent  implements OnInit {
   }
 
   mapClicked($event: MouseEvent) {
-   
-      console.log("clicked", $event.coords.lat,$event.coords.lng);
       this.latitude =  $event.coords.lat;
       this.longitude = $event.coords.lng;
       this.zoom = 12;
-     
-   
   }
+
   private setCurrentPosition() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -155,7 +150,6 @@ export class DeviceInfoComponent  implements OnInit {
     const files: FileList = target.files;
     this.fileLocation = files[0];
     this.fileLocation_name = files[0].name;
-    console.log(this.fileLocation);
   }
 
   onChangeImage(event: EventTarget) {
@@ -164,12 +158,10 @@ export class DeviceInfoComponent  implements OnInit {
       const files: FileList = target.files;
       this.fileImage = files[0];
       this.fileImage_name = files[0].name;
-      console.log(this.fileImage);
   }
 
   addIndustryType(event, data) {
-    console.log(data)
-    if (data=="") {
+    if (data === '') {
         const data = {
       };
          const modalSize = {
@@ -183,7 +175,6 @@ export class DeviceInfoComponent  implements OnInit {
   }
 
   deviceInfo(data: NgForm) {
-
     this.json = {
       'location_hours': [
         {
@@ -280,21 +271,16 @@ export class DeviceInfoComponent  implements OnInit {
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
-        console.log(data.value['industry_type_id'])
-        console.log(data.value['industry_name'])
         if (data.value['industry_type']) {
           this.json['industry_type_id'] = data.value['industry_type'];
         }
 
-        console.log(this.json);
-
         this.deviceservice.postDeviceinfo(this.json).subscribe(
             response => {
-            console.log(response);
-            this.formData.append('location_logo', this.fileImage);
-            this.formData.append('machine_photo', this.fileLocation);
-            this.device_id = response['data']['id'];
-            this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
+              this.formData.append('location_logo', this.fileImage);
+              this.formData.append('machine_photo', this.fileLocation);
+              this.device_id = response['data']['id'];
+              this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
               response => {
                 this.messageservice.add('succesfully registered');
                 this.router.navigateByUrl(`device/` + this.device_id);
