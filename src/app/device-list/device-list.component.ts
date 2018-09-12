@@ -99,30 +99,36 @@ export class DeviceListComponent implements OnInit {
 
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['sort_type'] = sortParam;
-        localStorage.setItem('presetFilterSaved',JSON.stringify(presetValues));
+        localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         console.log(localStorage.getItem('presetFilterSaved'));
         this.reOrderDeviceList();
 
 
     }
 
-    changeFilterParams(filterParam, type_id) {
-        console.log(filterParam, type_id);
-        localStorage.getItem('presetFilterSaved');
+    changeFilterParams(filterParam, filter_key) {
+        console.log(filterParam, filter_key);
+        let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        presetValues['filter_type'] = filterParam;
+        if (filter_key) {
+            presetValues['filter_keys'].push(filter_key);
+        }
+        localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         console.log(JSON.parse(localStorage.getItem('presetFilterSaved')));
+        this.reOrderDeviceList();
 
     }
 
     reOrderDeviceList() {
-        const presetValueSaved = JSON.parse(localStorage.getItem('presetFilterSaved'));
-        console.log(presetValueSaved);
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        console.log(presetValues);
         console.log(this.deviceList['value']);
         this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
         // this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
         // console.log(filtered, filtered2);
-        console.log(presetValueSaved['sort_type'], sortParams['Clear']);
+        console.log(presetValues['sort_type'], sortParams['Clear']);
 
-        if (presetValueSaved['sort_type'] === sortParams['Clear']) {
+        if (presetValues['sort_type'] === sortParams['Clear']) {
             this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
 
             console.log(this.deviceList['value'], 0)
@@ -136,7 +142,7 @@ export class DeviceListComponent implements OnInit {
         //
         //
         // }
-        else if (presetValueSaved['sort_type'] === sortParams['Industry']) {
+        else if (presetValues['sort_type'] === sortParams['Industry']) {
             this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
             console.log(this.deviceList['value'], 5)
 
