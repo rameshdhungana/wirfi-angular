@@ -106,7 +106,7 @@ export class DeviceListComponent implements OnInit {
 
     }
 
-    changeFilterParams(filterParam, filter_key) {
+    changeFilterParams(filterParam, filter_key=null) {
         console.log(filterParam, filter_key);
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
@@ -127,6 +127,12 @@ export class DeviceListComponent implements OnInit {
         // this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
         // console.log(filtered, filtered2);
         console.log(presetValues['sort_type'], sortParams['Clear']);
+
+        const sortType = presetValues['sort_type'];
+        switch (sortType) {
+
+        }
+
 
         if (presetValues['sort_type'] === sortParams['Clear']) {
             this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
