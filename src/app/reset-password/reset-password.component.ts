@@ -37,11 +37,8 @@ export class ResetPasswordComponent implements OnInit {
                 this.email = res['data']['email'];
 
             } else {
-                // this.router.navigateByUrl('/')
                 this.valid_url = false;
                 this.loading = false;
-
-
             }
         });
 
@@ -49,11 +46,11 @@ export class ResetPasswordComponent implements OnInit {
     }
 
     resetPassword(data: NgForm) {
-        console.log(data.valid);
         if (data.valid) {
             this.resetButtonClicked = true;
             data.value['token'] = this.token;
             data.value['uid'] = this.uid;
+            data.value['email'] = this.email;
             console.log(data.value);
             this.authService.resetPassword(data.value).subscribe(
                 (response) => {

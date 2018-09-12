@@ -10,7 +10,7 @@ export class DeviceService {
     }
 
     togglePriority(id, data) {
-        return this.http.put(`device/${id}/priority/`, data);
+      return this.http.post(`device/${id}/priority/`, data);
     }
 
     getDeviceList() {
@@ -50,7 +50,7 @@ export class DeviceService {
     }
 
     muteDevice(id, data) {
-        return this.http.post(`device/${id}/mute`, data);
+      return this.http.post(`device/${id}/mute/`, data);
     }
 
     getPresetFilter() {

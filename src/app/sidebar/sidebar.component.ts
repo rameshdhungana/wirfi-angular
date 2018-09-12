@@ -1,4 +1,4 @@
-import {Component, OnInit, Input,Output,EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthenticationService} from '../_services/authentication.service';
 
 
@@ -27,13 +27,10 @@ export class SidebarComponent implements OnInit {
             this.logged_in_user = response['data'];
         });
     }
-    ShowText(){
-        this.isVisible=true;
+    ShowText() {
+        this.isVisible = true;
     }
-    hideText(){
-        this.isVisible=false;
+    hideText() {
+        this.isVisible = false;
     }
-
-
-  
 }

@@ -65,9 +65,8 @@
                             </small>
 
                             <small *ngIf="password_1.errors?.pattern">
-                                Password must be 6 characters long with at least 1 capital, 1 small and 1 special
+                                Password must be 8 characters long with at least 1 numerical or 1 special
                                 character.
-
                             </small>
                         </div>
                     </div>
@@ -84,7 +83,7 @@
                                 This is required field.
                             </small>
                             <small *ngIf="registerForm.submitted && password_2.hasError('minlength')">
-                                Password must be minimum 6 characters long
+                                Password must be minimum 8 characters long
                             </small>
                         </div>
                     </div>
