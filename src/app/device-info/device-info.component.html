@@ -70,7 +70,7 @@
                                   <div class="col-md-12">
                                     <div class="form-group">
                                       <label class="text-white">Industry Type</label>
-                                      <select  id="industry_type" name="industry_type" class="form-control" #industry (change)="addIndustryType($event, industry.value)">
+                                      <select  id="industry_type" name="industry_type" class="form-control" #industry ngModel (change)="addIndustryType($event, industry.value)">
                                         <option value="" disabled selected>Select a Industry Type</option>
                                         <option *ngFor="let industry of industryType" [value]="industry.id">{{industry.name}}</option>
                                         <option value="">Add Other...</option>

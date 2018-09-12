@@ -5,6 +5,7 @@ import {MuteDeviceComponent} from '../mute-device/mute-device.component';
 import {environment} from "../../environments/environment.prod";
 import {PresetFilter} from "../_models/preset-filter";
 import {BehaviorSubject} from "rxjs/Rx";
+import {JwtInterceptor} from "../_helpers/jwt.interceptor";
 
 enum sortParams {
     Clear,
@@ -37,6 +38,7 @@ export class DeviceListComponent implements OnInit {
     public presetFilterValue = new BehaviorSubject(new PresetFilter());
     public sortParams: any;
     public filterParams: any;
+    public industry_type: Array<any>;
 
 
     constructor(private deviceService: DeviceService,
@@ -50,16 +52,28 @@ export class DeviceListComponent implements OnInit {
         this.deviceService.getDeviceList().subscribe(response => {
             console.log(response, 22222222);
             this.device_list = response['data']['device'];
+            this.industry_type = response['data']['industry_type'];
+
             this.deviceList.next(<Array<any>>response['data']['device']);
-            let sorted = this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
-            console.log(sorted, this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
-            this.device_list = sorted;
+            this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
+            console.log(this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
 
 
             this.deviceService.getPresetFilter().subscribe(res => {
                 console.log(res);
 
-            })
+            });
+            if (!localStorage.getItem('presetFilterSaved')) {
+                const presetValues = new PresetFilter();
+                presetValues.id = null;
+                presetValues.name = null;
+                presetValues.sort_type = sortParams['Clear'];
+                presetValues.filter_type = filterParams['Clear'];
+                presetValues.filter_keys = [];
+                localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
+                console.log(localStorage.getItem('presetFilterSaved'))
+
+            }
 
 
         });
@@ -82,20 +96,54 @@ export class DeviceListComponent implements OnInit {
     }
 
     changeSortParams(sortParam) {
-        console.log(sortParam);
-        const presetValues = new PresetFilter();
-        presetValues.sort_type = sortParam;
 
-        this.presetFilterValue.next(presetValues);
-        console.log(presetValues,this.presetFilterValue['value']);
-
-        // localStorage.setItem('presetFilter', this.presetFilterValue)
+        let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        presetValues['sort_type'] = sortParam;
+        localStorage.setItem('presetFilterSaved',JSON.stringify(presetValues));
+        console.log(localStorage.getItem('presetFilterSaved'));
+        this.reOrderDeviceList();
 
 
     }
 
+    changeFilterParams(filterParam, type_id) {
+        console.log(filterParam, type_id);
+        localStorage.getItem('presetFilterSaved');
+        console.log(JSON.parse(localStorage.getItem('presetFilterSaved')));
+
+    }
+
     reOrderDeviceList() {
-        // this.
+        const presetValueSaved = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        console.log(presetValueSaved);
+        console.log(this.deviceList['value']);
+        this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
+        // this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
+        // console.log(filtered, filtered2);
+        console.log(presetValueSaved['sort_type'], sortParams['Clear']);
+
+        if (presetValueSaved['sort_type'] === sortParams['Clear']) {
+            this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+
+            console.log(this.deviceList['value'], 0)
+
+
+        }
+        // else if (presetValueSaved['sort_type'] === sortParams['Priority']) {
+        //     this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
+        //     this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+        //     console.log(this.deviceList['value'], 2)
+        //
+        //
+        // }
+        else if (presetValueSaved['sort_type'] === sortParams['Industry']) {
+            this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
+            console.log(this.deviceList['value'], 5)
+
+
+        }
+
+
     }
 
 

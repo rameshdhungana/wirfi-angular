@@ -3,6 +3,7 @@
         <div class="col-md-12  text-white">
             <div class="row">
                 <div class="offset-md-6 col-md-2">
+
                     <div ngbDropdown>
                         <div id="preset" ngbDropdownToggle>Preset</div>
                         <div ngbDropdownMenu aria-labelledby="preset">
@@ -18,42 +19,38 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div ngbDropdown>
-                        <div id="filter" ngbDropdownToggle>Filter</div>
-                        <div ngbDropdownMenu aria-labelledby="filter">
+                    <button mat-button [matMenuTriggerFor]="filterOptions">Filter</button>
 
-                            <button class="dropdown-item">Clear
+                    <mat-menu #filterOptions="matMenu">
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear</button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority</button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems</button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise</button>
+                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry</button>
+                    </mat-menu>
 
-                            </button>
+                    <mat-menu #types_of_industry="matMenu">
+                        <mat-checkbox *ngFor="let type of industry_type" [checked]="true"
+                                      (click)="changeFilterParams(filterParams['Industry'],type.id)">{{type.name}}
+                        </mat-checkbox>
+                    </mat-menu>
 
-                            <button class="dropdown-item">Priority</button>
-                            <button class="dropdown-item">Problems</button>
-                            <button class="dropdown-item">Franchise</button>
-                            <button class="dropdown-item">Industry</button>
-                        </div>
 
-                    </div>
                 </div>
                 <div class="col-md-2">
-                    <div ngbDropdown>
-                        <div id="sort" ngbDropdownToggle>Sort</div>
-                        <div ngbDropdownMenu aria-labelledby="sort">
 
-                            <button (click)="changeSortParams(sortParams['Clear'])" class="dropdown-item">Clear</button>
-                            <button (click)="changeSortParams(sortParams['Location'])" class="dropdown-item">Location
-                            </button>
-                            <button (click)="changeSortParams(sortParams['Priority'])" class="dropdown-item">Priority
-                            </button>
-                            <button (click)="changeSortParams(sortParams['Problems'])" class="dropdown-item">Problems
-                            </button>
-                            <button (click)="changeSortParams(sortParams['Franchise'])" class="dropdown-item">
-                                Franchise
-                            </button>
-                            <button (click)="changeSortParams(sortParams['Industry'])" class="dropdown-item">Industry
-                            </button>
-                        </div>
+                    <button mat-button [matMenuTriggerFor]="sortOptions">Sort</button>
 
-                    </div>
+                    <mat-menu #sortOptions="matMenu">
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Priority'])">Priority</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Problems'])">Problems</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Franchise'])">Franchise</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Industry'])">Industry</button>
+                    </mat-menu>
+
+
                 </div>
             </div>
             ￼
@@ -61,7 +58,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-6  text-white">
-                    <div *ngFor="let device of device_list">
+                    <div *ngFor="let device of deviceList.value">
                         <div class="panel">
                             <div class="card text-center">
                                 <div ngbDropdown class="d-inline-block">
