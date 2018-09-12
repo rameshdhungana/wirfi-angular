@@ -1,15 +1,13 @@
-import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone,Inject } from '@angular/core';
+import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone, Inject } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { DeviceService } from '../_services/device.service';
 import { IndustryService } from '../_services/industry-type.service';
 import { MessageService } from '../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material";
-import { MatDialogRef} from "@angular/material";
-import {NgbTimeStruct, NgbTimeAdapter} from '@ng-bootstrap/ng-bootstrap';
+import { NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import {MaterialDialogService} from "../_services/material-dialog.service";
+import { MaterialDialogService } from '../_services/material-dialog.service';
 import { AddIndustryTypeComponent } from '../add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
 /**
@@ -162,14 +160,13 @@ export class DeviceInfoComponent  implements OnInit {
 
   addIndustryType(event, data) {
     if (data === '') {
-        const data = {
-      };
-         const modalSize = {
-            'height': '800px',
-            'width': '600px'
+      const data = {};
+      const modalSize = {
+        'height': '800px',
+        'width': '600px'
 
-        };
-      this.dialogService.openDialog(AddIndustryTypeComponent, data,modalSize)
+      };
+      this.dialogService.openDialog(AddIndustryTypeComponent, data, modalSize);
     }
 
   }
@@ -281,10 +278,10 @@ export class DeviceInfoComponent  implements OnInit {
               this.formData.append('machine_photo', this.fileLocation);
               this.device_id = response['data']['id'];
               this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
-              response => {
-                this.messageservice.add('succesfully registered');
-                this.router.navigateByUrl(`device/` + this.device_id);
-            });
+                res => {
+                  this.messageservice.add('succesfully registered');
+                  this.router.navigateByUrl(`device/` + this.device_id);
+              });
            },
         (error) => {
             this.messageservice.add(error.error.message);
