@@ -9,11 +9,9 @@ import {JwtInterceptor} from "../_helpers/jwt.interceptor";
 
 enum sortParams {
     Clear,
+    NetworkStatus,
     Location,
-    Priority,
-    Problems,
-    Franchise,
-    Industry
+    InstallationDate
 }
 
 enum filterParams {
@@ -106,7 +104,7 @@ export class DeviceListComponent implements OnInit {
 
     }
 
-    changeFilterParams(filterParam, filter_key=null) {
+    changeFilterParams(filterParam, filter_key = null) {
         console.log(filterParam, filter_key);
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
@@ -127,33 +125,81 @@ export class DeviceListComponent implements OnInit {
         // this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
         // console.log(filtered, filtered2);
         console.log(presetValues['sort_type'], sortParams['Clear']);
+        let sortedDeviceListArray = [];
 
         const sortType = presetValues['sort_type'];
         switch (sortType) {
 
+            case sortParams['Clear']: {
+                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+                console.log('inside clear sorting');
+                break;
+            }
+
+            case sortParams['NetworkStatus']: {
+                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+                console.log('inside network status sorting');
+
+                break;
+            }
+            case sortParams['Location']: {
+                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+                console.log('inside location sorting');
+
+                break;
+            }
+            case sortParams['InstallationDate']: {
+                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+                console.log('inside installation date sorting');
+
+                break;
+            }
+
+
         }
+        this.deviceList.next(sortedDeviceListArray);
 
 
-        if (presetValues['sort_type'] === sortParams['Clear']) {
-            this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+        const filterType = presetValues['filter_type'];
+        const filterKeys = presetValues['filter_keys'];
+        let filteredDeviceListArray = [];
+        switch (filterType) {
+            case filterParams['Clear']: {
+                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
+                console.log('inside  clear filtering ')
 
-            console.log(this.deviceList['value'], 0)
+                break;
 
+
+            }
+            case filterParams['Priority']: {
+                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
+                console.log('inside  Priority filtering ')
+
+                break;
+
+            }
+            case filterParams['Problems']: {
+                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
+                console.log('inside  Problems filtering ')
+
+                break;
+            }
+            case filterParams['Franchise']: {
+                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
+                console.log('inside  Franchise filtering ')
+
+                break;
+            }
+            case filterParams['Industry']: {
+                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
+                console.log('inside  Industry filtering ')
+
+                break;
+            }
 
         }
-        // else if (presetValueSaved['sort_type'] === sortParams['Priority']) {
-        //     this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
-        //     this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
-        //     console.log(this.deviceList['value'], 2)
-        //
-        //
-        // }
-        else if (presetValues['sort_type'] === sortParams['Industry']) {
-            this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
-            console.log(this.deviceList['value'], 5)
-
-
-        }
+        this.deviceList.next(filteredDeviceListArray);
 
 
     }

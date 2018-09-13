@@ -43,11 +43,12 @@
 
                     <mat-menu #sortOptions="matMenu">
                         <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['NetworkStatus'])">Network Status
+                        </button>
                         <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Priority'])">Priority</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Problems'])">Problems</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Franchise'])">Franchise</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Industry'])">Industry</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['InstallationDate'])">Installation
+                            Date
+                        </button>
                     </mat-menu>
 
 
