@@ -8,7 +8,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class ProfileComponent implements OnInit {
   public loading:boolean=false;
-  person:object
+  person:object;
 
   constructor(private authService:AuthenticationService) { }
 

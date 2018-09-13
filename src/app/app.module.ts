@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule, MatMenuModule} from '@angular/material';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
@@ -99,6 +100,8 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         UiSwitchModule,
         NgbModule.forRoot(),
         MatDialogModule,
+        MatMenuModule,
+        MatCheckboxModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
             libraries: ['places']

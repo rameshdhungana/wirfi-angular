@@ -48,7 +48,7 @@ export class BillingComponent implements OnInit {
             (response: Array<object>) => {
                 if (response['code'] == 1) {
                     this.billingLoaded = true;
-                    console.log(this.billingLoaded, 'billing is loadded ')
+                    console.log(this.billingLoaded, 'billing is loadded ');
                     console.log(response);
                     this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
                     if (this.customerStripeInfo.length) {
