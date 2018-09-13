@@ -6,6 +6,8 @@ import {environment} from "../../environments/environment.prod";
 import {PresetFilter} from "../_models/preset-filter";
 import {BehaviorSubject} from "rxjs/Rx";
 import {JwtInterceptor} from "../_helpers/jwt.interceptor";
+import {} from 'googlemaps';
+import {GetCurrentLocationService} from "../_services/get-current-location.service";
 
 enum sortParams {
     Clear,
@@ -37,6 +39,9 @@ export class DeviceListComponent implements OnInit {
     public sortParams: any;
     public filterParams: any;
     public industry_type: Array<any>;
+    public currentLatitude: number;
+    public currentLongitude: number;
+    public hell0test: number;
 
 
     constructor(private deviceService: DeviceService,
@@ -44,6 +49,7 @@ export class DeviceListComponent implements OnInit {
         this.API_URl = environment.API_URL;
         this.sortParams = sortParams;
         this.filterParams = filterParams;
+
     }
 
     ngOnInit() {
@@ -94,7 +100,6 @@ export class DeviceListComponent implements OnInit {
     }
 
     changeSortParams(sortParam) {
-
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['sort_type'] = sortParam;
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
@@ -103,6 +108,54 @@ export class DeviceListComponent implements OnInit {
 
 
     }
+
+    getCurrentLocation() {
+        if (navigator.geolocation) {
+
+            navigator.geolocation.getCurrentPosition(showPosition.bind(this));
+
+
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+
+        function showPosition(position) {
+            console.log('latitude', position.coords.latitude);
+            console.log('longitude', position.coords.longitude);
+
+            this.currentLatitude = position.coords.latitude;
+            this.currentLongitude = position.coords.longitude;
+            console.log(this.currentLatitude, this.currentLongitude);
+            this.deviceList.next(this.deviceList['value'].sort((b, a) =>
+                // this.distanceCalculation(a.latitude, a.longitude, 40.85199, -74).localeCompare(this.distanceCalculation(b.latitude, b.longitude, 27.7151639, 85))));
+                this.distanceCalculation(a.latitude, a.longitude, position.coords.latitude, position.coords.longitude).localeCompare(this.distanceCalculation(b.latitude, b.longitude, position.coords.latitude, position.coords.longitude))));
+            console.log(this.deviceList['value'],'this is last line');
+        }
+
+
+    }
+
+    distanceCalculation(lat1, lon1, lat2, lon2) {
+        const earthRadiusKm = 6371;
+
+        let dLat = degreesToRadians(lat2 - lat1);
+        let dLon = degreesToRadians(lon2 - lon1);
+
+        lat1 = degreesToRadians(lat1);
+        lat2 = degreesToRadians(lat2);
+
+        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return (earthRadiusKm * c).toString();
+
+
+        function degreesToRadians(degrees) {
+            return degrees * Math.PI / 180;
+        }
+
+    }
+
 
     changeFilterParams(filterParam, filter_key = null) {
         console.log(filterParam, filter_key);
@@ -143,8 +196,21 @@ export class DeviceListComponent implements OnInit {
                 break;
             }
             case sortParams['Location']: {
-                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
-                console.log('inside location sorting');
+                console.log(this.deviceList['value'], 547093475);
+                this.getCurrentLocation();
+
+                // this.getCurrentLocation().subscribe(response => {
+                //     console.log(this.currentLatitude, this.currentLatitude, 'current value lat long')
+                //     console.log(this.distanceCalculation(40.85199, -74, 80, 85));
+                //     console.log(this.distanceCalculation(27.7151639, 85, 80, 85));
+                //     console.log(this.distanceCalculation(40.85199, -74, 80, 85).localeCompare(this.distanceCalculation(27.7151639, 85, 80, 85)));
+                //     sortedDeviceListArray = this.deviceList['value'].sort((b, a) =>
+                //         // this.distanceCalculation(40.85199, -74, 80, 85).localeCompare(this.distanceCalculation(27.7151639, 85, 80, 85)));
+                //         this.distanceCalculation(a.latitude, a.longitude, this.currentLatitude, this.currentLongitude).localeCompare(this.distanceCalculation(a.latitude, a.longitude, this.currentLatitude, this.currentLongitude)));
+                //
+                // });
+                console.log('inside location sorting', sortedDeviceListArray);
+
 
                 break;
             }
@@ -157,7 +223,7 @@ export class DeviceListComponent implements OnInit {
 
 
         }
-        this.deviceList.next(sortedDeviceListArray);
+        // this.deviceList.next(sortedDeviceListArray);
 
 
         const filterType = presetValues['filter_type'];
@@ -199,7 +265,7 @@ export class DeviceListComponent implements OnInit {
             }
 
         }
-        this.deviceList.next(filteredDeviceListArray);
+        // this.deviceList.next(filteredDeviceListArray);
 
 
     }

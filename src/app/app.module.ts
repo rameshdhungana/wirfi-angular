@@ -104,7 +104,8 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         MatCheckboxModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
-            libraries: ['places']
+            libraries: ['places',
+            'geometry']
         }),
 
 
@@ -120,6 +121,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         BillingService,
         CustomErrorService,
         IndustryService,
+
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],
