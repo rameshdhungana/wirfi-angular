@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.authService.me().subscribe(response => {
-            console.log(response);
+            console.log(response, 'i am calling me()');
             this.logged_in_user = response['data'];
         });
     }

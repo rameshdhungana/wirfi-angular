@@ -1,10 +1,6 @@
-.setting_icon{
-    position: absolute;
-    right: 10px;;
-}
-
-#filterDropDown{
-    padding-right: 10rem;
+.setting_icon {
+  position: absolute;
+  right: 10px;;
 }
 
 .fa-camera-unavailable:after, .fa-moon-unavailable:after {
@@ -47,4 +43,10 @@
 
 .fa-moon-asleep {
     color:blue;
+}
+
+.mat-checkbox {
+  display: block;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

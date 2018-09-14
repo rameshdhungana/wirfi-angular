@@ -31,7 +31,8 @@
 
                     <mat-menu #types_of_industry="matMenu">
                         <mat-checkbox *ngFor="let type of industry_type" [checked]="true"
-                                      (click)="changeFilterParams(filterParams['Industry'],type.id)">{{type.name}}
+                                      (click)="changeFilterParams(filterParams['Industry'],type.id,$event)">
+                            {{type.name}}
                         </mat-checkbox>
                     </mat-menu>
 
@@ -43,11 +44,12 @@
 
                     <mat-menu #sortOptions="matMenu">
                         <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['NetworkStatus'])">Network Status
+                        </button>
                         <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Priority'])">Priority</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Problems'])">Problems</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Franchise'])">Franchise</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Industry'])">Industry</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['InstallationDate'])">Installation
+                            Date
+                        </button>
                     </mat-menu>
                 </div>
             </div>
@@ -61,7 +63,7 @@
                             <div class="card text-center">
                                 <div ngbDropdown class="d-inline-block">
                                     <div class="setting_icon" id="dropdownBasic1" ngbDropdownToggle>
-                                      <i class="fas fa-cog"></i>
+                                        <i class="fas fa-cog"></i>
                                     </div>
 
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
@@ -84,7 +86,8 @@
                                     <img src={{API_URl}}{{device.machine_photo}}
                                          class="img-fluid mx-auto d-block device-image" style="max-width:200px;">
                                     <div class="card-body">
-                                        <h5 class="card-title"><span>{{device.name}} &#9679; {{device.industry_type.name}}</span></h5>
+                                        <h5 class="card-title"><span>{{device.name}} &#9679; {{device.industry_type.name}}</span>
+                                        </h5>
                                         <p class="card-text"><span>{{device.address}}</span></p>
                                         <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;
                                         <i class="fas fa-moon" [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
