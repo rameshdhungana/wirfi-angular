@@ -55,8 +55,8 @@
         </div>
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-6 text-white">
-                    <div *ngFor="let device of deviceList.value">
+                <div class="col-md-6 text-white" *ngFor="let device of deviceList.value">
+                    <div>
                         <div class="panel">
                             <div class="card text-center">
                                 <div ngbDropdown class="d-inline-block">
@@ -86,9 +86,9 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><span>{{device.name}} &#9679; {{device.industry_type.name}}</span></h5>
                                         <p class="card-text"><span>{{device.address}}</span></p>
-                                        <i class="fas fa-wifi" style="color: green"></i>&nbsp;
-                                        <i class="far fa-moon" style="color: white"></i>&nbsp;
-                                        <i class="fas fa-camera" style="color: white"></i>
+                                        <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;
+                                        <i class="fas fa-moon" [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
+                                        <i class="fas fa-camera" [ngClass]="device?.camera_service?.length == 0 ? 'fa-camera-unavailable' : (!device?.camera_service[0]?.is_on ? 'fa-camera-off' : '')"></i>
                                     </div>
                                 </a>
                             </div>

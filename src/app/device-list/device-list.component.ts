@@ -68,7 +68,7 @@ export class DeviceListComponent implements OnInit {
                 presetValues.filter_type = filterParams['Clear'];
                 presetValues.filter_keys = [];
                 localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
-                console.log(localStorage.getItem('presetFilterSaved'))
+                console.log(localStorage.getItem('presetFilterSaved'));
 
             }
         });
@@ -90,7 +90,7 @@ export class DeviceListComponent implements OnInit {
     }
 
     changeSortParams(sortParam) {
-        let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['sort_type'] = sortParam;
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         console.log(localStorage.getItem('presetFilterSaved'));
@@ -98,9 +98,9 @@ export class DeviceListComponent implements OnInit {
 
     }
 
-    changeFilterParams(filterParam, filter_key=null) {
+    changeFilterParams(filterParam, filter_key = null) {
         console.log(filterParam, filter_key);
-        let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
         if (filter_key) {
             presetValues['filter_keys'].push(filter_key);
@@ -127,7 +127,7 @@ export class DeviceListComponent implements OnInit {
         if (presetValues['sort_type'] === sortParams['Clear']) {
             this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
 
-            console.log(this.deviceList['value'], 0)
+            console.log(this.deviceList['value'], 0);
         }
         // else if (presetValueSaved['sort_type'] === sortParams['Priority']) {
         //     this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
@@ -138,7 +138,7 @@ export class DeviceListComponent implements OnInit {
         // }
         else if (presetValues['sort_type'] === sortParams['Industry']) {
             this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
-            console.log(this.deviceList['value'], 5)
+            console.log(this.deviceList['value'], 5);
         }
 
     }

@@ -344,7 +344,7 @@ export class DashboardComponent implements OnInit {
                 .enter().append('circle')
                 .style('fill', function(d) { return '#ffffff'; })
                 .attr('r', 2)
-                .attr('cx', function (d) { console.log(new Date(d['date'])); return x(new Date(d['date'])); })
+                .attr('cx', function (d) { return x(new Date(d['date'])); })
                 .attr('cy', function (d) { return y(d['close']); });
 
             if (dat === '1') {
