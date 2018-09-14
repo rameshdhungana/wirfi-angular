@@ -32,16 +32,13 @@ enum filterParams {
 
 
 export class DeviceListComponent implements OnInit {
-    public device_list: any;
+    public allDeviceList: any;
     public API_URl: any;
     public deviceList = new BehaviorSubject<Array<any>>([]);
     public presetFilterValue = new BehaviorSubject(new PresetFilter());
     public sortParams: any;
     public filterParams: any;
     public industry_type: Array<any>;
-    public currentLatitude: number;
-    public currentLongitude: number;
-    public hell0test: number;
 
 
     constructor(private deviceService: DeviceService,
@@ -55,7 +52,7 @@ export class DeviceListComponent implements OnInit {
     ngOnInit() {
         this.deviceService.getDeviceList().subscribe(response => {
             console.log(response, 22222222);
-            this.device_list = response['data']['device'];
+            this.allDeviceList = response['data']['device'];
             this.industry_type = response['data']['industry_type'];
 
             this.deviceList.next(<Array<any>>response['data']['device']);
@@ -104,6 +101,7 @@ export class DeviceListComponent implements OnInit {
         presetValues['sort_type'] = sortParam;
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         console.log(localStorage.getItem('presetFilterSaved'));
+        this.deviceList.next(this.allDeviceList);
         this.reOrderDeviceList();
 
 
@@ -129,7 +127,7 @@ export class DeviceListComponent implements OnInit {
             this.deviceList.next(this.deviceList['value'].sort((b, a) =>
                 // this.distanceCalculation(a.latitude, a.longitude, 40.85199, -74).localeCompare(this.distanceCalculation(b.latitude, b.longitude, 27.7151639, 85))));
                 this.distanceCalculation(a.latitude, a.longitude, position.coords.latitude, position.coords.longitude).localeCompare(this.distanceCalculation(b.latitude, b.longitude, position.coords.latitude, position.coords.longitude))));
-            console.log(this.deviceList['value'],'this is last line');
+            console.log(this.deviceList['value'], 'this is last line');
         }
 
 
@@ -157,7 +155,7 @@ export class DeviceListComponent implements OnInit {
     }
 
 
-    changeFilterParams(filterParam, filter_key = null) {
+    changeFilterParams(filterParam, filter_key = null, is_checked = null) {
         console.log(filterParam, filter_key);
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
@@ -166,6 +164,8 @@ export class DeviceListComponent implements OnInit {
         }
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         console.log(JSON.parse(localStorage.getItem('presetFilterSaved')));
+        this.deviceList.next(this.allDeviceList);
+
         this.reOrderDeviceList();
 
     }
@@ -177,20 +177,59 @@ export class DeviceListComponent implements OnInit {
         this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
         // this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
         // console.log(filtered, filtered2);
+
+
+        const filterType = presetValues['filter_type'];
+        const filterKeys = presetValues['filter_keys'];
+        switch (filterType) {
+            case filterParams['Clear']: {
+                this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
+                console.log('inside  clear filtering ')
+
+                break;
+
+
+            }
+            case filterParams['Priority']: {
+                this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
+                console.log('inside  Priority filtering ')
+
+                break;
+
+            }
+            case filterParams['Problems']: {
+                this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
+                console.log('inside  Problems filtering ')
+
+                break;
+            }
+            case filterParams['Franchise']: {
+                this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
+                console.log('inside  Franchise filtering ')
+
+                break;
+            }
+            case filterParams['Industry']: {
+                this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
+                console.log('inside  Industry filtering ')
+
+                break;
+            }
+
+        }
         console.log(presetValues['sort_type'], sortParams['Clear']);
-        let sortedDeviceListArray = [];
 
         const sortType = presetValues['sort_type'];
         switch (sortType) {
 
             case sortParams['Clear']: {
-                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+                this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
                 console.log('inside clear sorting');
                 break;
             }
 
             case sortParams['NetworkStatus']: {
-                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
+                this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
                 console.log('inside network status sorting');
 
                 break;
@@ -199,73 +238,18 @@ export class DeviceListComponent implements OnInit {
                 console.log(this.deviceList['value'], 547093475);
                 this.getCurrentLocation();
 
-                // this.getCurrentLocation().subscribe(response => {
-                //     console.log(this.currentLatitude, this.currentLatitude, 'current value lat long')
-                //     console.log(this.distanceCalculation(40.85199, -74, 80, 85));
-                //     console.log(this.distanceCalculation(27.7151639, 85, 80, 85));
-                //     console.log(this.distanceCalculation(40.85199, -74, 80, 85).localeCompare(this.distanceCalculation(27.7151639, 85, 80, 85)));
-                //     sortedDeviceListArray = this.deviceList['value'].sort((b, a) =>
-                //         // this.distanceCalculation(40.85199, -74, 80, 85).localeCompare(this.distanceCalculation(27.7151639, 85, 80, 85)));
-                //         this.distanceCalculation(a.latitude, a.longitude, this.currentLatitude, this.currentLongitude).localeCompare(this.distanceCalculation(a.latitude, a.longitude, this.currentLatitude, this.currentLongitude)));
-                //
-                // });
-                console.log('inside location sorting', sortedDeviceListArray);
-
 
                 break;
             }
             case sortParams['InstallationDate']: {
-                sortedDeviceListArray = this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name));
-                console.log('inside installation date sorting');
+                this.deviceList.next(this.deviceList['value'].sort((a, b) => b.created_at.localeCompare(a.created_at)));
+                console.log('inside installation date sorting', this.deviceList['value']);
 
                 break;
             }
 
 
         }
-        // this.deviceList.next(sortedDeviceListArray);
-
-
-        const filterType = presetValues['filter_type'];
-        const filterKeys = presetValues['filter_keys'];
-        let filteredDeviceListArray = [];
-        switch (filterType) {
-            case filterParams['Clear']: {
-                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
-                console.log('inside  clear filtering ')
-
-                break;
-
-
-            }
-            case filterParams['Priority']: {
-                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
-                console.log('inside  Priority filtering ')
-
-                break;
-
-            }
-            case filterParams['Problems']: {
-                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
-                console.log('inside  Problems filtering ')
-
-                break;
-            }
-            case filterParams['Franchise']: {
-                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
-                console.log('inside  Franchise filtering ')
-
-                break;
-            }
-            case filterParams['Industry']: {
-                filteredDeviceListArray = sortedDeviceListArray.filter(device => device.device_settings.priority_settings.priority === true);
-                console.log('inside  Industry filtering ')
-
-                break;
-            }
-
-        }
-        // this.deviceList.next(filteredDeviceListArray);
 
 
     }

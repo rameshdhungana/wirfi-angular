@@ -31,7 +31,7 @@
 
                     <mat-menu #types_of_industry="matMenu">
                         <mat-checkbox *ngFor="let type of industry_type" [checked]="true"
-                                      (click)="changeFilterParams(filterParams['Industry'],type.id)">{{type.name}}
+                                      (click)="changeFilterParams(filterParams['Industry'],type.id,$event)">{{type.name}}
                         </mat-checkbox>
                     </mat-menu>
 
