@@ -1,12 +1,12 @@
 <div class="container">
 
-    <div class="row" *ngFor="let array of notificationList;let i = index">
-        <div class="col-12 text-white">
-            <button class="btn-link btn-lg" (click)="toggleNotificationDiv(i)" aria-controls="urgent">
-                {{array.type_name}}
+    <div class="row" *ngFor="let array of notificationList;let i = index" class="pt-3">
+        <div class="col-3">
+            <button class="btn-link btn-lg btn-block" (click)="array.collapse = !array.collapse" aria-controls="urgent">
+                <span class="text-white"> {{array.type_name}}</span>
             </button>
         </div>
-        <div class="col-12" [ngbCollapse]="false" #i>
+        <div class="col-12" [ngbCollapse]="array.collapse">
             <div class="row mt-4" *ngFor="let notification of array.notifications">
                 <div class="col-md-12 text-white ">
                     <div class="panel">

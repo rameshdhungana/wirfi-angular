@@ -26,9 +26,5 @@ export class NotificationComponent implements OnInit {
         });
     }
 
-    toggleNotificationDiv(i) {
-        console.log(i.get('ngbCollapse'))
 
-
-    }
 }
