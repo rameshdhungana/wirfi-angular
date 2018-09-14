@@ -2,12 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {DeviceService} from '../_services/device.service';
 import {MaterialDialogService} from '../_services/material-dialog.service';
 import {MuteDeviceComponent} from '../mute-device/mute-device.component';
-import {environment} from "../../environments/environment.prod";
-import {PresetFilter} from "../_models/preset-filter";
-import {BehaviorSubject} from "rxjs/Rx";
-import {JwtInterceptor} from "../_helpers/jwt.interceptor";
-import {} from 'googlemaps';
-import {GetCurrentLocationService} from "../_services/get-current-location.service";
+import {environment} from '../../environments/environment.prod';
+import {PresetFilter} from '../_models/preset-filter';
+import {BehaviorSubject} from 'rxjs/Rx';
 
 enum sortParams {
     Clear,
@@ -40,7 +37,6 @@ export class DeviceListComponent implements OnInit {
     public filterParams: any;
     public industry_type: Array<any>;
 
-
     constructor(private deviceService: DeviceService,
                 private dialogService: MaterialDialogService) {
         this.API_URl = environment.API_URL;
@@ -59,10 +55,8 @@ export class DeviceListComponent implements OnInit {
             this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
             console.log(this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
 
-
             this.deviceService.getPresetFilter().subscribe(res => {
                 console.log(res);
-
             });
             if (!localStorage.getItem('presetFilterSaved')) {
                 const presetValues = new PresetFilter();
@@ -75,8 +69,6 @@ export class DeviceListComponent implements OnInit {
                 console.log(localStorage.getItem('presetFilterSaved'))
 
             }
-
-
         });
     }
 
@@ -91,9 +83,8 @@ export class DeviceListComponent implements OnInit {
         const modalSize = {
             'height': '325px',
             'width': '450px'
-
         };
-        this.dialogService.openDialog(MuteDeviceComponent, data, modalSize)
+        this.dialogService.openDialog(MuteDeviceComponent, data, modalSize);
     }
 
     changeSortParams(sortParam) {
@@ -103,7 +94,6 @@ export class DeviceListComponent implements OnInit {
         console.log(localStorage.getItem('presetFilterSaved'));
         this.deviceList.next(this.allDeviceList);
         this.reOrderDeviceList();
-
 
     }
 
@@ -253,6 +243,5 @@ export class DeviceListComponent implements OnInit {
 
 
     }
-
 
 }

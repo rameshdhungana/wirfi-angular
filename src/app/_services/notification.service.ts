@@ -10,6 +10,6 @@ export class NotificationService {
     }
 
     getAllNotification() {
-        return this.http.get('device/notifications/');
+        return this.http.get('notifications/');
     }
 }
