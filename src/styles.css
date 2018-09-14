@@ -14,3 +14,7 @@
 .mat-dialog-container {
     background-color: #292e3f;
 }
+
+a {
+    cursor: pointer;
+}

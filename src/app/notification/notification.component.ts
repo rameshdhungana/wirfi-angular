@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {NotificationService} from '../_services/notification.service';
 import {environment} from "../../environments/environment.prod";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-notification',
@@ -13,17 +14,25 @@ export class NotificationComponent implements OnInit {
     public API_URL: string;
 
     constructor(private notificationService: NotificationService,
-                private elementref: ElementRef) {
+                private router: Router) {
         this.API_URL = environment.API_URL;
     }
 
     ngOnInit() {
         this.notificationService.getAllNotification().subscribe(response => {
             console.log(response['data']['notifications']);
-            this.notificationList = response['data']['notifications']
+            this.notificationList = response['data']['notifications'];
 
 
         });
+    }
+
+    updateToReadType(notification_id, device_id) {
+        this.notificationService.updateNotificationToReadType(notification_id).subscribe(response => {
+            console.log(response);
+            this.router.navigateByUrl(`device/${device_id}`);
+        })
+
     }
 
 
