@@ -15,9 +15,6 @@ import { MouseEvent } from '@agm/core';
  */
 @Injectable()
 export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
-
-
-
   fromModel(value: string): NgbTimeStruct {
     if (!value) {
       return null;
