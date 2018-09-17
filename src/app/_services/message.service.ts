@@ -9,8 +9,8 @@ export class MessageService {
     add(message: string) {
         this.messages.push(message);
         setTimeout(() => {
-            this.clear()
-        }, 10000)
+            this.clear();
+        }, 10000);
     }
 
     clear() {

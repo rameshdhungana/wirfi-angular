@@ -44,7 +44,6 @@ export class DeviceListComponent implements OnInit {
         this.API_URl = environment.API_URL;
         this.sortParams = sortParams;
         this.filterParams = filterParams;
-
     }
 
     ngOnInit() {
@@ -115,7 +114,7 @@ export class DeviceListComponent implements OnInit {
 
 
     changeSortParams(sortParam) {
-        let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['sort_type'] = sortParam;
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
@@ -128,10 +127,7 @@ export class DeviceListComponent implements OnInit {
 
     getCurrentLocation() {
         if (navigator.geolocation) {
-
             navigator.geolocation.getCurrentPosition(showPosition.bind(this));
-
-
         } else {
             console.log("Geolocation is not supported by this browser.");
         }
@@ -148,8 +144,6 @@ export class DeviceListComponent implements OnInit {
                 this.distanceCalculation(a.latitude, a.longitude, position.coords.latitude, position.coords.longitude).localeCompare(this.distanceCalculation(b.latitude, b.longitude, position.coords.latitude, position.coords.longitude))));
             console.log(this.deviceList['value'], 'this is last line');
         }
-
-
     }
 
     distanceCalculation(lat1, lon1, lat2, lon2) {
@@ -166,17 +160,15 @@ export class DeviceListComponent implements OnInit {
         let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return (earthRadiusKm * c).toString();
 
-
         function degreesToRadians(degrees) {
             return degrees * Math.PI / 180;
         }
-
     }
 
 
     changeFilterParams(filterParam, filter_key = null) {
         console.log(filterParam, filter_key);
-        let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
         if (filter_key) {
             console.log((this.presetFilterValue.value.filter_keys.indexOf(filter_key) == -1), 'this is checking of checkbox');
@@ -195,9 +187,7 @@ export class DeviceListComponent implements OnInit {
 
         console.log(JSON.parse(localStorage.getItem('presetFilterSaved')));
         this.deviceList.next(this.allDeviceList);
-
         this.reOrderDeviceList();
-
     }
 
     reOrderDeviceList() {
@@ -208,44 +198,36 @@ export class DeviceListComponent implements OnInit {
         // this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
         // console.log(filtered, filtered2);
 
-
         const filterType = presetValues['filter_type'];
         const filterKeys = presetValues['filter_keys'];
         switch (filterType) {
             case filterParams['Clear']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
-                console.log('inside  clear filtering ');
 
                 break;
-
-
             }
             case filterParams['Priority']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-                console.log('inside  Priority filtering ');
 
+                console.log('inside  Priority filtering ')
                 break;
 
             }
             case filterParams['Problems']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
                 console.log('inside  Problems filtering ')
-
                 break;
             }
             case filterParams['Franchise']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
                 console.log('inside  Franchise filtering ')
-
                 break;
             }
             case filterParams['Industry']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
                 console.log('inside  Industry filtering ')
-
                 break;
             }
-
         }
         console.log(presetValues['sort_type'], sortParams['Clear']);
 
@@ -261,14 +243,11 @@ export class DeviceListComponent implements OnInit {
             case sortParams['NetworkStatus']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
                 console.log('inside network status sorting');
-
                 break;
             }
             case sortParams['Location']: {
                 console.log(this.deviceList['value'], 547093475);
                 this.getCurrentLocation();
-
-
                 break;
             }
             case sortParams['InstallationDate']: {
@@ -277,11 +256,6 @@ export class DeviceListComponent implements OnInit {
 
                 break;
             }
-
-
         }
-
-
     }
-
 }

@@ -50,7 +50,7 @@ export class DeviceService {
     }
 
     muteDevice(id, data) {
-        return this.http.post(`device/${id}/mute/`, data);
+      return this.http.post(`device/${id}/mute/`, data);
     }
 
     getPresetFilter() {
