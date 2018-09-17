@@ -11,10 +11,11 @@
                                 *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']" class="float-right"><i
                                 class="fa fa-check "></i></span></button>
                         <button mat-menu-item *ngFor="let preset of preset_list" (click)="changePreset(preset.id)">
-                            {{preset.name}}<span
-                                *ngIf="presetFilterValue.value.id===presetFilterValue.value.id" class="float-right"><i
+                            {{preset.name}}{{presetFilterValue.value.id===preset.id}}<span
+                                *ngIf="presetFilterValue.value.id===preset.id" class="float-right"><i
                                 class="fa fa-check "></i></span></button>
-                        <button  mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span></button>
+                        <button mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span>
+                        </button>
                     </mat-menu>
                 </div>
                 <div class="col-md-2">

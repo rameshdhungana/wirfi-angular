@@ -58,7 +58,7 @@ export class DeviceListComponent implements OnInit {
             console.log(this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
 
             this.deviceService.getPresetFilter().subscribe(res => {
-                console.log( res['data'], 'this is preset list man');
+                console.log(res['data'], 'this is preset list man');
                 this.preset_list = res['data']
 
             });
@@ -99,6 +99,8 @@ export class DeviceListComponent implements OnInit {
 
     changePreset(preset_id) {
         console.log('preset is changed', preset_id);
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+        console.log(presetValues);
     }
 
     addPresetPopUp() {
@@ -107,9 +109,10 @@ export class DeviceListComponent implements OnInit {
             'height': '325px',
             'width': '450px',
         };
-        console.log(PresetFilterComponent)
+        console.log(PresetFilterComponent);
         this.dialogService.openDialog(PresetFilterComponent, data, modalSize)
     }
+
 
     changeSortParams(sortParam) {
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
