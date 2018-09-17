@@ -3,14 +3,14 @@
 
     <div class="row">
       <div class="card col-8 mx-auto" style="height:250px">
-          <fieldset class="text-white">
-              <label  *ngFor="let item of industry_types_doughnut_graph">
-                      <input type="checkbox"  [(ngModel)]="value_of_checkbox[item]"  (change)="toggleFeatureDoughnut(item,$event.target.checked)"/> {{item}} 
-              </label>   
-  </fieldset>
-          <div class="doughnut_chart" id="doughnut_chart">
+        <fieldset class="text-white">
+          <label  *ngFor="let item of industry_types_doughnut_graph">
+            <input type="checkbox" [(ngModel)]="value_of_checkbox[item]" (change)="toggleFeatureDoughnut(item,$event.target.checked)"/> {{item}} 
+          </label>   
+        </fieldset>
+        <div class="doughnut_chart" id="doughnut_chart">
 
-          </div>
+        </div>
       </div>
     </div>
     <div class="row" style="height:400px;">
@@ -25,14 +25,17 @@
           </div>
         </div>
     </div>
+    
     <div class="row">
       <div class="col-md-12">
-            <fieldset class="text-white">
-                    <label  *ngFor="let item of industry_types_line_graph">
-                            <input type="checkbox"  [(ngModel)]="value_of_checkbox[item]"  (change)="toggleFeature(item,$event.target.checked)"/> {{item}} 
-                    </label>   
+        <fieldset class="text-white">
+          <label  *ngFor="let item of industry_types_line_graph">
+            <input type="checkbox" [(ngModel)]="value_of_checkbox[item]" (change)="toggleFeature(item,$event.target.checked)"/> {{item}} 
+          </label>   
         </fieldset>
-        <div class="linec_chart" id="line_chart"></div>
+        <div class="linec_chart" id="line_chart">
+        
+        </div>
       </div>
     </div>
   </div>
