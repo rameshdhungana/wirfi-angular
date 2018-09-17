@@ -53,6 +53,7 @@ import {IndustryListComponent} from './industry-list/industry-list.component';
 import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from './notification/notification.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import {PresetFilterComponent} from './preset-filter/preset-filter.component';
 
 @NgModule({
     declarations: [
@@ -88,6 +89,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         EditIndustryTypeComponent,
         NotificationComponent,
         TimeAgoPipe,
+        PresetFilterComponent,
     ],
     imports: [
         BrowserModule,
@@ -105,7 +107,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
             libraries: ['places',
-            'geometry']
+                'geometry']
         }),
 
 
@@ -131,6 +133,8 @@ import {TimeAgoPipe} from 'time-ago-pipe';
     entryComponents: [
         DeletecardComponent,
         UpdatecardComponent,
+        PresetFilterComponent,
+        MuteDeviceComponent,
     ]
 
 })

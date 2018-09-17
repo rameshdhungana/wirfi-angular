@@ -4,35 +4,49 @@
             <div class="row">
                 <div class="offset-md-6 col-md-2">
 
-                    <div ngbDropdown>
-                        <div id="preset" ngbDropdownToggle>Preset</div>
-                        <div ngbDropdownMenu aria-labelledby="preset">
+                    <button mat-button [matMenuTriggerFor]="presetOptions">Preset</button>
 
-                            <button class="dropdown-item">Preset
-
-                            </button>
-
-                            <button class="dropdown-item">Another Action</button>
-                            <button class="dropdown-item">Something else is here</button>
-                        </div>
-
-                    </div>
+                    <mat-menu #presetOptions="matMenu">
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']" class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item *ngFor="let preset of preset_list" (click)="changePreset(preset.id)">
+                            {{preset.name}}<span
+                                *ngIf="presetFilterValue.value.id===presetFilterValue.value.id" class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button  mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span></button>
+                    </mat-menu>
                 </div>
                 <div class="col-md-2">
                     <button mat-button [matMenuTriggerFor]="filterOptions">Filter</button>
 
                     <mat-menu #filterOptions="matMenu">
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear</button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority</button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems</button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise</button>
-                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry</button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Clear']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Priority']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Problems']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Franchise']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry
+                            {{presetFilterValue.value.filter_keys}}
+                        </button>
                     </mat-menu>
 
                     <mat-menu #types_of_industry="matMenu">
-                        <mat-checkbox *ngFor="let type of industry_type" [checked]="true"
-                                      (click)="changeFilterParams(filterParams['Industry'],type.id,$event)">
-                            {{type.name}}
+                        <mat-checkbox *ngFor="let type of industry_type"
+                                      [checked]="presetFilterValue.value.filter_keys.indexOf(type.id)!=-1"
+                                      (click)="changeFilterParams(filterParams['Industry'],type.id)">
+                            {{type.name}}{{presetFilterValue.value.filter_keys.indexOf(type.id)!=-1}}
                         </mat-checkbox>
                     </mat-menu>
 
@@ -43,12 +57,23 @@
                     <button mat-button [matMenuTriggerFor]="sortOptions">Sort</button>
 
                     <mat-menu #sortOptions="matMenu">
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['NetworkStatus'])">Network Status
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']" class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['NetworkStatus'])">Network
+                            Status<span
+                                    *ngIf="presetFilterValue.value.sort_type==sortParams['NetworkStatus']"
+                                    class="float-right"><i
+                                    class="fa fa-check "></i></span>
                         </button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location<span
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['Location']" class="float-right"><i
+                                class="fa fa-check "></i></span></button>
                         <button mat-menu-item (click)="changeSortParams(sortParams['InstallationDate'])">Installation
-                            Date
+                            Date<span
+                                    *ngIf="presetFilterValue.value.sort_type==sortParams['InstallationDate']"
+                                    class="float-right"><i
+                                    class="fa fa-check "></i></span>
                         </button>
                     </mat-menu>
                 </div>

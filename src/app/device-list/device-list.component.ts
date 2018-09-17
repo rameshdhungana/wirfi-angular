@@ -5,6 +5,7 @@ import {MuteDeviceComponent} from '../mute-device/mute-device.component';
 import {environment} from '../../environments/environment.prod';
 import {PresetFilter} from '../_models/preset-filter';
 import {BehaviorSubject} from 'rxjs/Rx';
+import {PresetFilterComponent} from "../preset-filter/preset-filter.component";
 
 enum sortParams {
     Clear,
@@ -36,6 +37,7 @@ export class DeviceListComponent implements OnInit {
     public sortParams: any;
     public filterParams: any;
     public industry_type: Array<any>;
+    public preset_list: Array<any>;
 
     constructor(private deviceService: DeviceService,
                 private dialogService: MaterialDialogService) {
@@ -56,7 +58,9 @@ export class DeviceListComponent implements OnInit {
             console.log(this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
 
             this.deviceService.getPresetFilter().subscribe(res => {
-                console.log(res);
+                console.log( res['data'], 'this is preset list man');
+                this.preset_list = res['data']
+
             });
             if (!localStorage.getItem('presetFilterSaved')) {
                 const presetValues = new PresetFilter();
@@ -66,7 +70,13 @@ export class DeviceListComponent implements OnInit {
                 presetValues.filter_type = filterParams['Clear'];
                 presetValues.filter_keys = [];
                 localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
-                console.log(localStorage.getItem('presetFilterSaved'))
+                console.log(localStorage.getItem('presetFilterSaved'));
+                this.presetFilterValue.next(presetValues);
+
+            }
+            else {
+                this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')))
+
 
             }
         });
@@ -87,10 +97,26 @@ export class DeviceListComponent implements OnInit {
         this.dialogService.openDialog(MuteDeviceComponent, data, modalSize);
     }
 
+    changePreset(preset_id) {
+        console.log('preset is changed', preset_id);
+    }
+
+    addPresetPopUp() {
+        const data = {};
+        const modalSize = {
+            'height': '325px',
+            'width': '450px',
+        };
+        console.log(PresetFilterComponent)
+        this.dialogService.openDialog(PresetFilterComponent, data, modalSize)
+    }
+
     changeSortParams(sortParam) {
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['sort_type'] = sortParam;
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
+        this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
+
         console.log(localStorage.getItem('presetFilterSaved'));
         this.deviceList.next(this.allDeviceList);
         this.reOrderDeviceList();
@@ -145,14 +171,25 @@ export class DeviceListComponent implements OnInit {
     }
 
 
-    changeFilterParams(filterParam, filter_key = null, is_checked = null) {
+    changeFilterParams(filterParam, filter_key = null) {
         console.log(filterParam, filter_key);
         let presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
         if (filter_key) {
-            presetValues['filter_keys'].push(filter_key);
+            console.log((this.presetFilterValue.value.filter_keys.indexOf(filter_key) == -1), 'this is checking of checkbox');
+            if (this.presetFilterValue.value.filter_keys.indexOf(filter_key) == -1) {
+                presetValues['filter_keys'].push(filter_key);
+
+            }
+            else {
+                presetValues['filter_keys'].pop(filter_key);
+
+            }
+
         }
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
+        this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
+
         console.log(JSON.parse(localStorage.getItem('presetFilterSaved')));
         this.deviceList.next(this.allDeviceList);
 
@@ -174,7 +211,7 @@ export class DeviceListComponent implements OnInit {
         switch (filterType) {
             case filterParams['Clear']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
-                console.log('inside  clear filtering ')
+                console.log('inside  clear filtering ');
 
                 break;
 
@@ -182,7 +219,7 @@ export class DeviceListComponent implements OnInit {
             }
             case filterParams['Priority']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-                console.log('inside  Priority filtering ')
+                console.log('inside  Priority filtering ');
 
                 break;
 
