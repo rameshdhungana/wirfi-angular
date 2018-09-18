@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment.prod';
 import {PresetFilter} from '../_models/preset-filter';
 import {BehaviorSubject} from 'rxjs/Rx';
 import {PresetFilterComponent} from "../preset-filter/preset-filter.component";
+import {DeletePresetComponent} from "../delete-preset/delete-preset.component";
 
 enum sortParams {
     Clear,
@@ -131,6 +132,22 @@ export class DeviceListComponent implements OnInit {
 
 
         });
+    }
+
+    deletePresetPopUp(id, name, sort_type, filter_type, filter_keys) {
+        const data = {
+            "id": id,
+            "name": name,
+            "sort_type": sortParams[sort_type],
+            "filter_type": filterParams[filter_type],
+        };
+        const modalSize = {
+            'height': '325px',
+            'width': '450px',
+        };
+
+        this.dialogService.openDialog(DeletePresetComponent, data, modalSize)
+
     }
 
     addPresetPopUp() {

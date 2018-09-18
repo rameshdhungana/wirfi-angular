@@ -71,4 +71,9 @@ export class DeviceService {
         return this.http.post(`preset-filter/`, data)
     }
 
+    deletePresetFilter(id) {
+        return this.http.delete(`preset-filter/${id}/`)
+
+    }
+
 }

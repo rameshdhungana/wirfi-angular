@@ -1,0 +1,26 @@
+<div class="row justify-content-center align-items-center">
+    <div class="col-12  text-white ">
+
+        <button class="float-right " mat-button mat-dialog-close>&#10005;</button>
+        <h5 class="text-center"> Are you sure you want to delete this Preset?</h5>
+
+
+    </div>
+    <div class="col-md-12 text-center text-white pb-2">
+
+
+        <div class="d-block pt-4">
+            <div class="pb-3"><p>Preset Name: {{data.name}}</p>
+                <p>Sort Type: {{data.sort_type}}</p>
+                <p>Filter Type: {{data.filter_type}}</p>
+                <p *ngIf="data?.filter_keys">Filter Keys{{data.filter_keys}}</p></div>
+
+            <button (click)="deletePreset(data.id)"
+                    type="submit" class=" p-2 btn btn-block btn-light">Delete Preset
+            </button>
+        </div>
+
+
+    </div>
+
+</div>

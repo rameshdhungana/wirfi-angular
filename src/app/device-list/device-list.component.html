@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="offset-md-6 col-md-2">
 
-                    <button mat-button [matMenuTriggerFor]="presetOptions">Preset  &#x25BE;</button>
+                    <button mat-button [matMenuTriggerFor]="presetOptions">Preset &#x25BE;</button>
 
                     <mat-menu #presetOptions="matMenu">
                         <button mat-menu-item (click)="clearPreset()">Clear<span
@@ -13,11 +13,12 @@
                                 class="fa fa-check "></i></span></button>
                         <div *ngFor="let preset of presetList.value" style="position: relative;">
                             <button mat-menu-item (click)="changePreset(preset.id)" style="padding-right: 60px;">
-                            {{preset.name}}
-                            <span *ngIf="presetFilterValue.value.id===preset.id" class="float-right"><i
-                                    class="fa fa-check "></i></span>
+                                {{preset.name}}
+                                <span *ngIf="presetFilterValue.value.id===preset.id" class="float-right"><i
+                                        class="fa fa-check "></i></span>
                             </button>
-                            <span class="delete-icon">
+                            <span class="delete-icon"
+                                  (click)="deletePresetPopUp(preset.id,preset.name,preset.sort_type,preset.filter_type,preset.filter_keys)">
                                 <i class="fa fa-trash"></i>
                             </span>
 
@@ -28,7 +29,7 @@
 
                 </div>
                 <div class="col-md-2">
-                    <button mat-button [matMenuTriggerFor]="filterOptions">Filter  &#x25BE;</button>
+                    <button mat-button [matMenuTriggerFor]="filterOptions">Filter &#x25BE;</button>
 
                     <mat-menu #filterOptions="matMenu">
                         <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear<span
@@ -64,7 +65,7 @@
                 </div>
                 <div class="col-md-2">
 
-                    <button mat-button [matMenuTriggerFor]="sortOptions">Sort  &#x25BE;</button>
+                    <button mat-button [matMenuTriggerFor]="sortOptions">Sort &#x25BE;</button>
 
                     <mat-menu #sortOptions="matMenu">
                         <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span

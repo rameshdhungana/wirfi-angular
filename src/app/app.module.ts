@@ -54,6 +54,7 @@ import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type
 import {NotificationComponent} from './notification/notification.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {PresetFilterComponent} from './preset-filter/preset-filter.component';
+import {DeletePresetComponent} from './delete-preset/delete-preset.component';
 
 @NgModule({
     declarations: [
@@ -90,6 +91,7 @@ import {PresetFilterComponent} from './preset-filter/preset-filter.component';
         NotificationComponent,
         TimeAgoPipe,
         PresetFilterComponent,
+        DeletePresetComponent,
     ],
     imports: [
         BrowserModule,
@@ -135,6 +137,7 @@ import {PresetFilterComponent} from './preset-filter/preset-filter.component';
         UpdatecardComponent,
         PresetFilterComponent,
         MuteDeviceComponent,
+        DeletePresetComponent,
     ]
 
 })
