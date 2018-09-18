@@ -40,6 +40,7 @@ export class DeviceListComponent implements OnInit {
     public industry_type: Array<any>;
     public presetList = new BehaviorSubject<Array<any>>([]);
 
+    public status_dict: any;
 
     constructor(private deviceService: DeviceService,
                 private dialogService: MaterialDialogService) {
@@ -53,6 +54,7 @@ export class DeviceListComponent implements OnInit {
             console.log(response, 22222222);
             this.allDeviceList = response['data']['device'];
             this.industry_type = response['data']['industry_type'];
+            this.status_dict = response['data']['status_dict'];
 
             this.deviceList.next(<Array<any>>response['data']['device']);
             this.reOrderDeviceList();
@@ -181,7 +183,7 @@ export class DeviceListComponent implements OnInit {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition.bind(this));
         } else {
-            console.log("Geolocation is not supported by this browser.");
+            console.log('Geolocation is not supported by this browser.');
         }
 
         function showPosition(position) {
@@ -192,8 +194,10 @@ export class DeviceListComponent implements OnInit {
             this.currentLongitude = position.coords.longitude;
             console.log(this.currentLatitude, this.currentLongitude);
             this.deviceList.next(this.deviceList['value'].sort((b, a) =>
-                // this.distanceCalculation(a.latitude, a.longitude, 40.85199, -74).localeCompare(this.distanceCalculation(b.latitude, b.longitude, 27.7151639, 85))));
-                this.distanceCalculation(a.latitude, a.longitude, position.coords.latitude, position.coords.longitude).localeCompare(this.distanceCalculation(b.latitude, b.longitude, position.coords.latitude, position.coords.longitude))));
+                // this.distanceCalculation(a.latitude, a.longitude, 40.85199, -74)
+                // .localeCompare(this.distanceCalculation(b.latitude, b.longitude, 27.7151639, 85))));
+                this.distanceCalculation(a.latitude, a.longitude, position.coords.latitude, position.coords.longitude)
+                    .localeCompare(this.distanceCalculation(b.latitude, b.longitude, position.coords.latitude, position.coords.longitude))));
             console.log(this.deviceList['value'], 'this is last line');
         }
     }
@@ -201,15 +205,15 @@ export class DeviceListComponent implements OnInit {
     distanceCalculation(lat1, lon1, lat2, lon2) {
         const earthRadiusKm = 6371;
 
-        let dLat = degreesToRadians(lat2 - lat1);
-        let dLon = degreesToRadians(lon2 - lon1);
+        const dLat = degreesToRadians(lat2 - lat1);
+        const dLon = degreesToRadians(lon2 - lon1);
 
         lat1 = degreesToRadians(lat1);
         lat2 = degreesToRadians(lat2);
 
-        let a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
             Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return (earthRadiusKm * c).toString();
 
         function degreesToRadians(degrees) {
@@ -260,19 +264,18 @@ export class DeviceListComponent implements OnInit {
             }
             case filterParams['Priority']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-
-                console.log('inside  Priority filtering ')
+                console.log('inside  Priority filtering ');
                 break;
 
             }
             case filterParams['Problems']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-                console.log('inside  Problems filtering ')
+                console.log('inside  Problems filtering ');
                 break;
             }
             case filterParams['Franchise']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-                console.log('inside  Franchise filtering ')
+                console.log('inside  Franchise filtering ');
                 break;
             }
             case filterParams['Industry']: {

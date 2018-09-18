@@ -271,11 +271,90 @@ data_new =  {
   filtered_data: object;
   filtered_data_toggle: object;
   private no_of_devices = 0;
+  private stepRoundAfter: any;
 
   constructor(
     private googleapiService: GoogleApiService,
     private dashboardservice: DashboardService
-  ) {}
+  ) {
+
+    function Step(context, t) {
+      this._context = context;
+      this._t = t;
+    }
+
+    Step.prototype = {
+        areaStart: function() {
+            this._line = 0;
+        },
+        areaEnd: function() {
+            this._line = NaN;
+        },
+        lineStart: function() {
+            this._x = this._y = NaN;
+            this._point = 0;
+        },
+        lineEnd: function() {
+            if (0 < this._t && this._t < 1 && this._point === 2) {
+            this._context.lineTo(this._x, this._y);
+            }
+
+            if (this._line || (this._line !== 0 && this._point === 1)) {
+            this._context.closePath();
+            }
+            if (this._line >= 0) {
+            this._t = 1 - this._t, this._line = 1 - this._line;
+            }
+        },
+
+        point: function(x, y) {
+            x = +x, y = +y;
+            switch (this._point) {
+            case 0:
+                this._point = 1;
+                this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
+                break;
+            case 1:
+                this._point = 2; // proceed
+                break;
+            default:
+                {
+                    let xN, yN, mYb, mYa;
+                    if (this._t <= 0) {
+                        xN = Math.abs(x - this._x) * 0.25;
+                        yN = Math.abs(y - this._y) * 0.25;
+                        mYb = (this._y < y) ? this._y + yN : this._y - yN;
+                        mYa = (this._y > y) ? y + yN : y - yN;
+
+                        this._context.quadraticCurveTo(this._x, this._y, this._x, mYb);
+                        this._context.lineTo(this._x, mYa);
+                        this._context.quadraticCurveTo(this._x, y, this._x + xN, y);
+                        this._context.lineTo(x - xN, y);
+
+                    } else {
+                        const x1 = this._x * (1 - this._t) + x * this._t;
+
+                        xN = Math.abs(x - x1) * 0.25;
+                        yN = Math.abs(y - this._y) * 0.25;
+                        mYb = (this._y < y) ? this._y + yN : this._y - yN;
+                        mYa = (this._y > y) ? y + yN : y - yN;
+
+                        this._context.quadraticCurveTo(x1, this._y, x1, mYb);
+                        this._context.lineTo(x1, mYa);
+                        this._context.quadraticCurveTo(x1, y, x1 + xN, y);
+                        this._context.lineTo(x - xN, y);
+                    }
+                    break;
+                }
+            }
+            this._x = x, this._y = y;
+        }
+    };
+
+    this.stepRoundAfter = function(context) {
+        return new Step(context, 1);
+    };
+  }
 
   ngOnInit() {
     this.dashboardservice.getDashboard().subscribe(
@@ -304,7 +383,6 @@ data_new =  {
     const cloneobj = cloneDeep(this.data_new);
     this.createLineGraph(cloneobj);
   }
-
 
   noOfDevice(data) {
     this.no_of_devices = 0;
@@ -351,6 +429,7 @@ data_new =  {
       // return new Date(data_date);
       // console.log(new Date(data_date));
       // };
+
     // array of curve functions and tites
     const daCurve = { 'd3Curve': d3.curveStepAfter, 'curveTitle': 'curveStepAfter' };
     const line_color = 'white';
@@ -368,6 +447,7 @@ data_new =  {
       .attr('height', height + margin.top + margin.bottom)
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
     svg.append('text')
     .attr('x', (width + 40))
     .attr('y', (margin.top + 80 ))
@@ -454,24 +534,24 @@ data_new =  {
               y.domain([0, 6]);
 
               // svg.selectAll('dot')
-              //       .datum(device_status_data)
-              //       .enter().append('circle')
-              //       .attr('r', 5)
-              //       .attr('cx', function(d) { return x((d['date'])); })
-              //       .attr('cy', function(d) {  return y(d['status_1']); })
-              //       .on('mouseover', function(d) {
-              //           div.transition()
-              //               .duration(200)
-              //               .style('opacity', .9);
-              //           div	.html(d.date + '<br/>'  + d.status_1)
-              //               .style('left', (d3.event.pageX) + 'px')
-              //               .style('top', (d3.event.pageY - 28) + 'px');
-              //           })
-              //       .on('mouseout', function(d) {
-              //           div.transition()
-              //               .duration(500)
-              //               .style('opacity', 0);
-              //       });
+          //       .datum(device_status_data)
+          //       .enter().append('circle')
+          //       .attr('r', 5)
+          //       .attr('cx', function(d) { return x((d['date'])); })
+          //       .attr('cy', function(d) {  return y(d['status_1']); })
+          //       .on('mouseover', function(d) {
+          //           div.transition()
+          //               .duration(200)
+          //               .style('opacity', .9);
+          //           div	.html(d.date + '<br/>'  + d.status_1)
+          //               .style('left', (d3.event.pageX) + 'px')
+          //               .style('top', (d3.event.pageY - 28) + 'px');
+          //           })
+          //       .on('mouseout', function(d) {
+          //           div.transition()
+          //               .duration(500)
+          //               .style('opacity', 0);
+          //       });
 
               // Add the paths with different curves.
               console.log(device_status_data);
@@ -498,7 +578,7 @@ data_new =  {
                   return daCurve['color'] = line_color;
                 })
                 .attr('d', d3.line<any>()
-                  .curve(d3.curveStepAfter)
+                  .curve(this.stepRoundAfter)
                   .x(function (d) {
                     // add circle in path
                     // svg.append('circle')
@@ -695,80 +775,4 @@ data_new =  {
         .style('font-size', '18px');
   }
 
-  // function Step(context, t) {
-  //   this._context = context;
-  //   this._t = t;
-  // }
-  //
-  // Step.prototype = {
-  //     areaStart: function() {
-  //         this._line = 0;
-  //     },
-  //     areaEnd: function() {
-  //         this._line = NaN;
-  //     },
-  //     lineStart: function() {
-  //         this._x = this._y = NaN;
-  //         this._point = 0;
-  //     },
-  //     lineEnd: function() {
-  //         if (0 < this._t && this._t < 1 && this._point === 2) {
-  //         this._context.lineTo(this._x, this._y);
-  //         }
-  //
-  //         if (this._line || (this._line !== 0 && this._point === 1)) {
-  //         this._context.closePath();
-  //         }
-  //         if (this._line >= 0) {
-  //         this._t = 1 - this._t, this._line = 1 - this._line;
-  //         }
-  //     },
-  //
-  //     point: function(x, y) {
-  //         x = +x, y = +y;
-  //         switch (this._point) {
-  //         case 0:
-  //             this._point = 1;
-  //             this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
-  //             break;
-  //         case 1:
-  //             this._point = 2; // proceed
-  //             break;
-  //         default:
-  //             {
-  //                 let xN, yN, mYb, mYa;
-  //                 if (this._t <= 0) {
-  //                     xN = Math.abs(x - this._x) * 0.25;
-  //                     yN = Math.abs(y - this._y) * 0.25;
-  //                     mYb = (this._y < y) ? this._y + yN : this._y - yN;
-  //                     mYa = (this._y > y) ? y + yN : y - yN;
-  //
-  //                     this._context.quadraticCurveTo(this._x, this._y, this._x, mYb);
-  //                     this._context.lineTo(this._x, mYa);
-  //                     this._context.quadraticCurveTo(this._x, y, this._x + xN, y);
-  //                     this._context.lineTo(x - xN, y);
-  //
-  //                 } else {
-  //                     const x1 = this._x * (1 - this._t) + x * this._t;
-  //
-  //                     xN = Math.abs(x - x1) * 0.25;
-  //                     yN = Math.abs(y - this._y) * 0.25;
-  //                     mYb = (this._y < y) ? this._y + yN : this._y - yN;
-  //                     mYa = (this._y > y) ? y + yN : y - yN;
-  //
-  //                     this._context.quadraticCurveTo(x1, this._y, x1, mYb);
-  //                     this._context.lineTo(x1, mYa);
-  //                     this._context.quadraticCurveTo(x1, y, x1 + xN, y);
-  //                     this._context.lineTo(x - xN, y);
-  //                 }
-  //                 break;
-  //             }
-  //         }
-  //         this._x = x, this._y = y;
-  //     }
-  // };
-  //
-  // const stepRoundAfter = function(context) {
-  //     return new Step(context, 1);
-  // };
 }

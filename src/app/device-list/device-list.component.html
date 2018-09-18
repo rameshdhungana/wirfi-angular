@@ -3,7 +3,6 @@
         <div class="col-md-12  text-white">
             <div class="row">
                 <div class="offset-md-6 col-md-2">
-
                     <button mat-button [matMenuTriggerFor]="presetOptions">Preset &#x25BE;</button>
 
                     <mat-menu #presetOptions="matMenu">
@@ -26,8 +25,8 @@
                         <button mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span>
                         </button>
                     </mat-menu>
-
                 </div>
+
                 <div class="col-md-2">
                     <button mat-button [matMenuTriggerFor]="filterOptions">Filter &#x25BE;</button>
 
@@ -103,10 +102,10 @@
                                     </div>
 
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                        <button *ngIf="device.device_settings?.mute_settings;else firstTimeCreated"
+                                        <button *ngIf="device?.device_settings?.mute_settings; else firstTimeCreated"
                                                 class="dropdown-item"
-                                                (click)="muteDevicePopUp(device.id,!device.device_settings.mute_settings.is_muted,device.device_settings.mute_settings.mute_start,device.device_settings.mute_settings.mute_duration)">
-                                            {{device.device_settings.mute_settings.is_muted ?'UnMute':'Mute'}}
+                                                (click)="muteDevicePopUp(device.id, !device?.device_settings?.mute_settings?.is_muted, device?.device_settings?.mute_settings?.mute_start, device?.device_settings?.mute_settings?.mute_duration)">
+                                            {{device?.device_settings?.mute_settings?.is_muted ?'UnMute':'Mute'}}
                                         </button>
                                         <ng-template #firstTimeCreated>
                                             <button class="dropdown-item" (click)="muteDevicePopUp(device.id,true)">
@@ -122,9 +121,16 @@
                                     <img src={{API_URl}}{{device.machine_photo}}
                                          class="img-fluid mx-auto d-block device-image" style="max-width:200px;">
                                     <div class="card-body">
-                                        <h5 class="card-title"><span>{{device.name}} &#9679; {{device.industry_type.name}}</span>
+                                        <h5 class="card-title">
+                                            <span>{{device.name}} &#9679; {{device.industry_type.name}}</span>
                                         </h5>
                                         <p class="card-text"><span>{{device.address}}</span></p>
+                                        <div *ngIf="(device.device_status | json) != '{}'">
+                                            <h6 class="card-title"><span>{{status_dict[device?.device_status?.status]}} &#9679; {{device?.device_status?.timestamp | timeAgo}}</span>
+                                            </h6>
+                                            Last updated: {{device?.device_status?.timestamp | datetimeformat}}<br>
+                                        </div>
+
                                         <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;
                                         <i class="fas fa-moon"
                                            [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
