@@ -63,7 +63,7 @@ export class DeviceService {
     }
 
     getPresetFilter(id) {
-        this.http.get(`preset-filter/${id}/`);
+        return this.http.get(`preset-filter/${id}/`);
     }
 
     addPresetFilter(data) {

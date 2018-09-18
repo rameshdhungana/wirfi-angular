@@ -54,7 +54,7 @@ export class DeviceListComponent implements OnInit {
             this.industry_type = response['data']['industry_type'];
 
             this.deviceList.next(<Array<any>>response['data']['device']);
-            this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
+            this.reOrderDeviceList();
             console.log(this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
             this.deviceService.getPresetFilterList().subscribe((res: Array<any>) => {
                 console.log(res, 'this is preset checking');
@@ -63,21 +63,9 @@ export class DeviceListComponent implements OnInit {
 
 
             });
-            if (localStorage.getItem('presetFilterSaved')) {
-
-                localStorage.removeItem('presetFilterSaved')
-            }
 
             if (!localStorage.getItem('presetFilterSaved')) {
-                const presetValues = new PresetFilter();
-                presetValues.id = null;
-                presetValues.name = 'Clear';
-                presetValues.sort_type = sortParams['Clear'];
-                presetValues.filter_type = filterParams['Clear'];
-                presetValues.filter_keys = [];
-                localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
-                console.log(localStorage.getItem('presetFilterSaved'));
-                this.presetFilterValue.next(presetValues);
+                this.initializePresetFilterSaved();
 
             }
             else {
@@ -88,6 +76,25 @@ export class DeviceListComponent implements OnInit {
         });
     }
 
+    initializePresetFilterSaved() {
+        const presetValues = new PresetFilter();
+        presetValues.id = null;
+        presetValues.name = 'Clear';
+        presetValues.sort_type = sortParams['Clear'];
+        presetValues.filter_type = filterParams['Clear'];
+        presetValues.filter_keys = [];
+        localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
+        console.log(localStorage.getItem('presetFilterSaved'));
+        this.presetFilterValue.next(presetValues);
+    }
+
+    clearPreset() {
+        this.initializePresetFilterSaved();
+        console.log('preset is cleared', this.presetFilterValue);
+        this.deviceList.next(this.allDeviceList);
+
+        this.reOrderDeviceList();
+    }
 
     muteDevicePopUp(device_id, mute_status, mute_start_date, mute_duration) {
         console.log('test', device_id);
@@ -107,14 +114,27 @@ export class DeviceListComponent implements OnInit {
     changePreset(preset_id) {
         console.log('preset is changed', preset_id);
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
-
+        this.deviceList.next(this.allDeviceList);
         console.log(presetValues);
         presetValues.id = preset_id;
-        this.deviceService.getPresetFilter(preset_id);
+        this.deviceService.getPresetFilter(preset_id).subscribe(response => {
+
+            console.log(response, 'this is after the api call');
+            presetValues.filter_type = response['data']['filter_type'];
+            presetValues.sort_type = response['data']['sort_type'];
+            presetValues.filter_Keys = response['data']['filter_keys'];
+            presetValues.name = response['data']['name'];
+            localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
+            console.log(JSON.parse(localStorage.getItem('presetFilterSaved')), 'this is after storage changed');
+            this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
+            this.reOrderDeviceList();
+
+
+        });
     }
 
     addPresetPopUp() {
-        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'))
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         const data = {
             'filter_type': filterParams[presetValues.filter_type],
             'sort_type': sortParams[presetValues.sort_type]
@@ -239,7 +259,7 @@ export class DeviceListComponent implements OnInit {
                 break;
             }
             case filterParams['Industry']: {
-                this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
+                this.deviceList.next(this.deviceList['value'].filter(device => filterKeys.includes(device.industry_type.id)));
                 console.log('inside  Industry filtering ')
                 break;
             }
