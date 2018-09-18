@@ -2,29 +2,7 @@
     <div class="row pt-4 ">
         <div class="col-md-12  text-white">
             <div class="row">
-                <div class="offset-md-6 col-md-2">
 
-                    <div ngbDropdown>
-                        <div id="preset" ngbDropdownToggle>Preset</div>
-                        <div ngbDropdownMenu aria-labelledby="preset">
-
-                            <button class="dropdown-item">Preset
-
-                    <div ngbDropdown class="d-inline-block">
-                        <div class="setting_icon" id="dropdownBasic1" ngbDropdownToggle><i class="fa fa-cog"></i></div>
-                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-
-                            <button *ngIf="device.device_settings?.mute_settings;else firstTimeCreated" class="dropdown-item"
-                                    (click)="muteDevicePopUp(device.id,!device.device_settings.mute_settings.is_muted,device.device_settings.mute_settings.mute_start,device.device_settings.mute_settings.mute_duration)">
-                                {{device.device_settings.mute_settings.is_muted ?'UnMute':'Mute'}}
-                            </button>
-
-                            <button class="dropdown-item">Another Action</button>
-                            <button class="dropdown-item">Something else is here</button>
-                        </div>
-
-                    </div>
-                </div>
                 <div class="col-md-2">
                     <button mat-button [matMenuTriggerFor]="filterOptions">Filter</button>
 
@@ -74,10 +52,10 @@
                                     </div>
 
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                        <button *ngIf="device.device_settings?.mute_settings;else firstTimeCreated"
+                                        <button *ngIf="device?.device_settings?.mute_settings; else firstTimeCreated"
                                                 class="dropdown-item"
-                                                (click)="muteDevicePopUp(device.id,!device.device_settings.mute_settings.is_muted,device.device_settings.mute_settings.mute_start,device.device_settings.mute_settings.mute_duration)">
-                                            {{device.device_settings.mute_settings.is_muted ?'UnMute':'Mute'}}
+                                                (click)="muteDevicePopUp(device.id, !device?.device_settings?.mute_settings?.is_muted, device?.device_settings?.mute_settings?.mute_start, device?.device_settings?.mute_settings?.mute_duration)">
+                                            {{device?.device_settings?.mute_settings?.is_muted ?'UnMute':'Mute'}}
                                         </button>
                                         <ng-template #firstTimeCreated>
                                             <button class="dropdown-item" (click)="muteDevicePopUp(device.id,true)">
@@ -96,6 +74,12 @@
                                         <h5 class="card-title"><span>{{device.name}} &#9679; {{device.industry_type.name}}</span>
                                         </h5>
                                         <p class="card-text"><span>{{device.address}}</span></p>
+                                        <div *ngIf="(device.device_status | json) != '{}'">
+                                          <h6 class="card-title"><span>{{status_dict[device?.device_status?.status]}} &#9679; {{device?.device_status?.timestamp | timeAgo}}</span>
+                                          </h6>
+                                          Last updated: {{device?.device_status?.timestamp | datetimeformat}}<br>
+                                        </div>
+
                                         <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;
                                         <i class="fas fa-moon" [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
                                         <i class="fas fa-camera" [ngClass]="device?.camera_service?.length == 0 ? 'fa-camera-unavailable' : (!device?.camera_service[0]?.is_on ? 'fa-camera-off' : '')"></i>

@@ -53,6 +53,7 @@ import {IndustryListComponent} from './industry-list/industry-list.component';
 import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from './notification/notification.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { DatetimeformatPipe } from './shared/datetimeformat.pipe';
 
 @NgModule({
     declarations: [
@@ -88,6 +89,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         EditIndustryTypeComponent,
         NotificationComponent,
         TimeAgoPipe,
+        DatetimeformatPipe,
     ],
     imports: [
         BrowserModule,
