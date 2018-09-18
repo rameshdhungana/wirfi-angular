@@ -56,6 +56,7 @@ export class MuteDeviceComponent implements OnInit {
         };
 
         this.muteButtonClicked = true;
+
         this.deviceService.muteDevice(device_id, payload).subscribe(response => {
             console.log(response, 'after mute device called');
             this.dialogService.closeCurrentDialog();

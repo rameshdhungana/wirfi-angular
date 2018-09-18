@@ -1,0 +1,27 @@
+<div class="row justify-content-center align-items-center">
+    <div class="col-12 text-white pb-5 ">
+
+        <button class="float-right" mat-button mat-dialog-close>&#10005;</button>
+        <h5 class="text-center">Add Preset</h5>
+
+
+    </div>
+    <div class="col-md-12 text-center text-white pb-2 ">
+        <form (ngSubmit)="addPresetFilter(presetForm)" #presetForm="ngForm">
+
+            <div class="form-group pb-4">
+                <input class="form-control form-control-lg" type="text" id="preset_name" [required]
+                       placeholder="Enter Name of Preset" [(ngModel)]="presetName" name="preset_name"
+                       #preset_name="ngModel">
+                <div class="text-danger" *ngIf="presetForm.submitted && preset_name.hasError('required')">
+                    <small>
+                        This field is required
+                    </small>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-light btn-block ">Add</button>
+
+        </form>
+
+    </div>
+</div>

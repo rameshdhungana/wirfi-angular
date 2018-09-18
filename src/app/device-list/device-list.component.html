@@ -7,17 +7,32 @@
                     <button mat-button [matMenuTriggerFor]="filterOptions">Filter</button>
 
                     <mat-menu #filterOptions="matMenu">
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear</button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority</button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems</button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise</button>
-                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry</button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Clear']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Priority']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Problems']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Franchise']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry
+                            {{presetFilterValue.value.filter_keys}}
+                        </button>
                     </mat-menu>
 
                     <mat-menu #types_of_industry="matMenu">
-                        <mat-checkbox *ngFor="let type of industry_type" [checked]="true"
-                                      (click)="changeFilterParams(filterParams['Industry'],type.id,$event)">
-                            {{type.name}}
+                        <mat-checkbox *ngFor="let type of industry_type"
+                                      [checked]="presetFilterValue.value.filter_keys.indexOf(type.id)!=-1"
+                                      (click)="changeFilterParams(filterParams['Industry'],type.id)">
+                            {{type.name}}{{presetFilterValue.value.filter_keys.indexOf(type.id)!=-1}}
                         </mat-checkbox>
                     </mat-menu>
 
@@ -28,12 +43,23 @@
                     <button mat-button [matMenuTriggerFor]="sortOptions">Sort</button>
 
                     <mat-menu #sortOptions="matMenu">
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear</button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['NetworkStatus'])">Network Status
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']" class="float-right"><i
+                                class="fa fa-check "></i></span></button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['NetworkStatus'])">Network
+                            Status<span
+                                    *ngIf="presetFilterValue.value.sort_type==sortParams['NetworkStatus']"
+                                    class="float-right"><i
+                                    class="fa fa-check "></i></span>
                         </button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location</button>
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location<span
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['Location']" class="float-right"><i
+                                class="fa fa-check "></i></span></button>
                         <button mat-menu-item (click)="changeSortParams(sortParams['InstallationDate'])">Installation
-                            Date
+                            Date<span
+                                    *ngIf="presetFilterValue.value.sort_type==sortParams['InstallationDate']"
+                                    class="float-right"><i
+                                    class="fa fa-check "></i></span>
                         </button>
                     </mat-menu>
                 </div>
@@ -81,8 +107,10 @@
                                         </div>
 
                                         <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;
-                                        <i class="fas fa-moon" [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
-                                        <i class="fas fa-camera" [ngClass]="device?.camera_service?.length == 0 ? 'fa-camera-unavailable' : (!device?.camera_service[0]?.is_on ? 'fa-camera-off' : '')"></i>
+                                        <i class="fas fa-moon"
+                                           [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
+                                        <i class="fas fa-camera"
+                                           [ngClass]="device?.camera_service?.length == 0 ? 'fa-camera-unavailable' : (!device?.camera_service[0]?.is_on ? 'fa-camera-off' : '')"></i>
                                     </div>
                                 </a>
                             </div>

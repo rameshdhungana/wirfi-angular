@@ -57,4 +57,9 @@ export class DeviceService {
         return this.http.get('preset-filter/');
     }
 
+    addPresetFilter(data) {
+        console.log(data,'tjhis is preset data passed')
+        return this.http.post(`preset-filter/`, data)
+    }
+
 }
