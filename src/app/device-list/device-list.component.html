@@ -4,24 +4,31 @@
             <div class="row">
                 <div class="offset-md-6 col-md-2">
 
-                    <button mat-button [matMenuTriggerFor]="presetOptions">Preset</button>
+                    <button mat-button [matMenuTriggerFor]="presetOptions">Preset  &#x25BE;</button>
 
                     <mat-menu #presetOptions="matMenu">
                         <button mat-menu-item (click)="clearPreset()">Clear<span
                                 *ngIf="presetFilterValue.value.sort_type===sortParams['Clear'] && presetFilterValue.value.filter_type===filterParams['Clear']"
                                 class="float-right"><i
                                 class="fa fa-check "></i></span></button>
-                        <button mat-menu-item *ngFor="let preset of presetList.value" (click)="changePreset(preset.id)">
+                        <div *ngFor="let preset of presetList.value" style="position: relative;">
+                            <button mat-menu-item (click)="changePreset(preset.id)" style="padding-right: 60px;">
                             {{preset.name}}
                             <span *ngIf="presetFilterValue.value.id===preset.id" class="float-right"><i
-                                    class="fa fa-check "></i></span></button>
+                                    class="fa fa-check "></i></span>
+                            </button>
+                            <span class="delete-icon">
+                                <i class="fa fa-trash"></i>
+                            </span>
+
+                        </div>
                         <button mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span>
                         </button>
                     </mat-menu>
 
                 </div>
                 <div class="col-md-2">
-                    <button mat-button [matMenuTriggerFor]="filterOptions">Filter</button>
+                    <button mat-button [matMenuTriggerFor]="filterOptions">Filter  &#x25BE;</button>
 
                     <mat-menu #filterOptions="matMenu">
                         <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear<span
@@ -57,7 +64,7 @@
                 </div>
                 <div class="col-md-2">
 
-                    <button mat-button [matMenuTriggerFor]="sortOptions">Sort</button>
+                    <button mat-button [matMenuTriggerFor]="sortOptions">Sort  &#x25BE;</button>
 
                     <mat-menu #sortOptions="matMenu">
                         <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span

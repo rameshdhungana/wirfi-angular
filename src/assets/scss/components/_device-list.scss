@@ -4,49 +4,69 @@
 }
 
 .fa-camera-unavailable:after, .fa-moon-unavailable:after {
-    position: relative;
-    content: "\\";
-    color: gray;
-    font-weight: 900;
-    font-size: 2em;
-    left: -13px;
-    top: 5px;
-    text-shadow: -1px 2px $body-bg;
+  position: relative;
+  content: "\\";
+  color: gray;
+  font-weight: 900;
+  font-size: 2em;
+  left: -13px;
+  top: 5px;
+  text-shadow: -1px 2px $body-bg;
 }
 
 .fa-camera-unavailable, .fa-moon-unavailable {
-    color:gray;
+  color: gray;
 }
 
-.fa-wifi-off:after, .fa-camera-off:after  {
-    position: relative;
-    content: "\\";
-    color: red;
-    font-weight: 900;
-    font-size: 2em;
-    left: -14px;
-    top: 5px;
-    text-shadow: -1px 2px $body-bg;
+.fa-wifi-off:after, .fa-camera-off:after {
+  position: relative;
+  content: "\\";
+  color: red;
+  font-weight: 900;
+  font-size: 2em;
+  left: -14px;
+  top: 5px;
+  text-shadow: -1px 2px $body-bg;
 }
 
 .fa-wifi-off, .fa-camera-off {
-    color:#FF4500;
+  color: #FF4500;
 }
 
 .fa-wifi-weak {
-    color:yellow;
+  color: yellow;
 }
 
 .fa-wifi-on {
-    color:green;
+  color: green;
 }
 
 .fa-moon-asleep {
-    color:blue;
+  color: blue;
 }
 
 .mat-checkbox {
   display: block;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.delete-icon {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  line-height: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  background: #e6e1df;
+
+  &:hover {
+    background-color: red;
+    color: $white;
+  }
 }
