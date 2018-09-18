@@ -12,6 +12,7 @@ import {NgForm} from "@angular/forms";
 })
 export class PresetFilterComponent implements OnInit {
     public presetName: string;
+    public nameAlreadyExists = false;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                 private dialogService: MaterialDialogService,
@@ -34,8 +35,14 @@ export class PresetFilterComponent implements OnInit {
                 'filter_keys': presetValues.filter_keys,
             };
             this.deviceService.addPresetFilter(preset).subscribe(response => {
-                console.log(response, 'preset is created ');
-            });
+                    console.log(response, 'preset is created ');
+                    this.deviceService.getPresetFilterList();
+                    this.dialogService.closeCurrentDialog();
+                },
+                error2 => {
+                    this.nameAlreadyExists = true;
+                }
+            );
         }
     }
 }

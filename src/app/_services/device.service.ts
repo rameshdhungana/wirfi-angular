@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
+import {BehaviorSubject} from "rxjs/Rx";
 
 @Injectable()
 export class DeviceService {
-    public getIndustryType = new Subject<Object>();
+    public presetList = new BehaviorSubject<Array<any>>([]);
 
     constructor(private http: HttpClient) {
     }
@@ -50,15 +51,23 @@ export class DeviceService {
     }
 
     muteDevice(id, data) {
-      return this.http.post(`device/${id}/mute/`, data);
+        return this.http.post(`device/${id}/mute/`, data);
     }
 
-    getPresetFilter() {
-        return this.http.get('preset-filter/');
+    getPresetFilterList() {
+
+        this.http.get('preset-filter/').subscribe(response => {
+            this.presetList.next(<Array<any>> response);
+        });
+        return this.presetList
+    }
+
+    getPresetFilter(id) {
+        this.http.get(`preset-filter/${id}/`);
     }
 
     addPresetFilter(data) {
-        console.log(data,'tjhis is preset data passed')
+        console.log(data, 'tjhis is preset data passed');
         return this.http.post(`preset-filter/`, data)
     }
 

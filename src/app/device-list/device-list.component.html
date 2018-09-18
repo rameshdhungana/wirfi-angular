@@ -7,10 +7,10 @@
                     <button mat-button [matMenuTriggerFor]="presetOptions">Preset</button>
 
                     <mat-menu #presetOptions="matMenu">
-                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span
-                                *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']" class="float-right"><i
+                        <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">None<span
+                                *ngIf="presetFilterValue.value.name==='Clear'" class="float-right"><i
                                 class="fa fa-check "></i></span></button>
-                        <button mat-menu-item *ngFor="let preset of preset_list" (click)="changePreset(preset.id)">
+                        <button mat-menu-item *ngFor="let preset of presetList.value" (click)="changePreset(preset.id)">
                             {{preset.name}}{{presetFilterValue.value.id===preset.id}}<span
                                 *ngIf="presetFilterValue.value.id===preset.id" class="float-right"><i
                                 class="fa fa-check "></i></span></button>

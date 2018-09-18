@@ -1,22 +1,32 @@
 <div class="row justify-content-center align-items-center">
-    <div class="col-12 text-white pb-5 ">
+    <div class="col-12 text-white pb-3 ">
 
         <button class="float-right" mat-button mat-dialog-close>&#10005;</button>
         <h5 class="text-center">Add Preset</h5>
 
 
     </div>
-    <div class="col-md-12 text-center text-white pb-2 ">
+    <div class="col-md-12 text-white pb-3">
+        <span class="text-white pr-3">Sort Type:  {{data.sort_type}}</span>
+        <span class=" text-white ">Filter Type:  {{data.filter_type}}</span>
+    </div>
+    <div class="col-md-12 text-center text-white ">
+
         <form (ngSubmit)="addPresetFilter(presetForm)" #presetForm="ngForm">
 
             <div class="form-group pb-4">
-                <input class="form-control form-control-lg" type="text" id="preset_name" [required]
+                <input class="form-control form-control-lg" type="text" id="preset_name" required
                        placeholder="Enter Name of Preset" [(ngModel)]="presetName" name="preset_name"
                        #preset_name="ngModel">
-                <div class="text-danger" *ngIf="presetForm.submitted && preset_name.hasError('required')">
-                    <small>
-                        This field is required
-                    </small>
+                <div class="text-danger text-right" *ngIf="presetForm.submitted && preset_name.hasError('required')">
+                    <span>
+                        This field is required.
+                    </span>
+                </div>
+                <div class="text-danger text-right" *ngIf="nameAlreadyExists">
+                    <span>
+                        This preset name already exits.
+                    </span>
                 </div>
             </div>
             <button type="submit" class="btn btn-lg btn-light btn-block ">Add</button>

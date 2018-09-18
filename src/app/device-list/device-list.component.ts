@@ -37,7 +37,8 @@ export class DeviceListComponent implements OnInit {
     public sortParams: any;
     public filterParams: any;
     public industry_type: Array<any>;
-    public preset_list: Array<any>;
+    public presetList = new BehaviorSubject<Array<any>>([]);
+
 
     constructor(private deviceService: DeviceService,
                 private dialogService: MaterialDialogService) {
@@ -55,16 +56,22 @@ export class DeviceListComponent implements OnInit {
             this.deviceList.next(<Array<any>>response['data']['device']);
             this.deviceList['value'].sort((a, b) => a.industry_type.name.localeCompare(b.industry_type.name));
             console.log(this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
+            this.deviceService.getPresetFilterList().subscribe((res: Array<any>) => {
+                console.log(res, 'this is preset checking');
+                this.presetList.next(res['data']);
+                console.log(this.presetList, 'this is preset list man');
 
-            this.deviceService.getPresetFilter().subscribe(res => {
-                console.log(res['data'], 'this is preset list man');
-                this.preset_list = res['data']
 
             });
+            if (localStorage.getItem('presetFilterSaved')) {
+
+                localStorage.removeItem('presetFilterSaved')
+            }
+
             if (!localStorage.getItem('presetFilterSaved')) {
                 const presetValues = new PresetFilter();
                 presetValues.id = null;
-                presetValues.name = null;
+                presetValues.name = 'Clear';
                 presetValues.sort_type = sortParams['Clear'];
                 presetValues.filter_type = filterParams['Clear'];
                 presetValues.filter_keys = [];
@@ -80,6 +87,7 @@ export class DeviceListComponent implements OnInit {
             }
         });
     }
+
 
     muteDevicePopUp(device_id, mute_status, mute_start_date, mute_duration) {
         console.log('test', device_id);
@@ -99,17 +107,24 @@ export class DeviceListComponent implements OnInit {
     changePreset(preset_id) {
         console.log('preset is changed', preset_id);
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
+
         console.log(presetValues);
+        presetValues.id = preset_id;
+        this.deviceService.getPresetFilter(preset_id);
     }
 
     addPresetPopUp() {
-        const data = {};
+        const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'))
+        const data = {
+            'filter_type': filterParams[presetValues.filter_type],
+            'sort_type': sortParams[presetValues.sort_type]
+        };
         const modalSize = {
             'height': '325px',
             'width': '450px',
         };
         console.log(PresetFilterComponent);
-        this.dialogService.openDialog(PresetFilterComponent, data, modalSize)
+        this.dialogService.openDialog(PresetFilterComponent, data, modalSize);
     }
 
 
