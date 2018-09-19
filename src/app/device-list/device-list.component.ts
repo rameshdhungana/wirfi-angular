@@ -60,11 +60,8 @@ export class DeviceListComponent implements OnInit {
 
             this.deviceList.next(<Array<any>>response['data']['device']);
             this.reOrderDeviceList();
-            console.log(this.presetFilterValue['value'], 'subject behaviour', this.deviceList['value']);
             this.deviceService.getPresetFilterList().subscribe((res: Array<any>) => {
-                console.log(res, 'this is preset checking');
                 this.presetList.next(res['data']);
-                console.log(this.presetList, 'this is preset list man');
 
 
             });
@@ -93,20 +90,17 @@ export class DeviceListComponent implements OnInit {
         presetValues.filter_type = filterParams['Clear'];
         presetValues.filter_keys = [];
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
-        console.log(localStorage.getItem('presetFilterSaved'));
         this.presetFilterValue.next(presetValues);
     }
 
     clearPreset() {
         this.initializePresetFilterSaved();
-        console.log('preset is cleared', this.presetFilterValue);
         this.deviceList.next(this.allDeviceList);
 
         this.reOrderDeviceList();
     }
 
     muteDevicePopUp(device_id, mute_status, mute_start_date, mute_duration) {
-        console.log('test', device_id);
         const data = {
             'device_id': device_id,
             'is_muted': mute_status,
@@ -121,20 +115,16 @@ export class DeviceListComponent implements OnInit {
     }
 
     changePreset(preset_id) {
-        console.log('preset is changed', preset_id);
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         this.deviceList.next(this.allDeviceList);
-        console.log(presetValues);
         presetValues.id = preset_id;
         this.deviceService.getPresetFilter(preset_id).subscribe(response => {
 
-            console.log(response, 'this is after the api call');
             presetValues.filter_type = response['data']['filter_type'];
             presetValues.sort_type = response['data']['sort_type'];
             presetValues.filter_keys = response['data']['filter_keys'];
             presetValues.name = response['data']['name'];
             localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
-            console.log(JSON.parse(localStorage.getItem('presetFilterSaved')), 'this is after storage changed');
             this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
             this.reOrderDeviceList();
 
@@ -161,14 +151,11 @@ export class DeviceListComponent implements OnInit {
     ifPresetAlreadyExists() {
         const presetValues = JSON.parse(localStorage.getItem('tempPresetFilterSaved'));
         const alreadyExisted = this.presetList['value'].filter(preset => preset.filter_type == presetValues.filter_type && preset.sort_type == presetValues.sort_type && preset.filter_keys.toString() == presetValues.filter_keys.toLocaleString());
-        console.log('checking it again if preset is already', alreadyExisted)
         if (alreadyExisted.length) {
-            console.log('yes alread')
             return false
 
         }
         else {
-            console.log('no alread')
 
             return true
         }
@@ -186,7 +173,6 @@ export class DeviceListComponent implements OnInit {
             'height': '325px',
             'width': '450px',
         };
-        console.log(PresetFilterComponent);
         this.dialogService.openDialog(PresetFilterComponent, data, modalSize);
     }
 
@@ -199,7 +185,6 @@ export class DeviceListComponent implements OnInit {
         localStorage.setItem('tempPresetFilterSaved', JSON.stringify(presetValues));
 
 
-        console.log(localStorage.getItem('presetFilterSaved'));
         this.deviceList.next(this.allDeviceList);
         this.reOrderDeviceList();
 
@@ -208,23 +193,17 @@ export class DeviceListComponent implements OnInit {
     getCurrentLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition.bind(this));
-        } else {
-            console.log('Geolocation is not supported by this browser.');
         }
 
         function showPosition(position) {
-            console.log('latitude', position.coords.latitude);
-            console.log('longitude', position.coords.longitude);
 
             this.currentLatitude = position.coords.latitude;
             this.currentLongitude = position.coords.longitude;
-            console.log(this.currentLatitude, this.currentLongitude);
             this.deviceList.next(this.deviceList['value'].sort((b, a) =>
                 // this.distanceCalculation(a.latitude, a.longitude, 40.85199, -74)
                 // .localeCompare(this.distanceCalculation(b.latitude, b.longitude, 27.7151639, 85))));
                 this.distanceCalculation(a.latitude, a.longitude, position.coords.latitude, position.coords.longitude)
                     .localeCompare(this.distanceCalculation(b.latitude, b.longitude, position.coords.latitude, position.coords.longitude))));
-            console.log(this.deviceList['value'], 'this is last line');
         }
     }
 
@@ -249,11 +228,9 @@ export class DeviceListComponent implements OnInit {
 
 
     changeFilterParams(filterParam, filter_key = null) {
-        console.log(filterParam, filter_key);
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
         if (filter_key) {
-            console.log((this.presetFilterValue.value.filter_keys.indexOf(filter_key) == -1), 'this is checking of checkbox');
             if (this.presetFilterValue.value.filter_keys.indexOf(filter_key) == -1) {
                 presetValues['filter_keys'].push(filter_key);
 
@@ -269,18 +246,13 @@ export class DeviceListComponent implements OnInit {
         localStorage.setItem('tempPresetFilterSaved', JSON.stringify(presetValues));
 
 
-        console.log(JSON.parse(localStorage.getItem('presetFilterSaved')));
         this.deviceList.next(this.allDeviceList);
         this.reOrderDeviceList();
     }
 
     reOrderDeviceList() {
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
-        console.log(presetValues);
-        console.log(this.deviceList['value']);
         this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
-        // this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
-        // console.log(filtered, filtered2);
 
         const filterType = presetValues['filter_type'];
         const filterKeys = presetValues['filter_keys'];
@@ -292,50 +264,41 @@ export class DeviceListComponent implements OnInit {
             }
             case filterParams['Priority']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-                console.log('inside  Priority filtering ');
                 break;
 
             }
             case filterParams['Problems']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-                console.log('inside  Problems filtering ');
                 break;
             }
             case filterParams['Franchise']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
-                console.log('inside  Franchise filtering ');
                 break;
             }
             case filterParams['Industry']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => filterKeys.includes(device.industry_type.id)));
-                console.log('inside  Industry filtering ')
                 break;
             }
         }
-        console.log(presetValues['sort_type'], sortParams['Clear']);
 
         const sortType = presetValues['sort_type'];
         switch (sortType) {
 
             case sortParams['Clear']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
-                console.log('inside clear sorting');
                 break;
             }
 
             case sortParams['NetworkStatus']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
-                console.log('inside network status sorting');
                 break;
             }
             case sortParams['Location']: {
-                console.log(this.deviceList['value'], 547093475);
                 this.getCurrentLocation();
                 break;
             }
             case sortParams['InstallationDate']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => b.created_at.localeCompare(a.created_at)));
-                console.log('inside installation date sorting', this.deviceList['value']);
 
                 break;
             }
