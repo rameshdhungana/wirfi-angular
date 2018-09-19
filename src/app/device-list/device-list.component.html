@@ -22,7 +22,7 @@
                             </span>
 
                         </div>
-                        <button mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span>
+                        <button *ngIf="ifPresetAlreadyExists()" mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span>
                         </button>
                     </mat-menu>
                 </div>

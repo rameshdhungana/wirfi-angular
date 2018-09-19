@@ -3,5 +3,5 @@ export class PresetFilter {
     name: string;
     filter_type: number;
     sort_type: number;
-    filter_keys: Array<any>;
+    filter_keys: Array<number>;
 }

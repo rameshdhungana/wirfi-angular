@@ -39,6 +39,8 @@ export class DeviceListComponent implements OnInit {
     public filterParams: any;
     public industry_type: Array<any>;
     public presetList = new BehaviorSubject<Array<any>>([]);
+    //tempPresetFilterSaved is to used to validate if preset with currently selected sort_type , filter_type and filter_keys already exists
+    public tempPresetFilterSaved = new BehaviorSubject(new PresetFilter());
 
     public status_dict: any;
 
@@ -66,7 +68,11 @@ export class DeviceListComponent implements OnInit {
 
 
             });
+            if (!localStorage.getItem('tempPresetFilterSaved')) {
 
+                localStorage.setItem('tempPresetFilterSaved', JSON.stringify(new PresetFilter()));
+
+            }
             if (!localStorage.getItem('presetFilterSaved')) {
                 this.initializePresetFilterSaved();
 
@@ -125,7 +131,7 @@ export class DeviceListComponent implements OnInit {
             console.log(response, 'this is after the api call');
             presetValues.filter_type = response['data']['filter_type'];
             presetValues.sort_type = response['data']['sort_type'];
-            presetValues.filter_Keys = response['data']['filter_keys'];
+            presetValues.filter_keys = response['data']['filter_keys'];
             presetValues.name = response['data']['name'];
             localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
             console.log(JSON.parse(localStorage.getItem('presetFilterSaved')), 'this is after storage changed');
@@ -152,6 +158,24 @@ export class DeviceListComponent implements OnInit {
 
     }
 
+    ifPresetAlreadyExists() {
+        const presetValues = JSON.parse(localStorage.getItem('tempPresetFilterSaved'));
+        const alreadyExisted = this.presetList['value'].filter(preset => preset.filter_type == presetValues.filter_type && preset.sort_type == presetValues.sort_type && preset.filter_keys.toString() == presetValues.filter_keys.toLocaleString());
+        console.log('checking it again if preset is already', alreadyExisted)
+        if (alreadyExisted.length) {
+            console.log('yes alread')
+            return false
+
+        }
+        else {
+            console.log('no alread')
+
+            return true
+        }
+
+
+    }
+
     addPresetPopUp() {
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         const data = {
@@ -172,6 +196,8 @@ export class DeviceListComponent implements OnInit {
         presetValues['sort_type'] = sortParam;
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
+        localStorage.setItem('tempPresetFilterSaved', JSON.stringify(presetValues));
+
 
         console.log(localStorage.getItem('presetFilterSaved'));
         this.deviceList.next(this.allDeviceList);
@@ -240,6 +266,8 @@ export class DeviceListComponent implements OnInit {
         }
         localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
         this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
+        localStorage.setItem('tempPresetFilterSaved', JSON.stringify(presetValues));
+
 
         console.log(JSON.parse(localStorage.getItem('presetFilterSaved')));
         this.deviceList.next(this.allDeviceList);
