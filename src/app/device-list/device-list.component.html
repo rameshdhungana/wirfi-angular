@@ -22,7 +22,8 @@
                             </span>
 
                         </div>
-                        <button *ngIf="ifPresetAlreadyExists()" mat-menu-item (click)="addPresetPopUp()"><span class="text-primary font-weight-bold">Add Preset</span>
+                        <button *ngIf="ifPresetAlreadyExists()" mat-menu-item (click)="addPresetPopUp()"><span
+                                class="text-primary font-weight-bold">Add Preset</span>
                         </button>
                     </mat-menu>
                 </div>
@@ -47,17 +48,21 @@
                                 *ngIf="presetFilterValue.value.filter_type==filterParams['Franchise']"
                                 class="float-right"><i
                                 class="fa fa-check "></i></span></button>
-                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry
-                            {{presetFilterValue.value.filter_keys}}
+                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry<span
+                                *ngIf="presetFilterValue.value.filter_type==filterParams['Industry']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span>
+
                         </button>
                     </mat-menu>
 
                     <mat-menu #types_of_industry="matMenu">
-                        <mat-checkbox *ngFor="let type of industry_type"
-                                      [checked]="presetFilterValue.value.filter_keys.indexOf(type.id)!=-1"
-                                      (click)="changeFilterParams(filterParams['Industry'],type.id)">
-                            {{type.name}}{{presetFilterValue.value.filter_keys.indexOf(type.id)!=-1}}
-                        </mat-checkbox>
+                        <button mat-menu-item *ngFor="let type of industry_type"
+                                (click)="changeFilterParams(filterParams['Industry'],type.id)">
+                            {{type.name}}
+                            <span *ngIf="presetFilterValue.value.filter_keys.indexOf(type.id)!=-1"
+                                  class="float-right"><i class="fa fa-check "></i></span>
+                        </button>
                     </mat-menu>
 
 
