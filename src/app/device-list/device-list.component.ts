@@ -108,8 +108,8 @@ export class DeviceListComponent implements OnInit {
             'mute_duration': mute_duration,
         };
         const modalSize = {
-            'height': '325px',
-            'width': '450px'
+            'height': 'auto',
+            'width': 'auto'
         };
         this.dialogService.openDialog(MuteDeviceComponent, data, modalSize);
     }
@@ -197,7 +197,7 @@ export class DeviceListComponent implements OnInit {
 
             this.currentLatitude = position.coords.latitude;
             this.currentLongitude = position.coords.longitude;
-            this.deviceList.next(this.deviceList['value'].sort((b, a) =>
+            this.deviceList.next(this.deviceList['value'].sort((a, b) =>
                 // this.distanceCalculation(a.latitude, a.longitude, 40.85199, -74)
                 // .localeCompare(this.distanceCalculation(b.latitude, b.longitude, 27.7151639, 85))));
                 this.distanceCalculation(a.latitude, a.longitude, position.coords.latitude, position.coords.longitude)
