@@ -275,7 +275,7 @@ export class DeviceInfoComponent  implements OnInit {
               this.device_id = response['data']['id'];
               this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
                 res => {
-                  this.messageservice.add('succesfully registered');
+                  this.messageservice.add(response['message']);
                   this.router.navigateByUrl(`device/` + this.device_id);
               });
            },

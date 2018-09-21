@@ -1,11 +1,7 @@
 <div class="row justify-content-center align-items-center">
-    <div class="col-12 text-center text-white ">
-
-        <button class="pull-right " mat-button mat-dialog-close>&#10005;</button>
+    <div class="col-md-12 text-center text-white ">
         <h5 *ngIf="data.is_muted" class="pb-1">Enter Mute Duration</h5>
         <h5 *ngIf="!data.is_muted"> Are you sure you want to UnMute Device?</h5>
-
-
     </div>
     <div class="col-md-12 text-center text-white pb-2">
         <form *ngIf="data.is_muted ;else unMuteConfirmation" #muteDeviceForm='ngForm'
@@ -22,10 +18,10 @@
             </button>
         </form>
         <ng-template #unMuteConfirmation>
-            <div class="d-block pt-5">
-                <p class="pb-5">Device is Muted Until: {{mutedUntil|date :"dd MMM HH:mm"}}</p>
+            <div class="d-block pt-3">
+                <p class="pb-3">Device is Muted Until: {{mutedUntil|date :"dd MMM HH:mm"}}</p>
                 <button (click)="unMuteDevice(data.device_id,data.is_muted)" [disabled]="muteButtonClicked"
-                        type="submit" class=" pt-3 btn  btn-light">UnMute
+                        type="submit" class="btn btn-light">UnMute
                     <i *ngIf="muteButtonClicked" class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
                 </button>
             </div>
