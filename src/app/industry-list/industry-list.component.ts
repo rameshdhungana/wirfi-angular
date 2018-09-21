@@ -30,8 +30,8 @@ export class IndustryListComponent implements OnInit {
   addDevice() {
     const data = {};
     const modalSize = {
-      'height':'auto',
-      'width':'auto'
+      'height': 'auto',
+      'width': 'auto'
     }
     this.dialogService.openDialog(AddIndustryTypeComponent, data, modalSize);
   }
