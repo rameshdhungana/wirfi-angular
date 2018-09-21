@@ -154,9 +154,8 @@ export class DeviceListComponent implements OnInit {
         if (alreadyExisted.length) {
             return false;
 
-        } else {
-            return true;
         }
+        return true;
 
 
     }
