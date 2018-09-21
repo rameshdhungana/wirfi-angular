@@ -152,12 +152,10 @@ export class DeviceListComponent implements OnInit {
         const presetValues = JSON.parse(localStorage.getItem('tempPresetFilterSaved'));
         const alreadyExisted = this.presetList['value'].filter(preset => preset.filter_type == presetValues.filter_type && preset.sort_type == presetValues.sort_type && preset.filter_keys.toString() == presetValues.filter_keys.toLocaleString());
         if (alreadyExisted.length) {
-            return false
+            return false;
 
-        }
-        else {
-
-            return true
+        } else {
+            return true;
         }
 
 
@@ -231,13 +229,10 @@ export class DeviceListComponent implements OnInit {
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
         if (filter_key) {
-            if (this.presetFilterValue.value.filter_keys.indexOf(filter_key) == -1) {
+            if (this.presetFilterValue.value.filter_keys.indexOf(filter_key) === -1) {
                 presetValues['filter_keys'].push(filter_key);
-
-            }
-            else {
+            } else {
                 presetValues['filter_keys'].pop(filter_key);
-
             }
 
         }
@@ -252,20 +247,17 @@ export class DeviceListComponent implements OnInit {
 
     reOrderDeviceList() {
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
-        this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true);
 
         const filterType = presetValues['filter_type'];
         const filterKeys = presetValues['filter_keys'];
         switch (filterType) {
             case filterParams['Clear']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
-
                 break;
             }
             case filterParams['Priority']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
                 break;
-
             }
             case filterParams['Problems']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
