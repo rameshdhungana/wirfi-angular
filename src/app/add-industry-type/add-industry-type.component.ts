@@ -21,11 +21,9 @@ export class AddIndustryTypeComponent implements OnInit {
   ngOnInit() {
   }
   industryTypeForm(data: NgForm) {
-    console.log(data.value);
     this.industryTypeService.postIndustry(data.value).subscribe(
       response => {
-        console.log(response);
-        this.messageService.add('added industry type');
+        this.messageService.add(response['message']);
         this.industryTypeService.getIndustryList();
         this.dialogService.closeCurrentDialog();
       }

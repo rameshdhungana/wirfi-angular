@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material";
-import {MaterialDialogService} from "../_services/material-dialog.service";
-import {MessageService} from "../_services/message.service";
-import {DeviceService} from "../_services/device.service";
-import {NgForm} from "@angular/forms";
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {MaterialDialogService} from '../_services/material-dialog.service';
+import {MessageService} from '../_services/message.service';
+import {DeviceService} from '../_services/device.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-preset-filter',
@@ -20,9 +20,7 @@ export class PresetFilterComponent implements OnInit {
                 private messageService: MessageService) {
     }
 
-    ngOnInit() {
-        console.log('i am preset filter component guys')
-    }
+    ngOnInit() { }
 
     addPresetFilter(data: NgForm) {
 
@@ -35,7 +33,6 @@ export class PresetFilterComponent implements OnInit {
                 'filter_keys': presetValues.filter_keys,
             };
             this.deviceService.addPresetFilter(preset).subscribe(response => {
-                    console.log(response, 'preset is created ');
                     this.deviceService.getPresetFilterList();
                     this.dialogService.closeCurrentDialog();
                 },

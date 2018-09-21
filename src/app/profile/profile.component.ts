@@ -7,16 +7,15 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  public loading:boolean=false;
-  person:object;
+  public loading = false;
+  person: object;
 
-  constructor(private authService:AuthenticationService) { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.authService.me().subscribe( response=>{
+    this.authService.me().subscribe(response => {
       this.person = response['data'];
-      this.loading=true;
-      console.log("test",this.person);
+      this.loading = true;
     });
   }
 

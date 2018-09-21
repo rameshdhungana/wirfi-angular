@@ -15,7 +15,7 @@ export class ResetPasswordComponent implements OnInit {
     private token: string;
     public email: string;
     public valid_url: boolean;
-    public loading: boolean = true;
+    public loading = true;
     public resetButtonClicked = false;
 
     constructor(private authService: AuthenticationService,
@@ -63,7 +63,7 @@ export class ResetPasswordComponent implements OnInit {
                     }
                 },
                 error => {
-                    this.messageService.add("Something went wrong");
+                    this.messageService.add('Something went wrong');
                     this.resetButtonClicked = false;
 
                 }

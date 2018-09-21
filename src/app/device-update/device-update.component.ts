@@ -21,8 +21,7 @@ export class DeviceUpdateComponent implements OnInit {
       console.log(this.device_id);
   }
 
-  onSubmit(data:NgForm) {
-      console.log(data.value)
+  onSubmit(data: NgForm) {
       if (data.valid) {
           this.device.updateDeviceDetail(data, '35').subscribe(
               (response) => {
@@ -30,11 +29,10 @@ export class DeviceUpdateComponent implements OnInit {
                   this.router.navigateByUrl(`device/${this.device_id}/setup`);
               }
           );
-      };
+      }
   }
 
   onCancel() {
-    console.log('Cancel btn clicked.')
     this.device.getDevice(this.device_id).subscribe(
         (response) => {
             localStorage.removeItem('device_id');

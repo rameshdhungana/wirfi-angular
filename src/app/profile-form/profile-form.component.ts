@@ -16,20 +16,20 @@ export class ProfileFormComponent implements OnInit {
   private user_email: string;
   formData = new FormData();
   fileImage: File;
-  fileImage_name:string;
-  activate_image_file:boolean = true;
+  fileImage_name: string;
+  activate_image_file = true;
   public user = {
     'first_name': '',
     'last_name': '',
-    'email':'',
+    'email': '',
     'profile': {
       'address': '',
       'phone_number': '',
-      'profile_picture':''
+      'profile_picture': ''
     }
   };
 
-  private subscription:Subscription
+  private subscription: Subscription;
 
   constructor(
       private userService: UserService,
@@ -39,21 +39,21 @@ export class ProfileFormComponent implements OnInit {
   ) {}
 
     ngOnInit() {
-      console.log(this.authService.me())
+      console.log(this.authService.me());
       this.authService.me().subscribe(
           response => {
             console.log(response);
           this.user_id = response['data']['id'];
           this.user_email = response['data']['email'];
           this.user.email = response['data']['email'];
-          this.user.first_name = response['data']['first_name']
-          this.user.last_name = response['data']['last_name']
-          if (response['data']['profile']!==null){
+          this.user.first_name = response['data']['first_name'];
+          this.user.last_name = response['data']['last_name'];
+          if (response['data']['profile'] !== null) {
             this.activate_image_file = true;
-          this.user.profile.address = response['data']['profile']['address']
-          this.user.profile.phone_number = response['data']['profile']['phone_number']
-          this.user.profile.profile_picture=response['data']['profile']['profile_picture']
-        }else{
+          this.user.profile.address = response['data']['profile']['address'];
+          this.user.profile.phone_number = response['data']['profile']['phone_number'];
+          this.user.profile.profile_picture = response['data']['profile']['profile_picture'];
+        } else {
           this.activate_image_file = false;
         }
         });
@@ -61,43 +61,42 @@ export class ProfileFormComponent implements OnInit {
     urls = new Array<string>();
     detectFiles(event) {
       this.urls = [];
-      let files = event.target.files;
+      const files = event.target.files;
       if (files) {
-        for (let file of files) {
-          let reader = new FileReader();
+        for (const file of files) {
+          const reader = new FileReader();
           reader.onload = (e: any) => {
             this.urls.push(e.target.result);
-          }
+          };
           reader.readAsDataURL(file);
         }
       }
     }
 
     onChangeImage(event: EventTarget) {
-      let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-      let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-      let files: FileList = target.files;
+      const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+      const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+      const files: FileList = target.files;
       this.fileImage = files[0];
-      this.fileImage_name=files[0].name;
+      this.fileImage_name = files[0].name;
       console.log(this.fileImage);
   }
 
     userInfo(data: NgForm) {
-     
-      if(data.valid){
+      if (data.valid) {
         this.user['first_name'] = data.value['first_name'];
         this.user['last_name'] = data.value['last_name'];
         this.user['profile']['address'] = data.value['address'];
         this.user['profile']['phone_number'] = data.value['phone_number'];
-  
+
         this.userService.updateUser(this.user, this.user_id).subscribe(
           response => {
             console.log(response);
             console.log(this.fileImage_name);
-            if(this.fileImage_name==undefined){
+            if (this.fileImage_name === undefined) {
               this.messageService.add('succesfully registered');
               this.routeService.navigateByUrl('profile');
-            }else{
+            } else {
               this.formData.append('profile_picture', this.fileImage);
               console.log(this.formData);
             this.userService.uploadProfile(this.formData, this.user_id).subscribe(
@@ -107,11 +106,11 @@ export class ProfileFormComponent implements OnInit {
                 }
             );
             }
-          
+
           }
         );
 
       }
-     
+
     }
 }

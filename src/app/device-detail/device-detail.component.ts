@@ -13,7 +13,7 @@ export class DeviceDetailComponent implements OnInit {
     public device_data: any;
     lat: number;
     lng: number;
-    enable:boolean;
+    enable: boolean;
     loading = false;
 
     manualUpdate = false;
@@ -24,50 +24,41 @@ export class DeviceDetailComponent implements OnInit {
     constructor(private deviceService: DeviceService,
                 private router: Router,
                 private route: ActivatedRoute,
-                private messageService: MessageService) {
-       
-    }
-   
+                private messageService: MessageService) { }
 
     ngOnInit() {
         this.device_id = this.route.snapshot.paramMap.get('id');
         this.counter = [0, 1, 2, 3, 4];
         this.test_video_source = [
-            "https://www.w3schools.com/html/movie.mp4",
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-            "https://www.w3schools.com/html/movie.mp4",
-            "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+            'https://www.w3schools.com/html/movie.mp4',
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            'https://www.w3schools.com/html/movie.mp4',
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
         ];
         this.videoToPlay = this.test_video_source[0];
 
 
         this.deviceService.getDevice(this.device_id).subscribe(response => {
             this.device_data = response;
-            this.lat = response['data']['latitude']
-            this.lng = response['data']['longitude']
-            this.enable= response['data']['priority']
-            console.log(response);
-            console.log(this.enable);
-        this.loading =true;
+            this.lat = response['data']['latitude'];
+            this.lng = response['data']['longitude'];
+            this.enable = response['data']['priority'];
+        this.loading = true;
         });
     }
     onClickMe() {
-        this.deviceService.togglePriority(this.device_id,{'priority':this.enable}).subscribe(
-            (response)=>{
+        this.deviceService.togglePriority(this.device_id, {'priority': this.enable}).subscribe(
+            (response) => {
                 console.log(response);
-                this.messageService.add(response['message'])
+                this.messageService.add(response['message']);
             }
-        )
+        );
       }
- 
-          
-
-   
 
     playThisVideo(src) {
         this.videoToPlay = this.test_video_source[src];
-        console.log(this.videoToPlay)
+        console.log(this.videoToPlay);
 
     }
 

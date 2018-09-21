@@ -21,7 +21,6 @@ export class BusinessListComponent implements OnInit {
 
         console.log(this.bussinessService.getBusiness().subscribe(
             (response) => {
-                console.log(response);
                 this.business_info = response;
             }
         ));
