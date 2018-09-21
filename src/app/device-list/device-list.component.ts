@@ -148,9 +148,8 @@ export class DeviceListComponent implements OnInit {
         if (alreadyExisted.length) {
             return false;
 
-        } else {
-            return true;
         }
+        return true;
 
     }
 
@@ -221,11 +220,14 @@ export class DeviceListComponent implements OnInit {
     changeFilterParams(filterParam, filter_key = null) {
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         presetValues['filter_type'] = filterParam;
+        const index = this.presetFilterValue.value.filter_keys.indexOf(filter_key);
         if (filter_key) {
-            if (this.presetFilterValue.value.filter_keys.indexOf(filter_key) === -1) {
+            if (index === -1) {
+
                 presetValues['filter_keys'].push(filter_key);
             } else {
-                presetValues['filter_keys'].pop(filter_key);
+
+                presetValues['filter_keys'].splice(index, 1);
             }
 
         }
