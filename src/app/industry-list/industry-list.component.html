@@ -1,16 +1,17 @@
-<div class="container-fluid device-container" >
-  <div class=" d-flex justify-content-center">
-    <div class="w-50 mt-5 text-white">
-     <button (click) ="addDevice()" class="btn btn-primary">Add Industry Type</button><br>
-      <div class="card" *ngFor="let industry_type of industry_list">
-        <div class="card-body">
-          <span class="nav-item-text">{{industry_type.name}}</span>
-          <span class="float-right" *ngIf="industry_type.is_user_created">
+<div class="container-fluid device-container">
+    <div class=" d-flex justify-content-center">
+        <div class="w-50 mt-5 text-white">
+            <button (click)="addIndustryTypePopUp()" class="btn btn-primary">Add Industry Type</button>
+            <br>
+            <div class="card" *ngFor="let industry_type of industry_list">
+                <div class="card-body">
+                    <span class="nav-item-text">{{industry_type.name}}</span>
+                    <span class="float-right" *ngIf="industry_type.is_user_created">
             <i class="fa fa-fw fa-pencil mr-1" (click)="onClickEdit(industry_type.id)"></i>
             <i class="fa fa-fw fa-trash" (click)="onClickDelete(industry_type.id)"></i>
           </span>
-         </div>
-      </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

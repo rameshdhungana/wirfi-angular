@@ -27,7 +27,7 @@ export class IndustryListComponent implements OnInit {
       }
     );
   }
-  addDevice() {
+  addIndustryTypePopUp() {
     const data = {};
     const modalSize = {
       'height': 'auto',
