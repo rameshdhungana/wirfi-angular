@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MatDialog, MatDialogRef} from "@angular/material";
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Injectable({
     providedIn: 'root'
@@ -10,9 +10,7 @@ export class MaterialDialogService {
     constructor(private dialog: MatDialog) {
     }
 
-
     openDialog(dialogComponent, data, modalSize) {
-
         this.currentDialog = this.dialog.open(dialogComponent, {
             data: data,
             height: modalSize['height'],
@@ -21,9 +19,7 @@ export class MaterialDialogService {
     }
 
     closeCurrentDialog() {
-        this.currentDialog.close()
-
+        this.currentDialog.close();
     }
-
 
 }

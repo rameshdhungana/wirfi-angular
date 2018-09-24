@@ -24,7 +24,6 @@ export class TopbarComponent implements OnInit {
     }
 
     toggleTopBar() {
-
         this.isCollapsed = !this.isCollapsed;
         this.isCollapsedChange.emit(this.isCollapsed);
 
@@ -33,7 +32,7 @@ export class TopbarComponent implements OnInit {
         this.isCollapseContentChange.emit(this.isCollapseContent);
 
 
-        if (this.isCollapsed == true) {
+        if (this.isCollapsed === true) {
             this.isVisible = false;
         } else {
             this.isVisible = true;

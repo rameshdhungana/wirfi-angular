@@ -34,8 +34,7 @@ export class EditIndustryTypeComponent implements OnInit {
     console.log(formdata.value);
     this.IndustryTypeService.updateIndustry(formdata.value, this.id).subscribe(
       (response) => {
-        console.log(response);
-        this.messageService.add('Succesfully Updated Industry Type');
+        this.messageService.add(response['message']);
         this.industryTypeService.getIndustryList();
         this.dialogService.closeCurrentDialog();
       }

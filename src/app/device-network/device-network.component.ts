@@ -18,7 +18,6 @@ export class DeviceNetworkComponent implements OnInit {
 
     ngOnInit() {
         this.device_id = localStorage.getItem('device_id');
-        console.log(this.device_id);
     }
 
     onSubmit(data: NgForm) {

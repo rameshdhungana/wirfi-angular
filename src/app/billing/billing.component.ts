@@ -1,12 +1,12 @@
 import {Component, OnInit, Renderer2} from '@angular/core';
-import {MatDialog, MatDialogRef} from "@angular/material";
-import {BillingService} from "../_services/billing.service"
-import {RouterModule} from "@angular/router";
-import {Router} from "@angular/router";
-import {MaterialDialogService} from "../_services/material-dialog.service";
-import {DeletecardComponent} from "./deletecard/deletecard.component";
-import {UpdatecardComponent} from "./updatecard/updatecard.component";
-import {AuthenticationService} from "../_services/authentication.service";
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {BillingService} from '../_services/billing.service';
+import {RouterModule} from '@angular/router';
+import {Router} from '@angular/router';
+import {MaterialDialogService} from '../_services/material-dialog.service';
+import {DeletecardComponent} from './deletecard/deletecard.component';
+import {UpdatecardComponent} from './updatecard/updatecard.component';
+import {AuthenticationService} from '../_services/authentication.service';
 
 
 @Component({
@@ -18,14 +18,14 @@ export class BillingComponent implements OnInit {
 
     public customerStripeInfo: Array<any> = [];
     public billingDetail: any = [];
-    public noBillingData: boolean; //when there is no card associated to user, it does not load card preview div
+    public noBillingData: boolean; // when there is no card associated to user, it does not load card preview div
     public billingLoaded: boolean; // stripe api takes few seconds , so cards not shown until fully loaded response obtained
     public buffering: boolean; // once link card button is clicked it does not let to click it again
     private current_user_email: string;
 
 
     constructor(private billingService: BillingService,
-                private  dialog: MatDialog,
+                private dialog: MatDialog,
                 private router: Router,
                 private dialogService: MaterialDialogService,
                 private authenticateService: AuthenticationService,
@@ -46,31 +46,18 @@ export class BillingComponent implements OnInit {
         this.buffering = false;
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
-                if (response['code'] == 1) {
+                if (response['code'] === 1) {
                     this.billingLoaded = true;
-                    console.log(this.billingLoaded, 'billing is loadded ');
-                    console.log(response);
                     this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
                     if (this.customerStripeInfo.length) {
                         this.noBillingData = false;
-                        this.billingDetail = this.customerStripeInfo[0];
-                        console.log(this.billingDetail);
-                        console.log('there is no card', this.customerStripeInfo.length)
 
-                    }
-                    else {
+                    } else {
                         this.noBillingData = true;
-
                     }
-
-
-                }
-
-                else if (response['code'] == 2) {
+                } else if (response['code'] === 2) {
                     this.billingLoaded = true;
                     this.noBillingData = true;
-
-
                 }
 
             }
@@ -78,14 +65,14 @@ export class BillingComponent implements OnInit {
 
         this.authenticateService.me().subscribe(res => {
             this.current_user_email = res['data']['email'];
-        })
+        });
 
     }
 
     openCheckout() {
         console.log('hello i am inside opencheckout');
         this.buffering = true;
-        var handler = (<any>window).StripeCheckout.configure({
+        const handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
             locale: 'auto',
 
@@ -95,9 +82,8 @@ export class BillingComponent implements OnInit {
 
                 // Get the token ID to your server-side code for use.
                 this.billingService.registerStripeToken(token).subscribe(response => {
-                    console.log(response, 'card is added')
                     this.billingService.getBillingList();
-                })
+                });
             }.bind(this)
         });
 
@@ -112,8 +98,6 @@ export class BillingComponent implements OnInit {
                 closed: () => {
                     this.buffering = false;
                 }
-
-
             }
         );
 
@@ -121,40 +105,31 @@ export class BillingComponent implements OnInit {
 
     OpenDetail(billing) {
         this.billingDetail = billing;
-
     }
-
 
     OpenDeleteDailog(billingDetail) {
 
         const data = {
-            "cardDetail": billingDetail,
+            'cardDetail': billingDetail,
         };
         const modalSize = {
             'height': '800px',
             'width': '600px'
 
         };
-
-
-        this.dialogService.openDialog(DeletecardComponent, data, modalSize)
-
-
+        this.dialogService.openDialog(DeletecardComponent, data, modalSize);
     }
 
     OpenCardUpdateForm(billingDetail) {
 
         const data = {
-            "cardDetail": billingDetail,
+            'cardDetail': billingDetail,
         };
         const modalSize = {
             'height': '800px',
             'width': '600px'
-
         };
-
-
-        this.dialogService.openDialog(UpdatecardComponent, data, modalSize)
+        this.dialogService.openDialog(UpdatecardComponent, data, modalSize);
     }
 
 }

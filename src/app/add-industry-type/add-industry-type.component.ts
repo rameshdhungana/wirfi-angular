@@ -25,7 +25,6 @@ export class AddIndustryTypeComponent implements OnInit {
     industryTypeForm(data: NgForm) {
         console.log(data.value);
         if (data.valid) {
-            console.log('data is valid')
             this.industryTypeService.postIndustry(data.value).subscribe(
                 response => {
                     console.log(response);

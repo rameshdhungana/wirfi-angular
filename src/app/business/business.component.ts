@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../_services/authentication.service';
 import { MessageService } from '../_services/message.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {NgForm} from '@angular/forms'
+import {NgForm} from '@angular/forms';
 import { BussinessService } from '../_services/bussiness.service';
 @Component({
   selector: 'app-business',
@@ -46,45 +46,38 @@ export class BusinessComponent implements OnInit {
       }
   );
   }
-  gotoBilling(){
+  gotoBilling() {
     this.messageService.add('Please fill the billing details');
     this.router.navigateByUrl('/billing');
   }
   addBussiness(data: NgForm) {
     if (data.valid) {
-      data.value['latitude']=37.33;
-      data.value['longitude']=34.34;
-        console.log(data.value);
-      console.log(this.code);
-        if (this.code == 1){
-          this.bussinessService.updateBusiness(this.business_id,data.value)
+      data.value['latitude'] = 37.33;
+      data.value['longitude'] = 34.34;
+        if (this.code === 1) {
+          this.bussinessService.updateBusiness(this.business_id, data.value)
           .subscribe(
-            (response) =>{
-            this.messageService.add('updated');
-            
+            (response) => {
+              this.messageService.add(response['message']);
           },
-              (error) =>{
+              (error) => {
               this.messageService.add(error.message);
               }
           );
-        
 
-        }else if(this.code ==2){
+        } else if (this.code === 2) {
           this.bussinessService.addBussiness(data.value)
           .subscribe(
               (response) => {
-                if (this.first_login =='true'){
+                if (this.first_login === 'true') {
                   this.messageService.add('Please fill the card details');
                   this.router.navigateByUrl('/billing');
-                }else{
-
+                } else {
                   this.messageService.add('Bussiness Info succesfully created');
                 }
               }
           );
-          
         }
-     
   }
 
 }

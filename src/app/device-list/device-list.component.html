@@ -59,7 +59,7 @@
                     <mat-menu #types_of_industry="matMenu">
                         <button mat-menu-item *ngFor="let type of industry_type"
                                 (click)="changeFilterParams(filterParams['Industry'],type.id)">
-                            {{type.name}}{{type.id}}
+                            {{type.name}}
                             <span *ngIf="presetFilterValue?.value?.filter_keys?.indexOf(type.id)!=-1"
                                   class="float-right"><i class="fa fa-check "></i></span>
                         </button>

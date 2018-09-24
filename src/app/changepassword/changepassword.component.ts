@@ -25,14 +25,11 @@ export class ChangepasswordComponent implements OnInit {
             this.authService.changePassword(data.value)
                 .subscribe(
                     (response) => {
-
-                        console.log(response);
                         if (response['code'] === 1) {
-                            this.messageService.add('password succesfully changed');
+                            this.messageService.add(response['message']);
                             this.router.navigateByUrl('/logout');
                         } else {
                             this.messageService.add('Password must be 8 characters long with at least 1 number or 1 special character');
-
                         }
                     },
                 (error) => {

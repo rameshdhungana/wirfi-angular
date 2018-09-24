@@ -5,8 +5,8 @@ import {MuteDeviceComponent} from '../mute-device/mute-device.component';
 import {environment} from '../../environments/environment.prod';
 import {PresetFilter} from '../_models/preset-filter';
 import {BehaviorSubject} from 'rxjs/Rx';
-import {PresetFilterComponent} from "../preset-filter/preset-filter.component";
-import {DeletePresetComponent} from "../delete-preset/delete-preset.component";
+import {PresetFilterComponent} from '../preset-filter/preset-filter.component';
+import {DeletePresetComponent} from '../delete-preset/delete-preset.component';
 
 enum sortParams {
     Clear,
@@ -39,7 +39,7 @@ export class DeviceListComponent implements OnInit {
     public filterParams: any;
     public industry_type: Array<any>;
     public presetList = new BehaviorSubject<Array<any>>([]);
-    //tempPresetFilterSaved is to used to validate if preset with currently selected sort_type , filter_type and filter_keys already exists
+    // tempPresetFilterSaved is to used to validate if preset with currently selected sort_type , filter_type and filter_keys already exists
     public tempPresetFilterSaved = new BehaviorSubject(new PresetFilter());
 
     public status_dict: any;
@@ -60,24 +60,18 @@ export class DeviceListComponent implements OnInit {
 
             this.deviceList.next(<Array<any>>response['data']['device']);
             this.reOrderDeviceList();
-            this.deviceService.getPresetFilterList().subscribe((res: Array<any>) => {
-                this.presetList.next(res['data']);
-
-
+            this.deviceService.getPresetFilterList().subscribe(
+                (res: Array<any>) => {
+                    this.presetList.next(res['data']);
             });
             if (!localStorage.getItem('tempPresetFilterSaved')) {
-
                 localStorage.setItem('tempPresetFilterSaved', JSON.stringify(new PresetFilter()));
-
             }
             if (!localStorage.getItem('presetFilterSaved')) {
                 this.initializePresetFilterSaved();
 
-            }
-            else {
-                this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')))
-
-
+            } else {
+                this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
             }
         });
     }
@@ -134,29 +128,28 @@ export class DeviceListComponent implements OnInit {
 
     deletePresetPopUp(id, name, sort_type, filter_type, filter_keys) {
         const data = {
-            "id": id,
-            "name": name,
-            "sort_type": sortParams[sort_type],
-            "filter_type": filterParams[filter_type],
+            'id': id,
+            'name': name,
+            'sort_type': sortParams[sort_type],
+            'filter_type': filterParams[filter_type],
         };
         const modalSize = {
             'height': '325px',
             'width': '450px',
         };
 
-        this.dialogService.openDialog(DeletePresetComponent, data, modalSize)
+        this.dialogService.openDialog(DeletePresetComponent, data, modalSize);
 
     }
 
     ifPresetAlreadyExists() {
         const presetValues = JSON.parse(localStorage.getItem('tempPresetFilterSaved'));
-        const alreadyExisted = this.presetList['value'].filter(preset => preset.filter_type == presetValues.filter_type && preset.sort_type == presetValues.sort_type && preset.filter_keys.toString() == presetValues.filter_keys.toLocaleString());
+        const alreadyExisted = this.presetList['value'].filter(preset => preset.filter_type === presetValues.filter_type && preset.sort_type === presetValues.sort_type && preset.filter_keys.toString() === presetValues.filter_keys.toLocaleString());
         if (alreadyExisted.length) {
             return false;
 
         }
         return true;
-
 
     }
 
@@ -293,7 +286,6 @@ export class DeviceListComponent implements OnInit {
             }
             case sortParams['InstallationDate']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => b.created_at.localeCompare(a.created_at)));
-
                 break;
             }
         }
