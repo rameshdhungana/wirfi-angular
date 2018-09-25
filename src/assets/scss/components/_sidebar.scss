@@ -3,11 +3,10 @@
   width: $sidebar-width;
   overflow: hidden;
   height: 100vh;
-  background:$secondary;
+  background: $secondary;
   transition: width 300ms;
   z-index: 1;
   border-right: 2px solid white;
-
 
   &__user {
     height: 200px;
@@ -26,10 +25,9 @@
       transition: width 300ms;
     }
 
-    &:hover{
-      width:$sidebar-width;
+    &:hover {
+      width: $sidebar-width;
     }
-
 
   }
 
@@ -41,32 +39,33 @@
     .fas {
       width: $sidebar-width-collapsed;
     }
-    &:hover{
-    background-color: rgb(204, 204, 204);
+    &:hover {
+      background-color: rgb(204, 204, 204);
+      cursor: pointer;
     }
-    a{
-    text-decoration: none;
-    display: block;
+    a {
+      text-decoration: none;
+      display: block;
     }
-    &-text{
+    &-text {
       color: $black;
     }
-    &.active{
-      color:$white;
-      border-left:2px solid red;
+    &.active {
+      color: $white;
+      border-left: 2px solid red;
       background-color: $primary;
 
-     .nav-item-text{
-       color:$white;
-     } 
+      .nav-item-text {
+        color: $white;
+      }
     }
   }
 
-  .wrapper{
+  .wrapper {
     position: absolute;
     width: 250px;
   }
-  .invisible{
+  .invisible {
     display: block;
   }
 
