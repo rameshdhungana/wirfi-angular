@@ -51,17 +51,13 @@ export class IndustryListComponent implements OnInit {
     deleteIndustryTypePopUp(industry_type) {
 
         const modalSize = {
-            'height': '325px',
-            'width': '450px',
+            'height': 'auto',
+            'width': '450px'
         };
         const data = {
             "id": industry_type.id,
             "name": industry_type.name
         };
-
         this.dialogService.openDialog(DeleteIndustryTypeComponent, data, modalSize);
-
-
     }
-
 }
