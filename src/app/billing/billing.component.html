@@ -38,20 +38,19 @@
                 <ul class="billing-list-add-card">
 
                     <li>
-                        <a *ngIf="!buffering;else bufferingDiv" (click)="openCheckout()">
+                        <button class="btn btn-link "
+                                [disabled]="buffering" (click)="openCheckout()">
                             <div class="row">
                                 <div class="col-4">
 
                                     <i class="fa fa-2x fa-plus-circle text-primary"></i></div>
                                 <div class="col-8">
-                                    <span class="bold-text">Link a Card</span>
-
-
+                                    <span class="bold-text">Link a Card <i
+                                            *ngIf="buffering"
+                                            class="fa fa-spinner fa-spin fa-1x fa-fw"></i></span>
                                 </div>
                             </div>
-                        </a>
-                        <ng-template #bufferingDiv>Loading...</ng-template>
-
+                        </button>
                     </li>
 
                 </ul>

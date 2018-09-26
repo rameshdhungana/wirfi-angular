@@ -20,7 +20,7 @@ export class BillingComponent implements OnInit {
     public billingDetail: any = [];
     public noBillingData: boolean; // when there is no card associated to user, it does not load card preview div
     public billingLoaded: boolean; // stripe api takes few seconds , so cards not shown until fully loaded response obtained
-    public buffering: boolean; // once link card button is clicked it does not let to click it again
+    public buffering = false; // once link card button is clicked it does not let to click it again
     private current_user_email: string;
 
 
@@ -43,7 +43,6 @@ export class BillingComponent implements OnInit {
 
     ngOnInit() {
         this.billingLoaded = false;
-        this.buffering = false;
         this.billingService.getBillingList().subscribe(
             (response: Array<object>) => {
                 if (response['code'] === 1) {
