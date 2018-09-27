@@ -28,11 +28,14 @@ export class DeletecardComponent implements OnInit {
         this.buffering = true;
 
         this.billingService.deleteCard(data).subscribe(response => {
-            this.billingService.getBillingList();
-            this.dialogService.closeCurrentDialog();
+                this.billingService.getBillingList();
+                this.dialogService.closeCurrentDialog();
 
 
-        })
+            },
+            error2 => {
+                this.buffering = false;
+            })
 
 
     }
