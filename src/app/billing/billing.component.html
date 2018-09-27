@@ -1,6 +1,6 @@
 <div class="container device-container">
     <div class="row">
-        <div class="col-lg-4 col-md- col-sm-12 pt-5">
+        <div class="col-lg-4 col-md- col-sm-12 pt-5 text-white">
             <section>
                 <header class="pb-2 pl-1" style="font-weight: 900">
                     PAYMENT METHODS
@@ -12,7 +12,6 @@
                             <a (click)="OpenDetail(billing)">
                                 <div class="row">
                                     <div class="col-4">
-
                                         <i *ngIf="billing.brand=='Visa';else second"
                                            class="fa fa-3x fa-cc-visa p-2"></i>
                                         <ng-template #second>
@@ -35,7 +34,7 @@
                     </ul>
                 </div>
 
-                <ul class="billing-list-add-card">
+                <ul class="billing-list-add-card" *ngIf="!noBillingData && billingLoaded ">
 
                     <li>
                         <button class="btn btn-link "
@@ -43,7 +42,7 @@
                             <div class="row">
                                 <div class="col-4">
 
-                                    <i class="fa fa-2x fa-plus-circle text-primary"></i></div>
+                                    <i class="fa fa-2x fa-plus-circle text-white"></i></div>
                                 <div class="col-8">
                                     <span class="bold-text">Link a Card <i
                                             *ngIf="buffering"
@@ -57,9 +56,9 @@
             </section>
         </div>
 
-        <div *ngIf="!noBillingData && billingLoaded" class="col-lg-8 col-sm-12 bg-light vh-100 pt-4">
+        <div *ngIf="!noBillingData && billingLoaded" class="col-lg-8 col-sm-12 panel vh-100 pt-4">
             <div class="row">
-                <div class="col-12 text-center">
+                <div class="col-12 text-center text-white">
                     <!--<img style="border-radius:8px;" src="../../assets/images/visa.JPG" width="50%"/>-->
                     <i *ngIf="billingDetail.brand=='Visa';else second"
                        class="fa  fa-cc-visa larger-card-size "></i>
@@ -74,7 +73,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-8 mx-auto text-left pt-3">
+                <div class="col-12 col-md-8 mx-auto text-left pt-3 text-white">
                     <ul class="billing-detail">
 
                         <li>
@@ -103,9 +102,9 @@
 
                     </ul>
                 </div>
-                <div class="col-12 col-md-8 mx-auto text-center pt-3 pb-3 text-primary">
-                    <span (click)="OpenCardUpdateForm(billingDetail)"> Update Card </span>|
-                    <span (click)="OpenDeleteDailog(billingDetail)">Delete Card</span>
+                <div class="col-12 col-md-8 mx-auto text-center pt-3 pb-3 text-white">
+                    <!--<span (click)="OpenCardUpdateForm(billingDetail)"> Update Card </span>|-->
+                    <span style="cursor:pointer" (click)="OpenDeleteDailog(billingDetail)">Delete Card</span>
                 </div>
 
 

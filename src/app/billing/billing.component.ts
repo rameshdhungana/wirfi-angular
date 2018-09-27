@@ -31,15 +31,15 @@ export class BillingComponent implements OnInit {
                 private authenticateService: AuthenticationService,
                 private renderer: Renderer2) {
 
-        this.renderer.addClass(document.body, 'bg-white');
+        // this.renderer.addClass(document.body, 'bg-white');
 
 
     }
 
-    ngOnDestroy() {
-        this.renderer.removeClass(document.body, 'bg-white');
-
-    }
+    // ngOnDestroy() {
+    //     this.renderer.removeClass(document.body, 'bg-white');
+    //
+    // }
 
     ngOnInit() {
         this.billingLoaded = false;
@@ -50,6 +50,8 @@ export class BillingComponent implements OnInit {
                     this.customerStripeInfo = response['data']['billing_info']['sources']['data'];
                     if (this.customerStripeInfo.length) {
                         this.noBillingData = false;
+                        this.billingDetail = response['data']['billing_info']['sources']['data'][0]
+
 
                     } else {
                         this.noBillingData = true;
@@ -112,8 +114,8 @@ export class BillingComponent implements OnInit {
             'cardDetail': billingDetail,
         };
         const modalSize = {
-            'height': '800px',
-            'width': '600px'
+            'height': '525px',
+            'width': '500px'
 
         };
         this.dialogService.openDialog(DeletecardComponent, data, modalSize);
