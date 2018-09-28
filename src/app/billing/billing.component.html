@@ -13,10 +13,10 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <i *ngIf="billing.brand=='Visa';else second"
-                                           class="fa fa-3x fa-cc-visa p-2"></i>
+                                           class="fab fa-3x fa-cc-visa p-2"></i>
                                         <ng-template #second>
                                             <i *ngIf="billing.brand=='MasterCard';else third"
-                                               class="fa fa-3x fa-cc-mastercard p-2"></i>
+                                               class="fab fa-3x fa-cc-mastercard p-2"></i>
 
                                         </ng-template>
                                         <ng-template #third><i class="fa fa-3x fa-address-card-o p-2"></i></ng-template>
@@ -61,10 +61,10 @@
                 <div class="col-12 text-center text-white">
                     <!--<img style="border-radius:8px;" src="../../assets/images/visa.JPG" width="50%"/>-->
                     <i *ngIf="billingDetail.brand=='Visa';else second"
-                       class="fa  fa-cc-visa larger-card-size "></i>
+                       class="fab  fa-cc-visa larger-card-size "></i>
                     <ng-template #second>
                         <i *ngIf="billingDetail.brand=='MasterCard';else third"
-                           class="fa  fa-cc-mastercard larger-card-size"></i>
+                           class="fab  fa-cc-mastercard larger-card-size"></i>
 
                     </ng-template>
                     <ng-template #third><i class="fa  fa-address-card-o larger-card-size"></i></ng-template>

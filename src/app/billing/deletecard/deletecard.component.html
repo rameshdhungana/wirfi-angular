@@ -1,15 +1,22 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center text-white">
-            <img style="border-radius:8px;" src="../../assets/images/visa.JPG" width="50%"/>
+            <!--<img style="border-radius:8px;" src="../../assets/images/visa.JPG" width="50%"/>-->
+            <i *ngIf="data.cardDetail.brand=='Visa';else second"
+               class="fab fa-3x fa-cc-visa  card-medium-size"></i>
+            <ng-template #second>
+                <i *ngIf="data.cardDetail.brand=='MasterCard';else third"
+                   class="fab fa-3x fa-cc-mastercard  card-medium-size"></i>
 
+            </ng-template>
+            <ng-template #third><i class="fa fa-3x fa-address-card-o "></i></ng-template>
         </div>
         <div class="col-12 text-center text-white">
-            <h3 class="pt-3 pb-3">Remove card</h3>
+            <h3 class="pt-1 pb-1">Remove card</h3>
             <h5>{{data.cardDetail.brand}} ••••{{data.last4}}</h5>
         </div>
         <div class="col-12 text-center text-white ">
-            <span class="text-justify pt-4">Any pending payments on this card will be processed even after you remove it.
+            <span class="text-justify pt-3">Any pending payments on this card will be processed even after you remove it.
                 Are you sure you want to remove your {{data.cardDetail.brand}} {{data.cardDetail.funding}} ••••{{data.cardDetail.last4}} from your Wirfi account?
             </span>
         </div>
