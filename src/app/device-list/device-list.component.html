@@ -5,7 +5,7 @@
                 <div class="offset-md-6 col-md-2">
                     <button mat-button [matMenuTriggerFor]="presetOptions">Preset &#x25BE;</button>
 
-                    <mat-menu #presetOptions="matMenu">
+                    <mat-menu #presetOptions="matMenu" [overlapTrigger]="false">
                         <button mat-menu-item (click)="clearPreset()">Clear<span
                                 *ngIf="presetFilterValue.value.sort_type===sortParams['Clear'] && presetFilterValue.value.filter_type===filterParams['Clear']"
                                 class="float-right"><i
@@ -31,7 +31,7 @@
                 <div class="col-md-2">
                     <button mat-button [matMenuTriggerFor]="filterOptions">Filter &#x25BE;</button>
 
-                    <mat-menu #filterOptions="matMenu">
+                    <mat-menu #filterOptions="matMenu" [overlapTrigger]="false">
                         <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear<span
                                 *ngIf="presetFilterValue.value.filter_type==filterParams['Clear']"
                                 class="float-right"><i
@@ -71,7 +71,7 @@
 
                     <button mat-button [matMenuTriggerFor]="sortOptions">Sort &#x25BE;</button>
 
-                    <mat-menu #sortOptions="matMenu">
+                    <mat-menu #sortOptions="matMenu" [overlapTrigger]="false">
                         <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span
                                 *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']" class="float-right"><i
                                 class="fa fa-check "></i></span></button>
