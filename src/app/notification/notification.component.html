@@ -1,8 +1,9 @@
 <div class="container">
 
-    <div class="row" *ngFor="let array of notificationList;let i = index" class="pt-3">
+    <div class="row pt-3" *ngFor="let array of notificationList;let i = index">
         <div class="col-3">
-            <button class="btn-link btn-lg btn-block" (click)="array.collapse = !array.collapse" aria-controls="urgent">
+            <button class="btn btn-link btn-lg btn-outline-light btn-block" (click)="array.collapse = !array.collapse;"
+                    aria-controls="urgent">
                 <span class="text-white"> {{array.type_name}}</span>
             </button>
         </div>
