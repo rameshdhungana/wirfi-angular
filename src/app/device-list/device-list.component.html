@@ -125,24 +125,28 @@
                                 <a class="nounderline text-white" href="/device/{{device.id}}">
                                     <img src={{API_URl}}{{device.machine_photo}}
                                          class="img-fluid mx-auto d-block device-image" style="max-width:200px;">
-                                    <div class="card-body">
+                                </a>
+
+                                <div class="card-body">
+                                    <a class="nounderline text-white" href="/device/{{device.id}}">
+
                                         <h5 class="card-title">
                                             <span>{{device.name}} &#9679; {{device.industry_type.name}}</span>
                                         </h5>
-                                        <p class="card-text"><span>{{device.address}}</span></p>
-                                        <div *ngIf="(device.device_status | json) != '{}'">
-                                            <h6 class="card-title"><span>{{status_dict[device?.device_status?.status]}} &#9679; {{device?.device_status?.timestamp | timeAgo}}</span>
-                                            </h6>
-                                            Last updated: {{device?.device_status?.timestamp | datetimeformat}}<br>
-                                        </div>
-
-                                        <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;
-                                        <i class="fas fa-moon"
-                                           [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
-                                        <i class="fas fa-camera"
-                                           [ngClass]="device?.camera_service?.length == 0 ? 'fa-camera-unavailable' : (!device?.camera_service[0]?.is_on ? 'fa-camera-off' : '')"></i>
+                                    </a>
+                                    <p class="card-text"><span>{{device.address}}</span></p>
+                                    <div *ngIf="(device.device_status | json) != '{}'">
+                                        <h6 class="card-title"><span>{{status_dict[device?.device_status?.status]}} &#9679; {{device?.device_status?.timestamp | timeAgo}}</span>
+                                        </h6>
+                                        Last updated: {{device?.device_status?.timestamp | datetimeformat}}<br>
                                     </div>
-                                </a>
+
+                                    <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;
+                                    <i class="fas fa-moon"
+                                       [ngClass]="!device?.device_settings?.sleep_settings?.has_sleep_feature ? 'fa-moon-unavailable' : (device?.device_settings?.sleep_settings?.is_asleep ? 'fa-moon-asleep' : '')"></i>&nbsp;
+                                    <i class="fas fa-camera"
+                                       [ngClass]="device?.camera_service?.length == 0 ? 'fa-camera-unavailable' : (!device?.camera_service[0]?.is_on ? 'fa-camera-off' : '')"></i>
+                                </div>
                             </div>
 
                         </div>
