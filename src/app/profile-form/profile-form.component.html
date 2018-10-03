@@ -1,121 +1,128 @@
 <div class="container-fluid login-container ">
-  <div class="  d-flex align-items-center text-white justify-content-center">
+    <div class="  d-flex align-items-center text-white justify-content-center">
 
-      <div class="w-50 mt-2">
-          <h2 class="text-center mt-5">Update User Profile</h2>
-          <!-- <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
-                 class="form-control" #search [formControl]="searchControl"> -->
-          <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-              <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-          </agm-map> -->
+        <div class="w-50 mt-2">
+            <h2 class="text-center mt-5">Update User Profile</h2>
+            <!-- <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text"
+                   class="form-control" #search [formControl]="searchControl"> -->
+            <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+                <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+            </agm-map> -->
 
-          <form  [class.was-validated]="userInfoform.submitted" #userInfoform='ngForm'
-                (ngSubmit)='userInfo(userInfoform)' enctype="multipart/form-data">
+            <form [class.was-validated]="userInfoform.submitted" #userInfoform='ngForm'
+                  (ngSubmit)='userInfo(userInfoform)' enctype="multipart/form-data">
 
 
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <label class="text-white" for="first_name">First Name</label>
-                          <input type="text" class="form-control" name="first_name" id="first_name"
-                                 placeholder="Enter First Name" aria-describedby="fileHelpId" [ngModel]="user.first_name" pattern="^$|^[A-Za-z]+$"
-                                 required maxlength="30" #first_name="ngModel">
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="userInfoform.submitted && first_name.hasError('required')">
-                                  This is required field.
-                              </small>
-                          </div>
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="first_name.hasError('pattern')">
-                                  Only alpha characters allowed.
-                              </small>
-                          </div>
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="first_name.hasError('maxlength')">
-                                  First name exceeds 30 characters
-                              </small>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="text-white" for="first_name">First Name</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name"
+                                   placeholder="Enter First Name" aria-describedby="fileHelpId"
+                                   [ngModel]="user.first_name" pattern="^$|^[A-Za-z]+$"
+                                   required maxlength="30" #first_name="ngModel">
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="userInfoform.submitted && first_name.hasError('required')">
+                                    This is required field.
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="first_name.hasError('pattern')">
+                                    Only alpha characters allowed.
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="first_name.hasError('maxlength')">
+                                    First name exceeds 30 characters
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Last Name -->
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <label class="text-white" for="last_name">Last Name</label>
-                          <input type="text" class="form-control" [ngModel]="user.last_name" name="last_name" id="last_name"
-                                 placeholder="Enter Last Name" aria-describedby="lastbnameHelp" ngModel pattern="^$|^[A-Za-z]+$"
-                                 required maxlength="30" #last_name="ngModel">
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="userInfoform.submitted && last_name.hasError('required')">
-                                  This is required field.
-                              </small>
-                          </div>
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="last_name.hasError('pattern')">
-                                  Only alpha characters allowed.
-                              </small>
-                          </div>
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="last_name.hasError('maxlength')">
-                                  Device name exceeds 30 characters
-                              </small>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <!-- Last Name -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="text-white" for="last_name">Last Name</label>
+                            <input type="text" class="form-control" [ngModel]="user.last_name" name="last_name"
+                                   id="last_name"
+                                   placeholder="Enter Last Name" aria-describedby="lastbnameHelp" ngModel
+                                   pattern="^$|^[A-Za-z]+$"
+                                   required maxlength="30" #last_name="ngModel">
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="userInfoform.submitted && last_name.hasError('required')">
+                                    This is required field.
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="last_name.hasError('pattern')">
+                                    Only alpha characters allowed.
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="last_name.hasError('maxlength')">
+                                    Device name exceeds 30 characters
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Address -->
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <label class="text-white" for="address">Address</label>
-                          <input type="text" name="address" [ngModel]="user.profile.address" class="form-control" id="address"
-                                 placeholder="Enter address" maxlength="50" required ngModel pattern="^$|^[-,a-zA-Z0-9\s]+$" #address="ngModel">
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="userInfoform.submitted && address.hasError('required')">
-                                  This is required field.
-                              </small>
-                          </div>
-                          <div class="invisible-text text-right text-white">
-                            <small *ngIf="address.hasError('pattern')">
-                                Special Characters aren't allowed.
-                            </small>
-                          </div>
-                          <div class="invisible-text text-right text-white">
-                            <small *ngIf="address.hasError('maxlength')">
-                                Address exceeds 50 characters.
-                            </small>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <!-- Address -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="text-white" for="address">Address</label>
+                            <input type="text" name="address" [ngModel]="user.profile.address" class="form-control"
+                                   id="address"
+                                   placeholder="Enter address" maxlength="50" required ngModel
+                                   pattern="^$|^[-,a-zA-Z0-9\s]+$" #address="ngModel">
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="userInfoform.submitted && address.hasError('required')">
+                                    This is required field.
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="address.hasError('pattern')">
+                                    Special Characters aren't allowed.
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="address.hasError('maxlength')">
+                                    Address exceeds 50 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Phone Number -->
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group">
-                          <label class="text-white" for="phone_number">Phone Number</label>
-                          <input type="text" name="phone_number" [ngModel]="user.profile.phone_number" class="form-control" id="phone_number" aria-describedby="phonenumberHelp"
-                                 placeholder="Enter phone number" maxlength="15" required ngModel pattern="^$|^[0-9+-]+$" #phone_number="ngModel">
-                          <div class="invisible-text text-right text-white">
-                              <small *ngIf="userInfoform.submitted && phone_number.hasError('required')">
-                                  This is required field.
-                              </small>
-                          </div>
-                          <div class="invisible-text text-right text-white">
-                            <small *ngIf="phone_number.hasError('pattern')">
-                                Only numeric, '+' and '-' characters are allowed.
-                            </small>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <!-- Phone Number -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="text-white" for="phone_number">Phone Number</label>
+                            <input type="text" name="phone_number" [ngModel]="user.profile.phone_number"
+                                   class="form-control" id="phone_number" aria-describedby="phonenumberHelp"
+                                   placeholder="Enter phone number" maxlength="15" required ngModel
+                                   pattern="^$|^[0-9+-]+$" #phone_number="ngModel">
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="userInfoform.submitted && phone_number.hasError('required')">
+                                    This is required field.
+                                </small>
+                            </div>
+                            <div class="invisible-text text-right text-white">
+                                <small *ngIf="phone_number.hasError('pattern')">
+                                    Only numeric, '+' and '-' characters are allowed.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Profile Picture -->
-              <div class="row mt-4">
-                  <div class="col-md-12">
+                <!-- Profile Picture -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
                         <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
 
                       <div class="form-group">
@@ -127,8 +134,11 @@
                   </div>
               </div>
 
-              <button type="submit" class="btn btn-outline-light float-right ">Submit</button>
-          </form>
-      </div>
-  </div>
+                <button [disabled]="submitButtonClicked" type="submit" class="btn btn-outline-light float-right ">Submit<i
+                        *ngIf="submitButtonClicked"
+                        class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 </div>
