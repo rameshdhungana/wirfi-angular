@@ -24,6 +24,7 @@ import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
 import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from "./notification/notification.component";
+import {FranchiseTypeListComponent} from "./franchise/franchise-type-list/franchise-type-list.component";
 
 
 const routes: Routes = [
@@ -52,6 +53,8 @@ const routes: Routes = [
     {path: 'industry-list', component: IndustryListComponent},
     {path: 'edit-industry-list', component: EditIndustryTypeComponent},
     {path: 'notifications', component: NotificationComponent},
+    {path: 'franchise-list', component: FranchiseTypeListComponent},
+
 ];
 
 @NgModule({
