@@ -55,8 +55,8 @@ import {NotificationComponent} from './notification/notification.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {PresetFilterComponent} from './preset-filter/preset-filter.component';
 import {DeletePresetComponent} from './delete-preset/delete-preset.component';
-import { DatetimeformatPipe } from './shared/datetimeformat.pipe';
-import { DeleteIndustryTypeComponent } from './industry-list/delete-industry-type/delete-industry-type.component';
+import {DatetimeformatPipe} from './shared/datetimeformat.pipe';
+import {DeleteIndustryTypeComponent} from './industry-list/delete-industry-type/delete-industry-type.component';
 
 @NgModule({
     declarations: [
