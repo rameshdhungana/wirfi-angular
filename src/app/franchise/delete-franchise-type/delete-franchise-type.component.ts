@@ -17,7 +17,7 @@ export class DeleteFranchiseTypeComponent implements OnInit {
                 private messageService: MessageService) {
     }
 
-    deleteIndustryType(id) {
+    deleteFranchiseType(id) {
 
         this.franchiseTypeService.deleteFranchiseType(id).subscribe(
             response => {
