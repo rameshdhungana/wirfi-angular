@@ -12,7 +12,7 @@ export class FranchiseTypeService {
     }
 
     getFranchiseTypeList() {
-        this.http.get('franchise-type/').subscribe(
+        this.http.get('location-type/').subscribe(
             response => {
                 this.getFranchiseType.next(response);
             }
@@ -21,15 +21,15 @@ export class FranchiseTypeService {
     }
 
     postFranchiseType(data) {
-        return this.http.post('franchise-type/', data);
+        return this.http.post('location-type/', data);
     }
 
     updateFranchiseType(data, id) {
-        return this.http.put(`franchise-type/${id}/`, data);
+        return this.http.put(`location-type/${id}/`, data);
     }
 
     deleteFranchiseType(id) {
-        return this.http.delete(`franchise-type/${id}/`);
+        return this.http.delete(`location-type/${id}/`);
     }
 
 }

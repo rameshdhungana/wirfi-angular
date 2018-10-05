@@ -27,7 +27,7 @@ export class AddFranchiseTypeComponent implements OnInit {
             this.franchiseTypeService.postFranchiseType(data.value).subscribe(
                 response => {
                     console.log(response);
-                    this.messageService.add('added industry type');
+                    this.messageService.add('added franchise type');
                     this.franchiseTypeService.getFranchiseTypeList();
                     this.dialogService.closeCurrentDialog();
                 },
