@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="text-white"> Add Franchise Type </h1>
+            <form [class.was-validated]="add_industry_form.submitted" class="form" #add_industry_form='ngForm'
+                  (ngSubmit)='franchiseTypeForm(add_industry_form)'>
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" class="form-control" id="" aria-describedby="helpId" placeholder="Name" required
+                           [(ngModel)]="industryTypeName" name="name" #name="ngModel">
+
+                    <div class="invisible-text text-right text-white">
+                        <small class="text text-danger"
+                               *ngIf="add_industry_form.submitted && name.hasError('required')">
+                            This is required field.
+                        </small>
+                        <small class="text text-danger" *ngIf="nameAlreadyExists">
+                            This name already Exists.
+                        </small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
