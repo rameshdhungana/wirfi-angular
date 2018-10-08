@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MaterialDialogService} from "../../_services/material-dialog.service";
 import {MessageService} from "../../_services/message.service";
 import {NgForm} from "@angular/forms";
 import {FranchiseTypeService} from "../../_services/franchise-type.service";
+import {MAT_DIALOG_DATA} from "@angular/material";
 
 @Component({
     selector: 'app-add-franchise-type',
@@ -13,7 +14,8 @@ export class AddFranchiseTypeComponent implements OnInit {
     public industryTypeName: string;
     public nameAlreadyExists = false;
 
-    constructor(private franchiseTypeService: FranchiseTypeService,
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+                private franchiseTypeService: FranchiseTypeService,
                 private messageService: MessageService,
                 private dialogService: MaterialDialogService) {
     }
@@ -27,7 +29,7 @@ export class AddFranchiseTypeComponent implements OnInit {
             this.franchiseTypeService.postFranchiseType(data.value).subscribe(
                 response => {
                     console.log(response);
-                    this.messageService.add('added franchise type');
+                    this.messageService.add(response['message']);
                     this.franchiseTypeService.getFranchiseTypeList();
                     this.dialogService.closeCurrentDialog();
                 },
