@@ -9,19 +9,19 @@
                 <div *ngIf="person.profile">
                   <img class="img-fluid" src="{{person['profile']['profile_picture']}}">
                 </div>
-                <h3 class="card-title">Name: {{person['full_name']}}</h3>
+                <h3 class="card-title">Name: {{person['profile']['full_name']}}</h3>
                 <div *ngIf="person.profile">
                   <p  class="card-text">Address: {{person['profile']['address']}}</p>
                   <p class="card-text">Phone Number: {{person['profile']['phone_number']}}</p>
                 </div>
                 <div *ngIf="!person.profile">
-                    
+
                     <p class="card-text">Please add your profile information</p>
                   </div>
                   <button class="btn btn-outline-light mt-2" routerLink="/profile-update">Edit</button>
               </div>
             </div>
-        
+
           </div>
         </div>
       </div>

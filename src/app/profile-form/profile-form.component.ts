@@ -44,8 +44,8 @@ export class ProfileFormComponent implements OnInit {
                 this.user_id = response['data']['id'];
                 this.user_email = response['data']['email'];
                 this.user.email = response['data']['email'];
-                this.user.first_name = response['data']['first_name'];
-                this.user.last_name = response['data']['last_name'];
+                this.user.first_name = response['data']['profile']['first_name'];
+                this.user.last_name = response['data']['profile']['last_name'];
                 if (response['data']['profile'] !== null) {
                     this.activate_image_file = true;
                     this.user.profile.address = response['data']['profile']['address'];
