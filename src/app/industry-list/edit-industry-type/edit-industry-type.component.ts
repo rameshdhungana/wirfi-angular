@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import { IndustryService } from '../_services/industry-type.service';
-import { MaterialDialogService } from '../_services/material-dialog.service';
 import { NgForm } from '@angular/forms';
-import { MessageService } from '../_services/message.service';
+import { MessageService } from '../../_services/message.service';
+import {IndustryService} from "../../_services/industry-type.service";
+import {MaterialDialogService} from "../../_services/material-dialog.service";
 
 @Component({
   selector: 'app-edit-industry-type',

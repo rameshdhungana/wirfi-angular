@@ -50,7 +50,7 @@ import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from './_services/custom-error.service';
 import {IndustryListComponent} from './industry-list/industry-list.component';
-import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
+import {EditIndustryTypeComponent} from './industry-list/edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from './notification/notification.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {PresetFilterComponent} from './preset-filter/preset-filter.component';
