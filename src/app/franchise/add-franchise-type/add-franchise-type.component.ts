@@ -41,5 +41,19 @@ export class AddFranchiseTypeComponent implements OnInit {
         }
     }
 
+    updateFranchiseType(formdata: NgForm, id) {
+        console.log(formdata.value);
+        this.franchiseTypeService.updateFranchiseType(formdata.value, id).subscribe(
+            (response) => {
+                this.messageService.add(response['message']);
+                this.franchiseTypeService.getFranchiseTypeList();
+                this.dialogService.closeCurrentDialog();
+            },
+            error2 => {
+                this.nameAlreadyExists = true;
+            }
+        );
+    }
+
 
 }

@@ -32,7 +32,7 @@ export class IndustryListComponent implements OnInit {
         const data = {};
         const modalSize = {
             'height': 'auto',
-            'width': 'auto'
+            'width': '450px'
         };
         this.dialogService.openDialog(AddIndustryTypeComponent, data, modalSize);
     }
@@ -46,7 +46,7 @@ export class IndustryListComponent implements OnInit {
             'height': 'auto',
             'width': '450px'
         };
-        this.dialogService.openDialog(EditIndustryTypeComponent, data, modalSize);
+        this.dialogService.openDialog(AddIndustryTypeComponent, data, modalSize);
     }
 
     deleteIndustryTypePopUp(industry_type) {
