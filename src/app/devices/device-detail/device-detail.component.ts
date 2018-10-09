@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceService} from '../_services/device.service';
 import {Route, Router, ActivatedRoute} from '@angular/router';
-import { MessageService } from '../_services/message.service';
+import { MessageService } from '../../_services/message.service';
+import {DeviceService} from "../../_services/device.service";
 
 @Component({
     selector: 'app-device-detail',

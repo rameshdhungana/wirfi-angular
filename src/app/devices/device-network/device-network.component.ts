@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {DeviceService} from '../_services/device.service';
-
+import {DeviceService} from "../../_services/device.service";
 @Component({
     selector: 'app-device-network',
     templateUrl: './device-network.component.html',

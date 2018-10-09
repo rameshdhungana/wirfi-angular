@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {DeviceService} from '../_services/device.service';
-import {MaterialDialogService} from '../_services/material-dialog.service';
-import {MuteDeviceComponent} from '../mute-device/mute-device.component';
-import {environment} from '../../environments/environment.prod';
-import {PresetFilter} from '../_models/preset-filter';
+import {MaterialDialogService} from '../../_services/material-dialog.service';
+import {MuteDeviceComponent} from '../../mute-device/mute-device.component';
+import {PresetFilter} from '../../_models/preset-filter';
 import {BehaviorSubject} from 'rxjs/Rx';
-import {PresetFilterComponent} from '../preset-filter/preset-filter.component';
-import {DeletePresetComponent} from '../delete-preset/delete-preset.component';
+import {PresetFilterComponent} from '../../preset-filter/preset-filter.component';
+import {DeletePresetComponent} from '../../delete-preset/delete-preset.component';
+import {environment} from '../../../environments/environment.prod';
+import {DeviceService} from "../../_services/device.service";
 
 enum sortParams {
     Clear,
