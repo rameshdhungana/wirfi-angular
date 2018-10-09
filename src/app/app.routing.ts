@@ -22,7 +22,6 @@ import {DeviceInfoComponent} from './devices/device-info/device-info.component';
 import {AddIndustryTypeComponent} from './industry-list/add-industry-type/add-industry-type.component';
 import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
-import {EditIndustryTypeComponent} from './industry-list/edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from "./notification/notification.component";
 import {FranchiseTypeListComponent} from "./franchise/franchise-type-list/franchise-type-list.component";
 
@@ -51,7 +50,6 @@ const routes: Routes = [
     {path: 'industry', component: AddIndustryTypeComponent},
     {path: 'mute-device', component: MuteDeviceComponent},
     {path: 'industry-list', component: IndustryListComponent},
-    {path: 'edit-industry-list', component: EditIndustryTypeComponent},
     {path: 'notifications', component: NotificationComponent},
     {path: 'franchise-list', component: FranchiseTypeListComponent},
 

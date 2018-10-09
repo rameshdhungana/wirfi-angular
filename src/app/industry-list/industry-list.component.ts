@@ -4,7 +4,6 @@ import {MessageService} from '../_services/message.service';
 import {AddIndustryTypeComponent} from './add-industry-type/add-industry-type.component';
 import {MatDialogModule} from '@angular/material';
 import {MaterialDialogService} from '../_services/material-dialog.service';
-import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
 import {DeleteIndustryTypeComponent} from "./delete-industry-type/delete-industry-type.component";
 
 @Component({
