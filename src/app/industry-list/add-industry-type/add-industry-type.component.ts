@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {DeviceService} from '../_services/device.service';
-import {MessageService} from '../_services/message.service';
-import {MaterialDialogService} from '../_services/material-dialog.service';
-import {IndustryService} from '../_services/industry-type.service';
+import {DeviceService} from '../../_services/device.service';
+import {MessageService} from '../../_services/message.service';
+import {MaterialDialogService} from '../../_services/material-dialog.service';
+import {IndustryService} from '../../_services/industry-type.service';
 
 @Component({
     selector: 'app-add-industry-type',

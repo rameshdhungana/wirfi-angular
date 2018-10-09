@@ -8,7 +8,7 @@ import { MapsAPILoader } from '@agm/core';
 import { NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { MaterialDialogService } from '../_services/material-dialog.service';
-import { AddIndustryTypeComponent } from '../add-industry-type/add-industry-type.component';
+import { AddIndustryTypeComponent } from '../industry-list/add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
 /**
  * Example of a String Time adapter

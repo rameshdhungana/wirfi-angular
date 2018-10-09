@@ -19,7 +19,7 @@ import {BusinessListComponent} from './business-list/business-list.component';
 import {ProfileComponent} from './profile/profile.component';
 import {ProfileFormComponent} from './profile-form/profile-form.component';
 import {DeviceInfoComponent} from './device-info/device-info.component';
-import {AddIndustryTypeComponent} from './add-industry-type/add-industry-type.component';
+import {AddIndustryTypeComponent} from './industry-list/add-industry-type/add-industry-type.component';
 import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
 import {EditIndustryTypeComponent} from './industry-list/edit-industry-type/edit-industry-type.component';
