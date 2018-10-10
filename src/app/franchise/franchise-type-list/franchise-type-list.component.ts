@@ -30,20 +30,21 @@ export class FranchiseTypeListComponent implements OnInit {
         const data = {};
         const modalSize = {
             'height': 'auto',
-            'width': 'auto'
+            'width': '450px'
         };
         this.dialogService.openDialog(AddFranchiseTypeComponent, data, modalSize);
     }
 
-    onClickEdit(id) {
+    onClickEdit(franchise_type) {
         const data = {
-            'id': id
+            'id': franchise_type.id,
+            'name': franchise_type.name
         };
         const modalSize = {
             'height': 'auto',
-            'width': 'auto'
+            'width': '450px'
         };
-        // this.dialogService.openDialog(EditIndustryTypeComponent, data, modalSize);
+        this.dialogService.openDialog(AddFranchiseTypeComponent, data, modalSize);
     }
 
     deleteIndustryTypePopUp(franchise_type) {

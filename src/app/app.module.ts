@@ -20,10 +20,10 @@ import {DeviceService} from './_services/device.service';
 import {MessageService} from './_services/message.service';
 import {IndustryService} from './_services/industry-type.service';
 import {DevicesComponent} from './devices/devices.component';
-import {DeviceDetailComponent} from './device-detail/device-detail.component';
-import {DeviceListComponent} from './device-list/device-list.component';
-import {DeviceUpdateComponent} from './device-update/device-update.component';
-import {DeviceNetworkComponent} from './device-network/device-network.component';
+import {DeviceDetailComponent} from './devices/device-detail/device-detail.component';
+import {DeviceListComponent} from './devices/device-list/device-list.component';
+import {DeviceUpdateComponent} from './devices/device-update/device-update.component';
+import {DeviceNetworkComponent} from './devices/device-network/device-network.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TopbarComponent} from './topbar/topbar.component';
 import {BillingComponent} from './billing/billing.component';
@@ -36,7 +36,7 @@ import {BusinessComponent} from './business/business.component';
 import {BusinessListComponent} from './business-list/business-list.component';
 import {BillingService} from './_services/billing.service';
 import {ProfileComponent} from './profile/profile.component';
-import {DeviceInfoComponent} from './device-info/device-info.component';
+import {DeviceInfoComponent} from './devices/device-info/device-info.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UiSwitchModule} from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -45,12 +45,11 @@ import {AgmCoreModule} from '@agm/core';
 import {UpdatecardComponent} from './billing/updatecard/updatecard.component';
 import {TimeComparatorDirective} from './shared/time-comparator.directive';
 import {ProfileFormComponent} from './profile-form/profile-form.component';
-import {AddIndustryTypeComponent} from './add-industry-type/add-industry-type.component';
+import {AddIndustryTypeComponent} from './industry-list/add-industry-type/add-industry-type.component';
 import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {ErrorComponent} from './error/error.component';
 import {CustomErrorService} from './_services/custom-error.service';
 import {IndustryListComponent} from './industry-list/industry-list.component';
-import {EditIndustryTypeComponent} from './edit-industry-type/edit-industry-type.component';
 import {NotificationComponent} from './notification/notification.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import {PresetFilterComponent} from './preset-filter/preset-filter.component';
@@ -92,7 +91,6 @@ import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/de
         MuteDeviceComponent,
         ErrorComponent,
         IndustryListComponent,
-        EditIndustryTypeComponent,
         NotificationComponent,
         TimeAgoPipe,
         PresetFilterComponent,
