@@ -22,10 +22,9 @@ export class ProfileFormComponent implements OnInit {
     public user = {
         'first_name': '',
         'last_name': '',
-        'email': '',
+        'address': '',
+        'phone_number': '',
         'profile': {
-            'address': '',
-            'phone_number': '',
             'profile_picture': ''
         }
     };
@@ -43,13 +42,13 @@ export class ProfileFormComponent implements OnInit {
             response => {
                 this.user_id = response['data']['id'];
                 this.user_email = response['data']['email'];
-                this.user.email = response['data']['email'];
                 this.user.first_name = response['data']['profile']['first_name'];
                 this.user.last_name = response['data']['profile']['last_name'];
-                if (response['data']['profile'] !== null) {
+                this.user.address = response['data']['profile']['address'];
+                this.user.phone_number = response['data']['profile']['phone_number'];
+
+                if (response['data']['profile']['profile_picture'] !== null) {
                     this.activate_image_file = true;
-                    this.user.profile.address = response['data']['profile']['address'];
-                    this.user.profile.phone_number = response['data']['profile']['phone_number'];
                     this.user.profile.profile_picture = response['data']['profile']['profile_picture'];
                 } else {
                     this.activate_image_file = false;
@@ -87,8 +86,8 @@ export class ProfileFormComponent implements OnInit {
             this.submitButtonClicked = true;
             this.user['first_name'] = data.value['first_name'];
             this.user['last_name'] = data.value['last_name'];
-            this.user['profile']['address'] = data.value['address'];
-            this.user['profile']['phone_number'] = data.value['phone_number'];
+            this.user['address'] = data.value['address'];
+            this.user['phone_number'] = data.value['phone_number'];
 
             this.userService.updateUser(this.user, this.user_id).subscribe(
                 response => {
