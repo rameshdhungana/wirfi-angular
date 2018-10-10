@@ -5,7 +5,9 @@
 
         <app-topbar *ngIf="isLoggedIn" [(isCollapsed)]="isCollapsed" [(isVisible)]="isVisible"
                     [(isCollapseContent)]="isCollapseContent"></app-topbar>
-        <router-outlet></router-outlet>
+        <div class="router-outlet-wrapper">
+            <router-outlet></router-outlet>
+        </div>
         <div *ngIf="messageService.messages.length" class="alert alert-success alert-box">
           
             

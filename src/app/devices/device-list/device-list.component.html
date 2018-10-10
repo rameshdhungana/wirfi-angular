@@ -1,6 +1,6 @@
 <div class="container-fluid device-container">
     <div class="row pt-4 ">
-        <div class="col-md-12  text-white">
+        <div class="col-md-12  text-white" style="position: relative;">
             <div class="row">
                 <div class="offset-md-6 col-md-2">
                     <button mat-button [matMenuTriggerFor]="presetOptions">Preset &#x25BE;</button>
@@ -73,7 +73,8 @@
 
                     <mat-menu #sortOptions="matMenu" [overlapTrigger]="false">
                         <button mat-menu-item (click)="changeSortParams(sortParams['Clear'])">Clear<span
-                                *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']" class="float-right"><i
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['Clear']"
+                                class="float-right"><i
                                 class="fa fa-check "></i></span></button>
                         <button mat-menu-item (click)="changeSortParams(sortParams['NetworkStatus'])">Network
                             Status<span
@@ -82,20 +83,22 @@
                                     class="fa fa-check "></i></span>
                         </button>
                         <button mat-menu-item (click)="changeSortParams(sortParams['Location'])">Location<span
-                                *ngIf="presetFilterValue.value.sort_type==sortParams['Location']" class="float-right"><i
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['Location']"
+                                class="float-right"><i
                                 class="fa fa-check "></i></span></button>
-                        <button mat-menu-item (click)="changeSortParams(sortParams['InstallationDate'])">Installation
+                        <button mat-menu-item (click)="changeSortParams(sortParams['InstallationDate'])">
+                            Installation
                             Date<span
-                                    *ngIf="presetFilterValue.value.sort_type==sortParams['InstallationDate']"
-                                    class="float-right"><i
-                                    class="fa fa-check "></i></span>
+                                *ngIf="presetFilterValue.value.sort_type==sortParams['InstallationDate']"
+                                class="float-right"><i
+                                class="fa fa-check "></i></span>
                         </button>
                     </mat-menu>
                 </div>
             </div>
-            ￼
         </div>
-        <div class="col-md-12">
+        ￼
+        <div class="col-md-12 pt-3">
             <div class="row">
                 <div class="col-md-6 text-white" *ngFor="let device of deviceList.value">
                     <div>
