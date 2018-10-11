@@ -7,4 +7,9 @@
 .topbar-container {
   background-color: $topbar-bg;
   border-bottom: 1px solid $secondary;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  height: 42px;
+
 }
