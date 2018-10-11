@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col text-center sidebar__user">
 
-            <img *ngIf="logged_in_user?.profile !== null" src="{{logged_in_user?.profile?.profile_picture}}"
+            <img *ngIf="logged_in_user?.profile !== null" src="{{URL + logged_in_user?.profile?.profile_picture}}"
                  class="rounded sidebar__user-icon mt-1"/>
 
             <img *ngIf="logged_in_user?.profile === null" src="../../assets/images/user-logo.png"
