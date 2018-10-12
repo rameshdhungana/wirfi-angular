@@ -1,21 +1,19 @@
 <div class="container-fluid device-container">
     <div class="row">
         <div class="col-md-12">
-
             <div class=" d-flex justify-content-center">
                 <div class="w-50 mt-5 text-white panel">
                     <div class="card">
                         <div *ngIf="loading" class="card-body">
                             <div class="row">
                                 <div class="col-5">
-
                                     <div *ngIf="person?.profile">
                                         <img class="profile-picture"
-                                             src="{{person['profile']['profile_picture']}}">
+                                             src="{{ URL + person['profile']['profile_picture'] }}">
 
                                     </div>
-                                    <h4 class="card-title pt-4">Ramesh
-                                        Dhungana{{person['profile']['full_name']}}</h4>
+                                    <h4 class="card-title pt-4">
+                                        {{person['profile']['full_name']}}</h4>
                                 </div>
                                 <div class="col-7">
                                     <div *ngIf="person?.profile">
