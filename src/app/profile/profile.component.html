@@ -1,29 +1,44 @@
-<div class="container-fluid device-container" >
+<div class="container-fluid device-container">
     <div class="row">
-      <div class="col-md-12">
+        <div class="col-md-12">
 
-        <div class=" d-flex justify-content-center">
-            <div class="w-50 mt-5 text-white panel">
-            <div class="card">
-              <div *ngIf="loading" class="card-body">
-                <div *ngIf="person.profile">
-                  <img class="img-fluid" src="{{person['profile']['profile_picture']}}">
-                </div>
-                <h3 class="card-title">Name: {{person['profile']['full_name']}}</h3>
-                <div *ngIf="person.profile">
-                  <p  class="card-text">Address: {{person['profile']['address']}}</p>
-                  <p class="card-text">Phone Number: {{person['profile']['phone_number']}}</p>
-                </div>
-                <div *ngIf="!person.profile">
+            <div class=" d-flex justify-content-center">
+                <div class="w-50 mt-5 text-white panel">
+                    <div class="card">
+                        <div *ngIf="loading" class="card-body">
+                            <div class="row">
+                                <div class="col-5">
 
-                    <p class="card-text">Please add your profile information</p>
-                  </div>
-                  <button class="btn btn-outline-light mt-2" routerLink="/profile-update">Edit</button>
-              </div>
+                                    <div *ngIf="person?.profile">
+                                        <img class="profile-picture"
+                                             src="{{person['profile']['profile_picture']}}">
+
+                                    </div>
+                                    <h4 class="card-title pt-4">Ramesh
+                                        Dhungana{{person['profile']['full_name']}}</h4>
+                                </div>
+                                <div class="col-7">
+                                    <div *ngIf="person?.profile">
+                                        <p class="card-text"><span class="font-weight-bold pr-1">Address:</span>
+                                            {{person['profile']['address']}}</p>
+                                        <p class="card-text"><span class="font-weight-bold pr-1">Phone Number:</span>
+                                            {{person['profile']['phone_number']}}</p>
+                                    </div>
+                                    <div *ngIf="!person.profile">
+
+                                        <p class="card-text">Please add your profile information</p>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-lg btn-outline-light mt-2 pl-5 pr-5 float-right"
+                                            routerLink="/profile-update">Edit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-          </div>
         </div>
-      </div>
     </div>
 </div>
