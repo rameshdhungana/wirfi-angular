@@ -83,6 +83,7 @@ export class BillingComponent implements OnInit {
 
                 // Get the token ID to your server-side code for use.
                 this.billingService.registerStripeToken(token).subscribe(response => {
+                    console.log(response, 'this is biling add response')
                     this.billingService.getBillingList();
                 });
             }.bind(this)
