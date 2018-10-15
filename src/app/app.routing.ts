@@ -39,7 +39,7 @@ const routes: Routes = [
     {path: 'register', component: RegisterComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'reset/:uid/:token', component: ResetPasswordComponent},
     {path: 'change-password', component: ChangepasswordComponent, canActivate: [AuthGuard]},
-    {path: 'bussiness', component: BusinessComponent, canActivate: [AuthGuard]},
+    {path: 'business', component: BusinessComponent, canActivate: [AuthGuard]},
     {path: 'list', component: BusinessListComponent, canActivate: [AuthGuard]},
     {path: 'device-info', component: DeviceInfoComponent, canActivate: [AuthGuard]},
     {path: 'billing', component: BillingComponent, canActivate: [AuthGuard]},

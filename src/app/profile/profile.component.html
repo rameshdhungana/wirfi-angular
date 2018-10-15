@@ -16,25 +16,60 @@
                                         {{person['profile']['full_name']}}</h4>
                                 </div>
                                 <div class="col-7">
-                                    <div *ngIf="person?.profile">
-                                        <p class="card-text"><span class="font-weight-bold pr-1">Address:</span>
-                                            {{person['profile']['address']}}</p>
-                                        <p class="card-text"><span class="font-weight-bold pr-1">Phone Number:</span>
-                                            {{person['profile']['phone_number']}}</p>
-                                    </div>
-                                    <div *ngIf="!person.profile">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="font-weight-bold">Personnel Info <i
+                                                    class="edit-icon pl-2 pr-2 fa fa-pen"
+                                                    routerLink="/profile-update"></i></h5>
 
-                                        <p class="card-text">Please add your profile information</p>
+                                        </div>
+                                        <div *ngIf="person?.profile" class="col-12">
+                                            <p class="card-text"><span class="font-weight-bold pr-1">Address:</span>
+                                                {{person['profile']['address']}} </p>
+                                            <p class="card-text"><span
+                                                    class="font-weight-bold pr-1">Phone Number:</span>
+                                                {{person['profile']['phone_number']}}
+                                            </p>
+                                        </div>
+                                        <div *ngIf="!person.profile">
+
+                                            <p class="card-text">Please add your profile information</p>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-5" *ngIf="businessInfo">
+                                        <div class="col-12">
+                                            <h5 class="font-weight-bold">Business Info <i
+                                                    class="edit-icon pl-2 pr-2 fa fa-pen"
+                                                    routerLink="/business"></i></h5>
+
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="card-text"><span
+                                                    class="font-weight-bold pr-1">Name:</span>
+                                                {{businessInfo.name}} </p>
+                                            <p class="card-text"><span
+                                                    class="font-weight-bold pr-1">Address:</span>
+                                                {{businessInfo.address}}
+                                            </p>
+                                            <p class="card-text"><span
+                                                    class="font-weight-bold pr-1">Contact:</span>
+                                                {{businessInfo.phone_number}}
+                                            </p>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <button class="btn btn-lg btn-outline-light mt-2 pl-5 pr-5 float-right"
-                                            routerLink="/profile-update">Edit
-                                    </button>
-                                </div>
+
+
+                                <!--<div class="col-12">-->
+                                <!--<button class="btn btn-lg btn-outline-light mt-2 pl-5 pr-5 float-right"-->
+                                <!--routerLink="/profile-update">Edit-->
+                                <!--</button>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
