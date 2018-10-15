@@ -59,6 +59,7 @@ import {DeleteIndustryTypeComponent} from './industry-list/delete-industry-type/
 import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franchise-type-list.component';
 import {AddFranchiseTypeComponent} from './franchise/add-franchise-type/add-franchise-type.component';
 import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/delete-franchise-type.component';
+import { AddNetworkSettingComponent } from './devices/add-network-setting/add-network-setting.component';
 
 @NgModule({
     declarations: [
@@ -100,6 +101,7 @@ import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/de
         FranchiseTypeListComponent,
         AddFranchiseTypeComponent,
         DeleteFranchiseTypeComponent,
+        AddNetworkSettingComponent,
     ],
     imports: [
         BrowserModule,

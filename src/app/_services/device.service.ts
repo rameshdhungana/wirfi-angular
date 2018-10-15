@@ -76,4 +76,8 @@ export class DeviceService {
 
     }
 
+    addNetworkSetting(data) {
+        return this.http.post('addNetworkSetting/', data);
+    }
+
 }

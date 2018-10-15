@@ -24,6 +24,7 @@ import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
 import {NotificationComponent} from "./notification/notification.component";
 import {FranchiseTypeListComponent} from "./franchise/franchise-type-list/franchise-type-list.component";
+import {AddNetworkSettingComponent} from "./devices/add-network-setting/add-network-setting.component";
 
 
 const routes: Routes = [
@@ -52,6 +53,7 @@ const routes: Routes = [
     {path: 'industry-list', component: IndustryListComponent},
     {path: 'notifications', component: NotificationComponent},
     {path: 'franchise-list', component: FranchiseTypeListComponent},
+    {path: 'network-setting', component: AddNetworkSettingComponent},
 
 ];
 
