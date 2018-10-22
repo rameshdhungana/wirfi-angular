@@ -1,14 +1,14 @@
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
-            <h5 class="text-white"> {{ data.name?"Edit Industry Type":"Add Industry Type"}} </h5>
+            <h5 class="text-white"> {{ data.name?"Edit ":"Add "}}{{industry?"Industry Type":"Franchise" }} </h5>
             <form [class.was-validated]="add_industry_form.submitted" class="form" #add_industry_form='ngForm'
-                  (ngSubmit)=data.name?updateIndustryType(add_industry_form,data.id):industryTypeForm(add_industry_form)>
+                  (ngSubmit)=data.name?updateForm(add_industry_form,data.id):createForm(add_industry_form)>
                 <div class="form-group">
                     <label for=""></label>
                     <input type="text" class="form-control" id="" aria-describedby="helpId"
-                           placeholder="{{data.name?data.name:'Enter Name'}}" required
-                           [(ngModel)]="industryTypeName" name="name" #name="ngModel">
+                           placeholder="Enter Name" required
+                           [ngModel]="data.name" name="name" #name="ngModel">
 
                     <div class="invisible-text text-right text-white">
                         <small class="text text-danger"
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <button type="submit" class=" p-2 btn btn-block btn-success">
-                    {{ data.name?"Edit Industry Type":"Add Industry Type"}}
+                    {{ data.name?"Edit ":"Add " }}{{ industry?"Industry Type":"Franchise" }}
                 </button>
                 <button type="button" class="btn btn-block btn-light" mat-button mat-dialog-close>Cancel</button>
             </form>
