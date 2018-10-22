@@ -7,7 +7,6 @@
                 <form [class.was-validated]="deviceInfoform.submitted" #deviceInfoform='ngForm'
                       (ngSubmit)='deviceInfo(deviceInfoform)'>
                     <div class="">
-
                         <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off"
                                type="text"
                                class="form-control mb-2" #search [formControl]="searchControl">
@@ -86,6 +85,21 @@
                         </div>
                     </div>
 
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-white">Location Type</label>
+                                <select id="location_type" name="location_type" class="form-control" ngModel #location
+                                        (change)="addLocationType($event, location.value)">
+                                    <option value="" disabled selected>Select a Location Type</option>
+                                    <option *ngFor="let location of locationType" [value]="location.id">
+                                        {{location.name}}
+                                    </option>
+                                    <option value="">Add Other...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row  mt-4">
                         <div class="col-md-4 offset-md-2">

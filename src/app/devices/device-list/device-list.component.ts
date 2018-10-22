@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs/Rx';
 import {PresetFilterComponent} from '../../preset-filter/preset-filter.component';
 import {DeletePresetComponent} from '../../delete-preset/delete-preset.component';
 import {environment} from '../../../environments/environment.prod';
-import {DeviceService} from "../../_services/device.service";
+import {DeviceService} from '../../_services/device.service';
 
 enum sortParams {
     Clear,
