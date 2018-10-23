@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone, Inject } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
 import { IndustryService } from '../../_services/industry-type.service';
+import { FranchiseTypeService } from '../../_services/franchise-type.service';
 import { MessageService } from '../../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 import { MaterialDialogService } from '../../_services/material-dialog.service';
 import { AddIndustryTypeComponent } from '../../industry-list/add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
-import {DeviceService} from "../../_services/device.service";
+import {DeviceService} from '../../_services/device.service';
+import { MatDialogRef, MatDialog } from '@angular/material';
 /**
  * Example of a String Time adapter
  */
@@ -55,6 +57,8 @@ export class DeviceInfoComponent  implements OnInit {
   public zoom: number;
   public industryType: Array<any>;
   public industry_type_id: string;
+  public locationType: Array<any>;
+  public location_type_id: string;
   public add_type: boolean;
 
   @ViewChild('search')
@@ -70,11 +74,11 @@ export class DeviceInfoComponent  implements OnInit {
   seconds = false;
   private address: any;
   // time: '13:30:00';
-
   constructor(
       private dialogService: MaterialDialogService,
       private deviceservice: DeviceService,
       private industryservice: IndustryService,
+      private franchiseservice: FranchiseTypeService,
       private messageservice: MessageService,
       private mapsAPILoader: MapsAPILoader,
       private ngZone: NgZone,
@@ -121,6 +125,11 @@ export class DeviceInfoComponent  implements OnInit {
       response => {
         this.industryType = response['data'];
     });
+
+    this.franchiseservice.getFranchiseTypeList().subscribe(
+      response => {
+        this.locationType = response['data'];
+    });
   }
 
   mapClicked($event: MouseEvent) {
@@ -157,12 +166,21 @@ export class DeviceInfoComponent  implements OnInit {
 
   addIndustryType(event, data) {
     if (data === '') {
-      const data = {};
       const modalSize = {
         'height': 'auto',
         'width': 'auto'
       };
-      this.dialogService.openDialog(AddIndustryTypeComponent, {}, modalSize);
+      this.dialogService.openDialog(AddIndustryTypeComponent, {'type': 'industry'} , modalSize);
+    }
+  }
+
+  addLocationType(event, data) {
+    if (data === '') {
+      const modalSize = {
+        'height': 'auto',
+        'width': 'auto'
+      };
+      this.dialogService.openDialog(AddIndustryTypeComponent, {'type': 'location'}, modalSize);
     }
 
   }
@@ -215,11 +233,13 @@ export class DeviceInfoComponent  implements OnInit {
     ],
       'name': '',
       'serial_number': '',
-      'latitude': this.latitude,
-      'longitude': this.longitude,
-      'address': this.address,
-      'industry_type_id': ''
+      'latitude': this.latitude ? this.latitude : 0.000,
+      'longitude': this.longitude ? this.longitude : 0.000,
+      'address': this.address ? this.address : 'IW Naxal, Ananda Bhairab Marga',
+      'industry_type_id': '',
+      'location_type_id': ''
     };
+
     if (data.valid) {
 
         this.json['location_hours'][0].from_time = data.value['sun_time_start'];
@@ -231,41 +251,45 @@ export class DeviceInfoComponent  implements OnInit {
         this.json['location_hours'][1].from_time = data.value['mon_time_start'];
         this.json['location_hours'][1].to_time = data.value['mon_time_end'];
         if (data.value['toggle_mon']) {
-        this.json['location_hours'][1].is_on = data.value['toggle_mon'];
+            this.json['location_hours'][1].is_on = data.value['toggle_mon'];
         }
         this.json['location_hours'][2].from_time = data.value['tue_time_start'];
         this.json['location_hours'][2].to_time = data.value['tue_time_end'];
         if (data.value['toggle_tue']) {
-        this.json['location_hours'][2].is_on = data.value['toggle_tue'];
-        }
-
-        this.json['location_hours'][5].from_time = data.value['wed_time_start'];
-        this.json['location_hours'][5].to_time = data.value['wed_time_end'];
-        if (data.value['toggle_wed']) {
-        this.json['location_hours'][5].is_on = data.value['toggle_wed'];
+            this.json['location_hours'][2].is_on = data.value['toggle_tue'];
         }
 
         this.json['location_hours'][3].from_time = data.value['thu_time_start'];
         this.json['location_hours'][3].to_time = data.value['thu_time_end'];
         if (data.value['toggle_thu']) {
-        this.json['location_hours'][3].is_on = data.value['toggle_thu'];
+            this.json['location_hours'][3].is_on = data.value['toggle_thu'];
         }
         this.json['location_hours'][4].from_time = data.value['fri_time_start'];
         this.json['location_hours'][4].to_time = data.value['fri_time_end'];
         if (data.value['toggle_fri']) {
-        this.json['location_hours'][4].is_on = data.value['toggle_fri'];
+            this.json['location_hours'][4].is_on = data.value['toggle_fri'];
+        }
+
+        this.json['location_hours'][5].from_time = data.value['wed_time_start'];
+        this.json['location_hours'][5].to_time = data.value['wed_time_end'];
+        if (data.value['toggle_wed']) {
+            this.json['location_hours'][5].is_on = data.value['toggle_wed'];
         }
 
         this.json['location_hours'][6].from_time = data.value['sat_time_start'];
         this.json['location_hours'][6].to_time = data.value['sat_time_end'];
         if (data.value['toggle_sat']) {
-        this.json['location_hours'][6].is_on = data.value['toggle_sat'];
+            this.json['location_hours'][6].is_on = data.value['toggle_sat'];
         }
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
+
         if (data.value['industry_type']) {
-          this.json['industry_type_id'] = data.value['industry_type'];
+            this.json['industry_type_id'] = data.value['industry_type'];
+        }
+        if (data.value['location_type']) {
+            this.json['location_type_id'] = data.value['location_type'];
         }
 
         this.deviceservice.postDeviceinfo(this.json).subscribe(

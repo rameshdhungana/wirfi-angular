@@ -4,7 +4,7 @@ import {MessageService} from '../_services/message.service';
 import {AddIndustryTypeComponent} from './add-industry-type/add-industry-type.component';
 import {MatDialogModule} from '@angular/material';
 import {MaterialDialogService} from '../_services/material-dialog.service';
-import {DeleteIndustryTypeComponent} from "./delete-industry-type/delete-industry-type.component";
+import {DeleteIndustryTypeComponent} from './delete-industry-type/delete-industry-type.component';
 
 @Component({
     selector: 'app-industry-list',
@@ -28,7 +28,7 @@ export class IndustryListComponent implements OnInit {
     }
 
     addIndustryTypePopUp() {
-        const data = {};
+        const data = {'type': 'industry'};
         const modalSize = {
             'height': 'auto',
             'width': '450px'
@@ -39,7 +39,8 @@ export class IndustryListComponent implements OnInit {
     onClickEdit(industry_type) {
         const data = {
             'id': industry_type.id,
-            'name': industry_type.name
+            'name': industry_type.name,
+            'type': 'industry'
         };
         const modalSize = {
             'height': 'auto',
@@ -55,8 +56,8 @@ export class IndustryListComponent implements OnInit {
             'width': '450px'
         };
         const data = {
-            "id": industry_type.id,
-            "name": industry_type.name
+            'id': industry_type.id,
+            'name': industry_type.name
         };
         this.dialogService.openDialog(DeleteIndustryTypeComponent, data, modalSize);
     }
