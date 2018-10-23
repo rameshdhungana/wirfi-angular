@@ -54,6 +54,7 @@ export class BusinessComponent implements OnInit {
     }
 
     addBussiness(data: NgForm) {
+
         if (data.valid) {
             data.value['latitude'] = 37.33;
             data.value['longitude'] = 34.34;
