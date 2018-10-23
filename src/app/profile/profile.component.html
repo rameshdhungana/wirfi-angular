@@ -28,7 +28,7 @@
                                                 {{person['profile']['address']}} </p>
                                             <p class="card-text"><span
                                                     class="font-weight-bold pr-1">Phone Number:</span>
-                                                {{person['profile']['phone_number']}}
+                                                {{person['profile']['phone_number']|mask:'(000)-000-0000'}}
                                             </p>
                                         </div>
                                         <div *ngIf="!person.profile">

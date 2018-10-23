@@ -100,7 +100,7 @@
                             <input type="text" name="phone_number" [ngModel]="user.phone_number"
                                    class="form-control form-control-lg" id="phone_number" aria-describedby="phonenumberHelp"
                                    placeholder="Enter phone number" maxlength="15" ngModel
-                                   pattern="^$|^[0-9+-]+$" #phone_number="ngModel">
+                                   pattern="^$|^[0-9+-]+$" #phone_number="ngModel" mask="(000)-000-0000">
                             <div class="invisible-text text-right text-white">
                                 <small *ngIf="phone_number.hasError('pattern')">
                                     Only numeric, '+' and '-' characters are allowed.
