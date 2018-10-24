@@ -12,14 +12,7 @@
                             <a (click)="OpenDetail(billing)">
                                 <div class="row">
                                     <div class="col-4">
-                                        <i *ngIf="billing.brand=='Visa';else second"
-                                           class="fab fa-3x fa-cc-visa p-2"></i>
-                                        <ng-template #second>
-                                            <i *ngIf="billing.brand=='MasterCard';else third"
-                                               class="fab fa-3x fa-cc-mastercard p-2"></i>
-
-                                        </ng-template>
-                                        <ng-template #third><i class="fa fa-3x fa-address-card-o p-2"></i></ng-template>
+                                        <i [ngClass]="billing.brand=='Visa'?'fab fa-3x fa-cc-visa p-2':(billing.brand=='MasterCard'?'fab fa-3x  fa-cc-mastercard p-2':(billing.brand=='American Express'?'fab fa-3x fa-cc-amex p-2':'far fa-3x fa-credit-card p-2 '))"></i>
                                     </div>
                                     <div class="col-8">
                                         <span class="bold-text">{{billing.brand}}</span>
@@ -60,16 +53,8 @@
             <div class="row">
                 <div class="col-12 text-center text-white">
                     <!--<img style="border-radius:8px;" src="../../assets/images/visa.JPG" width="50%"/>-->
-                    <i *ngIf="billingDetail.brand=='Visa';else second"
-                       class="fab  fa-cc-visa larger-card-size "></i>
-                    <ng-template #second>
-                        <i *ngIf="billingDetail.brand=='MasterCard';else third"
-                           class="fab  fa-cc-mastercard larger-card-size"></i>
-
-                    </ng-template>
-                    <ng-template #third><i class="fa  fa-address-card-o larger-card-size"></i></ng-template>
+                    <i [ngClass]="billingDetail.brand=='Visa'?'fab fa-3x fa-cc-visa p-2 larger-card-size':(billingDetail.brand=='MasterCard'?'fab fa-3x  fa-cc-mastercard p-2 larger-card-size':(billingDetail.brand=='American Express'?'fab fa-3x fa-cc-amex p-2 larger-card-size':'far fa-3x fa-credit-card p-2 larger-card-size '))"></i>
                     <span class="pt-4 d-block">{{billingDetail.brand}}</span>
-
                 </div>
             </div>
             <div class="row">
