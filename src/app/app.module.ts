@@ -59,7 +59,8 @@ import {DeleteIndustryTypeComponent} from './industry-list/delete-industry-type/
 import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franchise-type-list.component';
 import {AddFranchiseTypeComponent} from './franchise/add-franchise-type/add-franchise-type.component';
 import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/delete-franchise-type.component';
-import { AddNetworkSettingComponent } from './devices/add-network-setting/add-network-setting.component';
+import {AddNetworkSettingComponent} from './devices/add-network-setting/add-network-setting.component';
+import {NgxMaskModule} from 'ngx-mask'
 
 @NgModule({
     declarations: [
@@ -116,6 +117,7 @@ import { AddNetworkSettingComponent } from './devices/add-network-setting/add-ne
         MatDialogModule,
         MatMenuModule,
         MatCheckboxModule,
+        NgxMaskModule.forRoot(),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
             libraries: ['places',

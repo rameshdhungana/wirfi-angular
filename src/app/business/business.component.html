@@ -39,8 +39,8 @@
                 <div class="form-group">
                     <label for="phone-number" class="text-white">Phone Number</label>
                     <input type="text" name="phone_number" class="form-control form-control-lg" id="phone-number" [maxlength]="15"
-                           placeholder="Enter Phone Number" required [ngModel]="business_data.phone_number"
-                           pattern="^[0-9+-]+$" #phone_number="ngModel">
+                           placeholder="(000)-000-0000" required [ngModel]="business_data.phone_number"
+                           pattern="^[0-9+-]+$" #phone_number="ngModel" mask="(000)-000-0000">
                     <div class="invisible-text text-right text-white">
                         <small *ngIf="bussinessForm.submitted && phone_number.hasError('required')">
                             This is required field.
