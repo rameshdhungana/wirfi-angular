@@ -7,6 +7,7 @@ import {PresetFilterComponent} from '../../preset-filter/preset-filter.component
 import {DeletePresetComponent} from '../../delete-preset/delete-preset.component';
 import {environment} from '../../../environments/environment.prod';
 import {DeviceService} from '../../_services/device.service';
+import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 
 enum sortParams {
     Clear,
@@ -26,9 +27,9 @@ enum filterParams {
 @Component({
     selector: 'app-device-list',
     templateUrl: './device-list.component.html',
-    styleUrls: ['./device-list.component.css']
+    styleUrls: ['./device-list.component.css'],
+    providers: [NgbDropdownConfig]
 })
-
 
 export class DeviceListComponent implements OnInit {
     public allDeviceList: any;

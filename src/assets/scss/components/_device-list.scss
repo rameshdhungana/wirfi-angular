@@ -10,6 +10,10 @@
   position: absolute;
   right: 10px;;
 }
+.device-dropdown.show {
+  right: 0px !important;
+  left: unset !important;
+}
 
 .fa-camera-unavailable:after, .fa-moon-unavailable:after {
   position: relative;
