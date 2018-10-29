@@ -60,7 +60,8 @@ import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franch
 import {AddFranchiseTypeComponent} from './franchise/add-franchise-type/add-franchise-type.component';
 import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/delete-franchise-type.component';
 import {AddNetworkSettingComponent} from './devices/add-network-setting/add-network-setting.component';
-import {NgxMaskModule} from 'ngx-mask'
+import {NgxMaskModule} from 'ngx-mask';
+import { SleepDeviceComponent } from './devices/sleep-device/sleep-device.component'
 
 @NgModule({
     declarations: [
@@ -103,6 +104,7 @@ import {NgxMaskModule} from 'ngx-mask'
         AddFranchiseTypeComponent,
         DeleteFranchiseTypeComponent,
         AddNetworkSettingComponent,
+        SleepDeviceComponent,
     ],
     imports: [
         BrowserModule,
@@ -154,7 +156,8 @@ import {NgxMaskModule} from 'ngx-mask'
         AddFranchiseTypeComponent,
         AddIndustryTypeComponent,
         DeleteIndustryTypeComponent,
-        DeleteFranchiseTypeComponent
+        DeleteFranchiseTypeComponent,
+        SleepDeviceComponent
 
 
     ]
