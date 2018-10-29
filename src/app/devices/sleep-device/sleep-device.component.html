@@ -1,0 +1,32 @@
+<div class="row justify-content-center align-items-center">
+    <div class="col-md-12 text-center text-white ">
+        <h5 *ngIf="data.is_asleep" class="pb-1">Enter Sleep Duration</h5>
+        <h5 *ngIf="!data.is_asleep"> Are you sure you want to Awake Device?</h5>
+    </div>
+    <div class="col-md-12 text-center text-white pb-2">
+        <form *ngIf="data.is_asleep ;else awakeConfirmation" #sleepDeviceForm='ngForm'
+              (ngSubmit)='sleepDevice(data.device_id,data.is_asleep,sleepDeviceForm)'>
+            <div class="d-flex justify-content-center">
+                <ngb-timepicker name="device_sleep_time" [(ngModel)]="time" ngModel></ngb-timepicker>
+            </div>
+            <small class=" text-center d-block mt-1 mb-3 " *ngIf="timeNotEntered">Please Enter Valid Hour and Minute
+                value
+            </small>
+            <button [disabled]="sleepButtonClicked" type="submit" class="btn  btn-light">
+                Sleep
+                <i *ngIf="sleepButtonClicked" class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+            </button>
+        </form>
+        <ng-template #awakeConfirmation>
+            <div class="d-block pt-3">
+                <p class="pb-3">Device is Slept Until: {{sleptUntil|date :"dd MMM HH:mm"}}</p>
+                <button (click)="awakeDevice(data.device_id,data.is_asleep)" [disabled]="sleepButtonClicked"
+                        type="submit" class="btn btn-light">Awake
+                    <i *ngIf="sleepButtonClicked" class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+                </button>
+            </div>
+        </ng-template>
+
+
+    </div>
+</div>
