@@ -2,11 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {MaterialDialogService} from '../../_services/material-dialog.service';
 import {MuteDeviceComponent} from '../../mute-device/mute-device.component';
 import {PresetFilter} from '../../_models/preset-filter';
-import {BehaviorSubject} from 'rxjs/Rx';
+import {BehaviorSubject, Subject} from 'rxjs/Rx';
 import {PresetFilterComponent} from '../../preset-filter/preset-filter.component';
 import {DeletePresetComponent} from '../../delete-preset/delete-preset.component';
 import {environment} from '../../../environments/environment.prod';
 import {DeviceService} from '../../_services/device.service';
+import {SleepDeviceComponent} from "../sleep-device/sleep-device.component";
 
 enum sortParams {
     Clear,
@@ -34,6 +35,7 @@ export class DeviceListComponent implements OnInit {
     public allDeviceList: any;
     public API_URl: any;
     public deviceList = new BehaviorSubject<Array<any>>([]);
+    // public deviceList = new Subject<Array<any>>();
     public presetFilterValue = new BehaviorSubject(new PresetFilter());
     public sortParams: any;
     public filterParams: any;
@@ -53,17 +55,19 @@ export class DeviceListComponent implements OnInit {
 
     ngOnInit() {
         this.deviceService.getDeviceList().subscribe(response => {
+
             console.log(response, 22222222);
             this.allDeviceList = response['data']['device'];
             this.industry_type = response['data']['industry_type'];
             this.status_dict = response['data']['status_dict'];
 
             this.deviceList.next(<Array<any>>response['data']['device']);
+            console.log(this.deviceList, 'this is checking subject')
             this.reOrderDeviceList();
             this.deviceService.getPresetFilterList().subscribe(
                 (res: Array<any>) => {
                     this.presetList.next(res['data']);
-            });
+                });
             if (!localStorage.getItem('tempPresetFilterSaved')) {
                 localStorage.setItem('tempPresetFilterSaved', JSON.stringify(new PresetFilter()));
             }
@@ -106,6 +110,22 @@ export class DeviceListComponent implements OnInit {
             'width': 'auto'
         };
         this.dialogService.openDialog(MuteDeviceComponent, data, modalSize);
+
+    }
+
+    sleepDevicePopUp(device_id, sleep_status, sleep_start_date, sleep_duration) {
+        const data = {
+            'device_id': device_id,
+            'is_asleep': sleep_status,
+            'sleep_start': sleep_start_date,
+            'sleep_duration': sleep_duration,
+        };
+        const modalSize = {
+            'height': 'auto',
+            'width': 'auto'
+        };
+        this.dialogService.openDialog(SleepDeviceComponent, data, modalSize);
+
     }
 
     changePreset(preset_id) {

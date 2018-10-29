@@ -100,7 +100,7 @@
         ￼
         <div class="col-md-12 pt-3">
             <div class="row">
-                <div class="col-md-6 text-white" *ngFor="let device of deviceList.value">
+                <div class="col-md-6 text-white" *ngFor="let device of deviceList.value; let idx = index">
                     <div>
                         <div class="panel">
                             <div class="card text-center">
@@ -120,7 +120,10 @@
                                                 Mute
                                             </button>
                                         </ng-template>
-                                        <button class="dropdown-item">Another Action</button>
+                                        <button class="dropdown-item"
+                                                (click)="sleepDevicePopUp(device.id, !device?.device_settings?.sleep_settings?.is_asleep, device?.device_settings?.sleep_settings?.sleep_start, device?.device_settings?.sleep_settings?.sleep_duration)">
+                                            {{device.device_settings?.sleep_settings?.is_asleep? 'Awake': 'Sleep'}}
+                                        </button>
                                         <button class="dropdown-item">Something else is here</button>
                                     </div>
                                 </div>
@@ -151,7 +154,6 @@
                                        [ngClass]="device?.camera_service?.length == 0 ? 'fa-camera-unavailable' : (!device?.camera_service[0]?.is_on ? 'fa-camera-off' : '')"></i>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
