@@ -6,10 +6,9 @@ import { BehaviorSubject } from 'rxjs';
 export class BillingService {
     public billingList = new BehaviorSubject<Array<any>>([]);
 
-    constructor(private http: HttpClient) {
-
-    }
-
+    constructor(
+        private http: HttpClient
+    ) { }
 
     getBillingList() {
        this.http.get('billing/').subscribe(res => {

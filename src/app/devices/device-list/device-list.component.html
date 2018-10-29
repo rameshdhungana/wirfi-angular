@@ -2,6 +2,7 @@
     <div class="row pt-4 ">
         <div class="col-md-12  text-white" style="position: relative;">
             <div class="row">
+
                 <div class="offset-md-6 col-md-2">
                     <button mat-button [matMenuTriggerFor]="presetOptions">Preset &#x25BE;</button>
 
@@ -67,8 +68,8 @@
 
 
                 </div>
-                <div class="col-md-2">
 
+                <div class="col-md-2">
                     <button mat-button [matMenuTriggerFor]="sortOptions">Sort &#x25BE;</button>
 
                     <mat-menu #sortOptions="matMenu" [overlapTrigger]="false">
@@ -109,7 +110,7 @@
                                         <i class="fas fa-cog"></i>
                                     </div>
 
-                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="device-dropdown" >
                                         <button *ngIf="device?.device_settings?.mute_settings; else firstTimeCreated"
                                                 class="dropdown-item"
                                                 (click)="muteDevicePopUp(device.id, !device?.device_settings?.mute_settings?.is_muted, device?.device_settings?.mute_settings?.mute_start, device?.device_settings?.mute_settings?.mute_duration)">

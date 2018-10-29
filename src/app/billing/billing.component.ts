@@ -24,17 +24,14 @@ export class BillingComponent implements OnInit {
     private current_user_email: string;
 
 
-    constructor(private billingService: BillingService,
-                private dialog: MatDialog,
-                private router: Router,
-                private dialogService: MaterialDialogService,
-                private authenticateService: AuthenticationService,
-                private renderer: Renderer2) {
-
-        // this.renderer.addClass(document.body, 'bg-white');
-
-
-    }
+    constructor(
+        private billingService: BillingService,
+        private dialog: MatDialog,
+        private router: Router,
+        private dialogService: MaterialDialogService,
+        private authenticateService: AuthenticationService,
+        private renderer: Renderer2
+    ) { }
 
     // ngOnDestroy() {
     //     this.renderer.removeClass(document.body, 'bg-white');
@@ -51,8 +48,6 @@ export class BillingComponent implements OnInit {
                     if (this.customerStripeInfo.length) {
                         this.noBillingData = false;
                         this.billingDetail = response['data']['billing_info']['sources']['data'][0]
-
-
                     } else {
                         this.noBillingData = true;
                     }
@@ -71,7 +66,6 @@ export class BillingComponent implements OnInit {
     }
 
     openCheckout() {
-        console.log('hello i am inside opencheckout');
         this.buffering = true;
         const handler = (<any>window).StripeCheckout.configure({
             key: 'pk_test_o7PR3DYdjOhH3bINtvDfCxTy',
