@@ -5,7 +5,9 @@ import {BehaviorSubject} from "rxjs/Rx";
 
 @Injectable()
 export class DeviceService {
-    public presetList = new BehaviorSubject<Array<any>>([]);
+    public presetList = new Subject<Array<any>>();
+    public deviceList = new Subject<Array<any>>();
+
 
     constructor(private http: HttpClient) {
     }
@@ -15,7 +17,11 @@ export class DeviceService {
     }
 
     getDeviceList() {
-        return this.http.get('device/');
+        this.http.get('device/').subscribe(response => {
+            this.deviceList.next(<Array<any>>response);
+            console.log(this.deviceList, 'this is device service list')
+        });
+        return this.deviceList
     }
 
     getDevice(id) {
@@ -78,6 +84,11 @@ export class DeviceService {
 
     addNetworkSetting(data) {
         return this.http.post('addNetworkSetting/', data);
+    }
+
+    sleepDevice(id, data) {
+        console.log(data)
+        return this.http.post(`device/${id}/sleep/`, data);
     }
 
 }

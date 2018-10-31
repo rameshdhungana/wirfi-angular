@@ -18,7 +18,7 @@ export class MuteDeviceComponent implements OnInit {
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                 private dialogService: MaterialDialogService,
                 private deviceService: DeviceService,
-                private messageService: MessageService) {
+                private messageService: MessageService,) {
     }
 
     ngOnInit() {
@@ -41,6 +41,7 @@ export class MuteDeviceComponent implements OnInit {
                 console.log(response, 'after mute device called');
                 this.dialogService.closeCurrentDialog();
                 this.messageService.add('Device is successfully Muted.');
+                this.deviceService.getDeviceList();
 
             });
         } else {
