@@ -1,0 +1,17 @@
+<div class="row justify-content-center align-items-center">
+    <div class="col-12  text-white ">
+        <h5 class="text-center"> Are you sure you want to delete this Secondary Network setting?</h5>
+    </div>
+    <div class="col-md-12 text-center text-white pb-2">
+
+        <div class="d-block pt-4">
+            <h6 class="pb-3"> Name: {{data.secondary_network.ssid}}</h6>
+            <div class="pt-3">
+                <button (click)="deleteNetworkSetting(data.device_id, data.secondary_network.id)"
+                        type="submit" class=" p-2 btn btn-block btn-danger">Delete Network Setting
+                </button>
+                <button class="btn btn-block btn-light" mat-button mat-dialog-close>Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
