@@ -9,6 +9,7 @@ import {environment} from '../../../environments/environment.prod';
 import {DeviceService} from '../../_services/device.service';
 import {SleepDeviceComponent} from "../sleep-device/sleep-device.component";
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
+import {AddNetworkSettingComponent} from "../add-network-setting/add-network-setting.component";
 
 enum sortParams {
     Clear,
@@ -126,6 +127,36 @@ export class DeviceListComponent implements OnInit {
             'width': 'auto'
         };
         this.dialogService.openDialog(SleepDeviceComponent, data, modalSize);
+
+    }
+
+    manageNetworkPopUp(device_id, primary_network,device_network) {
+        const data = {
+            'device_id': device_id,
+            'primary_network': primary_network,
+            'device_network':device_network
+
+        };
+        console.log(data, 'this is for checking prim or sec')
+        const modalSize = {
+            'height': 'auto',
+            'width': 'auto'
+        };
+        this.dialogService.openDialog(AddNetworkSettingComponent, data, modalSize);
+
+    }
+
+    deleteNetworkPopUp(device_id, primary_network) {
+        const data = {
+            'device_id': device_id,
+            'primary_network': primary_network
+
+        };
+        const modalSize = {
+            'height': 'auto',
+            'width': 'auto'
+        };
+        this.dialogService.openDialog(AddNetworkSettingComponent, data, modalSize);
 
     }
 

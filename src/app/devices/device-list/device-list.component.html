@@ -133,9 +133,12 @@
                                             </button>
 
 
-                                            <span class="add-icon-network" (click)="manageNetworkPopUp(device.id,true)"> <i
+                                            <span class="add-icon-network"
+                                                  (click)="device.device_network?.primary_network?manageNetworkPopUp(device.id,true,device.device_network.primary_network):manageNetworkPopUp(device.id,true,null)"> <i
                                                     [ngClass]="device.device_network?.primary_network?'fa fa-fw fa-pencil-alt':'fa fa-fw fa-plus-circle'"></i></span>
-                                            <span (click)="deleteNetworkPopUp(device.id,true)" class="delete-icon-network ml-3 mr-2"><i
+                                            <span *ngIf="device.device_network?.primary_network"
+                                                  (click)="deleteNetworkPopUp(device.id,true)"
+                                                  class="delete-icon-network ml-3 mr-2"><i
                                                     class="fa fa-fw fa-trash"></i></span>
                                         </div>
 
@@ -146,9 +149,11 @@
                                             </button>
 
                                             <span class="add-icon-network"
-                                                  (click)="manageNetworkPopUp(device.id,false)"> <i
+                                                  (click)="device.device_network?.secondary_network?manageNetworkPopUp(device.id,false,device.device_network.secondary_network):manageNetworkPopUp(device.id,false,null)"> <i
                                                     [ngClass]="device.device_network?.secondary_network?'fa fa-fw fa-pencil-alt':' fa fa-fw fa-plus-circle'"></i></span>
-                                            <span (click)="deleteNetworkPopUp(device.id,false)" class="delete-icon-network ml-3 mr-2"><i
+                                            <span *ngIf="device.device_network?.secondary_network"
+                                                  (click)="deleteNetworkPopUp(device.id,false)"
+                                                  class="delete-icon-network ml-3 mr-2"><i
                                                     class="fa fa-fw fa-trash "></i></span>
 
                                         </div>
