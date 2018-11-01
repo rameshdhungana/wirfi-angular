@@ -17,7 +17,7 @@
                                 <span *ngIf="presetFilterValue.value.id===preset.id" class="float-right"><i
                                         class="fa fa-check "></i></span>
                             </button>
-                            <span class="delete-icon"
+                            <span class="delete-icon-preset"
                                   (click)="deletePresetPopUp(preset.id,preset.name,preset.sort_type,preset.filter_type,preset.filter_keys)">
                                 <i class="fa fa-trash"></i>
                             </span>
@@ -110,7 +110,7 @@
                                         <i class="fas fa-cog"></i>
                                     </div>
 
-                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="device-dropdown" >
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="device-dropdown">
                                         <button *ngIf="device?.device_settings?.mute_settings; else firstTimeCreated"
                                                 class="dropdown-item"
                                                 (click)="muteDevicePopUp(device.id, !device?.device_settings?.mute_settings?.is_muted, device?.device_settings?.mute_settings?.mute_start, device?.device_settings?.mute_settings?.mute_duration)">
@@ -121,11 +121,37 @@
                                                 Mute
                                             </button>
                                         </ng-template>
-                                        <button class="dropdown-item"
+                                        <button class="dropdown-item" style="margin-right: 55px; cursor:default;"
                                                 (click)="sleepDevicePopUp(device.id, !device?.device_settings?.sleep_settings?.is_asleep, device?.device_settings?.sleep_settings?.sleep_start, device?.device_settings?.sleep_settings?.sleep_duration)">
                                             {{device.device_settings?.sleep_settings?.is_asleep? 'Awake': 'Sleep'}}
                                         </button>
-                                        <button class="dropdown-item">Something else is here</button>
+                                        <div style="position:relative; cursor:default;">
+
+                                            <button class="dropdown-item"
+                                                    style=" margin-right: 55px;cursor:default !important;">
+                                                Primary Network
+                                            </button>
+
+
+                                            <span class="add-icon-network" (click)="manageNetworkPopUp(device.id,true)"> <i
+                                                    [ngClass]="device.device_network?.primary_network?'fa fa-fw fa-pencil-alt':'fa fa-fw fa-plus-circle'"></i></span>
+                                            <span (click)="deleteNetworkPopUp(device.id,true)" class="delete-icon-network ml-3 mr-2"><i
+                                                    class="fa fa-fw fa-trash"></i></span>
+                                        </div>
+
+                                        <div style="position:relative;">
+                                            <button class="dropdown-item"
+                                                    style=" margin-right: 55px;cursor:default !important;">
+                                                Secondary Network
+                                            </button>
+
+                                            <span class="add-icon-network"
+                                                  (click)="manageNetworkPopUp(device.id,false)"> <i
+                                                    [ngClass]="device.device_network?.secondary_network?'fa fa-fw fa-pencil-alt':' fa fa-fw fa-plus-circle'"></i></span>
+                                            <span (click)="deleteNetworkPopUp(device.id,false)" class="delete-icon-network ml-3 mr-2"><i
+                                                    class="fa fa-fw fa-trash "></i></span>
+
+                                        </div>
                                     </div>
                                 </div>
 

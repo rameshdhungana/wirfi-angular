@@ -10,6 +10,7 @@
   position: absolute;
   right: 10px;;
 }
+
 .device-dropdown.show {
   right: 0px !important;
   left: unset !important;
@@ -67,22 +68,58 @@
   min-width: 150px !important;
 }
 
-.delete-icon {
+%base-icon {
   position: absolute;
-  right: 0;
-  top: 10px;
-  width: 30px;
-  height: 30px;
-  font-size: 15px;
-  line-height: 30px;
-  border-radius: 15px;
   cursor: pointer;
-  text-align: center;
   display: inline-block;
   background: #e6e1df;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 30px;
+
+}
+
+.delete-icon {
+  @extend %base-icon;
 
   &:hover {
     background-color: red;
     color: $white;
   }
 }
+
+.add-icon {
+  @extend %base-icon;
+
+  &:hover {
+    background-color: green;
+    color: $white;
+  }
+}
+
+.delete-icon-preset {
+  @extend .delete-icon;
+  right: 0;
+  top: 10px;
+
+}
+
+.delete-icon-network {
+  @extend .delete-icon;
+  right: 0;
+  top: 0;
+
+}
+
+.add-icon-network {
+
+  @extend .add-icon;
+  right: 40px;
+  top: 0;
+
+}
+
+
