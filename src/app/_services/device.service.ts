@@ -82,12 +82,22 @@ export class DeviceService {
 
     }
 
-    addNetworkSetting(data) {
-        return this.http.post('addNetworkSetting/', data);
+    addNetworkSetting(id, data) {
+        console.log(id, data, 'this is device setting data');
+        return this.http.post(`device/${id}/network/`, data);
+    }
+
+    updateNetworkSetting(device_id, network_id, data) {
+        console.log(device_id, data, 'this is device setting data');
+        return this.http.put(`device/${device_id}/network/${network_id}/`, data);
+    }
+
+    deleteNetworkSetting(device_id, network_id,) {
+        return this.http.delete(`device/${device_id}/network/${network_id}/`);
     }
 
     sleepDevice(id, data) {
-        console.log(data)
+        console.log(data);
         return this.http.post(`device/${id}/sleep/`, data);
     }
 
