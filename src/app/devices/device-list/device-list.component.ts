@@ -10,6 +10,7 @@ import {DeviceService} from '../../_services/device.service';
 import {SleepDeviceComponent} from "../sleep-device/sleep-device.component";
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddNetworkSettingComponent} from "../add-network-setting/add-network-setting.component";
+import {DeleteNetworkSettingComponent} from "../network-setting/delete-network-setting/delete-network-setting.component";
 
 enum sortParams {
     Clear,
@@ -130,11 +131,11 @@ export class DeviceListComponent implements OnInit {
 
     }
 
-    manageNetworkPopUp(device_id, primary_network,device_network) {
+    manageNetworkPopUp(device_id, primary_network, device_network) {
         const data = {
             'device_id': device_id,
             'primary_network': primary_network,
-            'device_network':device_network
+            'device_network': device_network
 
         };
         console.log(data, 'this is for checking prim or sec')
@@ -146,17 +147,17 @@ export class DeviceListComponent implements OnInit {
 
     }
 
-    deleteNetworkPopUp(device_id, primary_network) {
+    deleteNetworkPopUp(device_id, secondary_network) {
         const data = {
             'device_id': device_id,
-            'primary_network': primary_network
+            'secondary_network': secondary_network
 
         };
         const modalSize = {
-            'height': 'auto',
-            'width': 'auto'
+            'height': '325px',
+            'width': '450px',
         };
-        this.dialogService.openDialog(AddNetworkSettingComponent, data, modalSize);
+        this.dialogService.openDialog(DeleteNetworkSettingComponent, data, modalSize);
 
     }
 

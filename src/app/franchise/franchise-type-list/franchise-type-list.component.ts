@@ -47,7 +47,7 @@ export class FranchiseTypeListComponent implements OnInit {
         this.dialogService.openDialog(AddFranchiseTypeComponent, data, modalSize);
     }
 
-    deleteIndustryTypePopUp(franchise_type) {
+    deleteFranchiseTypePopUp(franchise_type) {
 
         const modalSize = {
             'height': 'auto',

@@ -61,7 +61,9 @@ import {AddFranchiseTypeComponent} from './franchise/add-franchise-type/add-fran
 import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/delete-franchise-type.component';
 import {AddNetworkSettingComponent} from './devices/add-network-setting/add-network-setting.component';
 import {NgxMaskModule} from 'ngx-mask';
-import { SleepDeviceComponent } from './devices/sleep-device/sleep-device.component'
+import {SleepDeviceComponent} from './devices/sleep-device/sleep-device.component';
+import {ConnectToHiddenNetworkComponent} from './connect-to-hidden-network/connect-to-hidden-network.component';
+import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-network-setting/delete-network-setting.component'
 
 @NgModule({
     declarations: [
@@ -105,6 +107,8 @@ import { SleepDeviceComponent } from './devices/sleep-device/sleep-device.compon
         DeleteFranchiseTypeComponent,
         AddNetworkSettingComponent,
         SleepDeviceComponent,
+        ConnectToHiddenNetworkComponent,
+        DeleteNetworkSettingComponent,
     ],
     imports: [
         BrowserModule,
@@ -157,7 +161,8 @@ import { SleepDeviceComponent } from './devices/sleep-device/sleep-device.compon
         AddIndustryTypeComponent,
         DeleteIndustryTypeComponent,
         DeleteFranchiseTypeComponent,
-        SleepDeviceComponent
+        SleepDeviceComponent,
+        DeleteNetworkSettingComponent
 
 
     ]

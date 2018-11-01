@@ -25,7 +25,7 @@ export class AddIndustryTypeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.industry = this.data.type === 'industry' ? true : false;
+        this.industry = this.data.type === 'industry';
     }
 
     createForm(data: NgForm) {
