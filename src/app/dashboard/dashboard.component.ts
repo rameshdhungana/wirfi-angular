@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
       'value': 0
     }
   ];
+
   doughnut_filter_data_toggle = [
     {
       'status': 'ONLINE',
@@ -65,6 +66,7 @@ export class DashboardComponent implements OnInit {
       'value': 0
     }
   ];
+
   industry_types_line_graph = [];
   industry_types_doughnut_graph = [];
   filter_data = {};
@@ -172,12 +174,8 @@ export class DashboardComponent implements OnInit {
             'status': 2
           },
           {
-            'date': '08:00:00',
-            'status': 3
-          },
-          {
             'date': '09:01:00',
-            'status': 3
+            'status': 2
           }
         ]
       },
@@ -246,85 +244,11 @@ export class DashboardComponent implements OnInit {
   filtered_data: object;
   filtered_data_toggle: object;
   private no_of_devices = 0;
-  // private stepRoundBefore: any;
-  // private stepRoundAfter: any;
 
   constructor(
     private googleapiService: GoogleApiService,
     private dashboardservice: DashboardService
-  ) {
-    // function Step(context, t) {
-    //   this._context = context;
-    //   this._t = t;
-    // }
-    // Step.prototype = {
-    //     areaStart: function() {
-    //         this._line = 0;
-    //     },
-    //     areaEnd: function() {
-    //         this._line = NaN;
-    //     },
-    //     lineStart: function() {
-    //         this._x = this._y = NaN;
-    //         this._point = 0;
-    //     },
-    //     lineEnd: function() {
-    //         if (0 < this._t && this._t < 1 && this._point % 2 === 0) {
-    //             this._context.lineTo(this._x, this._y);
-    //         }
-    //         if (this._line || (this._line !== 0 && this._point % 2 === 1)) {
-    //             this._context.lineTo(this._x, this._y);
-    //         }
-    //         if (this._line >= 0) {
-    //             this._t = 1 - this._t, this._line = 1 - this._line;
-    //         }
-    //     },
-    //     point: function(x, y) {
-    //         x = +x, y = +y;
-    //         switch (this._point) {
-    //         case 0:
-    //             this._point = 1;
-    //             this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
-    //             break;
-    //         case 1:
-    //             this._point = 2; // proceed
-    //             break;
-    //         default:
-    //             {
-    //                 let xN, yN, mYb, mYa;
-    //                 if (this._t <= 0) {
-    //                     xN = Math.abs(x - this._x) * 0.25;
-    //                     yN = Math.abs(y - this._y) * 0.25;
-    //                     mYb = (this._y < y) ? this._y + yN : this._y - yN;
-    //                     mYa = (this._y > y) ? y + yN : y - yN;
-    //                     this._context.quadraticCurveTo(this._x, this._y, this._x, mYb);
-    //                     this._context.lineTo(this._x, mYa);
-    //                     this._context.quadraticCurveTo(this._x, y, this._x + xN, y);
-    //                     this._context.lineTo(x - xN, y);
-    //                 } else {
-    //                     const x1 = this._x * (1 - this._t) + x * this._t;
-    //                     xN = Math.abs(x - x1) * 0.25;
-    //                     yN = Math.abs(y - this._y) * 0.25;
-    //                     mYb = (this._y < y) ? this._y + yN : this._y - yN;
-    //                     mYa = (this._y > y) ? y + yN : y - yN;
-    //                     this._context.quadraticCurveTo(x1, this._y, x1, mYb);
-    //                     this._context.lineTo(x1, mYa);
-    //                     this._context.quadraticCurveTo(x1, y, x1 + xN, y );
-    //                     this._context.lineTo(x - xN, y);
-    //                 }
-    //                 break;
-    //             }
-    //         }
-    //         this._x = x, this._y = y;
-    //     }
-    // };
-    // this.stepRoundBefore = function(context) {
-    //   return new Step(context, 0);
-    // };
-    // this.stepRoundAfter = function(context) {
-    //     return new Step(context, 1);
-    // };
-  }
+  ) { }
 
   ngOnInit() {
     this.dashboardservice.getDashboard().subscribe(response => {
@@ -585,12 +509,18 @@ export class DashboardComponent implements OnInit {
                     .html(device_data[index].device_name)
                     .style('left', d3.event.pageX + 'px')
                     .style('top', d3.event.pageY - 28 + 'px');
+
+                  d3.select(this)
+                    .style('stroke-width', '4');
                 })
                 .on('mouseout', function(d) {
                   div
                     .transition()
-                    .duration(500)
+                    .duration(50)
                     .style('opacity', 0);
+
+                  d3.select(this)
+                    .style('stroke-width', '2');
                 })
                 .style('stroke', function() {
                     // Add the colour
