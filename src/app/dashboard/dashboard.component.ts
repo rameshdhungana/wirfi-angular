@@ -72,133 +72,114 @@ export class DashboardComponent implements OnInit {
   value_of_checkbox = [];
 
   data_new = {
-    //   'type1': [{
-    //     'device_name': 'device1',
-    //     'address': 'address',
-    //     'data':  [
-    //           {
-    //             'date': '01:00:00',
-    //             'status': 1
-    //           },
-    //           {
-    //             'date': '02:00:00',
-    //             'status': 2
-    //           },
-    //           {
-    //             'date': '03:00:00',
-    //             'status': 3
-    //           },
-    //           {
-    //             'date': '04:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '05:00:00',
-    //             'status': 5
-    //           },
-    //           {
-    //             'date': '06:00:00',
-    //             'status': 6
-    //           },
-    //           {
-    //             'date': '07:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '08:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '09:00:00',
-    //             'status': 4
-    //           }
-    //         ]
-    //  },
-    //   {
-    //     'device_name': 'device2',
-    //     'address': 'address',
-    //     'data':  [
-    //           {
-    //             'date': '01:00:00',
-    //             'status': 1
-    //           },
-    //           {
-    //             'date': '02:00:00',
-    //             'status': 1
-    //           },
-    //           {
-    //             'date': '03:00:00',
-    //             'status': 3
-    //           },
-    //           {
-    //             'date': '04:00:00',
-    //             'status': 3
-    //           },
-    //           {
-    //             'date': '05:00:00',
-    //             'status': 2
-    //           },
-    //           {
-    //             'date': '06:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '07:00:00',
-    //             'status': 6
-    //           },
-    //           {
-    //             'date': '08:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '09:00:00',
-    //             'status': 4
-    //           }
-    //         ]
-    //  }],
+      'type1': [
+        {
+          'device_name': 'device1',
+          'address': 'address',
+          'data':  [
+              {
+                'date': '01:00:00',
+                'status': 4
+              },
+              {
+                'date': '02:00:00',
+                'status': 2
+              },
+              {
+                'date': '03:00:00',
+                'status': 3
+              },
+              {
+                'date': '04:00:00',
+                'status': 4
+              },
+              {
+                'date': '05:00:00',
+                'status': 5
+              },
+              {
+                'date': '06:00:00',
+                'status': 6
+              },
+              {
+                'date': '06:10:00',
+                'status': 2
+              },
+              {
+                'date': '09:00:00',
+                'status': 2
+              }
+            ]
+      },
+      {
+        'device_name': 'device2',
+        'address': 'address',
+        'data':  [
+              {
+                'date': '01:00:00',
+                'status': 6
+              },
+              {
+                'date': '03:00:00',
+                'status': 3
+              },
+              {
+                'date': '05:00:00',
+                'status': 5
+              },
+              {
+                'date': '08:00:00',
+                'status': 6
+              },
+              {
+                'date': '09:00:00',
+                'status': 6
+              }
+            ]
+     }],
     type2: [
-      //    {
-      //     'device_name': 'device3',
-      //     'address': 'address',
-      //     'data':  [
-      //           {
-      //             'date': '01:00:00',
-      //             'status': 1
-      //           },
-      //           {
-      //             'date': '02:00:00',
-      //             'status': 2
-      //           },
-      //           {
-      //             'date': '03:00:00',
-      //             'status': 3
-      //           },
-      //           {
-      //             'date': '04:00:00',
-      //             'status': 5
-      //           },
-      //           {
-      //             'date': '05:00:00',
-      //             'status': 3
-      //           },
-      //           {
-      //             'date': '06:00:00',
-      //             'status': 6
-      //           },
-      //           {
-      //             'date': '07:00:00',
-      //             'status': 2
-      //           },
-      //           {
-      //             'date': '08:00:00',
-      //             'status': 4
-      //           },
-      //           {
-      //             'date': '09:00:00',
-      //             'status': 4
-      //           }
-      //         ]
-      //  },
+         {
+          'device_name': 'device3',
+          'address': 'address',
+          'data':  [
+                {
+                  'date': '01:00:00',
+                  'status': 1
+                },
+                {
+                  'date': '02:00:00',
+                  'status': 2
+                },
+                {
+                  'date': '03:00:00',
+                  'status': 3
+                },
+                {
+                  'date': '04:00:00',
+                  'status': 5
+                },
+                {
+                  'date': '05:00:00',
+                  'status': 3
+                },
+                {
+                  'date': '06:00:00',
+                  'status': 6
+                },
+                {
+                  'date': '07:00:00',
+                  'status': 2
+                },
+                {
+                  'date': '08:00:00',
+                  'status': 3
+                },
+                {
+                  'date': '09:01:00',
+                  'status': 3
+                }
+              ]
+       },
       {
         'device_name': 'device4',
         'address': 'address',
@@ -239,6 +220,15 @@ export class DashboardComponent implements OnInit {
             'date': '07:00:00',
             'status': 2
           },
+          {
+            'date': '07:15:00',
+            'status': 6
+          },
+          {
+            'date': '07:45:00',
+            'status': 2
+          },
+
           {
             'date': '08:00:00',
             'status': 4
