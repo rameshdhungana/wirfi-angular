@@ -72,114 +72,115 @@ export class DashboardComponent implements OnInit {
   value_of_checkbox = [];
 
   data_new = {
-      'type1': [
-        {
-          'device_name': 'device1',
-          'address': 'address',
-          'data':  [
-              {
-                'date': '01:00:00',
-                'status': 4
-              },
-              {
-                'date': '02:00:00',
-                'status': 2
-              },
-              {
-                'date': '03:00:00',
-                'status': 3
-              },
-              {
-                'date': '04:00:00',
-                'status': 4
-              },
-              {
-                'date': '05:00:00',
-                'status': 5
-              },
-              {
-                'date': '06:00:00',
-                'status': 6
-              },
-              {
-                'date': '06:10:00',
-                'status': 2
-              },
-              {
-                'date': '09:00:00',
-                'status': 2
-              }
-            ]
+    'type1': [
+      {
+        'device_name': 'device1',
+        'address': 'address',
+        'data':  [
+          {
+            'date': '01:00:00',
+            'status': 4
+          },
+          {
+            'date': '02:00:00',
+            'status': 2
+          },
+          {
+            'date': '03:00:00',
+            'status': 3
+          },
+          {
+            'date': '04:00:00',
+            'status': 4
+          },
+          {
+            'date': '05:00:00',
+            'status': 5
+          },
+          {
+            'date': '06:00:00',
+            'status': 6
+          },
+          {
+            'date': '06:10:00',
+            'status': 2
+          },
+          {
+            'date': '09:01:00',
+            'status': 2
+          }
+        ]
       },
       {
         'device_name': 'device2',
         'address': 'address',
         'data':  [
-              {
-                'date': '01:00:00',
-                'status': 6
-              },
-              {
-                'date': '03:00:00',
-                'status': 3
-              },
-              {
-                'date': '05:00:00',
-                'status': 5
-              },
-              {
-                'date': '08:00:00',
-                'status': 6
-              },
-              {
-                'date': '09:00:00',
-                'status': 6
-              }
-            ]
-     }],
+          {
+            'date': '01:00:00',
+            'status': 6
+          },
+          {
+            'date': '03:00:00',
+            'status': 3
+          },
+          {
+            'date': '05:00:00',
+            'status': 5
+          },
+          {
+            'date': '08:00:00',
+            'status': 6
+          },
+          {
+            'date': '09:01:00',
+            'status': 6
+          }
+        ]
+      }
+    ],
     type2: [
-         {
-          'device_name': 'device3',
-          'address': 'address',
-          'data':  [
-                {
-                  'date': '01:00:00',
-                  'status': 1
-                },
-                {
-                  'date': '02:00:00',
-                  'status': 2
-                },
-                {
-                  'date': '03:00:00',
-                  'status': 3
-                },
-                {
-                  'date': '04:00:00',
-                  'status': 5
-                },
-                {
-                  'date': '05:00:00',
-                  'status': 3
-                },
-                {
-                  'date': '06:00:00',
-                  'status': 6
-                },
-                {
-                  'date': '07:00:00',
-                  'status': 2
-                },
-                {
-                  'date': '08:00:00',
-                  'status': 3
-                },
-                {
-                  'date': '09:01:00',
-                  'status': 3
-                }
-              ]
-       },
+      {
+      'device_name': 'device3',
+      'address': 'address',
+      'data':  [
+          {
+            'date': '01:00:00',
+            'status': 1
+          },
+          {
+            'date': '02:00:00',
+            'status': 2
+          },
+          {
+            'date': '03:00:00',
+            'status': 3
+          },
+          {
+            'date': '04:00:00',
+            'status': 5
+          },
+          {
+            'date': '05:00:00',
+            'status': 3
+          },
+          {
+            'date': '06:00:00',
+            'status': 6
+          },
+          {
+            'date': '07:00:00',
+            'status': 2
+          },
+          {
+            'date': '08:00:00',
+            'status': 3
+          },
+          {
+            'date': '09:01:00',
+            'status': 3
+          }
+        ]
+      },
       {
         'device_name': 'device4',
         'address': 'address',
@@ -269,13 +270,13 @@ export class DashboardComponent implements OnInit {
     //     },
     //     lineEnd: function() {
     //         if (0 < this._t && this._t < 1 && this._point % 2 === 0) {
-    //         this._context.lineTo(this._x, this._y);
+    //             this._context.lineTo(this._x, this._y);
     //         }
     //         if (this._line || (this._line !== 0 && this._point % 2 === 1)) {
-    //         this._context.lineTo(this._x, this._y);
+    //             this._context.lineTo(this._x, this._y);
     //         }
     //         if (this._line >= 0) {
-    //         this._t = 1 - this._t, this._line = 1 - this._line;
+    //             this._t = 1 - this._t, this._line = 1 - this._line;
     //         }
     //     },
     //     point: function(x, y) {
@@ -329,6 +330,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardservice.getDashboard().subscribe(response => {
       this.donut_chart = response['data']['donut_chart'];
       const ctx = document.getElementById('doughnut_chart');
+
       for (const key in response['data']['industry_type']) {
         if (response['data']['industry_type'][key]) {
           this.industry_types_doughnut_graph.push(
@@ -402,11 +404,6 @@ export class DashboardComponent implements OnInit {
       .attr('class', 'tooltip')
       .style('opacity', 0);
 
-    // parse the date / time
-    const parseTime = d3.timeParse('%H:%M:%S');
-
-    // array of curve functions and tites
-    const daCurve = { d3Curve: d3.curveLinear, curveTitle: 'curveLinear' };
     const line_color = 'white';
 
     // append the svg obgect to the body of the page
@@ -521,16 +518,18 @@ export class DashboardComponent implements OnInit {
 
     for (const index_industry in this.filtered_data) {
       if (this.filtered_data[index_industry]) {
+
         const device_data = this.filtered_data[index_industry];
         for (const index in device_data) {
           if (device_data[index]) {
+
             const device_status_data = device_data[index].data;
             if (device_status_data) {
+
               // change data
               const line_graph_data = this.manipulate_graph_data(
                 device_status_data
               );
-              console.log(line_graph_data);
 
               // format the data
               line_graph_data.forEach(function(d) {
@@ -555,7 +554,6 @@ export class DashboardComponent implements OnInit {
                 .call(
                   d3
                     .axisBottom(x)
-                    .ticks(8)
                     .tickSize(-height)
                     .tickFormat(d3.timeFormat('%H:%M'))
                 );
@@ -566,7 +564,7 @@ export class DashboardComponent implements OnInit {
                 // in the rest of the method calls:
                 .select('line') // grab the tick line
                 .attr('class', 'quadrantBorder') // style with a custom class and CSS
-                .style('stroke-width', 0.5) // or style directly with attributes or inline styles
+                .style('stroke-width', 0.2) // or style directly with attributes or inline styles
                 .style('stroke', '#dcdcdc');
 
               // Add the paths with different curves.
@@ -576,7 +574,7 @@ export class DashboardComponent implements OnInit {
                 .attr('class', 'line')
                 .style('stroke-width', '2')
                 .style('fill', function(d) {
-                  return 'rgba(0, 0, 0, 0)';
+                    return 'rgba(0, 0, 0, 0)';
                 })
                 .on('mouseover', function(d) {
                   div
@@ -595,20 +593,19 @@ export class DashboardComponent implements OnInit {
                     .style('opacity', 0);
                 })
                 .style('stroke', function() {
-                  // Add the colour
-                  return (daCurve['color'] = line_color);
+                    // Add the colour
+                    return line_color;
                 })
                 .attr(
                   'd',
                   d3
                     .line<any>()
-                    // .curve(this.stepRoundAfter)
                     .curve(d3.curveLinear)
                     .x(function(d) {
-                      return x(d['date']);
+                        return x(d['date']);
                     })
                     .y(function(d) {
-                      return y(d['status_1']);
+                        return y(d['status_1']);
                     })
                 );
             }
