@@ -2,7 +2,6 @@ import {Component, ContentChild, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../_services/authentication.service';
-import {AlertService} from '../_services/alert.service';
 import {MessageService} from '../_services/message.service';
 
 @Component({
@@ -11,8 +10,6 @@ import {MessageService} from '../_services/message.service';
     styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
-    private message;
     passwordType = 'password';
     passwordShown = false;
     toggleClass = 'fa fa-eye';
@@ -24,11 +21,11 @@ export class LoginComponent implements OnInit {
     disableClass = '';
     public loginButtonClicked = false;
 
-    constructor(private messageService: MessageService,
-                private router: Router,
-                private authService: AuthenticationService,
-                private alertService: AlertService) {
-    }
+    constructor(
+        private messageService: MessageService,
+        private router: Router,
+        private authService: AuthenticationService
+    ) { }
 
     ngOnInit() {
     }
@@ -50,7 +47,7 @@ export class LoginComponent implements OnInit {
                             if (response['data']['is_first_login'] === true) {
                                 localStorage.setItem('first_login', 'true');
                                 this.messageService.add('Please add your business info');
-                                this.router.navigateByUrl('bussiness');
+                                this.router.navigateByUrl('business');
                             } else {
                                 localStorage.setItem('first_login', 'false');
                                 this.router.navigateByUrl('dashboard');
@@ -68,26 +65,8 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    // forgetPassword(data) {
-    //     if (data.valid) {
-    //         console.log(data.value, 'inside the function');
-    //         this.authService.forgetPassword(data.value)
-    //             .subscribe(
-    //                 (response) => {
-    //                     this.messageService.add('Please check your email for forget password link');
-    //                     this.showMainComponent()
-    //                 },
-    //                 (error) => {
-    //                     this.messageService.add('Something went wrong');
-    //
-    //                 }
-    //             );
-    //     }
-    // }
-
     forgetPassword(data) {
         if (data.valid) {
-            console.log(data.value, 'inside the function');
             const json_data = {'email': data.value};
             this.authService.forgetPassword(json_data)
                 .subscribe(
