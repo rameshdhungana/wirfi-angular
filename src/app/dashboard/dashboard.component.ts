@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
       'value': 0
     }
   ];
+
   doughnut_filter_data_toggle = [
     {
       'status': 'ONLINE',
@@ -65,6 +66,7 @@ export class DashboardComponent implements OnInit {
       'value': 0
     }
   ];
+
   industry_types_line_graph = [];
   industry_types_doughnut_graph = [];
   filter_data = {};
@@ -72,133 +74,111 @@ export class DashboardComponent implements OnInit {
   value_of_checkbox = [];
 
   data_new = {
-    //   'type1': [{
-    //     'device_name': 'device1',
-    //     'address': 'address',
-    //     'data':  [
-    //           {
-    //             'date': '01:00:00',
-    //             'status': 1
-    //           },
-    //           {
-    //             'date': '02:00:00',
-    //             'status': 2
-    //           },
-    //           {
-    //             'date': '03:00:00',
-    //             'status': 3
-    //           },
-    //           {
-    //             'date': '04:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '05:00:00',
-    //             'status': 5
-    //           },
-    //           {
-    //             'date': '06:00:00',
-    //             'status': 6
-    //           },
-    //           {
-    //             'date': '07:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '08:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '09:00:00',
-    //             'status': 4
-    //           }
-    //         ]
-    //  },
-    //   {
-    //     'device_name': 'device2',
-    //     'address': 'address',
-    //     'data':  [
-    //           {
-    //             'date': '01:00:00',
-    //             'status': 1
-    //           },
-    //           {
-    //             'date': '02:00:00',
-    //             'status': 1
-    //           },
-    //           {
-    //             'date': '03:00:00',
-    //             'status': 3
-    //           },
-    //           {
-    //             'date': '04:00:00',
-    //             'status': 3
-    //           },
-    //           {
-    //             'date': '05:00:00',
-    //             'status': 2
-    //           },
-    //           {
-    //             'date': '06:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '07:00:00',
-    //             'status': 6
-    //           },
-    //           {
-    //             'date': '08:00:00',
-    //             'status': 4
-    //           },
-    //           {
-    //             'date': '09:00:00',
-    //             'status': 4
-    //           }
-    //         ]
-    //  }],
+    'type1': [
+      {
+        'device_name': 'device1',
+        'address': 'address',
+        'data':  [
+          {
+            'date': '01:00:00',
+            'status': 4
+          },
+          {
+            'date': '02:00:00',
+            'status': 2
+          },
+          {
+            'date': '03:00:00',
+            'status': 3
+          },
+          {
+            'date': '04:00:00',
+            'status': 4
+          },
+          {
+            'date': '05:00:00',
+            'status': 5
+          },
+          {
+            'date': '06:00:00',
+            'status': 6
+          },
+          {
+            'date': '06:10:00',
+            'status': 2
+          },
+          {
+            'date': '09:01:00',
+            'status': 2
+          }
+        ]
+      },
+      {
+        'device_name': 'device2',
+        'address': 'address',
+        'data':  [
+          {
+            'date': '01:00:00',
+            'status': 6
+          },
+          {
+            'date': '03:00:00',
+            'status': 3
+          },
+          {
+            'date': '05:00:00',
+            'status': 5
+          },
+          {
+            'date': '08:00:00',
+            'status': 6
+          },
+          {
+            'date': '09:01:00',
+            'status': 6
+          }
+        ]
+      }
+    ],
     type2: [
-      //    {
-      //     'device_name': 'device3',
-      //     'address': 'address',
-      //     'data':  [
-      //           {
-      //             'date': '01:00:00',
-      //             'status': 1
-      //           },
-      //           {
-      //             'date': '02:00:00',
-      //             'status': 2
-      //           },
-      //           {
-      //             'date': '03:00:00',
-      //             'status': 3
-      //           },
-      //           {
-      //             'date': '04:00:00',
-      //             'status': 5
-      //           },
-      //           {
-      //             'date': '05:00:00',
-      //             'status': 3
-      //           },
-      //           {
-      //             'date': '06:00:00',
-      //             'status': 6
-      //           },
-      //           {
-      //             'date': '07:00:00',
-      //             'status': 2
-      //           },
-      //           {
-      //             'date': '08:00:00',
-      //             'status': 4
-      //           },
-      //           {
-      //             'date': '09:00:00',
-      //             'status': 4
-      //           }
-      //         ]
-      //  },
+      {
+      'device_name': 'device3',
+      'address': 'address',
+      'data':  [
+          {
+            'date': '01:00:00',
+            'status': 1
+          },
+          {
+            'date': '02:00:00',
+            'status': 2
+          },
+          {
+            'date': '03:00:00',
+            'status': 3
+          },
+          {
+            'date': '04:00:00',
+            'status': 5
+          },
+          {
+            'date': '05:00:00',
+            'status': 3
+          },
+          {
+            'date': '06:00:00',
+            'status': 6
+          },
+          {
+            'date': '07:00:00',
+            'status': 2
+          },
+          {
+            'date': '09:01:00',
+            'status': 2
+          }
+        ]
+      },
       {
         'device_name': 'device4',
         'address': 'address',
@@ -240,6 +220,15 @@ export class DashboardComponent implements OnInit {
             'status': 2
           },
           {
+            'date': '07:15:00',
+            'status': 6
+          },
+          {
+            'date': '07:45:00',
+            'status': 2
+          },
+
+          {
             'date': '08:00:00',
             'status': 4
           },
@@ -255,90 +244,17 @@ export class DashboardComponent implements OnInit {
   filtered_data: object;
   filtered_data_toggle: object;
   private no_of_devices = 0;
-  // private stepRoundBefore: any;
-  // private stepRoundAfter: any;
 
   constructor(
     private googleapiService: GoogleApiService,
     private dashboardservice: DashboardService
-  ) {
-    // function Step(context, t) {
-    //   this._context = context;
-    //   this._t = t;
-    // }
-    // Step.prototype = {
-    //     areaStart: function() {
-    //         this._line = 0;
-    //     },
-    //     areaEnd: function() {
-    //         this._line = NaN;
-    //     },
-    //     lineStart: function() {
-    //         this._x = this._y = NaN;
-    //         this._point = 0;
-    //     },
-    //     lineEnd: function() {
-    //         if (0 < this._t && this._t < 1 && this._point % 2 === 0) {
-    //         this._context.lineTo(this._x, this._y);
-    //         }
-    //         if (this._line || (this._line !== 0 && this._point % 2 === 1)) {
-    //         this._context.lineTo(this._x, this._y);
-    //         }
-    //         if (this._line >= 0) {
-    //         this._t = 1 - this._t, this._line = 1 - this._line;
-    //         }
-    //     },
-    //     point: function(x, y) {
-    //         x = +x, y = +y;
-    //         switch (this._point) {
-    //         case 0:
-    //             this._point = 1;
-    //             this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y);
-    //             break;
-    //         case 1:
-    //             this._point = 2; // proceed
-    //             break;
-    //         default:
-    //             {
-    //                 let xN, yN, mYb, mYa;
-    //                 if (this._t <= 0) {
-    //                     xN = Math.abs(x - this._x) * 0.25;
-    //                     yN = Math.abs(y - this._y) * 0.25;
-    //                     mYb = (this._y < y) ? this._y + yN : this._y - yN;
-    //                     mYa = (this._y > y) ? y + yN : y - yN;
-    //                     this._context.quadraticCurveTo(this._x, this._y, this._x, mYb);
-    //                     this._context.lineTo(this._x, mYa);
-    //                     this._context.quadraticCurveTo(this._x, y, this._x + xN, y);
-    //                     this._context.lineTo(x - xN, y);
-    //                 } else {
-    //                     const x1 = this._x * (1 - this._t) + x * this._t;
-    //                     xN = Math.abs(x - x1) * 0.25;
-    //                     yN = Math.abs(y - this._y) * 0.25;
-    //                     mYb = (this._y < y) ? this._y + yN : this._y - yN;
-    //                     mYa = (this._y > y) ? y + yN : y - yN;
-    //                     this._context.quadraticCurveTo(x1, this._y, x1, mYb);
-    //                     this._context.lineTo(x1, mYa);
-    //                     this._context.quadraticCurveTo(x1, y, x1 + xN, y );
-    //                     this._context.lineTo(x - xN, y);
-    //                 }
-    //                 break;
-    //             }
-    //         }
-    //         this._x = x, this._y = y;
-    //     }
-    // };
-    // this.stepRoundBefore = function(context) {
-    //   return new Step(context, 0);
-    // };
-    // this.stepRoundAfter = function(context) {
-    //     return new Step(context, 1);
-    // };
-  }
+  ) { }
 
   ngOnInit() {
     this.dashboardservice.getDashboard().subscribe(response => {
       this.donut_chart = response['data']['donut_chart'];
       const ctx = document.getElementById('doughnut_chart');
+
       for (const key in response['data']['industry_type']) {
         if (response['data']['industry_type'][key]) {
           this.industry_types_doughnut_graph.push(
@@ -412,11 +328,6 @@ export class DashboardComponent implements OnInit {
       .attr('class', 'tooltip')
       .style('opacity', 0);
 
-    // parse the date / time
-    const parseTime = d3.timeParse('%H:%M:%S');
-
-    // array of curve functions and tites
-    const daCurve = { d3Curve: d3.curveLinear, curveTitle: 'curveLinear' };
     const line_color = 'white';
 
     // append the svg obgect to the body of the page
@@ -531,16 +442,18 @@ export class DashboardComponent implements OnInit {
 
     for (const index_industry in this.filtered_data) {
       if (this.filtered_data[index_industry]) {
+
         const device_data = this.filtered_data[index_industry];
         for (const index in device_data) {
           if (device_data[index]) {
+
             const device_status_data = device_data[index].data;
             if (device_status_data) {
+
               // change data
               const line_graph_data = this.manipulate_graph_data(
                 device_status_data
               );
-              console.log(line_graph_data);
 
               // format the data
               line_graph_data.forEach(function(d) {
@@ -565,7 +478,6 @@ export class DashboardComponent implements OnInit {
                 .call(
                   d3
                     .axisBottom(x)
-                    .ticks(8)
                     .tickSize(-height)
                     .tickFormat(d3.timeFormat('%H:%M'))
                 );
@@ -576,7 +488,7 @@ export class DashboardComponent implements OnInit {
                 // in the rest of the method calls:
                 .select('line') // grab the tick line
                 .attr('class', 'quadrantBorder') // style with a custom class and CSS
-                .style('stroke-width', 0.5) // or style directly with attributes or inline styles
+                .style('stroke-width', 0.2) // or style directly with attributes or inline styles
                 .style('stroke', '#dcdcdc');
 
               // Add the paths with different curves.
@@ -586,7 +498,7 @@ export class DashboardComponent implements OnInit {
                 .attr('class', 'line')
                 .style('stroke-width', '2')
                 .style('fill', function(d) {
-                  return 'rgba(0, 0, 0, 0)';
+                    return 'rgba(0, 0, 0, 0)';
                 })
                 .on('mouseover', function(d) {
                   div
@@ -597,28 +509,33 @@ export class DashboardComponent implements OnInit {
                     .html(device_data[index].device_name)
                     .style('left', d3.event.pageX + 'px')
                     .style('top', d3.event.pageY - 28 + 'px');
+
+                  d3.select(this)
+                    .style('stroke-width', '4');
                 })
                 .on('mouseout', function(d) {
                   div
                     .transition()
-                    .duration(500)
+                    .duration(50)
                     .style('opacity', 0);
+
+                  d3.select(this)
+                    .style('stroke-width', '2');
                 })
                 .style('stroke', function() {
-                  // Add the colour
-                  return (daCurve['color'] = line_color);
+                    // Add the colour
+                    return line_color;
                 })
                 .attr(
                   'd',
                   d3
                     .line<any>()
-                    // .curve(this.stepRoundAfter)
                     .curve(d3.curveLinear)
                     .x(function(d) {
-                      return x(d['date']);
+                        return x(d['date']);
                     })
                     .y(function(d) {
-                      return y(d['status_1']);
+                        return y(d['status_1']);
                     })
                 );
             }

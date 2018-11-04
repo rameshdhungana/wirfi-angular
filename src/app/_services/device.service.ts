@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
-import {BehaviorSubject} from "rxjs/Rx";
+import {BehaviorSubject} from 'rxjs/Rx';
 
 @Injectable()
 export class DeviceService {
     public presetList = new Subject<Array<any>>();
     public deviceList = new Subject<Array<any>>();
-
 
     constructor(private http: HttpClient) {
     }
@@ -19,9 +18,8 @@ export class DeviceService {
     getDeviceList() {
         this.http.get('device/').subscribe(response => {
             this.deviceList.next(<Array<any>>response);
-            console.log(this.deviceList, 'this is device service list')
         });
-        return this.deviceList
+        return this.deviceList;
     }
 
     getDevice(id) {
@@ -65,7 +63,7 @@ export class DeviceService {
         this.http.get('preset-filter/').subscribe(response => {
             this.presetList.next(<Array<any>> response);
         });
-        return this.presetList
+        return this.presetList;
     }
 
     getPresetFilter(id) {
@@ -73,31 +71,27 @@ export class DeviceService {
     }
 
     addPresetFilter(data) {
-        console.log(data, 'tjhis is preset data passed');
-        return this.http.post(`preset-filter/`, data)
+        return this.http.post(`preset-filter/`, data);
     }
 
     deletePresetFilter(id) {
-        return this.http.delete(`preset-filter/${id}/`)
+        return this.http.delete(`preset-filter/${id}/`);
 
     }
 
     addNetworkSetting(id, data) {
-        console.log(id, data, 'this is device setting data');
         return this.http.post(`device/${id}/network/`, data);
     }
 
     updateNetworkSetting(device_id, network_id, data) {
-        console.log(device_id, data, 'this is device setting data');
         return this.http.put(`device/${device_id}/network/${network_id}/`, data);
     }
 
-    deleteNetworkSetting(device_id, network_id,) {
+    deleteNetworkSetting(device_id, network_id) {
         return this.http.delete(`device/${device_id}/network/${network_id}/`);
     }
 
     sleepDevice(id, data) {
-        console.log(data);
         return this.http.post(`device/${id}/sleep/`, data);
     }
 

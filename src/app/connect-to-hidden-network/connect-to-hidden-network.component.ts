@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DeviceService} from "../_services/device.service";
-import {NgForm} from "@angular/forms";
-import {MAT_DIALOG_DATA} from "@angular/material";
+import {DeviceService} from '../_services/device.service';
+import {NgForm} from '@angular/forms';
+import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'app-connect-to-hidden-network',
@@ -10,7 +10,10 @@ import {MAT_DIALOG_DATA} from "@angular/material";
 })
 export class ConnectToHiddenNetworkComponent implements OnInit {
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any, private deviceService: DeviceService) {
+    constructor(
+        @Inject(MAT_DIALOG_DATA)
+        public data: any,
+        private deviceService: DeviceService) {
     }
 
     ngOnInit() {
