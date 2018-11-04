@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
                             if (response['data']['is_first_login'] === true) {
                                 localStorage.setItem('first_login', 'true');
                                 this.messageService.add('Please add your business info');
-                                this.router.navigateByUrl('bussiness');
+                                this.router.navigateByUrl('business');
                             } else {
                                 localStorage.setItem('first_login', 'false');
                                 this.router.navigateByUrl('dashboard');
