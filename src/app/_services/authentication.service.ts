@@ -8,9 +8,10 @@ export class AuthenticationService {
     private loggedIn = new BehaviorSubject<boolean>(false);
     public getProfile = new Subject<Object>();
 
-    constructor(private router: Router,
-                private http: HttpClient) {
-    }
+    constructor(
+        private router: Router,
+        private http: HttpClient
+    ) { }
 
     login(loginData) {
         return this.http.post('login/', loginData);
@@ -41,7 +42,6 @@ export class AuthenticationService {
         return this.http.post('register/verify-email/', {'key': key});
     }
 
-
     logout() {
         return this.http.post('logout/', {});
     }
@@ -71,4 +71,3 @@ export class AuthenticationService {
         return this.getProfile.asObservable();
     }
 }
-

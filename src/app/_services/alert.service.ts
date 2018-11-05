@@ -2,10 +2,8 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {NavigationStart, Router} from '@angular/router';
 
-
 @Injectable()
 export class AlertService {
-
   private subject = new Subject<any>();
 
   constructor(
@@ -35,8 +33,4 @@ export class AlertService {
   getMessage(): Observable<any> {
     return this.subject.asObservable();
   }
-
-
 }
-
-
