@@ -21,20 +21,16 @@
                                     </div>
                                 </div>
                             </a>
-
                         </li>
-
                     </ul>
                 </div>
 
                 <ul class="billing-list-add-card">
-
                     <li>
                         <button class="btn btn-link "
                                 [disabled]="buffering" (click)="openCheckout()">
                             <div class="row">
                                 <div class="col-4">
-
                                     <i class="fa fa-2x fa-plus-circle text-white"></i></div>
                                 <div class="col-8">
                                     <span class="bold-text">Link a Card <i
@@ -44,7 +40,6 @@
                             </div>
                         </button>
                     </li>
-
                 </ul>
             </section>
         </div>
@@ -60,43 +55,29 @@
             <div class="row">
                 <div class="col-12 col-md-8 mx-auto text-left pt-3 text-white">
                     <ul class="billing-detail">
-
                         <li>
                             <span class="bold-text">Type</span>
                             <span>{{billingDetail.funding}}</span>
-
                         </li>
                         <li>
                             <span class="bold-text">Expiration Date</span>
                             <span>{{billingDetail.exp_month}}/{{billingDetail.exp_year}}</span>
-
                         </li>
-
                         <li>
                             <span class="bold-text">Card Holder's Name</span>
                             <span>{{ billingDetail.name}}</span>
-
                         </li>
-
                         <li>
                             <span class="bold-text"> Billing Address</span>
                             <span style="display:block">{{billingDetail.address_line1}}</span>
                             <span>{{billingDetail.address_city}}, {{billingDetail.address_country}}  {{billingDetail.address_zip}}</span>
-
                         </li>
-
                     </ul>
                 </div>
                 <div class="col-12 col-md-8 mx-auto text-center pt-3 pb-3 text-white">
-                    <!--<span (click)="OpenCardUpdateForm(billingDetail)"> Update Card </span>|-->
                     <span style="cursor:pointer" (click)="OpenDeleteDailog(billingDetail)">Delete Card</span>
                 </div>
-
-
             </div>
         </div>
-
     </div>
-
-
 </div>

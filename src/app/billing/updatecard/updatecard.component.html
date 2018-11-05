@@ -1,25 +1,20 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-
             <button class="pull-right btn btn-md" mat-button mat-dialog-close>&#10005;</button>
-
             <h2 class="pt-5">Update Card</h2>
         </div>
-
 
         <div class="col-12 text-left pt-4 pb-4">
             <img class="pr-2 " src="../../assets/images/visa.JPG" width="10%"/>
             <span class="h4">{{data.brand}} </span> <span> {{data.funding}} ••••{{data.last4}}</span>
-
         </div>
     </div>
+
     <div class="row">
         <div class="col-12">
             <form action="" method="POST" id="payment-form" (submit)="getToken()">
                 <span class="payment-message">{{message}}</span>
-
-
                 <div class="form-control">
                     <label>
                         <span>Expiration (MM/YY)</span>
@@ -39,7 +34,6 @@
 
                 <input type="submit" value="Submit Payment">
             </form>
-
         </div>
     </div>
 </div>

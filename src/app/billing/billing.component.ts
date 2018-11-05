@@ -33,11 +33,6 @@ export class BillingComponent implements OnInit {
         private renderer: Renderer2
     ) { }
 
-    // ngOnDestroy() {
-    //     this.renderer.removeClass(document.body, 'bg-white');
-    //
-    // }
-
     ngOnInit() {
         this.billingLoaded = false;
         this.billingService.getBillingList().subscribe(
@@ -55,14 +50,12 @@ export class BillingComponent implements OnInit {
                     this.billingLoaded = true;
                     this.noBillingData = true;
                 }
-
             }
         );
 
         this.authenticateService.me().subscribe(res => {
             this.current_user_email = res['data']['email'];
         });
-
     }
 
     openCheckout() {
@@ -73,11 +66,10 @@ export class BillingComponent implements OnInit {
 
             token: function (token: any) {
                 // You can access the token ID with `token.id`.
-                console.log(token.id, token.email);
+                // console.log(token.id, token.email);
 
                 // Get the token ID to your server-side code for use.
                 this.billingService.registerStripeToken(token).subscribe(response => {
-                    console.log(response, 'this is biling add response')
                     this.billingService.getBillingList();
                 });
             }.bind(this)
@@ -96,7 +88,6 @@ export class BillingComponent implements OnInit {
                 }
             }
         );
-
     }
 
     OpenDetail(billing) {
@@ -104,20 +95,17 @@ export class BillingComponent implements OnInit {
     }
 
     OpenDeleteDailog(billingDetail) {
-
         const data = {
             'cardDetail': billingDetail,
         };
         const modalSize = {
             'height': '525px',
             'width': '500px'
-
         };
         this.dialogService.openDialog(DeletecardComponent, data, modalSize);
     }
 
     OpenCardUpdateForm(billingDetail) {
-
         const data = {
             'cardDetail': billingDetail,
         };
@@ -127,6 +115,4 @@ export class BillingComponent implements OnInit {
         };
         this.dialogService.openDialog(UpdatecardComponent, data, modalSize);
     }
-
 }
-
