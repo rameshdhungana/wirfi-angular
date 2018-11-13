@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 import {AuthenticationService} from '../_services/authentication.service';
 import {catchError} from 'rxjs/operators';
 import {AlertService} from '../_services/alert.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
