@@ -7,10 +7,10 @@ import {PresetFilterComponent} from '../../preset-filter/preset-filter.component
 import {DeletePresetComponent} from '../../delete-preset/delete-preset.component';
 import {environment} from '../../../environments/environment.prod';
 import {DeviceService} from '../../_services/device.service';
-import {SleepDeviceComponent} from "../sleep-device/sleep-device.component";
+import {SleepDeviceComponent} from '../sleep-device/sleep-device.component';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
-import {AddNetworkSettingComponent} from "../add-network-setting/add-network-setting.component";
-import {DeleteNetworkSettingComponent} from "../network-setting/delete-network-setting/delete-network-setting.component";
+import {AddNetworkSettingComponent} from '../add-network-setting/add-network-setting.component';
+import {DeleteNetworkSettingComponent} from '../network-setting/delete-network-setting/delete-network-setting.component';
 
 enum sortParams {
     Clear,
@@ -65,7 +65,7 @@ export class DeviceListComponent implements OnInit {
             this.status_dict = response['data']['status_dict'];
 
             this.deviceList.next(<Array<any>>response['data']['device']);
-            console.log(this.deviceList, 'this is checking subject')
+            console.log(this.deviceList, 'this is checking subject');
             this.reOrderDeviceList();
             this.deviceService.getPresetFilterList().subscribe(
                 (res: Array<any>) => {
@@ -295,9 +295,8 @@ export class DeviceListComponent implements OnInit {
 
     reOrderDeviceList() {
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
-
-        const filterType = presetValues['filter_type'];
-        const filterKeys = presetValues['filter_keys'];
+        const filterType = presetValues['filter_type'] ? presetValues['filter_type'] : '';
+        const filterKeys = presetValues['filter_keys'] ? presetValues['filter_keys'] : '';
         switch (filterType) {
             case filterParams['Clear']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => a.name.localeCompare(b.name)));
@@ -317,6 +316,9 @@ export class DeviceListComponent implements OnInit {
             }
             case filterParams['Industry']: {
                 this.deviceList.next(this.deviceList['value'].filter(device => filterKeys.includes(device.industry_type.id)));
+                break;
+            }
+            default: {
                 break;
             }
         }
@@ -339,6 +341,9 @@ export class DeviceListComponent implements OnInit {
             }
             case sortParams['InstallationDate']: {
                 this.deviceList.next(this.deviceList['value'].sort((a, b) => b.created_at.localeCompare(a.created_at)));
+                break;
+            }
+            default: {
                 break;
             }
         }
