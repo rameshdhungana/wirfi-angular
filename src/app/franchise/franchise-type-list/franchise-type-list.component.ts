@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MaterialDialogService} from "../../_services/material-dialog.service";
-import {MessageService} from "../../_services/message.service";
-import {AddFranchiseTypeComponent} from "../add-franchise-type/add-franchise-type.component";
-import {DeleteFranchiseTypeComponent} from "../delete-franchise-type/delete-franchise-type.component";
-import {FranchiseTypeService} from "../../_services/franchise-type.service";
+import {MaterialDialogService} from '../../_services/material-dialog.service';
+import {MessageService} from '../../_services/message.service';
+import {DeleteFranchiseTypeComponent} from '../delete-franchise-type/delete-franchise-type.component';
+import {FranchiseTypeService} from '../../_services/franchise-type.service';
+import { AddIndustryTypeComponent } from '../../industry-list/add-industry-type/add-industry-type.component';
 
 @Component({
     selector: 'app-franchise-type-list',
@@ -32,7 +32,7 @@ export class FranchiseTypeListComponent implements OnInit {
             'height': 'auto',
             'width': '450px'
         };
-        this.dialogService.openDialog(AddFranchiseTypeComponent, data, modalSize);
+        this.dialogService.openDialog(AddIndustryTypeComponent, data, modalSize);
     }
 
     onClickEdit(franchise_type) {
@@ -44,7 +44,7 @@ export class FranchiseTypeListComponent implements OnInit {
             'height': 'auto',
             'width': '450px'
         };
-        this.dialogService.openDialog(AddFranchiseTypeComponent, data, modalSize);
+        this.dialogService.openDialog(AddIndustryTypeComponent, data, modalSize);
     }
 
     deleteFranchiseTypePopUp(franchise_type) {
@@ -54,8 +54,8 @@ export class FranchiseTypeListComponent implements OnInit {
             'width': '450px'
         };
         const data = {
-            "id": franchise_type.id,
-            "name": franchise_type.name
+            'id': franchise_type.id,
+            'name': franchise_type.name
         };
         this.dialogService.openDialog(DeleteFranchiseTypeComponent, data, modalSize);
     }

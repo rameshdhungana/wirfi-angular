@@ -57,7 +57,6 @@ import {DeletePresetComponent} from './delete-preset/delete-preset.component';
 import {DatetimeformatPipe} from './shared/datetimeformat.pipe';
 import {DeleteIndustryTypeComponent} from './industry-list/delete-industry-type/delete-industry-type.component';
 import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franchise-type-list.component';
-import {AddFranchiseTypeComponent} from './franchise/add-franchise-type/add-franchise-type.component';
 import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/delete-franchise-type.component';
 import {AddNetworkSettingComponent} from './devices/add-network-setting/add-network-setting.component';
 import {NgxMaskModule} from 'ngx-mask';
@@ -103,7 +102,6 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
         DatetimeformatPipe,
         DeleteIndustryTypeComponent,
         FranchiseTypeListComponent,
-        AddFranchiseTypeComponent,
         DeleteFranchiseTypeComponent,
         AddNetworkSettingComponent,
         SleepDeviceComponent,
@@ -157,7 +155,6 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
         MuteDeviceComponent,
         DeletePresetComponent,
         DeleteIndustryTypeComponent,
-        AddFranchiseTypeComponent,
         AddIndustryTypeComponent,
         DeleteIndustryTypeComponent,
         DeleteFranchiseTypeComponent,
