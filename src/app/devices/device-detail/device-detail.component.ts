@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Route, Router, ActivatedRoute} from '@angular/router';
 import { MessageService } from '../../_services/message.service';
-import {DeviceService} from "../../_services/device.service";
+import {DeviceService} from '../../_services/device.service';
 
 @Component({
     selector: 'app-device-detail',
@@ -47,6 +47,7 @@ export class DeviceDetailComponent implements OnInit {
         this.loading = true;
         });
     }
+
     onClickMe() {
         this.deviceService.togglePriority(this.device_id, {'priority': this.enable}).subscribe(
             (response) => {
@@ -54,12 +55,30 @@ export class DeviceDetailComponent implements OnInit {
                 this.messageService.add(response['message']);
             }
         );
-      }
+    }
+
+    copyDeviceInfo() {
+        const googleLink = 'https://maps.google.com/?q=' + this.lat.toString() + ',' + this.lng.toString();
+        const address = this.device_data['data']['address'];
+        const copyText = 'Location of device: ' + address + '\nGoogle map link: ' + googleLink;
+
+        // copy to clipboard
+        let clipboard = document.createElement('textarea');
+        clipboard.style.position = 'fixed';
+        clipboard.style.left = '0';
+        clipboard.style.top = '0';
+        clipboard.style.opacity = '0';
+        clipboard.value = copyText;
+        document.body.appendChild(clipboard);
+        clipboard.focus();
+        clipboard.select();
+        document.execCommand('copy');
+        document.body.removeChild(clipboard);
+    }
 
     playThisVideo(src) {
         this.videoToPlay = this.test_video_source[src];
         console.log(this.videoToPlay);
 
     }
-
 }

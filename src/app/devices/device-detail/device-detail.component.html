@@ -37,6 +37,7 @@
 
 
         </div>
+
         <div class="col-8">
             <div class="panel">
                 <div class="card text-white text-center">
@@ -45,16 +46,21 @@
                         <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
                           </ui-switch>
                         <h4 class="card-title">Device : {{device_data['data']['name']}}</h4>
-                        <p class="card-text">
-                            serial no: {{device_data['data']['serial_number']}}<br>
+                        <div class="card-text mb-2">
+                            Serial No: {{device_data['data']['serial_number']}}<br>
+                            Address: {{device_data['data']['address']}}
+                            <div class="mx-3 d-inline" (click)="copyDeviceInfo()">
+                                <i class="fa fa-clipboard"></i>
+                            </div>
+                        </div>
 
-                        </p>
                         <!-- this creates a google map on the page with the given lat/lng from -->
                         <!-- the component as the initial center of the map: -->
                         <agm-map [latitude]="lat" [longitude]="lng">
                             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
                         </agm-map>
-                        <table class="table">
+
+                        <table class="table mt-2">
                             <thead>
                             <tr>
                                 <th>Day</th>
