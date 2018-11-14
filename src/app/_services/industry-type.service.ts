@@ -6,8 +6,9 @@ import {Subject} from 'rxjs';
 export class IndustryService {
     public getIndustryType = new Subject<Object>();
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(
+        private http: HttpClient
+    ) { }
 
     getIndustryList() {
         this.http.get('industry-type/').subscribe(

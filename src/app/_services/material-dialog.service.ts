@@ -7,8 +7,9 @@ import {MatDialog, MatDialogRef} from '@angular/material';
 export class MaterialDialogService {
     currentDialog: MatDialogRef<any>;
 
-    constructor(private dialog: MatDialog) {
-    }
+    constructor(
+        private dialog: MatDialog
+    ) { }
 
     openDialog(dialogComponent, data, modalSize) {
         this.currentDialog = this.dialog.open(dialogComponent, {

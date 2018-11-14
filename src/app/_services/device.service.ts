@@ -8,8 +8,9 @@ export class DeviceService {
     public presetList = new Subject<Array<any>>();
     public deviceList = new Subject<Array<any>>();
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(
+        private http: HttpClient
+    ) { }
 
     togglePriority(id, data) {
         return this.http.post(`device/${id}/priority/`, data);
@@ -59,7 +60,6 @@ export class DeviceService {
     }
 
     getPresetFilterList() {
-
         this.http.get('preset-filter/').subscribe(response => {
             this.presetList.next(<Array<any>> response);
         });
@@ -76,7 +76,6 @@ export class DeviceService {
 
     deletePresetFilter(id) {
         return this.http.delete(`preset-filter/${id}/`);
-
     }
 
     addNetworkSetting(id, data) {

@@ -14,20 +14,18 @@ export class UpdatecardComponent implements OnInit {
     cvc: string;
     message: string;
 
-
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-                private _zone: NgZone) {
-    }
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private _zone: NgZone
+    ) { }
 
     ngOnInit() {
     }
-
 
     getToken() {
         this.message = 'Loading...';
 
         (<any>window).Stripe.card.createToken({
-
             number: this.cardNumber,
             exp_month: this.expiryMonth,
             exp_year: this.expiryYear,

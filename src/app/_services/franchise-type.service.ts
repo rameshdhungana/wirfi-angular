@@ -8,8 +8,9 @@ import {HttpClient} from '@angular/common/http';
 export class FranchiseTypeService {
     public getFranchiseType = new Subject<Object>();
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(
+        private http: HttpClient
+    ) { }
 
     getFranchiseTypeList() {
         this.http.get('location-type/').subscribe(
