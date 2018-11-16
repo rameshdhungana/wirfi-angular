@@ -18,13 +18,13 @@ import {BusinessComponent} from './business/business.component';
 import {BusinessListComponent} from './business-list/business-list.component';
 import {ProfileComponent} from './profile/profile.component';
 import {ProfileFormComponent} from './profile-form/profile-form.component';
-import {DeviceInfoComponent} from './devices/device-info/device-info.component';
+import {DeviceAddComponent} from './devices/device-add/device-add.component';
 import {AddIndustryTypeComponent} from './industry-list/add-industry-type/add-industry-type.component';
 import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
-import {NotificationComponent} from "./notification/notification.component";
-import {FranchiseTypeListComponent} from "./franchise/franchise-type-list/franchise-type-list.component";
-import {AddNetworkSettingComponent} from "./devices/add-network-setting/add-network-setting.component";
+import {NotificationComponent} from './notification/notification.component';
+import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franchise-type-list.component';
+import {AddNetworkSettingComponent} from './devices/add-network-setting/add-network-setting.component';
 
 
 const routes: Routes = [
@@ -42,7 +42,7 @@ const routes: Routes = [
     {path: 'change-password', component: ChangepasswordComponent, canActivate: [AuthGuard]},
     {path: 'business', component: BusinessComponent, canActivate: [AuthGuard]},
     {path: 'list', component: BusinessListComponent, canActivate: [AuthGuard]},
-    {path: 'device-info', component: DeviceInfoComponent, canActivate: [AuthGuard]},
+    {path: 'device-add', component: DeviceAddComponent, canActivate: [AuthGuard]},
     {path: 'billing', component: BillingComponent, canActivate: [AuthGuard]},
     {path: 'me', component: SidebarComponent, canActivate: [AuthGuard]},
     // {path: 'device/:id/update', component: DeviceUpdateComponent},

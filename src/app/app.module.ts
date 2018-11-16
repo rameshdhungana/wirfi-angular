@@ -36,7 +36,7 @@ import {BusinessComponent} from './business/business.component';
 import {BusinessListComponent} from './business-list/business-list.component';
 import {BillingService} from './_services/billing.service';
 import {ProfileComponent} from './profile/profile.component';
-import {DeviceInfoComponent} from './devices/device-info/device-info.component';
+import {DeviceAddComponent} from './devices/device-add/device-add.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UiSwitchModule} from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -86,7 +86,7 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
         BusinessComponent,
         BusinessListComponent,
         ProfileComponent,
-        DeviceInfoComponent,
+        DeviceAddComponent,
         DeletecardComponent,
         UpdatecardComponent,
         TimeComparatorDirective,
@@ -128,7 +128,6 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
                 'geometry']
         }),
 
-
     ],
     providers: [
         AuthenticationService,
@@ -160,10 +159,7 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
         DeleteFranchiseTypeComponent,
         SleepDeviceComponent,
         DeleteNetworkSettingComponent
-
-
     ]
-
 })
 
 export class AppModule {
