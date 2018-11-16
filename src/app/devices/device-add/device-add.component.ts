@@ -43,14 +43,14 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
 }
 
 @Component({
-  selector: 'app-device-info',
-  templateUrl: './device-info.component.html',
-  styleUrls: ['./device-info.component.css'],
+  selector: 'app-device-add',
+  templateUrl: './device-add.component.html',
+  styleUrls: ['./device-add.component.css'],
 
   providers: [{provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}]
 })
 
-export class DeviceInfoComponent  implements OnInit {
+export class DeviceAddComponent  implements OnInit {
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
