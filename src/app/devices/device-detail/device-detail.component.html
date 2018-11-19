@@ -44,8 +44,14 @@
                     <img class="card-img-top" src="holder.js/100px180/" alt="">
                     <div class="card-body">
                         <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
-                          </ui-switch>
-                        <h4 class="card-title">Device : {{device_data['data']['name']}}</h4>
+                        </ui-switch>
+                       
+                        <div class="d-inline text-right mx-3 px-3" routerLink="/device/{{device_data['data']['id']}}/edit">
+                            <i class="fa fa-edit"> Edit</i>
+                        </div>
+
+                        <h4 class="card-title">Device : {{device_data['data']['name']}}</h4> 
+
                         <div class="card-text mb-2">
                             Serial No: {{device_data['data']['serial_number']}}<br>
                             Address: {{device_data['data']['address']}}
