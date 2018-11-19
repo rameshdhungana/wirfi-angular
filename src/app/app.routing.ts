@@ -45,7 +45,7 @@ const routes: Routes = [
     {path: 'device-add', component: DeviceAddComponent, canActivate: [AuthGuard]},
     {path: 'billing', component: BillingComponent, canActivate: [AuthGuard]},
     {path: 'me', component: SidebarComponent, canActivate: [AuthGuard]},
-    // {path: 'device/:id/update', component: DeviceUpdateComponent},
+    {path: 'device/:id/edit', component: DeviceAddComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
     {path: 'account_confirm_email/:key', component: VerifyEmailComponent},
     {path: 'industry', component: AddIndustryTypeComponent},

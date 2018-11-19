@@ -6,12 +6,12 @@ import { MessageService } from '../../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MaterialDialogService } from '../../_services/material-dialog.service';
 import { AddIndustryTypeComponent } from '../../industry-list/add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
 import {DeviceService} from '../../_services/device.service';
-import { MatDialogRef, MatDialog } from '@angular/material';
+
 /**
  * Example of a String Time adapter
  */
@@ -60,6 +60,9 @@ export class DeviceAddComponent  implements OnInit {
   public locationType: Array<any>;
   public location_type_id: string;
   public add_type: boolean;
+  public url_id = '';
+  public editing = false;
+  public device_data = {};
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -73,7 +76,7 @@ export class DeviceAddComponent  implements OnInit {
   public device_id: any;
   seconds = false;
   private address: any;
-  // time: '13:30:00';
+
   constructor(
       private dialogService: MaterialDialogService,
       private deviceservice: DeviceService,
@@ -82,11 +85,24 @@ export class DeviceAddComponent  implements OnInit {
       private messageservice: MessageService,
       private mapsAPILoader: MapsAPILoader,
       private ngZone: NgZone,
-      private router: Router
+      private router: Router,
+      private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-      // set google maps defaults
+    this.url_id = this.route.snapshot.paramMap.get('id');
+
+    if (this.url_id) {
+      this.editing = true;
+      this.deviceservice.getDevice(this.url_id).subscribe(response => {
+          this.device_data = response['data'];
+          this.address = response['data']['address'];
+          this.latitude = response['data']['latitude'];
+          this.longitude = response['data']['longitude'];
+      });
+    }
+
+    // set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
