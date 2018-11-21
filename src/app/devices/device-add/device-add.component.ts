@@ -1,16 +1,16 @@
 import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone, Inject } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
-import { IndustryService } from '../../_services/industry-type.service';
-import { FranchiseTypeService } from '../../_services/franchise-type.service';
+import { Router } from '@angular/router';
+import { DeviceService } from '../../_services/device.service';
 import { MessageService } from '../../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { Router, ActivatedRoute } from '@angular/router';
+import { IndustryService } from '../../_services/industry-type.service';
+import { FranchiseTypeService } from '../../_services/franchise-type.service';
 import { MaterialDialogService } from '../../_services/material-dialog.service';
 import { AddIndustryTypeComponent } from '../../industry-list/add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
-import {DeviceService} from '../../_services/device.service';
 
 /**
  * Example of a String Time adapter
@@ -39,7 +39,6 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   private pad(i: number): string {
     return i < 10 ? `0${i}` : `${i}`;
   }
-
 }
 
 @Component({
@@ -60,9 +59,6 @@ export class DeviceAddComponent  implements OnInit {
   public locationType: Array<any>;
   public location_type_id: string;
   public add_type: boolean;
-  public url_id = '';
-  public editing = false;
-  public device_data = {};
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
@@ -85,23 +81,10 @@ export class DeviceAddComponent  implements OnInit {
       private messageservice: MessageService,
       private mapsAPILoader: MapsAPILoader,
       private ngZone: NgZone,
-      private router: Router,
-      private route: ActivatedRoute
+      private router: Router
   ) { }
 
   ngOnInit() {
-    this.url_id = this.route.snapshot.paramMap.get('id');
-
-    if (this.url_id) {
-      this.editing = true;
-      this.deviceservice.getDevice(this.url_id).subscribe(response => {
-          this.device_data = response['data'];
-          this.address = response['data']['address'];
-          this.latitude = response['data']['latitude'];
-          this.longitude = response['data']['longitude'];
-      });
-    }
-
     // set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
@@ -251,7 +234,8 @@ export class DeviceAddComponent  implements OnInit {
       'serial_number': '',
       'latitude': this.latitude ? this.latitude : 0.000,
       'longitude': this.longitude ? this.longitude : 0.000,
-      'address': this.address ? this.address : 'IW Naxal, Ananda Bhairab Marga',
+      'location_of_device': '',
+      'address': this.address ? this.address : 'Ananda Bhairab Marga, Naxal',
       'industry_type_id': '',
       'location_type_id': ''
     };
@@ -300,6 +284,7 @@ export class DeviceAddComponent  implements OnInit {
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
+        this.json['location_of_device'] = data.value['location_of_device'];
 
         if (data.value['industry_type']) {
             this.json['industry_type_id'] = data.value['industry_type'];
@@ -318,7 +303,7 @@ export class DeviceAddComponent  implements OnInit {
                   this.messageservice.add(response['message']);
                   this.router.navigateByUrl(`device/` + this.device_id);
               });
-           },
+            },
         (error) => {
             this.messageservice.add(error.error.message);
         });

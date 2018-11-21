@@ -2,26 +2,17 @@
     <div class="row ">
         <div class="col-md-12 pb-5">
 
-            <div class="text-white panelpb-5">
-                <h2 class="text-center mt-5 text-white">{{editing ? 'Edit' : 'Add'}} Device</h2>
+            <div class="text-white panel pb-5">
+                <h2 class="text-center text-white">Add Device</h2>
                 <form [class.was-validated]="deviceInfoform.submitted" #deviceInfoform='ngForm'
                       (ngSubmit)='deviceInfo(deviceInfoform)'>
-                    <div class="">
-                        <input [placeholder]="device_data.address" autocorrect="off" autocapitalize="off" spellcheck="off"
-                               type="text"
-                               class="form-control mb-2" #search [formControl]="searchControl">
-                        <agm-map (mapClick)="mapClicked($event)" [latitude]="device_data.latitude" [longitude]="device_data.longitude"
-                                 [scrollwheel]="false" [zoom]="zoom">
-                            <agm-marker [latitude]="device_data.latitude" [longitude]="device_data.longitude"></agm-marker>
-                        </agm-map>
-                    </div>
 
                     <div class="row ">
                         <div class="col-md-12 mt-2">
                             <div class="form-group">
                                 <label class="text-white" for="device_name">Device Name</label>
                                 <input type="text" class="form-control" name="device_name" id="device_name"
-                                       placeholder="Enter Device Name" aria-describedby="fileHelpId" [ngModel]="device_data.name"
+                                       placeholder="Enter Device Name" aria-describedby="fileHelpId" ngModel
                                        #device_name="ngModel"
                                        required minlength="3" maxlength="30">
                                 <div class="invisible-text text-right text-white">
@@ -50,7 +41,7 @@
                                 <input type="text" class="form-control" name="serial_number" id="serial_number"
                                        placeholder="Enter Device's Serial Number" maxlength="30"
                                        aria-describedby="fileHelpId" required
-                                       [ngModel]="device_data.serial_number" pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel">
+                                       ngModel pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel">
                                 <div class="invisible-text text-right text-white">
                                     <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('required')">
                                         This is required field.
@@ -70,11 +61,41 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-white" for="location_device">Location of Device</label>
+                                <input type="text" class="form-control" name="location_of_device" id="location_of_device"
+                                       placeholder="Enter Location of Device" maxlength="128"
+                                       aria-describedby="fileHelpId" required
+                                       ngModel #location_of_device="ngModel">
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="deviceInfoform.submitted && location_of_device.hasError('required')">
+                                        This is required field.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="text-white" for="address">Device Address</label>
+                            <input placeholder="Device address" autocorrect="off" autocapitalize="off" spellcheck="off"
+                                type="text"
+                                class="form-control mb-2" #search [formControl]="searchControl">
+                            <agm-map (mapClick)="mapClicked($event)" [latitude]="latitude" [longitude]="longitude"
+                                    [scrollwheel]="false" [zoom]="zoom">
+                                <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                            </agm-map>
+                        </div>
+                    </div>
+
                     <div class="row ">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="text-white">Industry Type</label>
-                                <select id="industry_type" name="industry_type" class="form-control" [ngModel]="device_data.industry_type.id" #industry
+                                <select id="industry_type" name="industry_type" class="form-control" ngModel #industry
                                         (change)="addIndustryType($event, industry.value)">
                                     <option value="" disabled selected>Select a Industry Type</option>
                                     <option *ngFor="let industry of industryType" [value]="industry.id">
@@ -90,7 +111,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="text-white">Location Type</label>
-                                <select id="location_type" name="location_type" class="form-control" [ngModel]="device_data.location_type.id" #location
+                                <select id="location_type" name="location_type" class="form-control" ngModel #location
                                         (change)="addLocationType($event, location.value)">
                                     <option value="" disabled selected>Select a Location Type</option>
                                     <option *ngFor="let location of locationType" [value]="location.id">
@@ -108,7 +129,7 @@
                                 <label class="text-white" for="location_logo">Location Image</label>
                                 <input type="file" class="form-control-file" name="logo"
                                        (change)="onChangeLocation($event)"
-                                       id="location_logo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_data.location_logo"
+                                       id="location_logo" placeholder="" aria-describedby="fileHelpId" required ngModel
                                        #name="ngModel">
 
                             </div>
@@ -118,7 +139,7 @@
                                 <label class="text-white" for="location_photo">Device Image</label>
                                 <input type="file" class="form-control-file" name="name"
                                        (change)="onChangeImage($event)"
-                                       id="location_photo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_data.machine_photo"
+                                       id="location_photo" placeholder="" aria-describedby="fileHelpId" required ngModel
                                        #name="ngModel">
                             </div>
                         </div>
@@ -131,13 +152,13 @@
                         <div class="col-md-4">
                             <label for=""></label>
                             <ngb-timepicker name="sun_time_start" [seconds]="seconds" #sun_time_start="ngModel"
-                                            [ngModel]="device_data.location_hours[0].from_time"></ngb-timepicker>
+                                            ngModel></ngb-timepicker>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="sun_time_end" validateTime="sun_time_start" [seconds]="seconds"
-                                                required #sun_time_end="ngModel" [ngModel]="device_data.location_hours[0].to_time"></ngb-timepicker>
+                                                required #sun_time_end="ngModel" ngModel></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
                                     <small *ngIf="sun_time_end.hasError('validateTime')">
                                         start time is greater than end time
@@ -147,7 +168,7 @@
 
                         </div>
                         <div class="col-md-2 d-flex align-items-center text-white">
-                            <ui-switch size="small" [checked]="false" name="toggle_sun"  [ngModel]="device_data.location_hours[0].is_on"></ui-switch>
+                            <ui-switch size="small" [checked]="false" name="toggle_sun"  ngModel></ui-switch>
                         </div>
                     </div>
 
@@ -157,7 +178,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="mon_time_start" [seconds]="seconds" #mon_time_start="ngModel"
-                                                 [ngModel]="device_data.location_hours[1].from_time"></ngb-timepicker>
+                                                 ngModel> </ngb-timepicker>
 
                             </div>
                         </div>
@@ -165,7 +186,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="mon_time_end" validateTime="mon_time_start" [seconds]="seconds"
-                                                 [ngModel]="device_data.location_hours[1].to_time" #monTimeEnd="ngModel"></ngb-timepicker>
+                                                 ngModel #monTimeEnd="ngModel"></ngb-timepicker>
 
                             </div>
                             <div class="invisible-text text-right text-white">
@@ -176,7 +197,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center text-white">
-                            <ui-switch size="small" [checked]="false" name="toggle_mon"  [ngModel]="device_data.location_hours[1].is_on"></ui-switch>
+                            <ui-switch size="small" [checked]="false" name="toggle_mon"  ngModel></ui-switch>
                         </div>
                     </div>
 
@@ -185,7 +206,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
-                                <ngb-timepicker name="tue_time_start" [seconds]="seconds"  [ngModel]="device_data.location_hours[2].from_time"
+                                <ngb-timepicker name="tue_time_start" [seconds]="seconds"  ngModel
                                                 #tue_time_start="ngModel"></ngb-timepicker>
 
                             </div>
@@ -195,7 +216,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="tue_time_end" validateTime="tue_time_start" [seconds]="seconds"
-                                                 [ngModel]="device_data.location_hours[2].to_time" #tue_time_end="ngModel"></ngb-timepicker>
+                                                 ngModel #tue_time_end="ngModel"></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="tue_time_end.hasError('validateTime')">
@@ -205,7 +226,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center text-white">
-                            <ui-switch size="small" [checked]="false" name="toggle_tue"  [ngModel]="device_data.location_hours[2].is_on"></ui-switch>
+                            <ui-switch size="small" [checked]="false" name="toggle_tue" ngModel></ui-switch>
                         </div>
                     </div>
 
@@ -215,7 +236,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="wed_time_start" [seconds]="seconds" #wed_time_start="ngModel"
-                                                 [ngModel]="device_data.location_hours[3].from_time"></ngb-timepicker>
+                                                 ngModel></ngb-timepicker>
 
                             </div>
                         </div>
@@ -223,7 +244,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="wed_time_end" validateTime="wed_time_start" [seconds]="seconds"
-                                                #wed_time_end="ngModel"  [ngModel]="device_data.location_hours[3].to_time"></ngb-timepicker>
+                                                #wed_time_end="ngModel" ngModel></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="wed_time_end.hasError('validateTime')">
@@ -233,7 +254,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center text-white">
-                            <ui-switch size="small" [checked]="false" name="toggle_wed"  [ngModel]="device_data.location_hours[3].is_on"></ui-switch>
+                            <ui-switch size="small" [checked]="false" name="toggle_wed" ngModel></ui-switch>
                         </div>
                     </div>
 
@@ -243,7 +264,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="thu_time_start" [seconds]="seconds" #thu_time_start="ngModel"
-                                                 [ngModel]="device_data.location_hours[4].from_time"></ngb-timepicker>
+                                                 ngModel></ngb-timepicker>
 
                             </div>
                         </div>
@@ -251,7 +272,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="thu_time_end" validateTime="thu_time_start" [seconds]="seconds"
-                                                #thu_time_end="ngModel"  [ngModel]="device_data.location_hours[4].to_time"></ngb-timepicker>
+                                                #thu_time_end="ngModel" ngModel></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="thu_time_end.hasError('validateTime')">
@@ -262,7 +283,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center text-white">
-                            <ui-switch size="small" [checked]="false" name="toggle_thu"  [ngModel]="device_data.location_hours[4].is_on"></ui-switch>
+                            <ui-switch size="small" [checked]="false" name="toggle_thu" ngModel></ui-switch>
                         </div>
                     </div>
 
@@ -271,7 +292,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
-                                <ngb-timepicker name="fri_time_start" [seconds]="seconds"  [ngModel]="device_data.location_hours[5].from_time"
+                                <ngb-timepicker name="fri_time_start" [seconds]="seconds" ngModel
                                                 #fri_time_start="ngModel"></ngb-timepicker>
 
                             </div>
@@ -280,7 +301,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="fri_time_end" validateTime="fri_time_start" [seconds]="seconds"
-                                                 [ngModel]="device_data.location_hours[5].to_time" #fri_time_end="ngModel"></ngb-timepicker>
+                                                 ngModel #fri_time_end="ngModel"></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="fri_time_end.hasError('validateTime')">
@@ -290,7 +311,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center text-white">
-                            <ui-switch size="small" [checked]="false" name="toggle_fri"  [ngModel]="device_data.location_hours[5].is_on"></ui-switch>
+                            <ui-switch size="small" [checked]="false" name="toggle_fri" ngModel></ui-switch>
                         </div>
                     </div>
 
@@ -299,7 +320,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
-                                <ngb-timepicker name="sat_time_start" [seconds]="seconds"  [ngModel]="device_data.location_hours[6].from_time"
+                                <ngb-timepicker name="sat_time_start" [seconds]="seconds" ngModel
                                                 #sat_time_start="ngModel"></ngb-timepicker>
                             </div>
                         </div>
@@ -307,7 +328,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="sat_time_end" validateTime="sat_time_start" [seconds]="seconds"
-                                                 [ngModel]="device_data.location_hours[6].to_time" #sat_time_end="ngModel"></ngb-timepicker>
+                                                 ngModel #sat_time_end="ngModel"></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
                                     <small *ngIf="sat_time_end.hasError('validateTime')">
                                         start time is greater than end time
@@ -316,10 +337,10 @@
                             </div>
                         </div>
                         <div class="col-md-2 d-flex align-items-center text-white">
-                            <ui-switch size="small" [checked]="false" name="toggle_sat" [ngModel]="device_data.location_hours[6].is_on"></ui-switch>
+                            <ui-switch size="small" [checked]="false" name="toggle_sat" ngModel></ui-switch>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-light  float-right ">{{editing ? 'Update' : 'Save'}}</button>
+                    <button type="submit" class="btn btn-lg btn-light  float-right ">Save</button>
 
 
                 </form>
