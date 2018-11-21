@@ -46,7 +46,7 @@
                         <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
                         </ui-switch>
                        
-                        <div class="d-inline text-right mx-3 px-3" routerLink="/device/{{device_data['data']['id']}}/edit">
+                        <div class="d-none mx-3 px-3" routerLink="/device/{{device_data['data']['id']}}/edit">
                             <i class="fa fa-edit"> Edit</i>
                         </div>
 
@@ -54,10 +54,11 @@
 
                         <div class="card-text mb-2">
                             Serial No: {{device_data['data']['serial_number']}}<br>
-                            Address: {{device_data['data']['address']}}
-                            <div class="mx-3 d-inline" (click)="copyDeviceInfo()">
+                            Location: {{device_data['data']['location_of_device']}}
+                            <div class="pl-3 d-inline-block" (click)="copyDeviceInfo()">
                                 <i class="fa fa-clipboard"></i>
-                            </div>
+                            </div><br>
+                            Address: {{device_data['data']['address']}}
                         </div>
 
                         <!-- this creates a google map on the page with the given lat/lng from -->

@@ -59,11 +59,12 @@ export class DeviceDetailComponent implements OnInit {
 
     copyDeviceInfo() {
         const googleLink = 'https://maps.google.com/?q=' + this.lat.toString() + ',' + this.lng.toString();
+        const location_of_device = this.device_data['data']['location_of_device'];
         const address = this.device_data['data']['address'];
-        const copyText = 'Location of device: ' + address + '\nGoogle map link: ' + googleLink;
+        const copyText = 'Location of device: ' + location_of_device + '\nDevice address: ' + address + '\nGoogle map link: ' + googleLink;
 
         // copy to clipboard
-        let clipboard = document.createElement('textarea');
+        const clipboard = document.createElement('textarea');
         clipboard.style.position = 'fixed';
         clipboard.style.left = '0';
         clipboard.style.top = '0';
@@ -73,6 +74,7 @@ export class DeviceDetailComponent implements OnInit {
         clipboard.focus();
         clipboard.select();
         document.execCommand('copy');
+        this.messageService.add('Copied device\'s location to clipboard.');
         document.body.removeChild(clipboard);
     }
 
