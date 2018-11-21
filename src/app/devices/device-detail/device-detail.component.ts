@@ -74,7 +74,7 @@ export class DeviceDetailComponent implements OnInit {
         clipboard.focus();
         clipboard.select();
         document.execCommand('copy');
-        this.messageService.add('Copied device\'s location to clipboard.');
+        this.messageService.add('Copied device\'s location info to clipboard.');
         document.body.removeChild(clipboard);
     }
 
