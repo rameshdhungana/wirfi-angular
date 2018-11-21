@@ -236,18 +236,8 @@ export class DeviceAddComponent  implements OnInit {
       'longitude': this.longitude ? this.longitude : 0.000,
       'location_of_device': '',
       'address': this.address ? this.address : 'Ananda Bhairab Marga, Naxal',
-      'industry_type': {
-        'id': '',
-        'name': '',
-        'is_user_created': ''
-      },
-      'location_type': {
-        'id': '',
-        'name': '',
-        'is_user_created': ''
-      },
-      'location_logo': '',
-      'machine_photo': ''
+      'industry_type_id': '',
+      'location_type_id': ''
     };
 
     if (data.valid) {

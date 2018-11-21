@@ -98,8 +98,18 @@ export class DeviceUpdateComponent implements OnInit {
       'longitude': 0.000,
       'location_of_device': '',
       'address': 'IW Naxal, Ananda Bhairab Marga',
-      'industry_type_id': '',
-      'location_type_id': ''
+      'industry_type': {
+        'id': '',
+        'name': '',
+        'is_user_created': ''
+      },
+      'location_type': {
+        'id': '',
+        'name': '',
+        'is_user_created': ''
+      },
+      'location_logo': '',
+      'machine_photo': ''
     };
 
     public latitude: number;
