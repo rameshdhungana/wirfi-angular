@@ -96,6 +96,7 @@ export class DeviceUpdateComponent implements OnInit {
       'serial_number': '',
       'latitude': 0.000,
       'longitude': 0.000,
+      'location_of_device': ''
       'address': 'IW Naxal, Ananda Bhairab Marga',
       'industry_type_id': '',
       'location_type_id': ''
