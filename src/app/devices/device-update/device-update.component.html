@@ -1,38 +1,352 @@
-<div class="container-fluid vh-100" style="background-color:#252b33;">
-    <div class="mx-auto mw-460">
+<div class="container device-container ">
+    <div class="row ">
+        <div class="col-md-12 pb-5">
 
-        <div class="mx-auto mw-460 text-center pb-5" style="padding-top:100px;">
-            <h4 class="text-white">Configure Wirfi device</h4>
-        </div>
+            <div class="text-white panelpb-5">
+                <h2 class="text-center text-white">Edit Device</h2>
+                <form [class.was-validated]="deviceInfoform.submitted" #deviceInfoform='ngForm'
+                      (ngSubmit)='onSubmit(deviceInfoform)'>
 
-        <div class="panel-body">
-            <form class="form-horizontal" role="form"
-                  #deviceDetailForm='ngForm' (ngSubmit)='onSubmit(deviceDetailForm)'>
-
-                <div class="form-group">
-                    <label class="text-white">Name</label>
-                    <input id="name" type="text" class="form-control" name="name" placeholder="Device Name" required
-                           autofocus ngModel #name="ngModel">
-                    <div class="invalid-feedback text-right">
-                      <span *ngIf="name.hasError('required')">
-                        This is required field.
-                      </span>
-                        <!--<span *ngIf="name.hasError('name')">-->
-                        <!--Enter a valid serial number of device.-->
-                        <!--</span>-->
+                    <div class="row ">
+                        <div class="col-md-12 mt-2">
+                            <div class="form-group">
+                                <label class="text-white" for="device_name">Device Name</label>
+                                <input type="text" class="form-control" name="device_name" id="device_name"
+                                       placeholder="Enter Device Name" aria-describedby="fileHelpId" [ngModel]="device_info.name"
+                                       #device_name="ngModel"
+                                       required minlength="3" maxlength="30">
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="deviceInfoform.submitted && device_name.hasError('required')">
+                                        This is required field.
+                                    </small>
+                                </div>
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="device_name.hasError('maxlength')">
+                                        Device name exceeds 30 characters
+                                    </small>
+                                </div>
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="deviceInfoform.submitted && device_name.hasError('minlength')">
+                                        Device name should be greater than 3 characters
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <button class="btn btn-danger float-right bordered ml-2" (click)="onCancel()">
-                        Cancel
-                    </button>
-                    <button type="submit" class="btn btn-primary float-right bordered">
-                        Update
-                    </button>
-                </div>
+                    <!-- Serial No -->
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-white" for="serial_number">Device Serial No</label>
+                                <input type="text" class="form-control" name="serial_number" id="serial_number"
+                                       placeholder="Enter Device's Serial Number" maxlength="30"
+                                       aria-describedby="fileHelpId" required
+                                       [ngModel]="device_info.serial_number" pattern="^$|^[A-Za-z0-9]+" #serialnumber="ngModel">
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="deviceInfoform.submitted && serialnumber.hasError('required')">
+                                        This is required field.
+                                    </small>
+                                </div>
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="serialnumber.hasError('pattern')">
+                                        Must be alphanumeric
+                                    </small>
+                                </div>
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="serialnumber.hasError('maxlength')">
+                                        Must not exceed 30 characters.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            </form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-white" for="location_device">Location of Device</label>
+                                <input type="text" class="form-control" name="location_of_device" id="location_of_device"
+                                       placeholder="Enter Location of Device" maxlength="128"
+                                       aria-describedby="fileHelpId" required
+                                       [ngModel]="device_info.location_of_device" #location_of_device="ngModel">
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="deviceInfoform.submitted && location_of_device.hasError('required')">
+                                        This is required field.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="text-white" for="address">Device Address</label>
+                            <input [value]="device_info.address" autocorrect="off" autocapitalize="off" spellcheck="off"
+                                type="text"
+                                class="form-control mb-2" #search [formControl]="searchControl">
+                            <agm-map (mapClick)="mapClicked($event)" [latitude]="device_info.latitude" [longitude]="device_info.longitude"
+                                    [scrollwheel]="false" [zoom]="zoom">
+                                <agm-marker [latitude]="device_info.latitude" [longitude]="device_info.longitude"></agm-marker>
+                            </agm-map>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-white">Industry Type</label>
+                                <select id="industry_type" name="industry_type" class="form-control" [ngModel]="device_info.industry_type?.id" #industry
+                                        (change)="addIndustryType($event, industry.value)">
+                                    <option value="" disabled selected>Select a Industry Type</option>
+                                    <option *ngFor="let industry of industryType" [value]="industry.id">
+                                        {{industry.name}}
+                                    </option>
+                                    <option value="">Add Other...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-white">Location Type</label>
+                                <select id="location_type" name="location_type" class="form-control" [ngModel]="device_info.location_type?.id" #location
+                                        (change)="addLocationType($event, location.value)">
+                                    <option value="" disabled selected>Select a Location Type</option>
+                                    <option *ngFor="let location of locationType" [value]="location.id">
+                                        {{location.name}}
+                                    </option>
+                                    <option value="">Add Other...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  mt-4">
+                        <div class="col-md-4 offset-md-2">
+                            <div class="form-group">
+                                <label class="text-white" for="location_logo">Location Image</label>
+                                <input type="file" class="form-control-file" name="logo"
+                                       (change)="onChangeLocation($event)"
+                                       id="location_logo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info.location_logo"
+                                       #name="ngModel">
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="text-white" for="location_photo">Device Image</label>
+                                <input type="file" class="form-control-file" name="name"
+                                       (change)="onChangeImage($event)"
+                                       id="location_photo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info.machine_photo"
+                                       #name="ngModel">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            Sunday
+                        </div>
+                        <div class="col-md-4">
+                            <label for=""></label>
+                            <ngb-timepicker name="sun_time_start" [seconds]="seconds" #sun_time_start="ngModel"
+                                            [ngModel]="device_info?.location_hours[0].from_time"></ngb-timepicker>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="sun_time_end" validateTime="sun_time_start" [seconds]="seconds"
+                                                required #sun_time_end="ngModel" [ngModel]="device_info.location_hours[0].to_time"></ngb-timepicker>
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="sun_time_end.hasError('validateTime')">
+                                        start time is greater than end time
+                                    </small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            <ui-switch size="small" [checked]="false" name="toggle_sun"  [ngModel]="device_info.location_hours[0].is_on"></ui-switch>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-2 d-flex align-items-center text-white">Monday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="mon_time_start" [seconds]="seconds" #mon_time_start="ngModel"
+                                                 [ngModel]="device_info.location_hours[1].from_time"></ngb-timepicker>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="mon_time_end" validateTime="mon_time_start" [seconds]="seconds"
+                                                 [ngModel]="device_info.location_hours[1].to_time" #monTimeEnd="ngModel"></ngb-timepicker>
+
+                            </div>
+                            <div class="invisible-text text-right text-white">
+
+                                <small *ngIf="monTimeEnd.hasError('validateTime')">
+                                    start time is greater than end time
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            <ui-switch size="small" [checked]="false" name="toggle_mon"  [ngModel]="device_info.location_hours[1].is_on"></ui-switch>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-2 d-flex align-items-center text-white">Tuesday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="tue_time_start" [seconds]="seconds"  [ngModel]="device_info.location_hours[2].from_time"
+                                                #tue_time_start="ngModel"></ngb-timepicker>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="tue_time_end" validateTime="tue_time_start" [seconds]="seconds"
+                                                 [ngModel]="device_info.location_hours[2].to_time" #tue_time_end="ngModel"></ngb-timepicker>
+                                <div class="invisible-text text-right text-white">
+
+                                    <small *ngIf="tue_time_end.hasError('validateTime')">
+                                        start time is greater than end time
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            <ui-switch size="small" [checked]="false" name="toggle_tue"  [ngModel]="device_info.location_hours[2].is_on"></ui-switch>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-2 d-flex align-items-center text-white">Wednesday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="wed_time_start" [seconds]="seconds" #wed_time_start="ngModel"
+                                                 [ngModel]="device_info.location_hours[3].from_time"></ngb-timepicker>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="wed_time_end" validateTime="wed_time_start" [seconds]="seconds"
+                                                #wed_time_end="ngModel"  [ngModel]="device_info.location_hours[3].to_time"></ngb-timepicker>
+                                <div class="invisible-text text-right text-white">
+
+                                    <small *ngIf="wed_time_end.hasError('validateTime')">
+                                        start time is greater than end time
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            <ui-switch size="small" [checked]="false" name="toggle_wed"  [ngModel]="device_info.location_hours[3].is_on"></ui-switch>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-2 d-flex align-items-center text-white">Thursday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="thu_time_start" [seconds]="seconds" #thu_time_start="ngModel"
+                                                 [ngModel]="device_info.location_hours[4].from_time"></ngb-timepicker>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="thu_time_end" validateTime="thu_time_start" [seconds]="seconds"
+                                                #thu_time_end="ngModel"  [ngModel]="device_info.location_hours[4].to_time"></ngb-timepicker>
+                                <div class="invisible-text text-right text-white">
+
+                                    <small *ngIf="thu_time_end.hasError('validateTime')">
+                                        start time is greater than end time
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            <ui-switch size="small" [checked]="false" name="toggle_thu"  [ngModel]="device_info.location_hours[4].is_on"></ui-switch>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-2 d-flex align-items-center text-white">Friday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="fri_time_start" [seconds]="seconds"  [ngModel]="device_info.location_hours[5].from_time"
+                                                #fri_time_start="ngModel"></ngb-timepicker>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="fri_time_end" validateTime="fri_time_start" [seconds]="seconds"
+                                                 [ngModel]="device_info.location_hours[5].to_time" #fri_time_end="ngModel"></ngb-timepicker>
+                                <div class="invisible-text text-right text-white">
+
+                                    <small *ngIf="fri_time_end.hasError('validateTime')">
+                                        start time is greater than end time
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            <ui-switch size="small" [checked]="false" name="toggle_fri"  [ngModel]="device_info.location_hours[5].is_on"></ui-switch>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-md-2 d-flex align-items-center text-white">Saturday</div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="sat_time_start" [seconds]="seconds"  [ngModel]="device_info.location_hours[6].from_time"
+                                                #sat_time_start="ngModel"></ngb-timepicker>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for=""></label>
+                                <ngb-timepicker name="sat_time_end" validateTime="sat_time_start" [seconds]="seconds"
+                                                 [ngModel]="device_info.location_hours[6].to_time" #sat_time_end="ngModel"></ngb-timepicker>
+                                <div class="invisible-text text-right text-white">
+                                    <small *ngIf="sat_time_end.hasError('validateTime')">
+                                        start time is greater than end time
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center text-white">
+                            <ui-switch size="small" [checked]="false" name="toggle_sat" [ngModel]="device_info.location_hours[6].is_on"></ui-switch>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-light  float-right ">Update</button>
+
+
+                </form>
+            </div>
         </div>
     </div>
+
 </div>
