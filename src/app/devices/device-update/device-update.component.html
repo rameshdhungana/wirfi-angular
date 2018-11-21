@@ -96,7 +96,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="text-white">Industry Type</label>
-                                <select id="industry_type" name="industry_type" class="form-control" [ngModel]="device_info.industry_type?.id" #industry
+                                <select id="industry_type" name="industry_type" class="form-control" [ngModel]="device_info?.industry_type?.id" #industry
                                         (change)="addIndustryType($event, industry.value)">
                                     <option value="" disabled selected>Select a Industry Type</option>
                                     <option *ngFor="let industry of industryType" [value]="industry.id">
@@ -112,7 +112,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label class="text-white">Location Type</label>
-                                <select id="location_type" name="location_type" class="form-control" [ngModel]="device_info.location_type?.id" #location
+                                <select id="location_type" name="location_type" class="form-control" [ngModel]="device_info?.location_type?.id" #location
                                         (change)="addLocationType($event, location.value)">
                                     <option value="" disabled selected>Select a Location Type</option>
                                     <option *ngFor="let location of locationType" [value]="location.id">
@@ -130,7 +130,7 @@
                                 <label class="text-white" for="location_logo">Location Image</label>
                                 <input type="file" class="form-control-file" name="logo"
                                        (change)="onChangeLocation($event)"
-                                       id="location_logo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info.location_logo"
+                                       id="location_logo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info?.location_logo"
                                        #name="ngModel">
 
                             </div>
@@ -140,7 +140,7 @@
                                 <label class="text-white" for="location_photo">Device Image</label>
                                 <input type="file" class="form-control-file" name="name"
                                        (change)="onChangeImage($event)"
-                                       id="location_photo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info.machine_photo"
+                                       id="location_photo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info?.machine_photo"
                                        #name="ngModel">
                             </div>
                         </div>
