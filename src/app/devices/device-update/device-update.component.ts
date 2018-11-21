@@ -194,7 +194,7 @@ export class DeviceUpdateComponent implements OnInit {
                           this.messageservice.add(response['message']);
                           this.router.navigateByUrl(`device/` + this.device_id);
                       });
-          );
+          });
       }
   }
 
