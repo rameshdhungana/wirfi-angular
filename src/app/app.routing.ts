@@ -25,6 +25,7 @@ import {IndustryListComponent} from './industry-list/industry-list.component';
 import {NotificationComponent} from './notification/notification.component';
 import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franchise-type-list.component';
 import {AddNetworkSettingComponent} from './devices/add-network-setting/add-network-setting.component';
+import { DeviceUpdateComponent } from './devices/device-update/device-update.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,7 @@ const routes: Routes = [
     {path: 'device-add', component: DeviceAddComponent, canActivate: [AuthGuard]},
     {path: 'billing', component: BillingComponent, canActivate: [AuthGuard]},
     {path: 'me', component: SidebarComponent, canActivate: [AuthGuard]},
-    {path: 'device/:id/edit', component: DeviceAddComponent},
+    {path: 'device/:id/edit', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
     {path: 'account_confirm_email/:key', component: VerifyEmailComponent},
     {path: 'industry', component: AddIndustryTypeComponent},
