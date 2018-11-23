@@ -11,6 +11,7 @@ import { FranchiseTypeService } from '../../_services/franchise-type.service';
 import { MaterialDialogService } from '../../_services/material-dialog.service';
 import { AddIndustryTypeComponent } from '../../industry-list/add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 
 @Injectable()
@@ -47,49 +48,53 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
 
 export class DeviceUpdateComponent implements OnInit {
     public device_id: string;
+    public device_data: any;
+
     public device_info = {
       'location_hours': [
         {
             'day_id': '1',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
+            'from_time': {'hour': 0, 'minute': 0},
+            'to_time': {'hour': 0, 'minute': 0},
+            'is_on': false
         },
         {
             'day_id': '2',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
+            'from_time': {'hour': 0, 'minute': 0},
+
+            'to_time': {'hour': 0, 'minute': 0},
+            'is_on': false
         },
         {
             'day_id': '3',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
+            'from_time': {'hour': 0, 'minute': 0},
+
+            'to_time': {'hour': 0, 'minute': 0},
+            'is_on': false
         },
         {
             'day_id': '4',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
+            'from_time': {'hour': 0, 'minute': 0},
+            'to_time': {'hour': 0, 'minute': 0},
+            'is_on': false
         },
         {
             'day_id': '5',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
+            'from_time': {'hour': 0, 'minute': 0},
+            'to_time': {'hour': 0, 'minute': 0},
+            'is_on': false
         },
         {
             'day_id': '6',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
+            'from_time': {'hour': 0, 'minute': 0},
+            'to_time': {'hour': 0, 'minute': 0},
+            'is_on': false
         },
         {
             'day_id': '7',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
+            'from_time': {'hour': 0, 'minute': 0},
+            'to_time': {'hour': 0, 'minute': 0},
+            'is_on': false
         }
       ],
       'name': '',
@@ -97,7 +102,7 @@ export class DeviceUpdateComponent implements OnInit {
       'latitude': 0.000,
       'longitude': 0.000,
       'location_of_device': '',
-      'address': 'IW Naxal, Ananda Bhairab Marga',
+      'address': '',
       'industry_type': {
         'id': '',
         'name': '',
@@ -111,7 +116,9 @@ export class DeviceUpdateComponent implements OnInit {
       'location_logo': '',
       'machine_photo': ''
     };
+    public request_json = {};
 
+    public address: string;
     public latitude: number;
     public longitude: number;
     public searchControl: FormControl;
@@ -130,9 +137,7 @@ export class DeviceUpdateComponent implements OnInit {
     fileImage: File;
     formData = new FormData();
 
-    private json: object = {};
     seconds = false;
-    private address: any;
 
   constructor(
       private router: Router,
@@ -146,11 +151,11 @@ export class DeviceUpdateComponent implements OnInit {
       private dialogService: MaterialDialogService
   ) { }
 
-  ngOnInit() {
+    ngOnInit() {
       this.device_id = this.route.snapshot.paramMap.get('id');
       this.deviceService.getDevice(this.device_id).subscribe(response => {
-        this.device_info = response['data'];
-        console.log(this.device_info);
+        this.device_data = cloneDeep(response['data']);
+        this.format_device_info();
       });
 
       this.industryservice.getIndustryList().subscribe(
@@ -192,31 +197,118 @@ export class DeviceUpdateComponent implements OnInit {
               });
           });
       });
-  }
+    }
 
-  onSubmit(data: NgForm) {
-      if (data.valid) {
-          this.deviceService.updateDeviceDetail(data, this.device_id).subscribe(
-              (response) => {
-                  this.formData.append('location_logo', this.fileImage);
-                  this.formData.append('machine_photo', this.fileLocation);
-                  this.deviceService.postDeviceImages(this.formData, this.device_id).subscribe(
-                      (res) => {
-                          this.messageservice.add(response['message']);
-                          this.router.navigateByUrl(`device/` + this.device_id);
-                      });
-          });
-      }
-  }
+    format_device_info() {
+        const hours = this.device_data['location_hours'];
+        for (const i in hours) {
+            if (hours[i]) {
 
+                let split_time = hours[i]['from_time'].split(':');
+                this.device_info['location_hours'][i]['from_time'] = {
+                    'hour': parseInt(split_time[0], 10),
+                    'minute': parseInt(split_time[1], 10)
+                };
+                split_time = hours[i]['to_time'].split(':');
+                this.device_info['location_hours'][i]['to_time'] = {
+                    'hour': parseInt(split_time[0], 10),
+                    'minute': parseInt(split_time[1], 10)
+                };
+            }
+        }
+        this.device_info['name'] = this.device_data['name'];
+        this.device_info['serial_number'] = this.device_data['serial_number'];
+        this.device_info['latitude'] = this.device_data['latitude'];
+        this.device_info['longitude'] = this.device_data['longitude'];
+        this.device_info['location_of_device'] = this.device_data['location_of_device'];
+        this.device_info['address'] = this.device_data['address'];
+        this.device_info['industry_type'] = this.device_data['industry_type'];
+        this.device_info['location_type'] = this.device_data['location_type'];
+        this.device_info['location_logo'] = this.device_data['lcoation_logo'];
+        this.device_info['machine_photo'] = this.device_data['machine_photo'];
 
+    }
 
+    onSubmit(data: NgForm) {
+        if (data.valid) {
+            this.request_json = {
+                'location_hours': [
+                  {
+                      'day_id': '1',
+                      'from_time': this.getTime(data.value['sun_time_start']),
+                      'to_time': this.getTime(data.value['sun_time_end']),
+                      'is_on': data.value['toggle_sun']
+                  },
+                  {
+                      'day_id': '2',
+                      'from_time': this.getTime(data.value['mon_time_start']),
+                      'to_time': this.getTime(data.value['mon_time_end']),
+                      'is_on': data.value['toggle_mon']
+                  },
+                  {
+                      'day_id': '3',
+                      'from_time': this.getTime(data.value['tue_time_start']),
+                      'to_time': this.getTime(data.value['tue_time_end']),
+                      'is_on': data.value['toggle_tue']
+                  },
+                  {
+                      'day_id': '4',
+                      'from_time': this.getTime(data.value['wed_time_start']),
+                      'to_time': this.getTime(data.value['wed_time_end']),
+                      'is_on': data.value['toggle_wed']
+                  },
+                  {
+                      'day_id': '5',
+                      'from_time': this.getTime(data.value['thu_time_start']),
+                      'to_time': this.getTime(data.value['thu_time_end']),
+                      'is_on': data.value['toggle_thu']
+                  },
+                  {
+                      'day_id': '6',
+                      'from_time': this.getTime(data.value['fri_time_start']),
+                      'to_time': this.getTime(data.value['fri_time_end']),
+                      'is_on': data.value['toggle_fri']
+                  },
+                  {
+                      'day_id': '7',
+                      'from_time': this.getTime(data.value['sat_time_start']),
+                      'to_time': this.getTime(data.value['sat_time_end']),
+                      'is_on': data.value['toggle_sat']
+                  }
+              ],
+            'name': data.value['device_name'],
+            'serial_number': data.value['serial_number'],
+            'latitude': this.latitude ? this.latitude : 0.000,
+            'longitude': this.longitude ? this.longitude : 0.000,
+            'location_of_device': data.value['location_of_device'],
+            'address': this.address ? this.address : 'Ananda Bhairab Marga, Naxal',
+            'industry_type_id': String(data.value['industry_type']),
+            'location_type_id': String(data.value['location_type'])
+            };
 
-  mapClicked($event: MouseEvent) {
-    this.latitude =  $event.coords.lat;
-    this.longitude = $event.coords.lng;
-    this.zoom = 12;
-}
+            this.deviceService.updateDeviceDetail(this.request_json, this.device_id).subscribe(
+                response => {
+                    this.formData.append('location_logo', this.fileLocation);
+                    this.formData.append('machine_photo', this.fileImage);
+                    this.deviceService.postDeviceImages(this.formData, this.device_id).subscribe(
+                        res => {
+                            this.messageservice.add(response['message']);
+                            this.router.navigateByUrl(`device/` + this.device_id);
+                        });
+                });
+        }
+    }
+
+    getTime(obj) {
+        const time = new Date(1990, 1, 2, obj.hour, obj.minute);
+        return time.toTimeString().split(' ')[0];
+    }
+
+    mapClicked($event: MouseEvent) {
+        this.latitude =  $event.coords.lat;
+        this.longitude = $event.coords.lng;
+        this.zoom = 12;
+    }
 
     private setCurrentPosition() {
         if ('geolocation' in navigator) {
