@@ -36,7 +36,7 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     {path: 'devices', component: DeviceListComponent},
-    {path: 'device', component: DevicesComponent, canActivate: [AuthGuard]},
+    // {path: 'device', component: DevicesComponent, canActivate: [AuthGuard]},
     {path: 'device/:id', component: DeviceDetailComponent, canActivate: [AuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'reset/:uid/:token', component: ResetPasswordComponent},

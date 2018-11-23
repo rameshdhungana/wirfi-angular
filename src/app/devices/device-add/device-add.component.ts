@@ -18,14 +18,19 @@ import { MouseEvent } from '@agm/core';
 @Injectable()
 export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   fromModel(value: string): NgbTimeStruct {
-    if (!value) {
-      return null;
-    }
-    const split = value.split(':');
+    // if (!value) {
+    //   return null;
+    // }
+    // const split = value.split(':');
+    // return {
+    //   hour: parseInt(split[0], 10),
+    //   minute: parseInt(split[1], 10),
+    //   second: parseInt(split[2], 10)
+    // };
     return {
-      hour: parseInt(split[0], 10),
-      minute: parseInt(split[1], 10),
-      second: parseInt(split[2], 10)
+      hour: 0,
+      minute: 0,
+      second: 0
     };
   }
 
@@ -301,7 +306,7 @@ export class DeviceAddComponent  implements OnInit {
               this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
                 res => {
                   this.messageservice.add(response['message']);
-                  this.router.navigateByUrl(`device/` + this.device_id);
+                  this.router.navigateByUrl(`devices`);
               });
             },
         (error) => {
