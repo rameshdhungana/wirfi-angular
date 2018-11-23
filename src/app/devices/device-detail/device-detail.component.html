@@ -12,7 +12,6 @@
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-12 pb-3" *ngFor="let count of counter">
                         <div class="video-list">
                             <a (click)="playThisVideo(count)" style="cursor: pointer;">
@@ -34,8 +33,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
         <div class="col-8">
@@ -46,7 +43,7 @@
                         <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
                         </ui-switch>
                        
-                        <div class="d-none mx-3 px-3" routerLink="/device/{{device_data['data']['id']}}/edit">
+                        <div class="d-inline-block mx-3 px-3" routerLink="/device/{{device_data['data']['id']}}/edit" style="cursor: pointer;">
                             <i class="fa fa-edit"> Edit</i>
                         </div>
 
