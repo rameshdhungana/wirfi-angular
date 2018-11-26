@@ -43,19 +43,19 @@
                         <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
                         </ui-switch>
                        
-                        <div class="d-inline-block mx-3 px-3" routerLink="/device/{{device_data['data']['id']}}/edit" style="cursor: pointer;">
+                        <div class="d-inline-block mx-3 px-3" routerLink="/device/{{device_data?.id}}/edit" style="cursor: pointer;">
                             <i class="fa fa-edit"> Edit</i>
                         </div>
 
-                        <h4 class="card-title">Device : {{device_data['data']['name']}}</h4> 
+                        <h4 class="card-title">Device : {{device_data?.name}}</h4> 
 
                         <div class="card-text mb-2">
-                            Serial No: {{device_data['data']['serial_number']}}<br>
-                            Location: {{device_data['data']['location_of_device']}}
+                            Serial No: {{device_data?.serial_number}}<br>
+                            Location: {{device_data?.location_of_device}}
                             <div class="pl-3 d-inline-block" (click)="copyDeviceInfo()">
                                 <i class="fa fa-clipboard"></i>
                             </div><br>
-                            Address: {{device_data['data']['address']}}
+                            Address: {{device_data?.address}}
                         </div>
 
                         <!-- this creates a google map on the page with the given lat/lng from -->
@@ -70,16 +70,20 @@
                                 <th>Day</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
+                                <th>Status</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let info of device_data['data']['location_hours']">
-                                <td>{{info.day_id}}</td>
+                            <tr *ngFor="let info of device_data?.location_hours">
+                                <td>{{days[info.day_id]}}</td>
                                 <td>{{info.from_time}}</td>
                                 <td>{{info.to_time}}</td>
+                                <td><i class="fa " [class.fa-toggle-off]="!info.is_on" [class.fa-toggle-on]="info.is_on"></i></td>
                             </tr>
                             <tr>
                                 <td scope="row"></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>

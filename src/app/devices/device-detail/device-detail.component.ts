@@ -15,6 +15,15 @@ export class DeviceDetailComponent implements OnInit {
     lng: number;
     enable: boolean;
     loading = false;
+    days = {
+        1: 'Sunday',
+        2: 'Monday',
+        3: 'Tuesday',
+        4: 'Wednesday',
+        5: 'Thursday',
+        6: 'Friday',
+        7: 'Saturday'
+    }
 
     manualUpdate = false;
     counter: any;
@@ -40,7 +49,7 @@ export class DeviceDetailComponent implements OnInit {
 
 
         this.deviceService.getDevice(this.device_id).subscribe(response => {
-            this.device_data = response;
+            this.device_data = response['data'];
             this.lat = response['data']['latitude'];
             this.lng = response['data']['longitude'];
             this.enable = response['data']['priority'];
