@@ -56,45 +56,45 @@ export class DeviceUpdateComponent implements OnInit {
             'day_id': '1',
             'from_time': {'hour': 0, 'minute': 0},
             'to_time': {'hour': 0, 'minute': 0},
-            'is_on': false
+            'is_on': <Boolean>false
         },
         {
             'day_id': '2',
             'from_time': {'hour': 0, 'minute': 0},
 
             'to_time': {'hour': 0, 'minute': 0},
-            'is_on': false
+            'is_on': <Boolean>false
         },
         {
             'day_id': '3',
             'from_time': {'hour': 0, 'minute': 0},
 
             'to_time': {'hour': 0, 'minute': 0},
-            'is_on': false
+            'is_on': <Boolean>false
         },
         {
             'day_id': '4',
             'from_time': {'hour': 0, 'minute': 0},
             'to_time': {'hour': 0, 'minute': 0},
-            'is_on': false
+            'is_on': <Boolean>false
         },
         {
             'day_id': '5',
             'from_time': {'hour': 0, 'minute': 0},
             'to_time': {'hour': 0, 'minute': 0},
-            'is_on': false
+            'is_on': <Boolean>false
         },
         {
             'day_id': '6',
             'from_time': {'hour': 0, 'minute': 0},
             'to_time': {'hour': 0, 'minute': 0},
-            'is_on': false
+            'is_on': <Boolean>false
         },
         {
             'day_id': '7',
             'from_time': {'hour': 0, 'minute': 0},
             'to_time': {'hour': 0, 'minute': 0},
-            'is_on': false
+            'is_on': <Boolean>false
         }
       ],
       'name': '',
@@ -153,9 +153,11 @@ export class DeviceUpdateComponent implements OnInit {
 
     ngOnInit() {
       this.device_id = this.route.snapshot.paramMap.get('id');
-      this.deviceService.getDevice(this.device_id).subscribe(response => {
-        this.device_data = cloneDeep(response['data']);
-        this.format_device_info();
+      this.deviceService.getDevice(this.device_id).subscribe(
+          response => {
+              this.device_data = cloneDeep(response['data']);
+              console.log(this.device_data)
+              this.format_device_info();
       });
 
       this.industryservice.getIndustryList().subscribe(
@@ -214,6 +216,7 @@ export class DeviceUpdateComponent implements OnInit {
                     'hour': parseInt(split_time[0], 10),
                     'minute': parseInt(split_time[1], 10)
                 };
+                this.device_info['location_hours'][i]['is_on'] = hours[i]['is_on'];
             }
         }
         this.device_info['name'] = this.device_data['name'];
@@ -226,7 +229,6 @@ export class DeviceUpdateComponent implements OnInit {
         this.device_info['location_type'] = this.device_data['location_type'];
         this.device_info['location_logo'] = this.device_data['lcoation_logo'];
         this.device_info['machine_photo'] = this.device_data['machine_photo'];
-
     }
 
     onSubmit(data: NgForm) {
