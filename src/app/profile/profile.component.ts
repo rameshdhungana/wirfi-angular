@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {AuthenticationService} from '../_services/authentication.service';
-import {BussinessService} from "../_services/bussiness.service";
+import {BussinessService} from '../_services/bussiness.service';
 
 @Component({
     selector: 'app-profile',
