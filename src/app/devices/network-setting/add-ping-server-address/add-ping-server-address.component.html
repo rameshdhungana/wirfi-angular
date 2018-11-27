@@ -8,7 +8,7 @@
 
             </div>
             <form #networkSettingForm="ngForm"
-                  (ngSubmit)="data.device_network?updateNetworkSetting(data.device_id,data.primary_network,data.device_network.id,networkSettingForm):addNetworkSetting(data.device_id,data.primary_network,networkSettingForm)">
+                  (ngSubmit)="data.device_network?updatePingServerAddress(data.device_id,data.primary_network,data.device_network.id,networkSettingForm):addPingServerAddress(data.device_id,data.primary_network,networkSettingForm)">
                 <div class="form-group mt-4">
                     <input type="text" name="ssid_name" class="form-control form-control-lg" id="network-name"
                            [(ngModel)]='ssidName'

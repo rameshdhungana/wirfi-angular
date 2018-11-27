@@ -58,11 +58,12 @@ import {DatetimeformatPipe} from './shared/datetimeformat.pipe';
 import {DeleteIndustryTypeComponent} from './industry-list/delete-industry-type/delete-industry-type.component';
 import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franchise-type-list.component';
 import {DeleteFranchiseTypeComponent} from './franchise/delete-franchise-type/delete-franchise-type.component';
-import {AddNetworkSettingComponent} from './devices/add-network-setting/add-network-setting.component';
+import {AddNetworkSettingComponent} from './devices/network-setting/add-network-setting/add-network-setting.component';
 import {NgxMaskModule} from 'ngx-mask';
 import {SleepDeviceComponent} from './devices/sleep-device/sleep-device.component';
-import {ConnectToHiddenNetworkComponent} from './connect-to-hidden-network/connect-to-hidden-network.component';
-import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-network-setting/delete-network-setting.component'
+import {ConnectToHiddenNetworkComponent} from './devices/network-setting/connect-to-hidden-network/connect-to-hidden-network.component';
+import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-network-setting/delete-network-setting.component';
+import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component'
 
 @NgModule({
     declarations: [
@@ -107,6 +108,7 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
         SleepDeviceComponent,
         ConnectToHiddenNetworkComponent,
         DeleteNetworkSettingComponent,
+        AddPingServerAddressComponent,
     ],
     imports: [
         BrowserModule,
@@ -159,7 +161,9 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
         DeleteIndustryTypeComponent,
         DeleteFranchiseTypeComponent,
         SleepDeviceComponent,
-        DeleteNetworkSettingComponent
+        DeleteNetworkSettingComponent,
+        AddPingServerAddressComponent,
+        AddNetworkSettingComponent
 
 
     ]

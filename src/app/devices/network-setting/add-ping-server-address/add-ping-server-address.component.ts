@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DeviceService} from "../../_services/device.service";
+import {DeviceService} from "../../../_services/device.service";
 import {NgForm} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material";
-import {MaterialDialogService} from "../../_services/material-dialog.service";
+import {MaterialDialogService} from "../../../_services/material-dialog.service";
 
 @Component({
     selector: 'app-add-ping-server-address',

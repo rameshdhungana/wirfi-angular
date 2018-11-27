@@ -24,7 +24,8 @@ import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
 import {NotificationComponent} from "./notification/notification.component";
 import {FranchiseTypeListComponent} from "./franchise/franchise-type-list/franchise-type-list.component";
-import {AddNetworkSettingComponent} from "./devices/add-network-setting/add-network-setting.component";
+import {AddNetworkSettingComponent} from "./devices/network-setting/add-network-setting/add-network-setting.component";
+import {AddPingServerAddressComponent} from "./devices/network-setting/add-ping-server-address/add-ping-server-address.component";
 
 
 const routes: Routes = [
