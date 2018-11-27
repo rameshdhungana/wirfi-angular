@@ -42,6 +42,6 @@ export class PreventLoggedInAccess implements CanActivate {
 
   canActivate() {
       console.log("here");
-    return !this.authService.isLoggedIn();
+      return !this.authService.isLoggedIn();
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Route, Router, ActivatedRoute} from '@angular/router';
 import { MessageService } from '../../_services/message.service';
 import {DeviceService} from '../../_services/device.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-device-detail',
@@ -23,17 +24,20 @@ export class DeviceDetailComponent implements OnInit {
         5: 'Thursday',
         6: 'Friday',
         7: 'Saturday'
-    }
+    };
+    API_URL = environment.API_URL;
 
     manualUpdate = false;
     counter: any;
     test_video_source: any;
     videoToPlay: any = [];
 
-    constructor(private deviceService: DeviceService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private messageService: MessageService) { }
+    constructor(
+        private deviceService: DeviceService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private messageService: MessageService
+    ) { }
 
     ngOnInit() {
         this.device_id = this.route.snapshot.paramMap.get('id');
@@ -48,12 +52,14 @@ export class DeviceDetailComponent implements OnInit {
         this.videoToPlay = this.test_video_source[0];
 
 
-        this.deviceService.getDevice(this.device_id).subscribe(response => {
-            this.device_data = response['data'];
-            this.lat = response['data']['latitude'];
-            this.lng = response['data']['longitude'];
-            this.enable = response['data']['priority'];
-        this.loading = true;
+        this.deviceService.getDevice(this.device_id).subscribe(
+            response => {
+                console.log(response['data']);
+                this.device_data = response['data'];
+                this.lat = response['data']['latitude'];
+                this.lng = response['data']['longitude'];
+                this.enable = response['data']['priority'];
+                this.loading = true;
         });
     }
 
@@ -68,8 +74,8 @@ export class DeviceDetailComponent implements OnInit {
 
     copyDeviceInfo() {
         const googleLink = 'https://maps.google.com/?q=' + this.lat.toString() + ',' + this.lng.toString();
-        const location_of_device = this.device_data['data']['location_of_device'];
-        const address = this.device_data['data']['address'];
+        const location_of_device = this.device_data['location_of_device'];
+        const address = this.device_data['address'];
         const copyText = 'Location of device: ' + location_of_device + '\nDevice address: ' + address + '\nGoogle map link: ' + googleLink;
 
         // copy to clipboard
