@@ -157,13 +157,13 @@
                                     </div>
                                 </div>
 
-                                <a class="nounderline text-white" href="/device/{{device.id}}">
-                                    <img src={{API_URl}}{{device.machine_photo}}
+                                <a class="nounderline text-white" routerLink="/device/{{device.id}}">
+                                    <img src="{{API_URL + device.machine_photo}}"
                                          class="img-fluid mx-auto d-block device-image" style="max-width:200px;">
                                 </a>
 
                                 <div class="card-body">
-                                    <a class="nounderline text-white" href="/device/{{device.id}}">
+                                    <a class="nounderline text-white" routerLink="/device/{{device.id}}">
 
                                         <h5 class="card-title">
                                             <span>{{device.name}} &#9679; {{device.industry_type.name}}</span>

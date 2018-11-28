@@ -1,7 +1,85 @@
 <div class="container-fluid">
 
     <div class="row mt-4">
-        <div class="col-4 text-white">
+       
+        <div class="col-md-8">
+            <div class="text-white" style="background: #292e3f;">
+                <div class="row py-4">
+
+                    <div class="col-md-4">
+                        <div class="col-12">
+                            <img class="machine-photo w-100" src="{{API_URL + device_data?.machine_photo}}">
+                        </div>
+                        <div class="col-12 pt-2 text-center">
+                            <h5>Device: {{device_data?.name}}</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="col-12">
+                             <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
+                            </ui-switch>
+                       
+                            <p>
+                                <b>Serial No: </b> {{device_data?.serial_number}} <i class="fa fa-edit ml-5"  routerLink="/device/{{device_data?.id}}/edit" ></i>
+                            </p>
+                        
+                            <p> 
+                                <b>Location: </b> {{device_data?.location_of_device}}
+                                <i class="fa fa-clipboard ml-5 d-inline-block btn pb-2"  (click)="copyDeviceInfo()"></i>
+                            </p>
+                            <p>
+                                <b>Address: </b> {{device_data?.address}}
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row py-2">
+                    <div class="col-12">
+                        <div class="px-3">
+                         <agm-map [latitude]="lat" [longitude]="lng">
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                        </agm-map>
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-2">
+                    <div class="col-12">
+                        <div class="px-3">
+                        <span><b>Location Hours: </b></span>
+                        <table class="table mt-2">
+                            <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Status</th>
+                                
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let info of device_data?.location_hours">
+                                <td>{{days[info.day_id]}}</td>
+                                <td>{{info.from_time}}</td>
+                                <td>{{info.to_time}}</td>
+                                <td><i class="fa " [class.fa-toggle-off]="!info.is_on" [class.fa-toggle-on]="info.is_on"></i></td>
+                            </tr>
+                            <tr>
+                                <td scope="row"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 text-white">
             <div class="panel">
                 <div class="row ">
                     <div class="col-12 pb-2">
@@ -12,14 +90,13 @@
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-12 pb-3" *ngFor="let count of counter">
                         <div class="video-list">
                             <a (click)="playThisVideo(count)" style="cursor: pointer;">
                                 <div class="row">
                                     <div class="col-3">
                                         <img src="https://www.w3schools.com/html/pic_trulli.jpg" width="100%"
-                                             height="100%">
+                                            height="100%">
                                     </div>
 
                                     <div class="col-8">
@@ -34,28 +111,30 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
-        <div class="col-8">
-            <div class="panel">
+            <!-- <div class="panel">
                 <div class="card text-white text-center">
                     <img class="card-img-top" src="holder.js/100px180/" alt="">
                     <div class="card-body">
                         <ui-switch [(ngModel)]="enable" (click)="onClickMe()">
-                          </ui-switch>
-                        <h4 class="card-title">Device : {{device_data['data']['name']}}</h4>
-                        <div class="card-text mb-2">
-                            Serial No: {{device_data['data']['serial_number']}}<br>
-                            Address: {{device_data['data']['address']}}
-                            <div class="mx-3 d-inline" (click)="copyDeviceInfo()">
-                                <i class="fa fa-clipboard"></i>
-                            </div>
+                        </ui-switch>
+                       
+                        <div class="d-inline-block mx-3 px-3" routerLink="/device/{{device_data?.id}}/edit" style="cursor: pointer;">
+                            <i class="fa fa-edit"> Edit</i>
                         </div>
 
-                        <!-- this creates a google map on the page with the given lat/lng from -->
-                        <!-- the component as the initial center of the map: -->
+                        <h4 class="card-title">Device : {{device_data?.name}}</h4> 
+
+                        <div class="card-text mb-2">
+                            Serial No: {{device_data?.serial_number}}<br>
+                            Location: {{device_data?.location_of_device}}
+                            <div class="pl-3 d-inline-block" (click)="copyDeviceInfo()">
+                                <i class="fa fa-clipboard"></i>
+                            </div><br>
+                            Address: {{device_data?.address}}
+                        </div>
+
                         <agm-map [latitude]="lat" [longitude]="lng">
                             <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
                         </agm-map>
@@ -66,16 +145,20 @@
                                 <th>Day</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
+                                <th>Status</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let info of device_data['data']['location_hours']">
-                                <td>{{info.day_id}}</td>
+                            <tr *ngFor="let info of device_data?.location_hours">
+                                <td>{{days[info.day_id]}}</td>
                                 <td>{{info.from_time}}</td>
                                 <td>{{info.to_time}}</td>
+                                <td><i class="fa " [class.fa-toggle-off]="!info.is_on" [class.fa-toggle-on]="info.is_on"></i></td>
                             </tr>
                             <tr>
                                 <td scope="row"></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -86,7 +169,6 @@
                 </div>
 
             </div>
-        </div>
-    </div>
+        </div> -->
 </div>
 

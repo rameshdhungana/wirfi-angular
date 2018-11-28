@@ -5,12 +5,13 @@ import {PresetFilter} from '../../_models/preset-filter';
 import {BehaviorSubject, Subject} from 'rxjs/Rx';
 import {PresetFilterComponent} from '../../preset-filter/preset-filter.component';
 import {DeletePresetComponent} from '../../delete-preset/delete-preset.component';
-import {environment} from '../../../environments/environment.prod';
+import {environment} from '../../../environments/environment';
 import {DeviceService} from '../../_services/device.service';
 import {SleepDeviceComponent} from '../sleep-device/sleep-device.component';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddNetworkSettingComponent} from "../network-setting/add-network-setting/add-network-setting.component";
 import {DeleteNetworkSettingComponent} from "../network-setting/delete-network-setting/delete-network-setting.component";
+
 
 enum sortParams {
     Clear,
@@ -36,7 +37,7 @@ enum filterParams {
 
 export class DeviceListComponent implements OnInit {
     public allDeviceList: any;
-    public API_URl: any;
+    public API_URL = environment.API_URL;
     public deviceList = new BehaviorSubject<Array<any>>([]);
     // public deviceList = new Subject<Array<any>>();
     public presetFilterValue = new BehaviorSubject(new PresetFilter());
@@ -51,7 +52,6 @@ export class DeviceListComponent implements OnInit {
 
     constructor(private deviceService: DeviceService,
                 private dialogService: MaterialDialogService) {
-        this.API_URl = environment.API_URL;
         this.sortParams = sortParams;
         this.filterParams = filterParams;
     }

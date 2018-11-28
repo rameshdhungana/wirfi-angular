@@ -1,31 +1,36 @@
 import { Component, Injectable, OnInit, ElementRef, ViewChild, NgZone, Inject } from '@angular/core';
 import { NgForm, FormControl } from '@angular/forms';
-import { IndustryService } from '../../_services/industry-type.service';
-import { FranchiseTypeService } from '../../_services/franchise-type.service';
+import { Router } from '@angular/router';
+import { DeviceService } from '../../_services/device.service';
 import { MessageService } from '../../_services/message.service';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { NgbTimeStruct, NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { IndustryService } from '../../_services/industry-type.service';
+import { FranchiseTypeService } from '../../_services/franchise-type.service';
 import { MaterialDialogService } from '../../_services/material-dialog.service';
 import { AddIndustryTypeComponent } from '../../industry-list/add-industry-type/add-industry-type.component';
 import { MouseEvent } from '@agm/core';
-import {DeviceService} from '../../_services/device.service';
-import { MatDialogRef, MatDialog } from '@angular/material';
+
 /**
  * Example of a String Time adapter
  */
 @Injectable()
 export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   fromModel(value: string): NgbTimeStruct {
-    if (!value) {
-      return null;
-    }
-    const split = value.split(':');
+    // if (!value) {
+    //   return null;
+    // }
+    // const split = value.split(':');
+    // return {
+    //   hour: parseInt(split[0], 10),
+    //   minute: parseInt(split[1], 10),
+    //   second: parseInt(split[2], 10)
+    // };
     return {
-      hour: parseInt(split[0], 10),
-      minute: parseInt(split[1], 10),
-      second: parseInt(split[2], 10)
+      hour: 0,
+      minute: 0,
+      second: 0
     };
   }
 
@@ -39,18 +44,17 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   private pad(i: number): string {
     return i < 10 ? `0${i}` : `${i}`;
   }
-
 }
 
 @Component({
-  selector: 'app-device-info',
-  templateUrl: './device-info.component.html',
-  styleUrls: ['./device-info.component.css'],
+  selector: 'app-device-add',
+  templateUrl: './device-add.component.html',
+  styleUrls: ['./device-add.component.css'],
 
   providers: [{provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter}]
 })
 
-export class DeviceInfoComponent  implements OnInit {
+export class DeviceAddComponent  implements OnInit {
   public latitude: number;
   public longitude: number;
   public searchControl: FormControl;
@@ -73,7 +77,7 @@ export class DeviceInfoComponent  implements OnInit {
   public device_id: any;
   seconds = false;
   private address: any;
-  // time: '13:30:00';
+
   constructor(
       private dialogService: MaterialDialogService,
       private deviceservice: DeviceService,
@@ -86,7 +90,7 @@ export class DeviceInfoComponent  implements OnInit {
   ) { }
 
   ngOnInit() {
-      // set google maps defaults
+    // set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
@@ -235,7 +239,8 @@ export class DeviceInfoComponent  implements OnInit {
       'serial_number': '',
       'latitude': this.latitude ? this.latitude : 0.000,
       'longitude': this.longitude ? this.longitude : 0.000,
-      'address': this.address ? this.address : 'IW Naxal, Ananda Bhairab Marga',
+      'location_of_device': '',
+      'address': this.address ? this.address : 'Ananda Bhairab Marga, Naxal',
       'industry_type_id': '',
       'location_type_id': ''
     };
@@ -284,6 +289,7 @@ export class DeviceInfoComponent  implements OnInit {
 
         this.json['name'] = data.value['device_name'];
         this.json['serial_number'] = data.value['serial_number'];
+        this.json['location_of_device'] = data.value['location_of_device'];
 
         if (data.value['industry_type']) {
             this.json['industry_type_id'] = data.value['industry_type'];
@@ -300,9 +306,9 @@ export class DeviceInfoComponent  implements OnInit {
               this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
                 res => {
                   this.messageservice.add(response['message']);
-                  this.router.navigateByUrl(`device/` + this.device_id);
+                  this.router.navigateByUrl(`devices`);
               });
-           },
+            },
         (error) => {
             this.messageservice.add(error.error.message);
         });

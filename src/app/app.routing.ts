@@ -18,7 +18,7 @@ import {BusinessComponent} from './business/business.component';
 import {BusinessListComponent} from './business-list/business-list.component';
 import {ProfileComponent} from './profile/profile.component';
 import {ProfileFormComponent} from './profile-form/profile-form.component';
-import {DeviceInfoComponent} from './devices/device-info/device-info.component';
+import {DeviceAddComponent} from './devices/device-add/device-add.component';
 import {AddIndustryTypeComponent} from './industry-list/add-industry-type/add-industry-type.component';
 import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
@@ -26,6 +26,7 @@ import {NotificationComponent} from "./notification/notification.component";
 import {FranchiseTypeListComponent} from "./franchise/franchise-type-list/franchise-type-list.component";
 import {AddNetworkSettingComponent} from "./devices/network-setting/add-network-setting/add-network-setting.component";
 import {AddPingServerAddressComponent} from "./devices/network-setting/add-ping-server-address/add-ping-server-address.component";
+import { DeviceUpdateComponent } from './devices/device-update/device-update.component';
 
 
 const routes: Routes = [
@@ -36,17 +37,17 @@ const routes: Routes = [
     {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
     {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
     {path: 'devices', component: DeviceListComponent},
-    {path: 'device', component: DevicesComponent, canActivate: [AuthGuard]},
+    // {path: 'device', component: DevicesComponent, canActivate: [AuthGuard]},
     {path: 'device/:id', component: DeviceDetailComponent, canActivate: [AuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'reset/:uid/:token', component: ResetPasswordComponent},
     {path: 'change-password', component: ChangepasswordComponent, canActivate: [AuthGuard]},
     {path: 'business', component: BusinessComponent, canActivate: [AuthGuard]},
     {path: 'list', component: BusinessListComponent, canActivate: [AuthGuard]},
-    {path: 'device-info', component: DeviceInfoComponent, canActivate: [AuthGuard]},
+    {path: 'device-add', component: DeviceAddComponent, canActivate: [AuthGuard]},
     {path: 'billing', component: BillingComponent, canActivate: [AuthGuard]},
     {path: 'me', component: SidebarComponent, canActivate: [AuthGuard]},
-    // {path: 'device/:id/update', component: DeviceUpdateComponent},
+    {path: 'device/:id/edit', component: DeviceUpdateComponent},
     {path: 'device/:id/setup', component: DeviceNetworkComponent},
     {path: 'account_confirm_email/:key', component: VerifyEmailComponent},
     {path: 'industry', component: AddIndustryTypeComponent},

@@ -35,5 +35,4 @@ export class ConnectToHiddenNetworkComponent implements OnInit {
             }
         }
     }
-
 }

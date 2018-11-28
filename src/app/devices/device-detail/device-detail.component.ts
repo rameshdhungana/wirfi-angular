@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Route, Router, ActivatedRoute} from '@angular/router';
 import { MessageService } from '../../_services/message.service';
 import {DeviceService} from '../../_services/device.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
     selector: 'app-device-detail',
@@ -15,16 +16,28 @@ export class DeviceDetailComponent implements OnInit {
     lng: number;
     enable: boolean;
     loading = false;
+    days = {
+        1: 'Sunday',
+        2: 'Monday',
+        3: 'Tuesday',
+        4: 'Wednesday',
+        5: 'Thursday',
+        6: 'Friday',
+        7: 'Saturday'
+    };
+    API_URL = environment.API_URL;
 
     manualUpdate = false;
     counter: any;
     test_video_source: any;
     videoToPlay: any = [];
 
-    constructor(private deviceService: DeviceService,
-                private router: Router,
-                private route: ActivatedRoute,
-                private messageService: MessageService) { }
+    constructor(
+        private deviceService: DeviceService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private messageService: MessageService
+    ) { }
 
     ngOnInit() {
         this.device_id = this.route.snapshot.paramMap.get('id');
@@ -39,12 +52,14 @@ export class DeviceDetailComponent implements OnInit {
         this.videoToPlay = this.test_video_source[0];
 
 
-        this.deviceService.getDevice(this.device_id).subscribe(response => {
-            this.device_data = response;
-            this.lat = response['data']['latitude'];
-            this.lng = response['data']['longitude'];
-            this.enable = response['data']['priority'];
-        this.loading = true;
+        this.deviceService.getDevice(this.device_id).subscribe(
+            response => {
+                console.log(response['data']);
+                this.device_data = response['data'];
+                this.lat = response['data']['latitude'];
+                this.lng = response['data']['longitude'];
+                this.enable = response['data']['priority'];
+                this.loading = true;
         });
     }
 
@@ -59,11 +74,12 @@ export class DeviceDetailComponent implements OnInit {
 
     copyDeviceInfo() {
         const googleLink = 'https://maps.google.com/?q=' + this.lat.toString() + ',' + this.lng.toString();
-        const address = this.device_data['data']['address'];
-        const copyText = 'Location of device: ' + address + '\nGoogle map link: ' + googleLink;
+        const location_of_device = this.device_data['location_of_device'];
+        const address = this.device_data['address'];
+        const copyText = 'Location of device: ' + location_of_device + '\nDevice address: ' + address + '\nGoogle map link: ' + googleLink;
 
         // copy to clipboard
-        let clipboard = document.createElement('textarea');
+        const clipboard = document.createElement('textarea');
         clipboard.style.position = 'fixed';
         clipboard.style.left = '0';
         clipboard.style.top = '0';
@@ -73,6 +89,7 @@ export class DeviceDetailComponent implements OnInit {
         clipboard.focus();
         clipboard.select();
         document.execCommand('copy');
+        this.messageService.add('Copied device\'s location info to clipboard.');
         document.body.removeChild(clipboard);
     }
 

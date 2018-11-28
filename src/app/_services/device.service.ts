@@ -39,8 +39,8 @@ export class DeviceService {
         return this.http.post(`device/${id}/images/`, data);
     }
 
-    updateDeviceDetail(device, id) {
-        return this.http.put(`device/${id}/`, device.getRawValue);
+    updateDeviceDetail(data, id) {
+        return this.http.put(`device/${id}/`, data);
     }
 
     postDeviceDetail(data, id) {
