@@ -152,13 +152,13 @@
                         <div class="col-md-4">
                             <label for=""></label>
                             <ngb-timepicker name="sun_time_start" [seconds]="seconds" #sun_time_start="ngModel"
-                                            [ngModel]="{'hour': 0, 'minute': 0}" ></ngb-timepicker>
+                                            ngModel ></ngb-timepicker>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="sun_time_end" validateTime="sun_time_start" [seconds]="seconds"
-                                                required #sun_time_end="ngModel" [ngModel]="{'hour': 0, 'minute': 0}"></ngb-timepicker>
+                                                required #sun_time_end="ngModel" ngModel></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
                                     <small *ngIf="sun_time_end.hasError('validateTime')">
                                         start time is greater than end time
@@ -177,7 +177,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="mon_time_start" [seconds]="seconds" #mon_time_start="ngModel"
-                                                 [ngModel]="{'hour': 0, 'minute': 0}"> </ngb-timepicker>
+                                                 ngModel> </ngb-timepicker>
 
                             </div>
                         </div>
@@ -185,7 +185,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="mon_time_end" validateTime="mon_time_start" [seconds]="seconds"
-                                                 [ngModel]="{'hour': 0, 'minute': 0}" #monTimeEnd="ngModel"></ngb-timepicker>
+                                                 ngModel #monTimeEnd="ngModel"></ngb-timepicker>
 
                             </div>
                             <div class="invisible-text text-right text-white">
@@ -205,7 +205,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
-                                <ngb-timepicker name="tue_time_start" [seconds]="seconds"  [ngModel]="{'hour': 0, 'minute': 0}"
+                                <ngb-timepicker name="tue_time_start" [seconds]="seconds"  ngModel
                                                 #tue_time_start="ngModel"></ngb-timepicker>
 
                             </div>
@@ -215,7 +215,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="tue_time_end" validateTime="tue_time_start" [seconds]="seconds"
-                                                 [ngModel]="{'hour': 0, 'minute': 0}" #tue_time_end="ngModel"></ngb-timepicker>
+                                                 ngModel #tue_time_end="ngModel"></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="tue_time_end.hasError('validateTime')">
@@ -235,7 +235,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="wed_time_start" [seconds]="seconds" #wed_time_start="ngModel"
-                                                 [ngModel]="{'hour': 0, 'minute': 0}"></ngb-timepicker>
+                                                 ngModel></ngb-timepicker>
 
                             </div>
                         </div>
@@ -243,7 +243,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="wed_time_end" validateTime="wed_time_start" [seconds]="seconds"
-                                                #wed_time_end="ngModel" [ngModel]="{'hour': 0, 'minute': 0}"></ngb-timepicker>
+                                                #wed_time_end="ngModel" ngModel></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="wed_time_end.hasError('validateTime')">
@@ -263,7 +263,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="thu_time_start" [seconds]="seconds" #thu_time_start="ngModel"
-                                                 [ngModel]="{'hour': 0, 'minute': 0}"></ngb-timepicker>
+                                                 ngModel></ngb-timepicker>
 
                             </div>
                         </div>
@@ -271,7 +271,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="thu_time_end" validateTime="thu_time_start" [seconds]="seconds"
-                                                #thu_time_end="ngModel" [ngModel]="{'hour': 0, 'minute': 0}"></ngb-timepicker>
+                                                #thu_time_end="ngModel" ngModel></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="thu_time_end.hasError('validateTime')">
@@ -291,7 +291,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
-                                <ngb-timepicker name="fri_time_start" [seconds]="seconds" [ngModel]="{'hour': 0, 'minute': 0}"
+                                <ngb-timepicker name="fri_time_start" [seconds]="seconds" ngModel
                                                 #fri_time_start="ngModel"></ngb-timepicker>
 
                             </div>
@@ -300,7 +300,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="fri_time_end" validateTime="fri_time_start" [seconds]="seconds"
-                                                 [ngModel]="{'hour': 0, 'minute': 0}" #fri_time_end="ngModel"></ngb-timepicker>
+                                                 ngModel #fri_time_end="ngModel"></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
 
                                     <small *ngIf="fri_time_end.hasError('validateTime')">
@@ -319,7 +319,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for=""></label>
-                                <ngb-timepicker name="sat_time_start" [seconds]="seconds" [ngModel]="{'hour': 0, 'minute': 0}"
+                                <ngb-timepicker name="sat_time_start" [seconds]="seconds" ngModel
                                                 #sat_time_start="ngModel"></ngb-timepicker>
                             </div>
                         </div>
@@ -327,7 +327,7 @@
                             <div class="form-group">
                                 <label for=""></label>
                                 <ngb-timepicker name="sat_time_end" validateTime="sat_time_start" [seconds]="seconds"
-                                                 [ngModel]="{'hour': 0, 'minute': 0}" #sat_time_end="ngModel"></ngb-timepicker>
+                                                 ngModel #sat_time_end="ngModel"></ngb-timepicker>
                                 <div class="invisible-text text-right text-white">
                                     <small *ngIf="sat_time_end.hasError('validateTime')">
                                         start time is greater than end time

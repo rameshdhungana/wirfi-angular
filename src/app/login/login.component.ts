@@ -41,9 +41,12 @@ export class LoginComponent implements OnInit {
             this.authService.login(data.value)
                 .subscribe(
                     (response) => {
-                        if (response['code'] === 1) {
-                            localStorage.setItem('token', response['data']['auth_token']);
-                            this.authService.isLoggedInObs();
+                        localStorage.setItem('token', response['data']['auth_token']);
+                        this.authService.isLoggedInObs();
+                        if (response['data']['is_superuser']) {
+                            this.router.navigate(['admin-dashboard']);
+
+                        } else {
                             if (response['data']['is_first_login'] === true) {
                                 localStorage.setItem('first_login', 'true');
                                 this.messageService.add('Please add your business info');

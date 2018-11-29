@@ -18,20 +18,20 @@ import { MouseEvent } from '@agm/core';
 @Injectable()
 export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
   fromModel(value: string): NgbTimeStruct {
-    // if (!value) {
-    //   return null;
-    // }
-    // const split = value.split(':');
-    // return {
-    //   hour: parseInt(split[0], 10),
-    //   minute: parseInt(split[1], 10),
-    //   second: parseInt(split[2], 10)
-    // };
+    if (!value) {
+      return null;
+    }
+    const split = value.split(':');
     return {
-      hour: 0,
-      minute: 0,
-      second: 0
+      hour: parseInt(split[0], 10),
+      minute: parseInt(split[1], 10),
+      second: parseInt(split[2], 10)
     };
+    // return {
+    //   hour: 0,
+    //   minute: 0,
+    //   second: 0
+    // };
   }
 
   toModel(time: NgbTimeStruct): string {
