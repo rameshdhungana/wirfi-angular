@@ -17,22 +17,39 @@
         <div class="row">
             <div class="col">
                 <ul class="nav flex-column">
-                    <li class="nav-item " [routerLink]="['dashboard']" [routerLinkActive]="'active'">
+
+                    <li class="nav-item" *ngIf="logged_in_user?.is_superuser" [routerLink]="['admin-dashboard']" [routerLinkActive]="'active'">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span class="nav-item-text"> Dashboard</span>
+                    </li>
+                    
+                    <li class="nav-item " *ngIf="!logged_in_user?.is_superuser"  [routerLink]="['dashboard']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span class="nav-item-text"> Dashboard</span>
                     </li>
 
-                    <li class="nav-item " [routerLink]="['industry-list']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="logged_in_user?.is_superuser" [routerLink]="['users-list']" [routerLinkActive]="'active'">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span class="nav-item-text"> Users</span>
+                    </li>
+
+                    <li class="nav-item" *ngIf="logged_in_user?.is_superuser " [routerLink]="['admin-activity-log']" [routerLinkActive]="'active'">
+                        <i class="fas fa-fw fa-history"></i>
+                        <span class="nav-item-text"> Admin Activity Log</span>
+                    </li>
+
+
+                    <li class="nav-item "  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['industry-list']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-industry"></i>
                         <span class="nav-item-text"> Industry Types</span>
                     </li>
 
-                    <li class="nav-item " [routerLink]="['franchise-list']" [routerLinkActive]="'active'">
+                    <li class="nav-item "  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['franchise-list']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-code-branch"></i>
                         <span class="nav-item-text"> Location Types</span>
                     </li>
 
-                    <li class="nav-item " [routerLink]="['devices']" [routerLinkActive]="'active'">
+                    <li class="nav-item "  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['devices']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-mobile"></i>
                         <span class="nav-item-text"> Devices</span>
                     </li>
@@ -42,18 +59,17 @@
                         <span class="nav-item-text">Network settings</span>
                     </li> -->
 
+                    <li class="nav-item" [routerLink]="['profile']" routerLinkActive="active">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span class="nav-item-text"> Profile</span>
+                    </li>
 
-                    <li class="nav-item" [routerLink]="['billing']" routerLinkActive="active">
+                    <li class="nav-item"  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['billing']" routerLinkActive="active">
                         <i class="fas fa-fw fa-money-bill-alt"></i>
                         <span class="nav-item-text"> Billing</span>
                     </li>
 
-                    <li class="nav-item" [routerLink]="['profile']" routerLinkActive="active">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span class="nav-item-text"> Profile</span>
-                    </li>
-
-                    <li class="nav-item" [routerLink]="['business']" [routerLinkActive]="'active'">
+                    <li class="nav-item"  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['business']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-building"></i>
                         <span class="nav-item-text"> Business Info</span>
                     </li>
