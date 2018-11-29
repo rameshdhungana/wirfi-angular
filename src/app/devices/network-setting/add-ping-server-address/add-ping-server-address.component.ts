@@ -1,15 +1,16 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DeviceService} from "../../_services/device.service";
+import {DeviceService} from "../../../_services/device.service";
 import {NgForm} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material";
-import {MaterialDialogService} from "../../_services/material-dialog.service";
+import {MaterialDialogService} from "../../../_services/material-dialog.service";
 
 @Component({
-    selector: 'app-add-network-setting',
-    templateUrl: './add-network-setting.component.html',
-    styleUrls: ['./add-network-setting.component.css']
+    selector: 'app-add-ping-server-address',
+    templateUrl: './add-ping-server-address.component.html',
+    styleUrls: ['./add-ping-server-address.component.css']
 })
-export class AddNetworkSettingComponent implements OnInit {
+export class AddPingServerAddressComponent implements OnInit {
+
     oldPasswordNotCorrect = false;
     oldPassword: string;
     newPassword: string;
@@ -22,7 +23,7 @@ export class AddNetworkSettingComponent implements OnInit {
     ngOnInit() {
     }
 
-    addNetworkSetting(id, primary_network, data: NgForm) {
+    addPingServerAddress(id, primary_network, data: NgForm) {
 
         if (data.valid) {
             const postData = {
@@ -41,7 +42,7 @@ export class AddNetworkSettingComponent implements OnInit {
         }
     }
 
-    updateNetworkSetting(device_id, primary_network, network_id, data: NgForm) {
+    updatePingServerAddress(device_id, primary_network, network_id, data: NgForm) {
 
         if (data.valid) {
             const postData = {

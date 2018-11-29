@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {DeviceService} from '../_services/device.service';
+import {DeviceService} from '../../../_services/device.service';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material';
 
