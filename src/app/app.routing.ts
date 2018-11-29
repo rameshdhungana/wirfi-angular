@@ -22,11 +22,14 @@ import {DeviceAddComponent} from './devices/device-add/device-add.component';
 import {AddIndustryTypeComponent} from './industry-list/add-industry-type/add-industry-type.component';
 import {MuteDeviceComponent} from './mute-device/mute-device.component';
 import {IndustryListComponent} from './industry-list/industry-list.component';
-import {NotificationComponent} from "./notification/notification.component";
-import {FranchiseTypeListComponent} from "./franchise/franchise-type-list/franchise-type-list.component";
-import {AddNetworkSettingComponent} from "./devices/network-setting/add-network-setting/add-network-setting.component";
-import {AddPingServerAddressComponent} from "./devices/network-setting/add-ping-server-address/add-ping-server-address.component";
+import {NotificationComponent} from './notification/notification.component';
+import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franchise-type-list.component';
+import {AddNetworkSettingComponent} from './devices/network-setting/add-network-setting/add-network-setting.component';
+import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
 import { DeviceUpdateComponent } from './devices/device-update/device-update.component';
+import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 
 const routes: Routes = [
@@ -56,6 +59,9 @@ const routes: Routes = [
     {path: 'notifications', component: NotificationComponent},
     {path: 'franchise-list', component: FranchiseTypeListComponent},
     {path: 'network-setting', component: AddNetworkSettingComponent},
+    {path: 'admin-dashboard', component: SuperadminDashboardComponent},
+    {path: 'admin-activity-log', component: AdminActivityLogComponent},
+    {path: 'users-list', component: UsersListComponent}
 
 ];
 

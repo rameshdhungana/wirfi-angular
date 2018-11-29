@@ -63,7 +63,10 @@ import {NgxMaskModule} from 'ngx-mask';
 import {SleepDeviceComponent} from './devices/sleep-device/sleep-device.component';
 import {ConnectToHiddenNetworkComponent} from './devices/network-setting/connect-to-hidden-network/connect-to-hidden-network.component';
 import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-network-setting/delete-network-setting.component';
-import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component'
+import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
+import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
+import { UsersListComponent } from './users-list/users-list.component'
 
 @NgModule({
     declarations: [
@@ -109,6 +112,9 @@ import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-
         ConnectToHiddenNetworkComponent,
         DeleteNetworkSettingComponent,
         AddPingServerAddressComponent,
+        SuperadminDashboardComponent,
+        AdminActivityLogComponent,
+        UsersListComponent,
     ],
     imports: [
         BrowserModule,
