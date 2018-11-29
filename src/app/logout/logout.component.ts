@@ -16,11 +16,13 @@ export class LogoutComponent implements OnInit {
     this.auth.logout().subscribe(
       (response) => {
         localStorage.removeItem('token');
+        localStorage.removeItem('first_login');
         this.auth.isLoggedInObs();
         this.router.navigate(['login']);
       },
       (error) => {
         if (localStorage.getItem('token')) {
+          localStorage.removeItem('first_login');
           localStorage.removeItem('token');
         }
         this.auth.isLoggedInObs();
