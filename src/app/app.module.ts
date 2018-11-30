@@ -66,7 +66,8 @@ import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-ne
 import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
 import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
-import { UsersListComponent } from './users-list/users-list.component'
+import { UsersListComponent } from './users-list/users-list.component';
+import { SlashUrlComponent } from './slash-url/slash-url.component'
 
 @NgModule({
     declarations: [
@@ -115,6 +116,7 @@ import { UsersListComponent } from './users-list/users-list.component'
         SuperadminDashboardComponent,
         AdminActivityLogComponent,
         UsersListComponent,
+        SlashUrlComponent,
     ],
     imports: [
         BrowserModule,

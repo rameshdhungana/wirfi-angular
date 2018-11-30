@@ -30,10 +30,11 @@ import { DeviceUpdateComponent } from './devices/device-update/device-update.com
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
 import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
 import { UsersListComponent } from './users-list/users-list.component';
+import { SlashUrlComponent } from './slash-url/slash-url.component';
 
 
 const routes: Routes = [
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    {path: '', component: SlashUrlComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent, canActivate: [PreventLoggedInAccess]},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'profile-update', component: ProfileFormComponent, canActivate: [AuthGuard]},
