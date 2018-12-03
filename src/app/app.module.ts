@@ -67,7 +67,8 @@ import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
 import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
 import { UsersListComponent } from './users-list/users-list.component';
-import { SlashUrlComponent } from './slash-url/slash-url.component'
+import { SlashUrlComponent } from './slash-url/slash-url.component';
+import { UserCreateComponent } from './user-create/user-create.component'
 
 @NgModule({
     declarations: [
@@ -117,6 +118,7 @@ import { SlashUrlComponent } from './slash-url/slash-url.component'
         AdminActivityLogComponent,
         UsersListComponent,
         SlashUrlComponent,
+        UserCreateComponent,
     ],
     imports: [
         BrowserModule,

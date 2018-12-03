@@ -25,8 +25,8 @@ export class ProfileComponent implements OnInit {
         });
         this.businessService.getBusiness().subscribe(businessResp => {
             this.businessInfo = businessResp['data']['business_info'];
-            console.log(this.businessInfo,'this is business respones')
-        })
+            console.log(this.businessInfo, 'this is business respones');
+        });
 
     }
 

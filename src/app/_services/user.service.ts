@@ -14,4 +14,12 @@ export class UserService {
     uploadProfile(profile, id) {
         return this.http.post(`user/${id}/image/`, profile);
     }
+
+    listUser() {
+        return this.http.get(`users/`);
+    }
+
+    createUser(data) {
+        return this.http.post(`users/`, data);
+    }
 }

@@ -31,6 +31,7 @@ import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-
 import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { SlashUrlComponent } from './slash-url/slash-url.component';
+import { UserCreateComponent } from './user-create/user-create.component';
 
 
 const routes: Routes = [
@@ -62,7 +63,8 @@ const routes: Routes = [
     {path: 'network-setting', component: AddNetworkSettingComponent},
     {path: 'admin-dashboard', component: SuperadminDashboardComponent},
     {path: 'admin-activity-log', component: AdminActivityLogComponent},
-    {path: 'users-list', component: UsersListComponent}
+    {path: 'users-list', component: UsersListComponent},
+    {path: 'users-create', component: UserCreateComponent}
 
 ];
 

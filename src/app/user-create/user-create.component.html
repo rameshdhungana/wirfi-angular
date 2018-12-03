@@ -1,0 +1,65 @@
+<div class="m-5 text-white">
+    <div class=" d-flex  justify-content-center">
+        <div class="w-50 mt-5">
+            <h2 class="text-center text-white">
+                Add User
+            </h2>
+            <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+                <div class="form-group">
+                    <label class="text-white">Email</label>
+                    <input type="text" name="email" class="form-control" id="email"
+                           placeholder="Email" required  ngModel #email="ngModel">
+                    <div class="invisible-text text-right  text-danger">
+                        <small *ngIf="userForm.submitted && email.hasError('required')">
+                            This is required field.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="text-white">Password</label>
+                    <input type="password" name="password1" class="form-control" id="password_one"
+                           placeholder="Password" required
+                           pattern="^(?=.*?[A-Za-z])(?=.*?[0-9#?!@$%^&*-]).{8,}$" ngModel
+                           #password1="ngModel">
+                    <div class="invisible-text text-right  text-danger">
+                        <small *ngIf="userForm.submitted && password1.hasError('required')">
+                            This is required field.
+                        </small>
+                        <small *ngIf="password1.errors?.pattern">
+                            Password must be 8 characters long with at least 1 number or 1 special character.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="text-white">Password Again</label>
+                    <input type="password" name="password2" class="form-control" id="password_two"
+                           placeholder="Retype password" validateEqual="password1" required
+                           ngModel #password2="ngModel">
+                    <div class="invisible-text text-right text-danger">
+                        <small *ngIf="password2.hasError('validateEqual') && userForm.submitted ">
+                            Password didn't matched.
+                        </small>
+                        <small *ngIf="userForm.submitted && password2.hasError('required')">
+                            This is required field.
+                        </small>
+
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="text-white">User Type</label>
+                    <select id="is_staff" name="is_staff" class="form-control" ngModel #is_staff>
+                        <option value="" disabled selected>Select a User Type</option>
+                        <option *ngFor="let userType of userTypes" [value]="userType[1]">
+                            {{userType[0]}}
+                        </option>
+                    </select>
+                </div>
+
+                <a class="btn btn-danger float-left " [routerLink]="['/users-list']">Cancel</a>
+
+                <button type="submit" class="btn btn-light float-right ">Create User</button>
+            </form>
+        </div>
+    </div>
+</div>
