@@ -69,6 +69,8 @@ import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-l
 import { UsersListComponent } from './users-list/users-list.component';
 import { SlashUrlComponent } from './slash-url/slash-url.component';
 import { UserCreateComponent } from './user-create/user-create.component'
+import {AdminActivityLogService} from "./_services/admin-activity-log.service";
+import {DataTableModule} from "angular-6-datatable";
 
 @NgModule({
     declarations: [
@@ -133,6 +135,7 @@ import { UserCreateComponent } from './user-create/user-create.component'
         MatDialogModule,
         MatMenuModule,
         MatCheckboxModule,
+        DataTableModule,
         NgxMaskModule.forRoot(),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
@@ -152,6 +155,7 @@ import { UserCreateComponent } from './user-create/user-create.component'
         BillingService,
         CustomErrorService,
         IndustryService,
+        AdminActivityLogService,
 
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
