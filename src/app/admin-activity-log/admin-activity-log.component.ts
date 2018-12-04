@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../_services/user.service";
+import {AdminActivityLogService} from "../_services/admin-activity-log.service";
 
 @Component({
-  selector: 'app-admin-activity-log',
-  templateUrl: './admin-activity-log.component.html',
-  styleUrls: ['./admin-activity-log.component.css']
+    selector: 'app-admin-activity-log',
+    templateUrl: './admin-activity-log.component.html',
+    styleUrls: ['./admin-activity-log.component.css']
 })
 export class AdminActivityLogComponent implements OnInit {
 
-  constructor() { }
+    activityLogs: any;
+    next: string;
+    previous: string;
 
-  ngOnInit() {
-  }
+    constructor(private adminLogService: AdminActivityLogService) {
+    }
+
+    ngOnInit() {
+        this.adminLogService.getAdminActivityLogList().subscribe(response => {
+            console.log(response);
+            this.next = response['data']['next'];
+            this.previous = response['data']['previous'];
+            this.activityLogs = response['data']['results'];
+        });
+    }
 
 }
