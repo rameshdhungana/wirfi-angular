@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
-  userTypes = [['Admin', true], ['Standard User', false]];
+  userTypes = [['Administrator', true], ['Basic User', false]];
 
   constructor(
     private userService: UserService,
