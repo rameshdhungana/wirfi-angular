@@ -1,38 +1,51 @@
 <div class="m-5 text-white">
     <section class="leader-table">
-      <div class="row">
-        <div class="col-md-9">
-          <h2>WiRfi Users</h2>
+        <div class="row">
+            <div class="col-md-9">
+                <h2>WiRfi Users</h2>
+            </div>
+            <div class="col-md-3 text-right">
+                <a class="btn btn-primary" [routerLink]="['/users-create']" [routerLinkActive]="'active'">
+                    <span><i class="fa fa-plus"> Add Users</i> </span>
+                </a>
+            </div>
         </div>
-        <div class="col-md-3 text-right">
-          <a class="btn btn-primary" [routerLink]="['/users-create']"  [routerLinkActive]="'active'">
-            <span><i class="fa fa-plus"> Add Users</i> </span>
-          </a>
-        </div> 
-      </div>
 
-      <div class="row mt-2">
-        <div class="col-md-12 table-responsive">
-            <table  class="table" >
-                <thead>
+        <div class="row mt-2">
+            <div class="col-md-12 table-responsive">
+                <table class="table" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="3">
+                    <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">User Type</th>
+                        <th scope="col">
+                            <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
+                        </th>
+                        <th scope="col">
+                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                        </th>
+
+                        <th scope="col">
+                            <mfDefaultSorter by="is_superuser">User Type</mfDefaultSorter>
+                        </th>
+
                     </tr>
-                </thead>
-              <tbody>
-                  <tr *ngFor="let user of users; let i = index" [attr.data-index]="i">
-                      <th cellpadding="0" cellspacing="0">{{ i + 1 }}</th>
-                      <td>{{ user?.first_name }} {{ user?.last_name }}</td>
-                      <td>{{ user?.email }}</td>
-                      <td>{{ user?.is_superuser ? 'Super Admin' : user?.is_staff ? 'Admin' : 'Normal User' }}</td>
-                  </tr>
-                
-              </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let user of mf.data; let i = index" [attr.data-index]="i">
+                        <th cellpadding="0" cellspacing="0">{{ i + 1 }}</th>
+                        <td>{{ user?.first_name }} {{ user?.last_name }}</td>
+                        <td>{{ user?.email }}</td>
+                        <td>{{ user?.is_superuser ? 'Super Admin' : user?.is_staff ? 'Admin' : 'Normal User' }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="12" class="float-right">
+                            <mfBootstrapPaginator></mfBootstrapPaginator>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </div>
     </section>
 </div>
