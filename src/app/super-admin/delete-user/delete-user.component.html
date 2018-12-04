@@ -1,0 +1,21 @@
+<div class="row justify-content-center align-items-center">
+    <div class="col-12  text-white ">
+        <h5 class="text-center"> Are you sure you want to delete this User?</h5>
+    </div>
+    <div class="col-md-12 text-center text-white pb-2">
+
+        <div class="d-block pt-4">
+            <h6 class="pb-2"><b>Email:</b> {{data.email}} {{data.pk}}</h6>
+            <h6 *ngIf="data?.first_name && data?.first_name " class="pb-2"><b>Name:</b> {{ data?.first_name }} {{
+                data?.last_name }}</h6>
+            <h6 class="pb-2"><b>User Type :</b>
+                {{ data?.is_superuser ? 'Super Admin' : data?.is_staff ? 'Administrator' : 'Basic User'}}</h6>
+            <div class="pt-3">
+                <button (click)="deleteUser(data.pk)"
+                        type="submit" class=" p-2 btn btn-block btn-danger">Delete User
+                </button>
+                <button class="btn btn-block btn-light" mat-button mat-dialog-close>Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
