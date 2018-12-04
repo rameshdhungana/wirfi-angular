@@ -240,7 +240,7 @@ export class DeviceAddComponent  implements OnInit {
       'latitude': this.latitude ? this.latitude : 0.000,
       'longitude': this.longitude ? this.longitude : 0.000,
       'location_of_device': '',
-      'address': this.address ? this.address : 'Ananda Bhairab Marga, Naxal',
+      'address': this.address ? this.address : '',
       'industry_type_id': '',
       'location_type_id': ''
     };

@@ -11,6 +11,10 @@ export class UserService {
         return this.http.put(`user/${id}/`, user);
     }
 
+    deleteUser(id) {
+        return this.http.delete(`user/${id}/`);
+    }
+
     uploadProfile(profile, id) {
         return this.http.post(`user/${id}/image/`, profile);
     }
