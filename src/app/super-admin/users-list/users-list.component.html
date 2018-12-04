@@ -1,8 +1,13 @@
 <div class="m-5 text-white">
     <section class="leader-table">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-3">
                 <h2>WiRfi Users</h2>
+
+            </div>
+            <div class="col-md-6">
+                <input type="text" placeholder="Search" (keyup)="filterUsers($event.target.value)">
+
             </div>
             <div class="col-md-3 text-right">
                 <a class="btn btn-primary" [routerLink]="['/users-create']" [routerLinkActive]="'active'">
@@ -16,7 +21,9 @@
                 <table class="table" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="3">
                     <thead>
                     <tr>
-                        <th><mfDefaultSorter by="pk">#</mfDefaultSorter></th>
+                        <th>
+                            <mfDefaultSorter by="pk">#</mfDefaultSorter>
+                        </th>
                         <th>
                             <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
                         </th>
@@ -38,11 +45,13 @@
                         <td>{{ user?.first_name }} {{ user?.last_name }}</td>
                         <td>{{ user?.email }}</td>
                         <td>
-                          {{ user?.is_superuser ? 'Super Admin' : user?.is_staff ? 'Administrator' : 'Basic User' }}
+                            {{ user?.is_superuser ? 'Super Admin' : user?.is_staff ? 'Administrator' : 'Basic User' }}
                         </td>
                         <td>
-                          <a class="btn btn-success my-1 my-md-0" (click)="userDashboard(user.pk)"><i class="fa fa-eye"></i></a>
-                          <a class="btn btn-danger my-1 my-md-0 mx-md-2" (click)="deleteUser(user.pk)" ><i class="fa fa-trash"></i></a>
+                            <a class="btn btn-success my-1 my-md-0" (click)="userDashboard(user.pk)"><i
+                                    class="fa fa-eye"></i></a>
+                            <a class="btn btn-danger my-1 my-md-0 mx-md-2" (click)="deleteUserPopUp(user)"><i
+                                    class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     <tr>

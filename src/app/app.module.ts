@@ -65,12 +65,13 @@ import {ConnectToHiddenNetworkComponent} from './devices/network-setting/connect
 import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-network-setting/delete-network-setting.component';
 import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
-import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
-import { UsersListComponent } from './users-list/users-list.component';
+import { AdminActivityLogComponent } from './super-admin/admin-activity-log/admin-activity-log.component';
+import { UsersListComponent } from './super-admin/users-list/users-list.component';
 import { SlashUrlComponent } from './slash-url/slash-url.component';
-import { UserCreateComponent } from './user-create/user-create.component'
+import { UserCreateComponent } from './super-admin/user-create/user-create.component'
 import {AdminActivityLogService} from "./_services/admin-activity-log.service";
 import {DataTableModule} from "angular-6-datatable";
+import { DeleteUserComponent } from './super-admin/delete-user/delete-user.component';
 
 @NgModule({
     declarations: [
@@ -121,6 +122,7 @@ import {DataTableModule} from "angular-6-datatable";
         UsersListComponent,
         SlashUrlComponent,
         UserCreateComponent,
+        DeleteUserComponent,
     ],
     imports: [
         BrowserModule,
@@ -176,7 +178,8 @@ import {DataTableModule} from "angular-6-datatable";
         SleepDeviceComponent,
         DeleteNetworkSettingComponent,
         AddPingServerAddressComponent,
-        AddNetworkSettingComponent
+        AddNetworkSettingComponent,
+        DeleteUserComponent
 
 
     ]

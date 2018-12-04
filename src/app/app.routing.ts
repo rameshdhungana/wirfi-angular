@@ -28,10 +28,10 @@ import {AddNetworkSettingComponent} from './devices/network-setting/add-network-
 import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
 import { DeviceUpdateComponent } from './devices/device-update/device-update.component';
 import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
-import { AdminActivityLogComponent } from './admin-activity-log/admin-activity-log.component';
-import { UsersListComponent } from './users-list/users-list.component';
+import { AdminActivityLogComponent } from './super-admin/admin-activity-log/admin-activity-log.component';
+import { UsersListComponent } from './super-admin/users-list/users-list.component';
 import { SlashUrlComponent } from './slash-url/slash-url.component';
-import { UserCreateComponent } from './user-create/user-create.component';
+import { UserCreateComponent } from './super-admin/user-create/user-create.component';
 
 
 const routes: Routes = [

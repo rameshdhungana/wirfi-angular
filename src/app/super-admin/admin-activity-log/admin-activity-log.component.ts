@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../_services/user.service";
-import {AdminActivityLogService} from "../_services/admin-activity-log.service";
+import {UserService} from "../../_services/user.service";
+import {AdminActivityLogService} from "../../_services/admin-activity-log.service";
 
 @Component({
     selector: 'app-admin-activity-log',
