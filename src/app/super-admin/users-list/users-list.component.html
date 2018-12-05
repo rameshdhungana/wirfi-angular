@@ -2,11 +2,11 @@
     <section class="leader-table">
         <div class="row">
             <div class="col-md-3">
-                <h2>WiRfi Users</h2>
+                <h3><b>WiRfi Users</b></h3>
 
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Search" (keyup)="filterUsers($event.target.value)">
+                <input type="text" class="form-control form-control-lg" placeholder="Search" (keyup)="filterUsers($event.target.value)">
 
             </div>
             <div class="col-md-3 text-right">
@@ -16,15 +16,13 @@
             </div>
         </div>
 
-        <div class="row mt-2">
+        <div class="row mt-4">
             <div class="col-md-12 table-responsive">
-                <table class="table" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="5">
+                <table class="table" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="10">
 
                     <thead>
                     <tr>
-                        <th>
-                            <mfDefaultSorter by="pk">#</mfDefaultSorter>
-                        </th>
+                        <th>#</th>
                         <th>
                             <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
                         </th>
@@ -58,7 +56,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center text-primary">
+                        <td class="text-primary">
                             <mfBootstrapPaginator></mfBootstrapPaginator>
                         </td>
                     </tr>
