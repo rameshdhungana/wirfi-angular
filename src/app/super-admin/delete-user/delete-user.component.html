@@ -5,10 +5,11 @@
     <div class="col-md-12 text-center text-white pb-2">
 
         <div class="d-block pt-4">
-            <h6 class="pb-2"><b>Email:</b> {{data.email}} {{data.pk}}</h6>
-            <h6 *ngIf="data?.first_name && data?.first_name " class="pb-2"><b>Name:</b> {{ data?.first_name }} {{
-                data?.last_name }}</h6>
-            <h6 class="pb-2"><b>User Type :</b>
+            <h6 class="pb-2"><b>Email:</b> {{data.email}} </h6>
+            <h6 *ngIf="data?.first_name && data?.last_name " class="pb-2">
+                <b>Name:</b> {{ data?.first_name }} {{ data?.last_name }}
+            </h6>
+            <h6 class="pb-2"><b>User Type:</b>
                 {{ data?.is_superuser ? 'Super Admin' : data?.is_staff ? 'Administrator' : 'Basic User'}}</h6>
             <div class="pt-3">
                 <button (click)="deleteUser(data.pk)"

@@ -19,8 +19,8 @@ export class UserService {
         return this.http.post(`user/${id}/image/`, profile);
     }
 
-    listUser() {
-        return this.http.get(`users/`);
+    listUser(query_params) {
+        return this.http.get(`users/`, {params: query_params});
     }
 
     createUser(data) {
