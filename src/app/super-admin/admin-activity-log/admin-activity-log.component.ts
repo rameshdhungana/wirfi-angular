@@ -16,13 +16,23 @@ export class AdminActivityLogComponent implements OnInit {
     constructor(private adminLogService: AdminActivityLogService) {
     }
 
-    ngOnInit() {
-        this.adminLogService.getAdminActivityLogList().subscribe(response => {
+    getLogList(queryparams) {
+        this.adminLogService.getAdminActivityLogList(queryparams).subscribe(response => {
             console.log(response);
-            this.next = response['data']['next'];
-            this.previous = response['data']['previous'];
-            this.activityLogs = response['data']['results'];
+            // this.next = response['data']['next'];
+            // this.previous = response['data']['previous'];
+            this.activityLogs = response['data'];
         });
+
     }
 
+    ngOnInit() {
+        this.getLogList({});
+    }
+
+
+    filterLogs(search_string) {
+        this.getLogList({search: search_string})
+
+    }
 }
