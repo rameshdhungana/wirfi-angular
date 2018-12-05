@@ -7,7 +7,7 @@ export class AdminActivityLogService {
     constructor(private http: HttpClient) {
     }
 
-    getAdminActivityLogList() {
-        return this.http.get(`activity-log/`);
+    getAdminActivityLogList(queryparams) {
+        return this.http.get(`activity-log/`, {params: queryparams});
     }
 }
