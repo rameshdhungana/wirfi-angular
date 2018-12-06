@@ -29,6 +29,7 @@ export class UsersListComponent implements OnInit {
 
     getUser(params) {
         this.userService.listUser(params).subscribe(response => {
+
             this.users = response['data'];
         });
     }
@@ -73,5 +74,6 @@ export class UsersListComponent implements OnInit {
 
     filterUsers(search_string) {
         this.getUser({search: search_string});
+
     }
 }

@@ -27,7 +27,7 @@ import {FranchiseTypeListComponent} from './franchise/franchise-type-list/franch
 import {AddNetworkSettingComponent} from './devices/network-setting/add-network-setting/add-network-setting.component';
 import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
 import { DeviceUpdateComponent } from './devices/device-update/device-update.component';
-import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import { SuperadminDashboardComponent } from './super-admin/superadmin-dashboard/superadmin-dashboard.component';
 import { AdminActivityLogComponent } from './super-admin/admin-activity-log/admin-activity-log.component';
 import { UsersListComponent } from './super-admin/users-list/users-list.component';
 import { SlashUrlComponent } from './slash-url/slash-url.component';
