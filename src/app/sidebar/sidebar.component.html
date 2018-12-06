@@ -81,12 +81,18 @@
                     
                     <li class="nav-item" [routerLink]="['change-password']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-key"></i>
-                        <span class="nav-item-text"> Change Password</span>
+                        <span class="nav-item-text"> Change Password </span>
                     </li>
 
-                    <li class="nav-item" [routerLink]="['logout']">
-                        <i class="fas fa-fw fa-sign-out-alt"></i>
-                        <span class="nav-item-text"> Logout</span>
+                    <li class="nav-item">
+                        <div *ngIf="!is_impersonating" [routerLink]="['logout']">
+                            <i class="fas fa-fw fa-sign-out-alt"></i>
+                            <span class="nav-item-text"> Logout</span>
+                        </div>
+                        <div *ngIf="is_impersonating" (click)="endImpersonation()">
+                            <i class="fas fa-fw fa-eye-slash"></i>
+                            <span class="nav-item-text"> Back to Own Dashboard </span>
+                        </div>
                     </li>
                 </ul>
             </div>
