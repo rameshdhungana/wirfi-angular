@@ -48,11 +48,7 @@
                             {{ user?.is_superuser ? 'Super Admin' : user?.is_staff ? 'Administrator' : 'Basic User' }}
                         </td>
                         <td>
-<<<<<<< HEAD
                             <a class="btn btn-success my-1 my-md-0" (click)="impersonate(user.pk)">
-=======
-                            <a class="btn btn-success my-1 my-md-0">
->>>>>>> 81eb4319054abb5b1e54212c50a1216da060638d
                                 <i class="fa fa-eye"></i>
                             </a>
                             <a class="btn btn-danger my-1 my-md-0 mx-md-2" (click)="deleteUserPopUp(user)"><i
