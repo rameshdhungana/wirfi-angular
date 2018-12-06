@@ -18,6 +18,13 @@ export class JwtInterceptor implements HttpInterceptor {
                 }
             });
         }
+        if (localStorage.getItem('is_impersonating')) {
+            request = request.clone({
+                setHeaders: {
+                    Personator: `${localStorage.getItem('personator')}`
+                }
+            });
+        }
         return next.handle(request);
     }
 }
