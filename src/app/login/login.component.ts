@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     (response) => {
                         localStorage.setItem('token', response['data']['auth_token']);
+                        localStorage.setItem('is_impersonating', 'false');
                         this.authService.isLoggedInObs();
                         if (response['data']['is_superuser']) {
                             this.router.navigate(['admin-dashboard']);

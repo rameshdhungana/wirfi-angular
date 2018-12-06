@@ -7,6 +7,7 @@ import {BehaviorSubject, Subject} from 'rxjs';
 export class AuthenticationService {
     private loggedIn = new BehaviorSubject<boolean>(false);
     public getProfile = new Subject<Object>();
+    public isImpersonate = new BehaviorSubject<boolean>(localStorage.getItem('is_impersonating') === 'true' ? true : false);
 
     constructor(
         private router: Router,
@@ -62,9 +63,18 @@ export class AuthenticationService {
         return this.loggedIn.asObservable();
     }
 
+    ToggleImpersonate(value) {
+        this.isImpersonate.next(value);
+        localStorage.setItem('is_impersonating', value);
+    }
+
+    ImpersonateObs() {
+        return this.isImpersonate.asObservable();
+    }
+
     me() {
         this.http.get('me/').subscribe(res => {
-            this.getProfile.next(res);
+        this.getProfile.next(res);
 
 
         });
