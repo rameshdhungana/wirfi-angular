@@ -135,7 +135,7 @@
                                 <label class="text-white" for="location_logo">Location Image</label>
                                 <input type="file" class="form-control-file" name="logo"
                                        (change)="onChangeLocation($event)"
-                                       id="location_logo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info?.location_logo"
+                                       id="location_logo" placeholder="" aria-describedby="fileHelpId"  [ngModel]="device_info?.location_logo"
                                        #name="ngModel">
 
                             </div>
@@ -145,7 +145,7 @@
                                 <label class="text-white" for="location_photo">Device Image</label>
                                 <input type="file" class="form-control-file" name="name"
                                        (change)="onChangeImage($event)"
-                                       id="location_photo" placeholder="" aria-describedby="fileHelpId" required [ngModel]="device_info?.machine_photo"
+                                       id="location_photo" placeholder="" aria-describedby="fileHelpId"  [ngModel]="device_info?.machine_photo"
                                        #name="ngModel">
                             </div>
                         </div>

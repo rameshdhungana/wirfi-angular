@@ -156,7 +156,7 @@ export class DeviceUpdateComponent implements OnInit {
       this.deviceService.getDevice(this.device_id).subscribe(
           response => {
               this.device_data = cloneDeep(response['data']);
-              console.log(this.device_data)
+              console.log(this.device_data);
               this.format_device_info();
       });
 
@@ -290,13 +290,18 @@ export class DeviceUpdateComponent implements OnInit {
 
             this.deviceService.updateDeviceDetail(this.request_json, this.device_id).subscribe(
                 response => {
-                    this.formData.append('location_logo', this.fileLocation);
-                    this.formData.append('machine_photo', this.fileImage);
-                    this.deviceService.postDeviceImages(this.formData, this.device_id).subscribe(
-                        res => {
-                            this.messageservice.add(response['message']);
-                            this.router.navigateByUrl(`device/` + this.device_id);
-                        });
+                    if (this.fileLocation && this.fileImage) {
+                        this.formData.append('location_logo', this.fileLocation);
+                        this.formData.append('machine_photo', this.fileImage);
+                        this.deviceService.postDeviceImages(this.formData, this.device_id).subscribe(
+                            res => {
+                                this.messageservice.add(response['message']);
+                                this.router.navigateByUrl(`device/` + this.device_id);
+                            });
+                    } else {
+                        this.messageservice.add(response['message']);
+                        this.router.navigateByUrl(`device/` + this.device_id);
+                    }
                 });
         }
     }
