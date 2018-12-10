@@ -58,7 +58,7 @@ export class DeviceDetailComponent implements OnInit {
                 this.device_data = response['data'];
                 this.lat = response['data']['latitude'];
                 this.lng = response['data']['longitude'];
-                this.enable = response['data']['priority'];
+                this.enable = response['data']['device_settings']['priority_settings']['priority'];
                 this.loading = true;
         });
     }
