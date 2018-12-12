@@ -1,34 +1,46 @@
 <div class="container-fluid device-container">
     <div class="row">
-        <div class="col-md-12">
-            <div class=" d-flex justify-content-center">
-                <div class="w-50 mt-5 text-white panel">
-                    <div class="card">
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <div class="w-60 mt-5 text-white" style="background: #292e3f; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <div class="card p-2">
                         <div *ngIf="loading" class="card-body">
                             <div class="row">
-                                <div class="col-md-5">
-                                    <div *ngIf="person?.profile">
-                                        <div class="profile-picture"
-                                             [style.background-image]="image">
+                                <div class="col-sm-5 col-12">
+                                    <div class="row ">
+                                        <div class="col-8 col-sm-12">
+                                            <div class=" d-flex justify-content-center" *ngIf="person?.profile">
+                                                <div class="profile-picture"
+                                                    [style.background-image]="image">
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
-                                    <h4 class="card-title pt-4">
-                                        {{person['profile']['full_name']}}</h4>
-                                </div>
-                                <div class="col-md-7">
+
                                     <div class="row">
                                         <div class="col-12">
-                                            <h5 class="font-weight-bold">Personnel Info <i
-                                                    class="edit-icon pl-2 pr-2 fa fa-pen"
-                                                    routerLink="/profile-update"></i></h5>
-
+                                            <h4 class="card-title pt-4">
+                                                {{person['profile']['full_name']}}
+                                            </h4>
+                                        </div>
+                                    </div>
+                                            
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="font-weight-bold">
+                                                Personnel Info 
+                                                <i class="edit-icon pl-2 pr-2 fa fa-pen"
+                                                    routerLink="/profile-update">
+                                                </i>
+                                            </h5>
                                         </div>
                                         <div *ngIf="person?.profile" class="col-12">
                                             <p class="card-text"><span class="font-weight-bold pr-1">Address:</span>
                                                 {{person['profile']['address']}} </p>
-                                            <p class="card-text"><span
-                                                    class="font-weight-bold pr-1">Phone Number:</span>
+                                            <p class="card-text">
+                                                <span class="font-weight-bold pr-1">Phone Number:</span>
                                                 {{person['profile']['phone_number']|mask:'(000)-000-0000'}}
                                             </p>
                                         </div>
@@ -60,7 +72,6 @@
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <!--<div class="col-12">-->
                                 <!--<button class="btn btn-lg btn-outline-light mt-2 pl-5 pr-5 float-right"-->

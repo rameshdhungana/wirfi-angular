@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
     public image;
 
     constructor(private authService: AuthenticationService,
-                private  businessService: BussinessService,
+                private businessService: BussinessService,
                 private sanitization: DomSanitizer) {
     }
 
@@ -29,8 +29,10 @@ export class ProfileComponent implements OnInit {
             console.log(this.image);
         });
         this.businessService.getBusiness().subscribe(businessResp => {
-            this.businessInfo = businessResp['data']['business_info'];
-            console.log(this.businessInfo, 'this is business respones');
+            if (businessResp['data']) {
+                this.businessInfo = businessResp['data']['business_info'];
+                console.log(this.businessInfo, 'this is business respones');
+            }
         });
 
     }
