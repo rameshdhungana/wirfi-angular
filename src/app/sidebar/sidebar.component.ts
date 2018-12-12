@@ -3,6 +3,7 @@ import {AuthenticationService} from '../_services/authentication.service';
 import {environment} from '../../environments/environment';
 import { ImpersonateService } from '../_services/impersonate.service';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 export class AppModule {
@@ -22,11 +23,13 @@ export class SidebarComponent implements OnInit {
     logged_in_user: any;
     is_impersonating;
     URL = environment.API_URL;
+    image;
 
     constructor(
         private authService: AuthenticationService,
         private impersonateService: ImpersonateService,
-        private router: Router
+        private router: Router,
+        private sanitization: DomSanitizer
     ) {}
 
     ngOnInit() {
@@ -37,6 +40,7 @@ export class SidebarComponent implements OnInit {
         );
         this.authService.me().subscribe(response => {
             this.logged_in_user = response['data'];
+            this.image = this.sanitization.bypassSecurityTrustStyle(`url(${this.URL}${this.logged_in_user['profile']['profile_picture']})`);
         });
     }
 

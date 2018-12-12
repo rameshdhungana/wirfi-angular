@@ -25,6 +25,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        window.onload = (e) => {
+            if (window.innerWidth < 768) {
+                this.isCollapsed = true;
+                this.isCollapseContent = true;
+                this.isVisible = false;
+            }
+        }
         this.subscription = this.authService.isLoggedInObs()
             .subscribe(
                 (value) => {

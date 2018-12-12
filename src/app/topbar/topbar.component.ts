@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, NgZone} from '@angular/core';
 
 @Component({
     selector: 'app-topbar',
@@ -13,10 +13,29 @@ export class TopbarComponent implements OnInit {
     @Output() isVisibleChange = new EventEmitter();
     @Output() isCollapseContentChange = new EventEmitter();
 
-    constructor() {
+    constructor(
+        private ngZone: NgZone
+    ) {
     }
 
     ngOnInit() {
+        window.onresize = (e) => {
+            // ngZone.run will help to run change detection
+            this.ngZone.run(() => {
+                if (window.innerWidth < 768) {
+                    console.log('smaller');
+
+                    this.isCollapsed = true;
+                    this.isCollapsedChange.emit(this.isCollapsed);
+
+                    this.isCollapseContent = true;
+                    this.isCollapseContentChange.emit(this.isCollapseContent);
+
+                    this.isVisible = false;
+                    this.isVisibleChange.emit(this.isVisible);
+                }
+            });
+        };
     }
 
     onToggle() {

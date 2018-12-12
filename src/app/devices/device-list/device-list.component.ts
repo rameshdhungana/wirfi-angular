@@ -9,8 +9,8 @@ import {environment} from '../../../environments/environment';
 import {DeviceService} from '../../_services/device.service';
 import {SleepDeviceComponent} from '../sleep-device/sleep-device.component';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
-import {AddNetworkSettingComponent} from "../network-setting/add-network-setting/add-network-setting.component";
-import {DeleteNetworkSettingComponent} from "../network-setting/delete-network-setting/delete-network-setting.component";
+import {AddNetworkSettingComponent} from '../network-setting/add-network-setting/add-network-setting.component';
+import {DeleteNetworkSettingComponent} from '../network-setting/delete-network-setting/delete-network-setting.component';
 
 
 enum sortParams {
@@ -59,7 +59,6 @@ export class DeviceListComponent implements OnInit {
     ngOnInit() {
         this.deviceService.getDeviceList().subscribe(response => {
 
-            console.log(response, 22222222);
             this.allDeviceList = response['data']['device'];
             this.industry_type = response['data']['industry_type'];
             this.status_dict = response['data']['status_dict'];
