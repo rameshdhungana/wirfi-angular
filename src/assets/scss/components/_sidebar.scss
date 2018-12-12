@@ -22,6 +22,7 @@
 
     .sidebar__user-icon {
       width: $sidebar-width-collapsed;
+      height: $sidebar-width-collapsed;
       transition: width 300ms;
     }
 
