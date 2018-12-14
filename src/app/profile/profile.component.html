@@ -20,53 +20,53 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <h4 class="card-title pt-4">
-                                                {{person['profile']['full_name']}}
+                                                {{ person?.profile?.full_name }}
                                             </h4>
                                         </div>
                                     </div>
-                                            
+
                                 </div>
                                 <div class="col-sm-7">
                                     <div class="row">
                                         <div class="col-12">
                                             <h5 class="font-weight-bold">
-                                                Personnel Info 
-                                                <i class="edit-icon pl-2 pr-2 fa fa-pen"
-                                                    routerLink="/profile-update">
+                                                Personnel Info
+                                                <i class="edit-icon pl-2 pr-2 fa fa-pen" [routerLink]="['profile-update']">
                                                 </i>
                                             </h5>
                                         </div>
                                         <div *ngIf="person?.profile" class="col-12">
                                             <p class="card-text"><span class="font-weight-bold pr-1">Address:</span>
-                                                {{person['profile']['address']}} </p>
+                                                {{ person?.profile?.address }} </p>
                                             <p class="card-text">
                                                 <span class="font-weight-bold pr-1">Phone Number:</span>
-                                                {{person['profile']['phone_number']|mask:'(000)-000-0000'}}
+                                                {{ person?.profile?.phone_number | mask:'(000)-000-0000' }}
                                             </p>
                                         </div>
                                         <div *ngIf="!person.profile">
-
                                             <p class="card-text">Please add your profile information</p>
                                         </div>
                                     </div>
                                     <div class="row pt-5" *ngIf="businessInfo">
                                         <div class="col-12">
-                                            <h5 class="font-weight-bold">Business Info <i
-                                                    class="edit-icon pl-2 pr-2 fa fa-pen"
-                                                    routerLink="/business"></i></h5>
+                                            <h5 class="font-weight-bold">
+                                                Business Info
+                                                <i class="edit-icon pl-2 pr-2 fa fa-pen" [routerLink]="['business']">
+                                                </i>
+                                            </h5>
 
                                         </div>
                                         <div class="col-12">
                                             <p class="card-text"><span
                                                     class="font-weight-bold pr-1">Name:</span>
-                                                {{businessInfo.name}} </p>
+                                                {{ businessInfo.name }} </p>
                                             <p class="card-text"><span
                                                     class="font-weight-bold pr-1">Address:</span>
-                                                {{businessInfo.address}}
+                                                {{ businessInfo.address }}
                                             </p>
                                             <p class="card-text"><span
                                                     class="font-weight-bold pr-1">Contact:</span>
-                                                {{businessInfo.phone_number|mask:'(000)-000-0000'}}
+                                                {{ businessInfo.phone_number | mask:'(000)-000-0000' }}
                                             </p>
 
                                         </div>

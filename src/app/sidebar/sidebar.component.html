@@ -9,12 +9,12 @@
                             class="img-round sidebar__user-icon"/>
 
                          <img *ngIf="logged_in_user?.profile !== null" src="{{URL + logged_in_user?.profile?.profile_picture}}"
-                            class="img img-fluid rounded sidebar__user-icon m-1"/> 
-                            
+                            class="img img-fluid rounded sidebar__user-icon m-1"/>
+
                         <!-- <div class="profile-picture sidebar__user-icon m-1"
                                 [style.background-image]="image">
                         </div> -->
-                        
+
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span class="nav-item-text"> Dashboard</span>
                     </li>
-                    
+
                     <li class="nav-item " *ngIf="!logged_in_user?.is_superuser"  [routerLink]="['dashboard']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span class="nav-item-text"> Dashboard</span>
@@ -78,12 +78,12 @@
                         <span class="nav-item-text">Network settings</span>
                     </li> -->
 
-                    <li class="nav-item" [routerLink]="['profile']" routerLinkActive="active">
+                      <li class="nav-item" [routerLink]="['profile']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-user"></i>
                         <span class="nav-item-text"> Profile</span>
                     </li>
 
-                    <li class="nav-item"  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['billing']" routerLinkActive="active">
+                    <li class="nav-item"  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['billing']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-money-bill-alt"></i>
                         <span class="nav-item-text"> Billing</span>
                     </li>
@@ -97,7 +97,7 @@
                         <i class="fas fa-fw fa-bell"></i>
                         <span class="nav-item-text"> Notifications</span>
                     </li>
-                    
+
                     <li class="nav-item" [routerLink]="['change-password']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-key"></i>
                         <span class="nav-item-text"> Change Password </span>

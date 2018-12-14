@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.isCollapseContent = true;
                 this.isVisible = false;
             }
-        }
+        };
         this.subscription = this.authService.isLoggedInObs()
             .subscribe(
                 (value) => {

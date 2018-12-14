@@ -74,9 +74,7 @@ export class AuthenticationService {
 
     me() {
         this.http.get('me/').subscribe(res => {
-        this.getProfile.next(res);
-
-
+          this.getProfile.next(res);
         });
         return this.getProfile.asObservable();
     }

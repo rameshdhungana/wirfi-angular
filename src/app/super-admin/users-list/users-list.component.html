@@ -19,52 +19,50 @@
         <div class="row mt-4">
             <div class="col-md-12 table-responsive">
                 <table class="table" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="10">
-
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>
-                            <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
-                        </th>
-                        <th>
-                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
-                        </th>
-                        <th>
-                            <mfDefaultSorter by="is_staff">User Type</mfDefaultSorter>
-                        </th>
-                        <th>
-                            Action
-                        </th>
-
-
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>
+                                <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                            </th>
+                            <th>
+                                <mfDefaultSorter by="is_staff">User Type</mfDefaultSorter>
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
                     </thead>
+                    
                     <tbody>
-                    <tr *ngFor="let user of mf.data; let i = index" [attr.data-index]="i">
-                        <th>{{ i + 1 }}</th>
-                        <td>{{ user?.first_name }} {{ user?.last_name }}</td>
-                        <td>{{ user?.email }}</td>
-                        <td>
-                            {{ user?.is_superuser ? 'Super Admin' : user?.is_staff ? 'Administrator' : 'Basic User' }}
-                        </td>
-                        <td>
-                            <a class="btn btn-success my-1 my-md-0" (click)="impersonate(user.pk)">
-                                <i class="fa fa-eye"></i>
-                            </a>
-                            <a class="btn btn-danger my-1 my-md-0 mx-md-2" (click)="deleteUserPopUp(user)"><i
-                                    class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td class="text-primary">
-                            <mfBootstrapPaginator></mfBootstrapPaginator>
-                        </td>
-                        <td></td>
-                        <td></td>
+                        <tr *ngFor="let user of mf.data; let i = index" [attr.data-index]="i">
+                            <th>{{ i + 1 }}</th>
+                            <td>{{ user?.first_name }} {{ user?.last_name }}</td>
+                            <td>{{ user?.email }}</td>
+                            <td>
+                                {{ user?.is_superuser ? 'Super Admin' : user?.is_staff ? 'Administrator' : 'Basic User' }}
+                            </td>
+                            <td>
+                                <a class="btn btn-success my-1 my-md-0" (click)="impersonate(user.pk)">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class="btn btn-danger my-1 my-md-0 mx-md-2" (click)="deleteUserPopUp(user)"><i
+                                        class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td class="text-primary">
+                                <mfBootstrapPaginator></mfBootstrapPaginator>
+                            </td>
+                            <td></td>
+                            <td></td>
 
-                    </tr>
+                        </tr>
                     </tbody>
                 </table>
             </div>
