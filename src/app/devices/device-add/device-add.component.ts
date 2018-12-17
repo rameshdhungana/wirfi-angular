@@ -55,263 +55,293 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
 })
 
 export class DeviceAddComponent  implements OnInit {
-  public latitude: number;
-  public longitude: number;
-  public searchControl: FormControl;
-  public zoom: number;
-  public industryType: Array<any>;
-  public industry_type_id: string;
-  public locationType: Array<any>;
-  public location_type_id: string;
-  public add_type: boolean;
+    latitude: number;
+    longitude: number;
+    searchControl: FormControl;
+    zoom: number;
+    industryType: Array<any>;
+    industry_type_id: string;
+    locationType: Array<any>;
+    location_type_id: string;
+    add_type: boolean;
 
-  @ViewChild('search')
-  public searchElementRef: ElementRef;
-  fileLocation: File;
-  fileLocation_name: any;
-  fileImage_name: any;
-  fileImage: File;
-  formData = new FormData();
+    @ViewChild('search')
+    searchElementRef: ElementRef;
+    fileLocation: File;
+    fileLocation_name: any;
+    fileImage_name: any;
+    fileImage: File;
+    formData = new FormData();
 
-  private json: object = {};
-  public device_id: any;
-  seconds = false;
-  private address: any;
+    private json: object = {};
+    device_id: any;
+    seconds = false;
+    address = '';
 
-  constructor(
-      private dialogService: MaterialDialogService,
-      private deviceservice: DeviceService,
-      private industryservice: IndustryService,
-      private franchiseservice: FranchiseTypeService,
-      private messageservice: MessageService,
-      private mapsAPILoader: MapsAPILoader,
-      private ngZone: NgZone,
-      private router: Router
-  ) { }
+    constructor(
+        private dialogService: MaterialDialogService,
+        private deviceservice: DeviceService,
+        private industryservice: IndustryService,
+        private franchiseservice: FranchiseTypeService,
+        private messageservice: MessageService,
+        private mapsAPILoader: MapsAPILoader,
+        private ngZone: NgZone,
+        private router: Router
+    ) { }
 
-  ngOnInit() {
-    // set google maps defaults
-    this.zoom = 4;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
+    ngOnInit() {
+      // set google maps defaults
+      this.zoom = 12;
+      this.latitude = 39.8282;
+      this.longitude = -98.5795;
 
-    // create search FormControl
-    this.searchControl = new FormControl();
+      // create search FormControl
+      this.searchControl = new FormControl();
 
-    // set current position
-    this.setCurrentPosition();
+      // set current position
+      this.setCurrentPosition();
 
-    // load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['address']
-      });
-      autocomplete.addListener('place_changed', () => {
-        this.ngZone.run(() => {
-          // get the place result
-          const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          this.address = place.name;
+      // load Places Autocomplete
+      this.mapsAPILoader.load().then(() => {
+        const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+          types: ['address']
+        });
+        autocomplete.addListener('place_changed', () => {
+          this.ngZone.run(() => {
+            console.log('tsty');
+            // get the place result
+            const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+            this.address = place.name;
 
 
-          // verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-          // set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
+            // verify result
+            if (place.geometry === undefined || place.geometry === null) {
+              return;
+            }
+            // set latitude, longitude and zoom
+            this.latitude = place.geometry.location.lat();
+            this.longitude = place.geometry.location.lng();
+            this.zoom = 12;
+          });
         });
       });
-    });
 
-    this.industryservice.getIndustryList().subscribe(
-      response => {
-        this.industryType = response['data'];
-    });
+      this.industryservice.getIndustryList().subscribe(
+        response => {
+          this.industryType = response['data'];
+      });
 
-    this.franchiseservice.getFranchiseTypeList().subscribe(
-      response => {
-        this.locationType = response['data'];
-    });
-  }
-
-  mapClicked($event: MouseEvent) {
-      this.latitude =  $event.coords.lat;
-      this.longitude = $event.coords.lng;
-      this.zoom = 12;
-  }
-
-  private setCurrentPosition() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
+      this.franchiseservice.getFranchiseTypeList().subscribe(
+        response => {
+          this.locationType = response['data'];
       });
     }
-  }
 
-  onChangeLocation(event: EventTarget) {
-    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-    const files: FileList = target.files;
-    this.fileLocation = files[0];
-    this.fileLocation_name = files[0].name;
-  }
+    getAddress( lat: number, lng: number ) {
+        let deviceAddress = '';
+        if (navigator.geolocation) {
+            const geocoder = new google.maps.Geocoder();
+            const latlng = new google.maps.LatLng(lat, lng);
+            const request = { latLng: latlng };
+            geocoder.geocode(request, (results, status) => {
+                if (status === google.maps.GeocoderStatus.OK) {
+                const result = results[0];
+                const rsltAdrComponent = result.address_components;
+                //   const resultLength = rsltAdrComponent.length;
+                if (result != null) {
+                    for (const addr of rsltAdrComponent) {
+                        if (deviceAddress) {
+                            deviceAddress = deviceAddress + ', ' + addr['long_name'];
+                        } else {
+                            deviceAddress = addr['long_name'];
+                        }
+                    }
+                    this.address = deviceAddress;
+                } else {
+                    alert('No address available!');
+                }
+                }
+            });
+        }
+    }
 
-  onChangeImage(event: EventTarget) {
+    mapClicked($event: MouseEvent) {
+        this.latitude =  $event.coords.lat;
+        this.longitude = $event.coords.lng;
+        this.zoom = 24;
+        this.getAddress(this.latitude, this.longitude);
+    }
+
+    private setCurrentPosition() {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.latitude = position.coords.latitude;
+          this.longitude = position.coords.longitude;
+          this.zoom = 24;
+        });
+      }
+    }
+
+    onChangeLocation(event: EventTarget) {
       const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
       const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
       const files: FileList = target.files;
-      this.fileImage = files[0];
-      this.fileImage_name = files[0].name;
-  }
+      this.fileLocation = files[0];
+      this.fileLocation_name = files[0].name;
+    }
 
-  addIndustryType(event, data) {
-    if (data === '') {
-      const modalSize = {
-        'height': 'auto',
-        'width': 'auto'
+    onChangeImage(event: EventTarget) {
+        const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+        const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+        const files: FileList = target.files;
+        this.fileImage = files[0];
+        this.fileImage_name = files[0].name;
+    }
+
+    addIndustryType(event, data) {
+      if (data === '') {
+        const modalSize = {
+          'height': 'auto',
+          'width': 'auto'
+        };
+        this.dialogService.openDialog(AddIndustryTypeComponent, {'type': 'industry'} , modalSize);
+      }
+    }
+
+    addLocationType(event, data) {
+      if (data === '') {
+        const modalSize = {
+          'height': 'auto',
+          'width': 'auto'
+        };
+        this.dialogService.openDialog(AddIndustryTypeComponent, {'type': 'location'}, modalSize);
+      }
+
+    }
+
+    deviceInfo(data: NgForm) {
+      this.json = {
+        'location_hours': [
+          {
+              'day_id': '1',
+              'from_time': '',
+              'to_time': '',
+              'is_on': true
+          },
+          {
+              'day_id': '2',
+              'from_time': '',
+              'to_time': '',
+              'is_on': true
+          },
+          {
+              'day_id': '3',
+              'from_time': '',
+              'to_time': '',
+              'is_on': true
+          },
+          {
+              'day_id': '4',
+              'from_time': '',
+              'to_time': '',
+              'is_on': true
+          },
+          {
+              'day_id': '5',
+              'from_time': '',
+              'to_time': '',
+              'is_on': true
+          },
+          {
+              'day_id': '6',
+              'from_time': '',
+              'to_time': '',
+              'is_on': true
+          },
+          {
+              'day_id': '7',
+              'from_time': '',
+              'to_time': '',
+              'is_on': true
+          }
+      ],
+        'name': '',
+        'serial_number': '',
+        'latitude': this.latitude,
+        'longitude': this.longitude,
+        'location_of_device': '',
+        'address': this.address,
+        'industry_type_id': '',
+        'location_type_id': ''
       };
-      this.dialogService.openDialog(AddIndustryTypeComponent, {'type': 'industry'} , modalSize);
+
+      if (data.valid) {
+
+          this.json['location_hours'][0].from_time = data.value['sun_time_start'];
+          this.json['location_hours'][0].to_time = data.value['sun_time_end'];
+          if (data.value['toggle_sun']) {
+              this.json['location_hours'][0].is_on = data.value['toggle_sun'];
+          }
+
+          this.json['location_hours'][1].from_time = data.value['mon_time_start'];
+          this.json['location_hours'][1].to_time = data.value['mon_time_end'];
+          if (data.value['toggle_mon']) {
+              this.json['location_hours'][1].is_on = data.value['toggle_mon'];
+          }
+          this.json['location_hours'][2].from_time = data.value['tue_time_start'];
+          this.json['location_hours'][2].to_time = data.value['tue_time_end'];
+          if (data.value['toggle_tue']) {
+              this.json['location_hours'][2].is_on = data.value['toggle_tue'];
+          }
+
+          this.json['location_hours'][3].from_time = data.value['thu_time_start'];
+          this.json['location_hours'][3].to_time = data.value['thu_time_end'];
+          if (data.value['toggle_thu']) {
+              this.json['location_hours'][3].is_on = data.value['toggle_thu'];
+          }
+          this.json['location_hours'][4].from_time = data.value['fri_time_start'];
+          this.json['location_hours'][4].to_time = data.value['fri_time_end'];
+          if (data.value['toggle_fri']) {
+              this.json['location_hours'][4].is_on = data.value['toggle_fri'];
+          }
+
+          this.json['location_hours'][5].from_time = data.value['wed_time_start'];
+          this.json['location_hours'][5].to_time = data.value['wed_time_end'];
+          if (data.value['toggle_wed']) {
+              this.json['location_hours'][5].is_on = data.value['toggle_wed'];
+          }
+
+          this.json['location_hours'][6].from_time = data.value['sat_time_start'];
+          this.json['location_hours'][6].to_time = data.value['sat_time_end'];
+          if (data.value['toggle_sat']) {
+              this.json['location_hours'][6].is_on = data.value['toggle_sat'];
+          }
+
+          this.json['name'] = data.value['device_name'];
+          this.json['serial_number'] = data.value['serial_number'];
+          this.json['location_of_device'] = data.value['location_of_device'];
+
+          if (data.value['industry_type']) {
+              this.json['industry_type_id'] = data.value['industry_type'];
+          }
+          if (data.value['location_type']) {
+              this.json['location_type_id'] = data.value['location_type'];
+          }
+
+          this.deviceservice.postDeviceinfo(this.json).subscribe(
+              response => {
+                this.formData.append('location_logo', this.fileImage);
+                this.formData.append('machine_photo', this.fileLocation);
+                this.device_id = response['data']['id'];
+                this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
+                  res => {
+                    this.messageservice.add(response['message']);
+                    this.router.navigateByUrl(`devices`);
+                });
+              },
+          (error) => {
+              this.messageservice.add(error.error.message);
+          });
+      }
     }
-  }
-
-  addLocationType(event, data) {
-    if (data === '') {
-      const modalSize = {
-        'height': 'auto',
-        'width': 'auto'
-      };
-      this.dialogService.openDialog(AddIndustryTypeComponent, {'type': 'location'}, modalSize);
-    }
-
-  }
-
-  deviceInfo(data: NgForm) {
-    this.json = {
-      'location_hours': [
-        {
-            'day_id': '1',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
-        },
-        {
-            'day_id': '2',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
-        },
-        {
-            'day_id': '3',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
-        },
-        {
-            'day_id': '4',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
-        },
-        {
-            'day_id': '5',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
-        },
-        {
-            'day_id': '6',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
-        },
-        {
-            'day_id': '7',
-            'from_time': '',
-            'to_time': '',
-            'is_on': true
-        }
-    ],
-      'name': '',
-      'serial_number': '',
-      'latitude': this.latitude ? this.latitude : 0.000,
-      'longitude': this.longitude ? this.longitude : 0.000,
-      'location_of_device': '',
-      'address': this.address ? this.address : '',
-      'industry_type_id': '',
-      'location_type_id': ''
-    };
-
-    if (data.valid) {
-
-        this.json['location_hours'][0].from_time = data.value['sun_time_start'];
-        this.json['location_hours'][0].to_time = data.value['sun_time_end'];
-        if (data.value['toggle_sun']) {
-            this.json['location_hours'][0].is_on = data.value['toggle_sun'];
-        }
-
-        this.json['location_hours'][1].from_time = data.value['mon_time_start'];
-        this.json['location_hours'][1].to_time = data.value['mon_time_end'];
-        if (data.value['toggle_mon']) {
-            this.json['location_hours'][1].is_on = data.value['toggle_mon'];
-        }
-        this.json['location_hours'][2].from_time = data.value['tue_time_start'];
-        this.json['location_hours'][2].to_time = data.value['tue_time_end'];
-        if (data.value['toggle_tue']) {
-            this.json['location_hours'][2].is_on = data.value['toggle_tue'];
-        }
-
-        this.json['location_hours'][3].from_time = data.value['thu_time_start'];
-        this.json['location_hours'][3].to_time = data.value['thu_time_end'];
-        if (data.value['toggle_thu']) {
-            this.json['location_hours'][3].is_on = data.value['toggle_thu'];
-        }
-        this.json['location_hours'][4].from_time = data.value['fri_time_start'];
-        this.json['location_hours'][4].to_time = data.value['fri_time_end'];
-        if (data.value['toggle_fri']) {
-            this.json['location_hours'][4].is_on = data.value['toggle_fri'];
-        }
-
-        this.json['location_hours'][5].from_time = data.value['wed_time_start'];
-        this.json['location_hours'][5].to_time = data.value['wed_time_end'];
-        if (data.value['toggle_wed']) {
-            this.json['location_hours'][5].is_on = data.value['toggle_wed'];
-        }
-
-        this.json['location_hours'][6].from_time = data.value['sat_time_start'];
-        this.json['location_hours'][6].to_time = data.value['sat_time_end'];
-        if (data.value['toggle_sat']) {
-            this.json['location_hours'][6].is_on = data.value['toggle_sat'];
-        }
-
-        this.json['name'] = data.value['device_name'];
-        this.json['serial_number'] = data.value['serial_number'];
-        this.json['location_of_device'] = data.value['location_of_device'];
-
-        if (data.value['industry_type']) {
-            this.json['industry_type_id'] = data.value['industry_type'];
-        }
-        if (data.value['location_type']) {
-            this.json['location_type_id'] = data.value['location_type'];
-        }
-
-        this.deviceservice.postDeviceinfo(this.json).subscribe(
-            response => {
-              this.formData.append('location_logo', this.fileImage);
-              this.formData.append('machine_photo', this.fileLocation);
-              this.device_id = response['data']['id'];
-              this.deviceservice.postDeviceImages(this.formData, response['data']['id']).subscribe(
-                res => {
-                  this.messageservice.add(response['message']);
-                  this.router.navigateByUrl(`devices`);
-              });
-            },
-        (error) => {
-            this.messageservice.add(error.error.message);
-        });
-    }
-  }
 }

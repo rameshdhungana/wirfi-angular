@@ -84,7 +84,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label class="text-white" for="address">Device Address</label>
-                            <input [value]="device_info.address" autocorrect="off" autocapitalize="off" spellcheck="off"
+                            <input [(value)]="device_info.address" autocorrect="off" autocapitalize="off" spellcheck="off"
                                 type="text"
                                 class="form-control mb-2" #search [formControl]="searchControl">
                             <agm-map (mapClick)="mapClicked($event)" [latitude]="device_info.latitude" [longitude]="device_info.longitude"

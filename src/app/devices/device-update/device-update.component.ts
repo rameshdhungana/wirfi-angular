@@ -47,90 +47,90 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
 })
 
 export class DeviceUpdateComponent implements OnInit {
-    public device_id: string;
-    public device_data: any;
+    device_id: string;
+    device_data: any;
 
-    public device_info = {
-      'location_hours': [
-        {
-            'day_id': '1',
-            'from_time': {'hour': 0, 'minute': 0},
-            'to_time': {'hour': 0, 'minute': 0},
-            'is_on': <Boolean>false
-        },
-        {
-            'day_id': '2',
-            'from_time': {'hour': 0, 'minute': 0},
+    device_info = {
+        'location_hours': [
+            {
+                'day_id': '1',
+                'from_time': {'hour': 0, 'minute': 0},
+                'to_time': {'hour': 0, 'minute': 0},
+                'is_on': <Boolean>false
+            },
+            {
+                'day_id': '2',
+                'from_time': {'hour': 0, 'minute': 0},
 
-            'to_time': {'hour': 0, 'minute': 0},
-            'is_on': <Boolean>false
-        },
-        {
-            'day_id': '3',
-            'from_time': {'hour': 0, 'minute': 0},
+                'to_time': {'hour': 0, 'minute': 0},
+                'is_on': <Boolean>false
+            },
+            {
+                'day_id': '3',
+                'from_time': {'hour': 0, 'minute': 0},
 
-            'to_time': {'hour': 0, 'minute': 0},
-            'is_on': <Boolean>false
-        },
-        {
-            'day_id': '4',
-            'from_time': {'hour': 0, 'minute': 0},
-            'to_time': {'hour': 0, 'minute': 0},
-            'is_on': <Boolean>false
-        },
-        {
-            'day_id': '5',
-            'from_time': {'hour': 0, 'minute': 0},
-            'to_time': {'hour': 0, 'minute': 0},
-            'is_on': <Boolean>false
-        },
-        {
-            'day_id': '6',
-            'from_time': {'hour': 0, 'minute': 0},
-            'to_time': {'hour': 0, 'minute': 0},
-            'is_on': <Boolean>false
-        },
-        {
-            'day_id': '7',
-            'from_time': {'hour': 0, 'minute': 0},
-            'to_time': {'hour': 0, 'minute': 0},
-            'is_on': <Boolean>false
-        }
-      ],
-      'name': '',
-      'serial_number': '',
-      'latitude': 0.000,
-      'longitude': 0.000,
-      'location_of_device': '',
-      'address': '',
-      'industry_type': {
-        'id': '',
+                'to_time': {'hour': 0, 'minute': 0},
+                'is_on': <Boolean>false
+            },
+            {
+                'day_id': '4',
+                'from_time': {'hour': 0, 'minute': 0},
+                'to_time': {'hour': 0, 'minute': 0},
+                'is_on': <Boolean>false
+            },
+            {
+                'day_id': '5',
+                'from_time': {'hour': 0, 'minute': 0},
+                'to_time': {'hour': 0, 'minute': 0},
+                'is_on': <Boolean>false
+            },
+            {
+                'day_id': '6',
+                'from_time': {'hour': 0, 'minute': 0},
+                'to_time': {'hour': 0, 'minute': 0},
+                'is_on': <Boolean>false
+            },
+            {
+                'day_id': '7',
+                'from_time': {'hour': 0, 'minute': 0},
+                'to_time': {'hour': 0, 'minute': 0},
+                'is_on': <Boolean>false
+            }
+        ],
         'name': '',
-        'is_user_created': ''
-      },
-      'location_type': {
-        'id': '',
-        'name': '',
-        'is_user_created': ''
-      },
-      'location_logo': '',
-      'machine_photo': ''
+        'serial_number': '',
+        'latitude': 0.000,
+        'longitude': 0.000,
+        'location_of_device': '',
+        'address': '',
+        'industry_type': {
+            'id': '',
+            'name': '',
+            'is_user_created': ''
+        },
+        'location_type': {
+            'id': '',
+            'name': '',
+            'is_user_created': ''
+        },
+        'location_logo': '',
+        'machine_photo': ''
     };
-    public request_json = {};
+    request_json = {};
 
-    public address: string;
-    public latitude: number;
-    public longitude: number;
-    public searchControl: FormControl;
-    public zoom: number;
-    public industryType: Array<any>;
-    public industry_type_id: string;
-    public locationType: Array<any>;
-    public location_type_id: string;
-    public add_type: boolean;
+    address: string;
+    latitude: number;
+    longitude: number;
+    searchControl: FormControl;
+    zoom: number;
+    industryType: Array<any>;
+    industry_type_id: string;
+    locationType: Array<any>;
+    location_type_id: string;
+    add_type: boolean;
 
     @ViewChild('search')
-    public searchElementRef: ElementRef;
+    searchElementRef: ElementRef;
     fileLocation: File;
     fileLocation_name: any;
     fileImage_name: any;
@@ -139,66 +139,97 @@ export class DeviceUpdateComponent implements OnInit {
 
     seconds = false;
 
-  constructor(
-      private router: Router,
-      private route: ActivatedRoute,
-      private industryservice: IndustryService,
-      private franchiseservice: FranchiseTypeService,
-      private messageservice: MessageService,
-      private deviceService: DeviceService,
-      private mapsAPILoader: MapsAPILoader,
-      private ngZone: NgZone,
-      private dialogService: MaterialDialogService
-  ) { }
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private industryservice: IndustryService,
+        private franchiseservice: FranchiseTypeService,
+        private messageservice: MessageService,
+        private deviceService: DeviceService,
+        private mapsAPILoader: MapsAPILoader,
+        private ngZone: NgZone,
+        private dialogService: MaterialDialogService
+    ) { }
 
     ngOnInit() {
-      this.device_id = this.route.snapshot.paramMap.get('id');
-      this.deviceService.getDevice(this.device_id).subscribe(
-          response => {
-              this.device_data = cloneDeep(response['data']);
-              console.log(this.device_data);
-              this.format_device_info();
-      });
+        this.device_id = this.route.snapshot.paramMap.get('id');
+        this.deviceService.getDevice(this.device_id).subscribe(
+            response => {
+                this.device_data = cloneDeep(response['data']);
+                console.log(this.device_data);
+                this.format_device_info();
+        });
 
-      this.industryservice.getIndustryList().subscribe(
-        response => {
-          this.industryType = response['data'];
-      });
+        this.industryservice.getIndustryList().subscribe(
+            response => {
+            this.industryType = response['data'];
+        });
 
-      this.franchiseservice.getFranchiseTypeList().subscribe(
-        response => {
-          this.locationType = response['data'];
-      });
+        this.franchiseservice.getFranchiseTypeList().subscribe(
+            response => {
+            this.locationType = response['data'];
+        });
 
-      // create search FormControl
-      this.searchControl = new FormControl();
+        // create search FormControl
+        this.searchControl = new FormControl();
 
-      // set current position
-      this.setCurrentPosition();
+        // set current position
+        this.setCurrentPosition();
 
-      // load Places Autocomplete
-      this.mapsAPILoader.load().then(() => {
-          const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-            types: ['address']
-          });
-          autocomplete.addListener('place_changed', () => {
-              this.ngZone.run(() => {
-                // get the place result
-                const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-                this.address = place.name;
+        // load Places Autocomplete
+        this.mapsAPILoader.load().then(() => {
+            const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+                types: ['address']
+            });
+            autocomplete.addListener('place_changed', () => {
+                this.ngZone.run(() => {
+                    // get the place result
+                    const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+                    this.address = place.name;
 
 
-                // verify result
-                if (place.geometry === undefined || place.geometry === null) {
-                  return;
+                    // verify result
+                    if (place.geometry === undefined || place.geometry === null) {
+                    return;
+                    }
+                    // set latitude, longitude and zoom`qq
+                    this.latitude = place.geometry.location.lat();
+                    this.longitude = place.geometry.location.lng();
+                    this.device_info.latitude = this.latitude;
+                    this.device_info.longitude = this.longitude;
+                    this.zoom = 12;
+                });
+            });
+        });
+    }
+
+    getAddress( lat: number, lng: number ) {
+        let deviceAddress = '';
+        if (navigator.geolocation) {
+            const geocoder = new google.maps.Geocoder();
+            const latlng = new google.maps.LatLng(lat, lng);
+            const request = { latLng: latlng };
+            geocoder.geocode(request, (results, status) => {
+                if (status === google.maps.GeocoderStatus.OK) {
+                const result = results[0];
+                const rsltAdrComponent = result.address_components;
+                //   const resultLength = rsltAdrComponent.length;
+                if (result != null) {
+                    for (const addr of rsltAdrComponent) {
+                        if (deviceAddress) {
+                            deviceAddress = deviceAddress + ', ' + addr['long_name'];
+                        } else {
+                            deviceAddress = addr['long_name'];
+                        }
+                    }
+                    this.address = deviceAddress;
+                    this.device_info.address = this.address;
+                } else {
+                    alert('No address available!');
                 }
-                // set latitude, longitude and zoom`qq
-                this.latitude = place.geometry.location.lat();
-                this.longitude = place.geometry.location.lng();
-                this.zoom = 12;
-              });
-          });
-      });
+                }
+            });
+        }
     }
 
     format_device_info() {
@@ -280,10 +311,10 @@ export class DeviceUpdateComponent implements OnInit {
               ],
             'name': data.value['device_name'],
             'serial_number': data.value['serial_number'],
-            'latitude': this.latitude ? this.latitude : 0.000,
-            'longitude': this.longitude ? this.longitude : 0.000,
+            'latitude': this.latitude,
+            'longitude': this.longitude,
             'location_of_device': data.value['location_of_device'],
-            'address': this.address ? this.address : 'Ananda Bhairab Marga, Naxal',
+            'address': this.address,
             'industry_type_id': String(data.value['industry_type']),
             'location_type_id': String(data.value['location_type'])
             };
@@ -314,7 +345,10 @@ export class DeviceUpdateComponent implements OnInit {
     mapClicked($event: MouseEvent) {
         this.latitude =  $event.coords.lat;
         this.longitude = $event.coords.lng;
-        this.zoom = 12;
+        this.device_info.latitude = this.latitude;
+        this.device_info.longitude = this.longitude;
+        this.zoom = 24;
+        this.getAddress(this.latitude, this.longitude);
     }
 
     private setCurrentPosition() {
@@ -322,7 +356,7 @@ export class DeviceUpdateComponent implements OnInit {
             navigator.geolocation.getCurrentPosition((position) => {
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
-            this.zoom = 12;
+            this.zoom = 24;
             });
         }
     }

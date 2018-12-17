@@ -81,12 +81,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label class="text-white" for="address">Device Address</label>
-                            <input placeholder="Device address" autocorrect="off" autocapitalize="off" spellcheck="off"
+                            <input placeholder="Device address" [(value)]="address" autocorrect="off" autocapitalize="off" spellcheck="off"
                                 type="text"
                                 class="form-control mb-2" #search [formControl]="searchControl">
-                            <agm-map (mapClick)="mapClicked($event)" [latitude]="latitude" [longitude]="longitude"
+                            <agm-map (mapClick)="mapClicked($event)" [(latitude)]="latitude" [(longitude)]="longitude"
                                     [scrollwheel]="false" [zoom]="zoom">
-                                <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                                <agm-marker [(latitude)]="latitude" [(longitude)]="longitude"></agm-marker>
                             </agm-map>
                         </div>
                     </div>
