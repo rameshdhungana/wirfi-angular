@@ -347,7 +347,7 @@ export class DeviceUpdateComponent implements OnInit {
         this.longitude = $event.coords.lng;
         this.device_info.latitude = this.latitude;
         this.device_info.longitude = this.longitude;
-        this.zoom = 24;
+        this.zoom = 12;
         this.getAddress(this.latitude, this.longitude);
     }
 
@@ -356,7 +356,7 @@ export class DeviceUpdateComponent implements OnInit {
             navigator.geolocation.getCurrentPosition((position) => {
             this.latitude = position.coords.latitude;
             this.longitude = position.coords.longitude;
-            this.zoom = 24;
+            this.zoom = 12;
             });
         }
     }

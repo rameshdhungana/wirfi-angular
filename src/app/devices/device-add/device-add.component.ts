@@ -91,7 +91,6 @@ export class DeviceAddComponent  implements OnInit {
 
     ngOnInit() {
       // set google maps defaults
-      this.zoom = 12;
       this.latitude = 39.8282;
       this.longitude = -98.5795;
 
@@ -121,7 +120,7 @@ export class DeviceAddComponent  implements OnInit {
             // set latitude, longitude and zoom
             this.latitude = place.geometry.location.lat();
             this.longitude = place.geometry.location.lng();
-            this.zoom = 12;
+            this.zoom = 4;
           });
         });
       });
@@ -168,7 +167,7 @@ export class DeviceAddComponent  implements OnInit {
     mapClicked($event: MouseEvent) {
         this.latitude =  $event.coords.lat;
         this.longitude = $event.coords.lng;
-        this.zoom = 24;
+        this.zoom = 12;
         this.getAddress(this.latitude, this.longitude);
     }
 
@@ -177,7 +176,7 @@ export class DeviceAddComponent  implements OnInit {
         navigator.geolocation.getCurrentPosition((position) => {
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
-          this.zoom = 24;
+          this.zoom = 12;
         });
       }
     }
