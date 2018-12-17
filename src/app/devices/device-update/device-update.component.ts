@@ -263,6 +263,10 @@ export class DeviceUpdateComponent implements OnInit {
     }
 
     onSubmit(data: NgForm) {
+        if (!this.address) {
+            this.messageservice.add('Device Address isn\'t available!!!');
+            return ;
+        }
         if (data.valid) {
             this.request_json = {
                 'location_hours': [
@@ -348,6 +352,7 @@ export class DeviceUpdateComponent implements OnInit {
         this.device_info.latitude = this.latitude;
         this.device_info.longitude = this.longitude;
         this.zoom = 12;
+
         this.getAddress(this.latitude, this.longitude);
     }
 

@@ -219,6 +219,10 @@ export class DeviceAddComponent  implements OnInit {
     }
 
     deviceInfo(data: NgForm) {
+      if (!this.address) {
+          this.messageservice.add('Device Address isn\'t available!!!');
+          return;
+      }
       this.json = {
         'location_hours': [
           {
