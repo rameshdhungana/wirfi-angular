@@ -208,7 +208,7 @@ export class DeviceUpdateComponent implements OnInit {
         if (navigator.geolocation) {
             const geocoder = new google.maps.Geocoder();
             const latlng = new google.maps.LatLng(lat, lng);
-            const request = { latLng: latlng };
+            const request = { location: latlng };
             geocoder.geocode(request, (results, status) => {
                 if (status === google.maps.GeocoderStatus.OK) {
                 const result = results[0];
