@@ -310,6 +310,9 @@ export class DeviceListComponent implements OnInit {
                 break;
             }
             case filterParams['Franchise']: {
+                for (let d of this.deviceList.value) {
+                    console.log(d.name, d.device_settings)
+                }
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
                 break;
             }

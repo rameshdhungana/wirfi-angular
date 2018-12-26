@@ -27,6 +27,7 @@
     "@types/d3": "^5.0.0",
     "@types/node": "^8.9.5",
     "add": "^2.0.6",
+    "agm-direction": "^0.7.5",
     "angular-6-datatable": "^0.8.0",
     "angular-font-awesome": "^3.1.2",
     "bootstrap": "^4.1.2",

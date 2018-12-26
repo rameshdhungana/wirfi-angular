@@ -64,14 +64,15 @@ import {SleepDeviceComponent} from './devices/sleep-device/sleep-device.componen
 import {ConnectToHiddenNetworkComponent} from './devices/network-setting/connect-to-hidden-network/connect-to-hidden-network.component';
 import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-network-setting/delete-network-setting.component';
 import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
-import { SuperadminDashboardComponent } from './super-admin/superadmin-dashboard/superadmin-dashboard.component';
-import { AdminActivityLogComponent } from './super-admin/admin-activity-log/admin-activity-log.component';
-import { UsersListComponent } from './super-admin/users-list/users-list.component';
-import { SlashUrlComponent } from './slash-url/slash-url.component';
-import { UserCreateComponent } from './super-admin/user-create/user-create.component'
+import {SuperadminDashboardComponent} from './super-admin/superadmin-dashboard/superadmin-dashboard.component';
+import {AdminActivityLogComponent} from './super-admin/admin-activity-log/admin-activity-log.component';
+import {UsersListComponent} from './super-admin/users-list/users-list.component';
+import {SlashUrlComponent} from './slash-url/slash-url.component';
+import {UserCreateComponent} from './super-admin/user-create/user-create.component'
 import {AdminActivityLogService} from "./_services/admin-activity-log.service";
 import {DataTableModule} from "angular-6-datatable";
-import { DeleteUserComponent } from './super-admin/delete-user/delete-user.component';
+import {DeleteUserComponent} from './super-admin/delete-user/delete-user.component';
+import {AgmDirectionModule} from "agm-direction";
 
 @NgModule({
     declarations: [
@@ -144,6 +145,7 @@ import { DeleteUserComponent } from './super-admin/delete-user/delete-user.compo
             libraries: ['places',
                 'geometry']
         }),
+        AgmDirectionModule,
 
     ],
     providers: [

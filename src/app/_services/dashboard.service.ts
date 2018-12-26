@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DashboardService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+    constructor(private http: HttpClient) {
+    }
 
-  getDashboard() {
-    return this.http.get('dashboard/');
-  }
+    getDashboard() {
+        return this.http.get('dashboard/');
+    }
+
+    getDeviceLocation() {
+       return this.http.get('device/locations/');
+    }
 }
