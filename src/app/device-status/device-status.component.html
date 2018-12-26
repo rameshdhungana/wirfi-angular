@@ -1,0 +1,36 @@
+<div class="text-white panel m-5">
+  <h2 class="text-center">Add Device Status</h2>
+  <form [class.was-validated]="statusForm.submitted" #statusForm='ngForm'
+        (ngSubmit)='onSubmit(statusForm)'>
+
+    <div class="row ">
+      <div class="col-md-12">
+          <div class="form-group">
+              <label class="text-white">Device</label>
+              <select id="device" name="device" class="form-control" ngModel #device required>
+                  <option value="" disabled selected>Select Device</option>
+                  <option *ngFor="let device of deviceList" [value]="device.id">
+                      {{device.name}} &#9679; {{device.industry_type.name}}
+                  </option>
+              </select>
+          </div>
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-md-12">
+          <div class="form-group">
+              <label class="text-white">Status</label>
+              <select id="status" name="status" class="form-control" ngModel #status required>
+                  <option value="" disabled selected>Select Status</option>
+                  <option *ngFor="let status of statusList" [value]="status.id">
+                      {{status.name}}
+                  </option>
+              </select>
+          </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-light float-right ">Add</button>
+  </form>
+</div>

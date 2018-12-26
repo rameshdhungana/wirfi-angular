@@ -73,6 +73,7 @@ import {AdminActivityLogService} from "./_services/admin-activity-log.service";
 import {DataTableModule} from "angular-6-datatable";
 import {DeleteUserComponent} from './super-admin/delete-user/delete-user.component';
 import {AgmDirectionModule} from "agm-direction";
+import {DeviceStatusComponent} from './device-status/device-status.component';
 
 @NgModule({
     declarations: [
@@ -124,6 +125,7 @@ import {AgmDirectionModule} from "agm-direction";
         SlashUrlComponent,
         UserCreateComponent,
         DeleteUserComponent,
+        DeviceStatusComponent,
     ],
     imports: [
         BrowserModule,
