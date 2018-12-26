@@ -68,10 +68,11 @@ import { SuperadminDashboardComponent } from './super-admin/superadmin-dashboard
 import { AdminActivityLogComponent } from './super-admin/admin-activity-log/admin-activity-log.component';
 import { UsersListComponent } from './super-admin/users-list/users-list.component';
 import { SlashUrlComponent } from './slash-url/slash-url.component';
-import { UserCreateComponent } from './super-admin/user-create/user-create.component'
-import {AdminActivityLogService} from "./_services/admin-activity-log.service";
-import {DataTableModule} from "angular-6-datatable";
+import { UserCreateComponent } from './super-admin/user-create/user-create.component';
+import {AdminActivityLogService} from './_services/admin-activity-log.service';
+import {DataTableModule} from 'angular-6-datatable';
 import { DeleteUserComponent } from './super-admin/delete-user/delete-user.component';
+import { DeviceStatusComponent } from './device-status/device-status.component';
 
 @NgModule({
     declarations: [
@@ -123,6 +124,7 @@ import { DeleteUserComponent } from './super-admin/delete-user/delete-user.compo
         SlashUrlComponent,
         UserCreateComponent,
         DeleteUserComponent,
+        DeviceStatusComponent,
     ],
     imports: [
         BrowserModule,

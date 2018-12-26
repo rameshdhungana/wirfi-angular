@@ -94,4 +94,12 @@ export class DeviceService {
         return this.http.post(`device/${id}/sleep/`, data);
     }
 
+    getStatus() {
+        return this.http.get(`device-status`);
+    }
+
+    postDeviceStatus(data) {
+        return this.http.post(`device-status/`, data);
+    }
+
 }
