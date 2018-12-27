@@ -43,7 +43,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <agm-map [longitude]="long" [latitude]="lat">
+                <agm-map [longitude]="lng" [latitude]="lat">
                     <agm-marker *ngFor="let location of deviceLocations" [latitude]="location.latitude"
                                 [longitude]="location.longitude">
                     </agm-marker>

@@ -714,6 +714,11 @@ agent-base@^4.1.0:
   dependencies:
     es6-promisify "^5.0.0"
 
+agm-direction@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/agm-direction/-/agm-direction-0.7.5.tgz#27e05926468c5860bf66c56735f81e46dbd6ee46"
+  integrity sha512-sEe7uX4gh3+Dzjj5+lGrJrUDx3kOs4/NVe1/mHuBAxisSjlqxntlFme7FQ8aS8YiSD53wst6+Cy0N5X7WP8XJw==
+
 ajv-keywords@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
