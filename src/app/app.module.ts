@@ -64,16 +64,17 @@ import {SleepDeviceComponent} from './devices/sleep-device/sleep-device.componen
 import {ConnectToHiddenNetworkComponent} from './devices/network-setting/connect-to-hidden-network/connect-to-hidden-network.component';
 import {DeleteNetworkSettingComponent} from './devices/network-setting/delete-network-setting/delete-network-setting.component';
 import {AddPingServerAddressComponent} from './devices/network-setting/add-ping-server-address/add-ping-server-address.component';
-import {SuperadminDashboardComponent} from './super-admin/superadmin-dashboard/superadmin-dashboard.component';
-import {AdminActivityLogComponent} from './super-admin/admin-activity-log/admin-activity-log.component';
-import {UsersListComponent} from './super-admin/users-list/users-list.component';
-import {SlashUrlComponent} from './slash-url/slash-url.component';
-import {UserCreateComponent} from './super-admin/user-create/user-create.component'
-import {AdminActivityLogService} from "./_services/admin-activity-log.service";
-import {DataTableModule} from "angular-6-datatable";
-import {DeleteUserComponent} from './super-admin/delete-user/delete-user.component';
-import {AgmDirectionModule} from "agm-direction";
-import {DeviceStatusComponent} from './device-status/device-status.component';
+import { SuperadminDashboardComponent } from './super-admin/superadmin-dashboard/superadmin-dashboard.component';
+import { AdminActivityLogComponent } from './super-admin/admin-activity-log/admin-activity-log.component';
+import { UsersListComponent } from './super-admin/users-list/users-list.component';
+import { SlashUrlComponent } from './slash-url/slash-url.component';
+import { UserCreateComponent } from './super-admin/user-create/user-create.component';
+import {AdminActivityLogService} from './_services/admin-activity-log.service';
+import {DataTableModule} from 'angular-6-datatable';
+import { DeleteUserComponent } from './super-admin/delete-user/delete-user.component';
+import { PusherService } from './_services/pusher.service';
+import { NotificationService } from './_services/notification.service';
+import { DeviceStatusComponent } from './device-status/device-status.component';
 
 @NgModule({
     declarations: [
@@ -162,6 +163,8 @@ import {DeviceStatusComponent} from './device-status/device-status.component';
         CustomErrorService,
         IndustryService,
         AdminActivityLogService,
+        PusherService,
+        NotificationService,
 
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
