@@ -75,6 +75,8 @@ import {DeleteUserComponent} from './super-admin/delete-user/delete-user.compone
 import {AgmDirectionModule} from "agm-direction";
 import {DeviceStatusComponent} from './device-status/device-status.component';
 import { PlanRouteComponent } from './devices/plan-route/plan-route.component';
+import { PusherService } from './_services/pusher.service';
+import { NotificationService } from './_services/notification.service';
 
 @NgModule({
     declarations: [
@@ -164,6 +166,8 @@ import { PlanRouteComponent } from './devices/plan-route/plan-route.component';
         CustomErrorService,
         IndustryService,
         AdminActivityLogService,
+        PusherService,
+        NotificationService,
 
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
