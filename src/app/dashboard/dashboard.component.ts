@@ -12,8 +12,6 @@ import * as cloneDeep from 'lodash/cloneDeep';
 })
 export class DashboardComponent implements OnInit {
     donut_chart: Array<any>;
-    public origin: any;
-    public destination: any;
     doughnut_filter_data = [
         {
             'status': 'ONLINE',
@@ -246,8 +244,9 @@ export class DashboardComponent implements OnInit {
     filtered_data_toggle: object;
     private no_of_devices = 0;
     public deviceLocations;
-    lat: number = 51.673858;
-    lng: number = 7.815982;
+    lat: number = 26.890959;
+    lng: number = -80.116577;
+
 
     constructor(private googleapiService: GoogleApiService,
                 private dashboardservice: DashboardService) {
@@ -268,19 +267,13 @@ export class DashboardComponent implements OnInit {
             this.sumDonutChart(this.donut_chart);
             this.createDoughnutChart(ctx, this.doughnut_filter_data);
         });
-        this.getDirection();
         this.dashboardservice.getDeviceLocation().subscribe(locationResponse => {
-            console.log('this is the list of the devices loccation', this.deviceLocations);
             this.deviceLocations = locationResponse;
+            console.log('this is the list of the devices loccation', this.deviceLocations);
+
+
         })
     }
-
-    //this is used for the routes in google map between the devices location
-    getDirection() {
-        this.origin = {lat: 24.799448, lng: 120.979021};
-        this.destination = {lat: 24.799524, lng: 120.975017};
-
-    };
 
 
     ngAfterViewInit() {

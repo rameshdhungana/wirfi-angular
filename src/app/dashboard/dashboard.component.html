@@ -41,14 +41,20 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <agm-map [longitude]="long" [latitude]="lat">
-                    <agm-marker *ngFor="let location of deviceLocations" [latitude]="location.latitude"
+        <div class="row ml-1 mr-1">
+            <div class="col-12">
+                <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="4">
+                    <agm-marker *ngFor="let location of deviceLocations" [latitude]="location.latitude" [iconUrl]=""
                                 [longitude]="location.longitude">
                     </agm-marker>
+
+
+
                 </agm-map>
 
+                <div class="col-12 text-center pt-2 pb-2">
+                    <button class="btn btn-lg btn-outline-light" routerLink="/plan-route">Plan a Route</button>
+                </div>
             </div>
         </div>
     </div>
