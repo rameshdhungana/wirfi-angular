@@ -74,6 +74,7 @@ import {DataTableModule} from "angular-6-datatable";
 import {DeleteUserComponent} from './super-admin/delete-user/delete-user.component';
 import {AgmDirectionModule} from "agm-direction";
 import {DeviceStatusComponent} from './device-status/device-status.component';
+import { PlanRouteComponent } from './devices/plan-route/plan-route.component';
 
 @NgModule({
     declarations: [
@@ -126,6 +127,7 @@ import {DeviceStatusComponent} from './device-status/device-status.component';
         UserCreateComponent,
         DeleteUserComponent,
         DeviceStatusComponent,
+        PlanRouteComponent,
     ],
     imports: [
         BrowserModule,
@@ -175,7 +177,6 @@ import {DeviceStatusComponent} from './device-status/device-status.component';
         PresetFilterComponent,
         MuteDeviceComponent,
         DeletePresetComponent,
-        DeleteIndustryTypeComponent,
         AddIndustryTypeComponent,
         DeleteIndustryTypeComponent,
         DeleteFranchiseTypeComponent,
