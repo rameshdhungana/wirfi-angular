@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row m-1 mt-3">
+        <div class="col-12">
+            <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="4">
+                <agm-marker *ngFor="let location of deviceLocations;let i =index" [latitude]="location.latitude" iconUrl="../../assets/images/green-marker.png"
+                            (markerClick)="addPointToPlanRoute(location,i)"
+                            [longitude]="location.longitude">
+                </agm-marker>
+
+                <ng-container *ngIf="getDirectionButtonClicked">
+                    <agm-direction *ngFor="let index of routeCounter" [origin]="planRouteLatLngList[index]"
+                                   [destination]="planRouteLatLngList[index+1]">
+                    </agm-direction>
+                </ng-container>
+
+            </agm-map>
+
+            <div class="col-12 text-center pt-2 pb-2">
+                <button class="btn btn-lg btn-outline-light mr-5" (click)="getDirection()" [disabled]="planRouteLatLngList.length < 2">Get Direction</button>
+                <button class="btn btn-lg btn-outline-light ml-5" [disabled]="true">Share Direction</button>
+            </div>
+        </div>
+    </div>
+</div>
