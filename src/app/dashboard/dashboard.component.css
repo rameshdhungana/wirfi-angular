@@ -1,3 +1,13 @@
+.status_dot {
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%; 
+    display: inline-block;
+}
+
+#deviceLineChart {
+    overflow-x: auto;
+}
 
 .line {
     fill: none;

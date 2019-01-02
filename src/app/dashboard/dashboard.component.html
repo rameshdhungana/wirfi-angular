@@ -1,42 +1,83 @@
 <div class="container-fluid p-0">
-    <div class=" device-container">
-
-        <div class="row">
-            <div class="card col-8 mx-auto" style="height:250px">
-                <fieldset class="text-white">
+    <div class=" device-container mx-5">
+        <div class="my-3">
+            <div class="row">
+                <!-- <fieldset class="text-white mx-5">
                     <label *ngFor="let item of industry_types_doughnut_graph">
                         <input type="checkbox" [(ngModel)]="value_of_checkbox[item]"
-                               (change)="toggleFeatureDoughnut(item,$event.target.checked)"/> {{item}}
+                                (change)="toggleFeatureDoughnut(item,$event.target.checked)"/> {{item}}
                     </label>
-                </fieldset>
-                <div class="doughnut_chart" id="doughnut_chart">
+                </fieldset> -->
 
+                <div class="col-12 text-white">
+                    <h5>Network Status </h5>
                 </div>
             </div>
-        </div>
-        <div class="row" style="height:400px;">
-            <div class="card col">
-                <h4 class="text-white text-center">Network Locations</h4>
-            </div>
-            <div class="card col">
-                <div class="d-flex h-100 justify-content-center align-items-center">
-                    <a class="btn btn-primary text-white" routerLink="/device-add">
-                        <i class="fa fa-plus text-white"></i> <br>Add New Devices
-                    </a>
+
+            <div class="row">
+                <div class="col-sm-6 col-md-2">
+                    <div class="doughnut_chart pl-2" id="doughnut_chart">
+
+                    </div>
                 </div>
+
+                <div class=" col-sm-6 col-md-3 text-white">
+                    <ul style="list-style: none;">
+                        <li class="pt-1 pb-2"> 
+                            <span class="dot status_dot" style="background-color: #4aec26;"></span>
+                            {{doughnut_filter_data[0].value}} ONLINE
+                        </li>
+                        <li class="pt-1 pb-2"> 
+                            <span class="dot status_dot" style="background-color: #5576e4;"></span>
+                            {{doughnut_filter_data[1].value}} USING CELLULAR
+                        </li>
+                        <li class="pt-1 pb-2"> 
+                            <span class="dot status_dot" style="background-color: #f0fc00;"></span>
+                            {{doughnut_filter_data[2].value}} WITH POOR SIGNAL
+                        </li>
+                        <li class="pt-1 pb-2"> 
+                            <span class="dot status_dot" style="background-color: #faac00;"></span>
+                            {{doughnut_filter_data[3].value}} MISSED PING
+                        </li>
+                        <li class="pt-1 pb-2"> 
+                            <span class="dot status_dot" style="background-color: #dd0000;"></span>
+                            {{doughnut_filter_data[4].value}} OFFLINE
+                        </li>
+                        <li class="pt-1 pb-2"> 
+                            <span class="dot status_dot" style="background-color: gray;"></span>
+                            {{doughnut_filter_data[5].value}} ASLEEP
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-7" id="deviceLineChart">
+                    <!-- <fieldset class="text-white">
+                        <label *ngFor="let item of industry_types_line_graph">
+                            <input type="checkbox" [(ngModel)]="value_of_checkbox[item]"
+                                (change)="toggleFeature(item,$event.target.checked)"/> {{item}}
+                        </label>
+                    </fieldset> -->
+                    <div class="linec_chart" id="line_chart">
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">
-                <fieldset class="text-white">
-                    <label *ngFor="let item of industry_types_line_graph">
-                        <input type="checkbox" [(ngModel)]="value_of_checkbox[item]"
-                               (change)="toggleFeature(item,$event.target.checked)"/> {{item}}
-                    </label>
-                </fieldset>
-                <div class="linec_chart" id="line_chart">
-
+            <div class="col-md-6 pr-0">
+                <div class="card" style="height:400px;">
+                    <h4 class="text-white text-center">Network Locations</h4>
+                </div>
+            </div>
+            <div class="col-md-6 pl-0">
+                <div class="card" style="height:400px;">
+                    <div class="d-flex h-100 justify-content-center align-items-center">
+                        <a class="btn btn-primary text-white" routerLink="/device-add">
+                            <i class="fa fa-plus text-white"></i> <br>Add New Devices
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
