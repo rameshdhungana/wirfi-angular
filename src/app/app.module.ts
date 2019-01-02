@@ -41,7 +41,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UiSwitchModule} from 'ngx-toggle-switch';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DeletecardComponent} from './billing/deletecard/deletecard.component';
-import {AgmCoreModule} from '@agm/core';
+import {AgmCoreModule, GoogleMapsAPIWrapper} from '@agm/core';
 import {UpdatecardComponent} from './billing/updatecard/updatecard.component';
 import {TimeComparatorDirective} from './shared/time-comparator.directive';
 import {ProfileFormComponent} from './profile-form/profile-form.component';
@@ -74,9 +74,9 @@ import {DataTableModule} from "angular-6-datatable";
 import {DeleteUserComponent} from './super-admin/delete-user/delete-user.component';
 import {AgmDirectionModule} from "agm-direction";
 import {DeviceStatusComponent} from './device-status/device-status.component';
-import { PlanRouteComponent } from './devices/plan-route/plan-route.component';
-import { PusherService } from './_services/pusher.service';
-import { NotificationService } from './_services/notification.service';
+import {PlanRouteComponent} from './devices/plan-route/plan-route.component';
+import {PusherService} from './_services/pusher.service';
+import {NotificationService} from './_services/notification.service';
 
 @NgModule({
     declarations: [
@@ -168,6 +168,7 @@ import { NotificationService } from './_services/notification.service';
         AdminActivityLogService,
         PusherService,
         NotificationService,
+        GoogleMapsAPIWrapper,
 
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
