@@ -1,35 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { UserService } from '../../_services/user.service';
-import { AlertService } from '../../_services/alert.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {UserService} from '../../_services/user.service';
+import {AlertService} from '../../_services/alert.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-user-create',
-  templateUrl: './user-create.component.html',
-  styleUrls: ['./user-create.component.css']
+    selector: 'app-user-create',
+    templateUrl: './user-create.component.html',
+    styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
-  userTypes = [['Administrator', true], ['Basic User', false]];
+    userTypes = [['Administrator', true], ['Basic User', false]];
+    emailAlreadyExits = false;
 
-  constructor(
-    private userService: UserService,
-    private alertService: AlertService,
-    private router: Router
-  ) { }
+    constructor(private userService: UserService,
+                private alertService: AlertService,
+                private router: Router) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  onSubmit(data: NgForm) {
-      if (data.valid) {
-          console.log(data.value);
-          this.userService.createUser(data.value).subscribe(
-            (response) => {
-              this.alertService.success('User created successfully');
-              this.router.navigateByUrl('users-list');
-          });
-      }
-  }
+    onSubmit(data: NgForm) {
+        if (data.valid) {
+            console.log(data.value);
+            this.userService.createUser(data.value).subscribe(
+                (response) => {
+                    this.alertService.success('User created successfully');
+                    this.router.navigateByUrl('users-list');
+                }, error2 => {
+                    console.log(error2.error.message === '\'email\': user with this email address already exists.', 'this is error')
+                    if (error2.error.message === '\'email\': user with this email address already exists.') {
+                        this.emailAlreadyExits = true;
+                    }
+                });
+        }
+    }
 
 }
