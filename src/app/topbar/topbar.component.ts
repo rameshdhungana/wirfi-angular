@@ -23,8 +23,6 @@ export class TopbarComponent implements OnInit {
             // ngZone.run will help to run change detection
             this.ngZone.run(() => {
                 if (window.innerWidth < 768) {
-                    console.log('smaller');
-
                     this.isCollapsed = true;
                     this.isCollapsedChange.emit(this.isCollapsed);
 

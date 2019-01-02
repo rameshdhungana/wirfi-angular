@@ -39,32 +39,7 @@ export class DashboardComponent implements OnInit {
         }
     ];
 
-    doughnut_filter_data_toggle = [
-        {
-            'status': 'ONLINE',
-            'value': 0
-        },
-        {
-            'status': 'CELL',
-            'value': 0
-        },
-        {
-            'status': 'AUTO RECOVER',
-            'value': 0
-        },
-        {
-            'status': 'WEAK SIGNAL',
-            'value': 0
-        },
-        {
-            'status': 'OFFLINE',
-            'value': 0
-        },
-        {
-            'status': 'ASLEEP',
-            'value': 0
-        }
-    ];
+    doughnut_filter_data_toggle = cloneDeep(this.doughnut_filter_data);
 
     industry_types_line_graph = [];
     industry_types_doughnut_graph = [];
@@ -73,72 +48,72 @@ export class DashboardComponent implements OnInit {
     value_of_checkbox = [];
 
     data_new = {
-        'type1': [
-            {
-                'device_name': 'device1',
-                'address': 'address',
-                'data': [
-                    {
-                        'date': '01:00:00',
-                        'status': 4
-                    },
-                    {
-                        'date': '02:00:00',
-                        'status': 2
-                    },
-                    {
-                        'date': '03:00:00',
-                        'status': 3
-                    },
-                    {
-                        'date': '04:00:00',
-                        'status': 4
-                    },
-                    {
-                        'date': '05:00:00',
-                        'status': 5
-                    },
-                    {
-                        'date': '06:00:00',
-                        'status': 6
-                    },
-                    {
-                        'date': '06:10:00',
-                        'status': 2
-                    },
-                    {
-                        'date': '09:01:00',
-                        'status': 2
-                    }
-                ]
-            },
-            {
-                'device_name': 'device2',
-                'address': 'address',
-                'data': [
-                    {
-                        'date': '01:00:00',
-                        'status': 6
-                    },
-                    {
-                        'date': '03:00:00',
-                        'status': 3
-                    },
-                    {
-                        'date': '05:00:00',
-                        'status': 5
-                    },
-                    {
-                        'date': '08:00:00',
-                        'status': 6
-                    },
-                    {
-                        'date': '09:01:00',
-                        'status': 6
-                    }
-                ]
-            }
-        ],
+        // 'type1': [
+        //     {
+        //         'device_name': 'device1',
+        //         'address': 'address',
+        //         'data': [
+        //             {
+        //                 'date': '01:00:00',
+        //                 'status': 4
+        //             },
+        //             {
+        //                 'date': '02:00:00',
+        //                 'status': 2
+        //             },
+        //             {
+        //                 'date': '03:00:00',
+        //                 'status': 3
+        //             },
+        //             {
+        //                 'date': '04:00:00',
+        //                 'status': 4
+        //             },
+        //             {
+        //                 'date': '05:00:00',
+        //                 'status': 5
+        //             },
+        //             {
+        //                 'date': '06:00:00',
+        //                 'status': 6
+        //             },
+        //             {
+        //                 'date': '06:10:00',
+        //                 'status': 2
+        //             },
+        //             {
+        //                 'date': '09:01:00',
+        //                 'status': 2
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         'device_name': 'device2',
+        //         'address': 'address',
+        //         'data': [
+        //             {
+        //                 'date': '01:00:00',
+        //                 'status': 6
+        //             },
+        //             {
+        //                 'date': '03:00:00',
+        //                 'status': 3
+        //             },
+        //             {
+        //                 'date': '05:00:00',
+        //                 'status': 5
+        //             },
+        //             {
+        //                 'date': '08:00:00',
+        //                 'status': 6
+        //             },
+        //             {
+        //                 'date': '09:01:00',
+        //                 'status': 6
+        //             }
+        //         ]
+        //     }
+        // ],
         type2: [
             {
                 'device_name': 'device3',
@@ -248,9 +223,10 @@ export class DashboardComponent implements OnInit {
     lng: number = -80.116577;
 
 
-    constructor(private googleapiService: GoogleApiService,
-                private dashboardservice: DashboardService) {
-    }
+    constructor(
+        private googleapiService: GoogleApiService,
+        private dashboardservice: DashboardService
+    ) { }
 
     ngOnInit() {
         this.dashboardservice.getDashboard().subscribe(response => {
@@ -267,14 +243,14 @@ export class DashboardComponent implements OnInit {
             this.sumDonutChart(this.donut_chart);
             this.createDoughnutChart(ctx, this.doughnut_filter_data);
         });
+
         this.dashboardservice.getDeviceLocation().subscribe(locationResponse => {
             this.deviceLocations = locationResponse;
             console.log('this is the list of the devices loccation', this.deviceLocations);
 
 
-        })
+        });
     }
-
 
     ngAfterViewInit() {
         for (const industry_type in this.data_new) {
@@ -313,9 +289,9 @@ export class DashboardComponent implements OnInit {
 
     createLineGraph(data) {
         d3.select('#line_chart svg').remove();
-        const margin = {top: 20, right: 150, bottom: 30, left: 50};
-        const width = 960 - margin.left - margin.right;
-        const height = 302 - margin.top - margin.bottom;
+        const margin = {top: 0, right: 20, bottom: 30, left: 20};
+        const width = 650 - margin.left - margin.right;
+        const height = 240 - margin.top - margin.bottom;
         const status_colors = [
             '#1e7431',
             '#413a7f',
@@ -339,7 +315,7 @@ export class DashboardComponent implements OnInit {
 
         const line_color = 'white';
 
-        // append the svg obgect to the body of the page
+        // append the svg object to the body of the page
         // appends a 'group' element to 'svg'
         // moves the 'group' element to the top left margin
         const svg = d3
@@ -348,7 +324,9 @@ export class DashboardComponent implements OnInit {
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
             .append('g')
-            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+            .style('background-color', '#30374a')
+            .style('z-index', 10);
 
         // status labels
         // svg.append('text')
@@ -391,63 +369,82 @@ export class DashboardComponent implements OnInit {
         // .text('3 Offline');
 
         // fill color
-        for (const index in status_colors) {
-            if (status_colors[index]) {
-                svg
-                    .append('rect')
-                    .attr('width', width)
-                    .attr('height', height / 6)
-                    .attr(
-                        'transform',
-                        'translate(0,' + (height / 6) * Number(index) + ')'
-                    )
-                    .attr('fill', status_colors[index])
-                    .attr('stop-opacity', 0);
-            }
+        // for (const index in status_colors) {
+        //     if (status_colors[index]) {
+        //         svg
+        //             .append('rect')
+        //             .attr('width', width)
+        //             .attr('height', height / 6)
+        //             .attr(
+        //                 'transform',
+        //                 'translate(0,' + (height / 6) * Number(index) + ')'
+        //             )
+        //             .attr('fill', status_colors[index])
+        //             .attr('stop-opacity', 0);
+        //     }
+        // }
+
+        // draw separator
+        for (let i = 0; i <= status_colors.length; i++) {
+            svg
+                .append('line')
+                .attr('x1', 0)
+                .attr('x2', width)
+                .attr('y1', (height / 6) * i)
+                .attr('y2', (height / 6) * i)
+                .attr('stroke', 'black')
+                .attr('stroke-width', 0.5);
+                // .attr('height', height / 6)
+                // .attr(
+                //     'transform',
+                //     'translate(0,' + (height / 6) * Number(index) + ')'
+                // )
+                // .attr('fill', status_colors[index])
+                // .attr('stop-opacity', 0);
         }
 
         // add gradient
-        for (const index in status_colors) {
-            if (status_colors[index]) {
-                const gradient = svg
-                    .append('defs')
-                    .append('linearGradient')
-                    .attr('id', 'gradient')
-                    .attr('x1', '0%')
-                    .attr('y1', '50%')
-                    .attr('x2', '100%')
-                    .attr('y2', '50%')
-                    .attr('spreadMethod', 'pad');
+        // for (const index in status_colors) {
+        //     if (status_colors[index]) {
+        //         const gradient = svg
+        //             .append('defs')
+        //             .append('linearGradient')
+        //             .attr('id', 'gradient')
+        //             .attr('x1', '0%')
+        //             .attr('y1', '50%')
+        //             .attr('x2', '100%')
+        //             .attr('y2', '50%')
+        //             .attr('spreadMethod', 'pad');
 
-                gradient
-                    .append('stop')
-                    .attr('offset', '0%')
-                    .attr('stop-color', '#000')
-                    .attr('stop-opacity', 0.55);
+        //         gradient
+        //             .append('stop')
+        //             .attr('offset', '0%')
+        //             .attr('stop-color', '#000')
+        //             .attr('stop-opacity', 0.55);
 
-                gradient
-                    .append('stop')
-                    .attr('offset', '87%')
-                    .attr('stop-color', '#000')
-                    .attr('stop-opacity', 0.55);
+        //         gradient
+        //             .append('stop')
+        //             .attr('offset', '87%')
+        //             .attr('stop-color', '#000')
+        //             .attr('stop-opacity', 0.55);
 
-                gradient
-                    .append('stop')
-                    .attr('offset', '100%')
-                    .attr('stop-color', '#fff')
-                    .attr('stop-opacity', 0.1);
+        //         gradient
+        //             .append('stop')
+        //             .attr('offset', '100%')
+        //             .attr('stop-color', '#fff')
+        //             .attr('stop-opacity', 0.1);
 
-                svg
-                    .append('rect')
-                    .attr('width', width)
-                    .attr('height', height / 6)
-                    .attr(
-                        'transform',
-                        'translate(' + 0 + ',' + (height / 6) * Number(index) + ')'
-                    )
-                    .attr('fill', 'url(#gradient)');
-            }
-        }
+        //         svg
+        //             .append('rect')
+        //             .attr('width', width)
+        //             .attr('height', height / 6)
+        //             .attr(
+        //                 'transform',
+        //                 'translate(' + 0 + ',' + (height / 6) * Number(index) + ')'
+        //             )
+        //             .attr('fill', 'url(#gradient)');
+        //     }
+        // }
 
         for (const index_industry in this.filtered_data) {
             if (this.filtered_data[index_industry]) {
@@ -505,7 +502,7 @@ export class DashboardComponent implements OnInit {
                                 .append('path')
                                 .datum(line_graph_data)
                                 .attr('class', 'line')
-                                .style('stroke-width', '2')
+                                .style('stroke-width', '1.5')
                                 .style('fill', function (d) {
                                     return 'rgba(0, 0, 0, 0)';
                                 })
@@ -520,7 +517,7 @@ export class DashboardComponent implements OnInit {
                                         .style('top', d3.event.pageY - 28 + 'px');
 
                                     d3.select(this)
-                                        .style('stroke-width', '4');
+                                        .style('stroke-width', '3.5');
                                 })
                                 .on('mouseout', function (d) {
                                     div
@@ -529,7 +526,7 @@ export class DashboardComponent implements OnInit {
                                         .style('opacity', 0);
 
                                     d3.select(this)
-                                        .style('stroke-width', '2');
+                                        .style('stroke-width', '1.5');
                                 })
                                 .style('stroke', function () {
                                     // Add the colour
@@ -698,8 +695,8 @@ export class DashboardComponent implements OnInit {
     // doughnut chart
     createDoughnutChart(node, data) {
         d3.select('#doughnut_chart svg').remove();
-        const width = 200;
-        const height = 200;
+        const width = 180;
+        const height = 180;
         const radius = Math.min(width, height) / 2;
         const color = d3
             .scaleOrdinal()
@@ -741,6 +738,7 @@ export class DashboardComponent implements OnInit {
             .attr('fill', function (d: any): any {
                 return color(d.data.status);
             });
+
         canvas
             .append('text')
             .attr('transform', function (d) {
