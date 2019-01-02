@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardService} from "../../_services/dashboard.service";
-import {BehaviorSubject, Subject} from "rxjs/Rx";
+import {GoogleMapsAPIWrapper} from "@agm/core";
 
 @Component({
     selector: 'app-plan-route',
@@ -97,7 +97,6 @@ export class PlanRouteComponent implements OnInit {
 
     getDirection() {
         this.getDirectionButtonClicked = true;
-
         this.selectedDirectionList = [];
         this.origin = this.planRouteLatLngList[0];
         this.destination = this.planRouteLatLngList[this.planRouteLatLngList.length - 1];
@@ -113,7 +112,6 @@ export class PlanRouteComponent implements OnInit {
 
             console.log(this.selectedDirectionList, 'this is selected list in get direction', 'refresh');
 
-            // this.deviceLocations = this.planRouteLatLngList;
 
 
         }

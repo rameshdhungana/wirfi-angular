@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mb-2">
                 <div class="col-sm-6 col-md-2">
                     <div class="doughnut_chart pl-2" id="doughnut_chart">
 
@@ -23,33 +23,33 @@
 
                 <div class=" col-sm-6 col-md-3 text-white">
                     <ul style="list-style: none;">
-                        <li class="pt-1 pb-2"> 
+                        <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: #4aec26;"></span>
                             {{doughnut_filter_data[0].value}} ONLINE
                         </li>
-                        <li class="pt-1 pb-2"> 
+                        <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: #5576e4;"></span>
                             {{doughnut_filter_data[1].value}} USING CELLULAR
                         </li>
-                        <li class="pt-1 pb-2"> 
+                        <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: #f0fc00;"></span>
                             {{doughnut_filter_data[2].value}} WITH POOR SIGNAL
                         </li>
-                        <li class="pt-1 pb-2"> 
+                        <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: #faac00;"></span>
                             {{doughnut_filter_data[3].value}} MISSED PING
                         </li>
-                        <li class="pt-1 pb-2"> 
+                        <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: #dd0000;"></span>
                             {{doughnut_filter_data[4].value}} OFFLINE
                         </li>
-                        <li class="pt-1 pb-2"> 
+                        <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: gray;"></span>
                             {{doughnut_filter_data[5].value}} ASLEEP
                         </li>
                     </ul>
                 </div>
-                
+
                 <div class="col-md-7" id="deviceLineChart">
                     <!-- <fieldset class="text-white">
                         <label *ngFor="let item of industry_types_line_graph">
@@ -65,25 +65,9 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 pr-0">
-                <div class="card" style="height:400px;">
-                    <h4 class="text-white text-center">Network Locations</h4>
-                </div>
-            </div>
-            <div class="col-md-6 pl-0">
-                <div class="card" style="height:400px;">
-                    <div class="d-flex h-100 justify-content-center align-items-center">
-                        <a class="btn btn-primary text-white" routerLink="/device-add">
-                            <i class="fa fa-plus text-white"></i> <br>Add New Devices
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row ml-1 mr-1">
-            <div class="col-12">
+        <div class="row m-1 mt-5 mb-5" >
+            <div class="col-8">
                 <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="4">
                     <agm-marker *ngFor="let location of deviceLocations" [latitude]="location.latitude" [iconUrl]=""
                                 [longitude]="location.longitude">
@@ -96,6 +80,24 @@
                     <button class="btn btn-lg btn-outline-light" routerLink="/plan-route">Plan a Route</button>
                 </div>
             </div>
+            <div class="col-md-4 pl-0">
+                <div class="card" style="height:400px;">
+                    <div class="d-flex h-100 justify-content-center align-items-center">
+                        <a class="btn btn-primary text-white" routerLink="/device-add">
+                            <i class="fa fa-plus text-white"></i> <br>Add New Devices
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!--<div class="row">-->
+            <!--<div class="col-md-6 pr-0">-->
+                <!--<div class="card" style="height:400px;">-->
+                    <!--<h4 class="text-white text-center">Network Locations</h4>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
     </div>
 </div>

@@ -10,7 +10,8 @@
                 </agm-marker>
 
                 <ng-container *ngIf="getDirectionButtonClicked">
-                    <agm-direction *ngFor="let index of routeCounter" [origin]="origin" [waypoints]="selectedDirectionList"
+                    <agm-direction *ngFor="let index of routeCounter" [origin]="origin"
+                                   [waypoints]="selectedDirectionList"
                                    [renderOptions]="directionOptions"
                                    [destination]="destination">
                     </agm-direction>

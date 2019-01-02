@@ -8,10 +8,13 @@
                 <div class="form-group">
                     <label class="text-white">Email</label>
                     <input type="text" name="email" class="form-control" id="email"
-                           placeholder="Email" required  ngModel #email="ngModel">
+                           placeholder="Email" required ngModel #email="ngModel">
                     <div class="invisible-text text-right  text-danger">
                         <small *ngIf="userForm.submitted && email.hasError('required')">
                             This is required field.
+                        </small>
+                        <small *ngIf="userForm.submitted && emailAlreadyExits">
+                            User with this email already registered.
                         </small>
                     </div>
                 </div>
@@ -45,7 +48,7 @@
 
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label class="text-white">User Type</label>
                     <select id="is_staff" name="is_staff" class="form-control" ngModel #is_staff>
