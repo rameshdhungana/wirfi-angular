@@ -22,11 +22,11 @@ export class DashboardComponent implements OnInit {
             'value': 0
         },
         {
-            'status': 'AUTO RECOVER',
+            'status': 'WEAK SIGNAL',
             'value': 0
         },
         {
-            'status': 'WEAK SIGNAL',
+            'status': 'MISSED A PING',
             'value': 0
         },
         {
