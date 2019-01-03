@@ -118,14 +118,21 @@
                                             {{device?.device_settings?.mute_settings?.is_muted ?'UnMute':'Mute'}}
                                         </button>
                                         <ng-template #firstTimeCreated>
-                                            <button class="dropdown-item" (click)="muteDevicePopUp(device.id,true)">
+                                            <button class="dropdown-item" (click)="muteDevicePopUp(device.id, true)">
                                                 Mute
                                             </button>
                                         </ng-template>
+                                        
                                         <button class="dropdown-item" style="margin-right: 55px; cursor:default;"
                                                 (click)="sleepDevicePopUp(device.id, !device?.device_settings?.sleep_settings?.is_asleep, device?.device_settings?.sleep_settings?.sleep_start, device?.device_settings?.sleep_settings?.sleep_duration)">
                                             {{device.device_settings?.sleep_settings?.is_asleep? 'Awake': 'Sleep'}}
                                         </button>
+
+                                        <button class="dropdown-item" (click)="deleteDevice(device)">
+                                            Delete Device
+                                        </button>
+
+                                    
                                         <div style="position:relative; cursor:default;">
 
                                             <button class="dropdown-item"

@@ -11,6 +11,7 @@ import {SleepDeviceComponent} from '../sleep-device/sleep-device.component';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddNetworkSettingComponent} from '../network-setting/add-network-setting/add-network-setting.component';
 import {DeleteNetworkSettingComponent} from '../network-setting/delete-network-setting/delete-network-setting.component';
+import { DeviceDeleteComponent } from '../device-delete/device-delete.component';
 
 
 enum sortParams {
@@ -57,6 +58,10 @@ export class DeviceListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getDeviceList();
+    }
+
+    getDeviceList() {
         this.deviceService.getDeviceList().subscribe(response => {
 
             this.allDeviceList = response['data']['device'];
@@ -128,6 +133,20 @@ export class DeviceListComponent implements OnInit {
         };
         this.dialogService.openDialog(SleepDeviceComponent, data, modalSize);
 
+    }
+
+    deleteDevice(device) {
+        console.log(device);
+        const modalSize = {
+            'height': 'auto',
+            'width': 'auto'
+        };
+        this.dialogService.openDialog(DeviceDeleteComponent, device, modalSize);
+        this.dialogService.currentDialog.afterClosed().subscribe(
+            res => {
+                this.getDeviceList();
+            }
+        );
     }
 
     manageNetworkPopUp(device_id, primary_network, device_network) {

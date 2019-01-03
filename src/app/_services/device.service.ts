@@ -27,6 +27,10 @@ export class DeviceService {
         return this.http.get(`device/${id}/`);
     }
 
+    removeDevice(id) {
+        return this.http.delete(`device/${id}/`);
+    }
+
     postDeviceSno(device) {
         return this.http.post('device/', device);
     }
