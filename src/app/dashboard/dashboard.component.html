@@ -67,20 +67,22 @@
 
 
         <div class="row m-1 mt-5 mb-5" >
-            <div class="col-8">
-                <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="4">
-                    <agm-marker *ngFor="let location of deviceLocations" [latitude]="location.latitude" [iconUrl]=""
-                                [longitude]="location.longitude">
-                    </agm-marker>
+            <div class="col-md-8 p-0">
+                <div class="card">
+                    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="4">
+                        <agm-marker *ngFor="let location of deviceLocations" [latitude]="location.latitude" [iconUrl]=""
+                                    [longitude]="location.longitude">
+                        </agm-marker>
 
 
-                </agm-map>
+                    </agm-map>
 
+                </div>
                 <div class="col-12 text-center pt-2 pb-2">
                     <button class="btn btn-lg btn-outline-light" routerLink="/plan-route">Plan a Route</button>
                 </div>
             </div>
-            <div class="col-md-4 pl-0">
+            <div class="col-md-4 p-0">
                 <div class="card" style="height:400px;">
                     <div class="d-flex h-100 justify-content-center align-items-center">
                         <a class="btn btn-primary text-white" routerLink="/device-add">

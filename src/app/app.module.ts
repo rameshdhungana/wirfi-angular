@@ -69,14 +69,15 @@ import {AdminActivityLogComponent} from './super-admin/admin-activity-log/admin-
 import {UsersListComponent} from './super-admin/users-list/users-list.component';
 import {SlashUrlComponent} from './slash-url/slash-url.component';
 import {UserCreateComponent} from './super-admin/user-create/user-create.component'
-import {AdminActivityLogService} from "./_services/admin-activity-log.service";
-import {DataTableModule} from "angular-6-datatable";
+import {AdminActivityLogService} from './_services/admin-activity-log.service';
+import {DataTableModule} from 'angular-6-datatable';
 import {DeleteUserComponent} from './super-admin/delete-user/delete-user.component';
-import {AgmDirectionModule} from "agm-direction";
+import {AgmDirectionModule} from 'agm-direction';
 import {DeviceStatusComponent} from './device-status/device-status.component';
 import {PlanRouteComponent} from './devices/plan-route/plan-route.component';
 import {PusherService} from './_services/pusher.service';
 import {NotificationService} from './_services/notification.service';
+import { DeviceDeleteComponent } from './devices/device-delete/device-delete.component';
 
 @NgModule({
     declarations: [
@@ -130,6 +131,7 @@ import {NotificationService} from './_services/notification.service';
         DeleteUserComponent,
         DeviceStatusComponent,
         PlanRouteComponent,
+        DeviceDeleteComponent,
     ],
     imports: [
         BrowserModule,
@@ -189,7 +191,8 @@ import {NotificationService} from './_services/notification.service';
         DeleteNetworkSettingComponent,
         AddPingServerAddressComponent,
         AddNetworkSettingComponent,
-        DeleteUserComponent
+        DeleteUserComponent,
+        DeviceDeleteComponent
 
 
     ]
