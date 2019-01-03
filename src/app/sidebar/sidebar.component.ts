@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
     is_impersonating;
     URL = environment.API_URL;
     image;
+    notificationCount = 0;
 
     constructor(
         private authService: AuthenticationService,

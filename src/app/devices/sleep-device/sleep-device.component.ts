@@ -1,9 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material";
-import {DeviceService} from "../../_services/device.service";
-import {MaterialDialogService} from "../../_services/material-dialog.service";
-import {MessageService} from "../../_services/message.service";
-import {NgForm} from "@angular/forms";
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {DeviceService} from '../../_services/device.service';
+import {MaterialDialogService} from '../../_services/material-dialog.service';
+import {MessageService} from '../../_services/message.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-sleep-device',
@@ -19,7 +19,7 @@ export class SleepDeviceComponent implements OnInit {
     constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                 private dialogService: MaterialDialogService,
                 private deviceService: DeviceService,
-                private messageService: MessageService,) {
+                private messageService: MessageService) {
     }
 
     ngOnInit() {

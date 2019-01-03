@@ -93,14 +93,15 @@
                         <span class="nav-item-text"> Business Info</span>
                     </li>
 
-                    <li class="nav-item" [routerLink]="['device-status']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="!logged_in_user?.is_superuser" [routerLink]="['device-status']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-clipboard-check"></i>
                         <span class="nav-item-text"> Add Device Status</span>
                     </li>
 
-                    <li class="nav-item" [routerLink]="['notifications']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="!logged_in_user?.is_superuser" [routerLink]="['notifications']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-bell"></i>
                         <span class="nav-item-text"> Notifications</span>
+                        <!-- <span class="dot ml-2 text-center text-white" id="notification-red">1</span> -->
                     </li>
 
                     <li class="nav-item" [routerLink]="['change-password']" [routerLinkActive]="'active'">

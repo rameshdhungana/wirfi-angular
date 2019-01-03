@@ -11,18 +11,18 @@
             <div class="row mt-4" *ngFor="let notification of array.notifications">
                 <div class="col-md-12">
                     <div class="panel">
-                        <a (click)="updateToReadType(notification.id, notification.device.id)">
+                        <a (click)="updateToReadType(notification?.id, notification?.device?.id)">
 
                             <div class="row">
                                 <div class="col-1 text-center">
-                                    <img src="{{API_URL + notification.device.machine_photo}}"
+                                    <img src="{{API_URL + notification?.device?.machine_photo}}"
                                          width="100px" height="100px" class="rounded-circle">
                                 </div>
                                 <div class="col-8 pl-5 text-white">
                                     <div class="row">
                                         <div class="col-12 text-left font-weight-bold pb-3">
-                                            <span>{{notification.device.name}} </span><span
-                                                class="pl-2">{{notification.device.industry_type.name}}</span></div>
+                                            <span>{{notification?.device?.name}} </span><span
+                                                class="pl-2">{{notification?.device?.industry_type?.name}}</span></div>
                                         <div class="col-12 text-left"><span>{{notification.message}}</span></div>
                                         <div class="col-12 text-left faded-text">
                                             <span>{{notification.created_at|timeAgo}}</span></div>
