@@ -192,8 +192,6 @@ export class DeviceListComponent implements OnInit {
             localStorage.setItem('presetFilterSaved', JSON.stringify(presetValues));
             this.presetFilterValue.next(JSON.parse(localStorage.getItem('presetFilterSaved')));
             this.reOrderDeviceList();
-
-
         });
     }
 
