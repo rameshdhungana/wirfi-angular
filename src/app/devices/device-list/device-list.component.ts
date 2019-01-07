@@ -156,7 +156,7 @@ export class DeviceListComponent implements OnInit {
             'device_network': device_network
 
         };
-        console.log(data, 'this is for checking prim or sec')
+        console.log(data, 'this is for checking prim or sec');
         const modalSize = {
             'height': 'auto',
             'width': 'auto'
@@ -327,8 +327,8 @@ export class DeviceListComponent implements OnInit {
                 break;
             }
             case filterParams['Franchise']: {
-                for (let d of this.deviceList.value) {
-                    console.log(d.name, d.device_settings)
+                for (const d of this.deviceList.value) {
+                    console.log(d.name, d.device_settings);
                 }
                 this.deviceList.next(this.deviceList['value'].filter(device => device.device_settings.priority_settings.priority === true));
                 break;

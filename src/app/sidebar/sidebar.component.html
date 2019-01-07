@@ -5,10 +5,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col p-0">
-                        <img *ngIf="logged_in_user?.profile === null" src="../../assets/images/user-logo.png"
+                        <img *ngIf="loggedInUser?.profile === null" src="../../assets/images/user-logo.png"
                             class="img-round sidebar__user-icon"/>
 
-                         <img *ngIf="logged_in_user?.profile !== null" src="{{URL + logged_in_user?.profile?.profile_picture}}"
+                         <img *ngIf="loggedInUser?.profile !== null" src="{{URL + loggedInUser?.profile?.profile_picture}}"
                             class="img img-fluid rounded sidebar__user-icon m-1"/>
 
                         <!-- <div class="profile-picture sidebar__user-icon m-1"
@@ -21,12 +21,12 @@
                 <div class="row text-center">
                     <div class="col-12">
                         <h4 class="text-center" [ngClass]="{'invisible': !isVisible}" style="margin-bottom: .01rem !important;">
-                            {{logged_in_user?.profile?.full_name}}</h4>
+                            {{loggedInUser?.profile?.full_name}}</h4>
                     </div>
                 </div>
                 <div class="row text-center">
                     <div class="col-12">
-                        <p class="text-center text-muted mb-0" [ngClass]="{'invisible': !isVisible}">{{logged_in_user?.email}}</p>
+                        <p class="text-center text-muted mb-0" [ngClass]="{'invisible': !isVisible}">{{loggedInUser?.email}}</p>
                     </div>
                 </div>
             </div>
@@ -37,38 +37,38 @@
             <div class="col">
                 <ul class="nav flex-column">
 
-                    <li class="nav-item" *ngIf="logged_in_user?.is_superuser" [routerLink]="['admin-dashboard']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="loggedInUser?.is_superuser" [routerLink]="['admin-dashboard']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span class="nav-item-text"> Dashboard</span>
                     </li>
 
-                    <li class="nav-item " *ngIf="!logged_in_user?.is_superuser"  [routerLink]="['dashboard']" [routerLinkActive]="'active'">
+                    <li class="nav-item " *ngIf="!loggedInUser?.is_superuser"  [routerLink]="['dashboard']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span class="nav-item-text"> Dashboard</span>
                     </li>
 
-                    <li class="nav-item" *ngIf="logged_in_user?.is_superuser" [routerLink]="['users-list']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="loggedInUser?.is_superuser" [routerLink]="['users-list']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-users"></i>
                         <span class="nav-item-text"> Users</span>
                     </li>
 
-                    <li class="nav-item" *ngIf="logged_in_user?.is_superuser " [routerLink]="['admin-activity-log']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="loggedInUser?.is_superuser " [routerLink]="['admin-activity-log']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-history"></i>
                         <span class="nav-item-text"> Admin Activity Log</span>
                     </li>
 
 
-                    <li class="nav-item "  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['industry-list']" [routerLinkActive]="'active'">
+                    <li class="nav-item "  *ngIf=" !loggedInUser?.is_superuser " [routerLink]="['industry-list']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-industry"></i>
                         <span class="nav-item-text"> Industry Types</span>
                     </li>
 
-                    <li class="nav-item "  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['franchise-list']" [routerLinkActive]="'active'">
+                    <li class="nav-item "  *ngIf=" !loggedInUser?.is_superuser " [routerLink]="['franchise-list']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-code-branch"></i>
                         <span class="nav-item-text"> Location Types</span>
                     </li>
 
-                    <li class="nav-item "  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['devices']" [routerLinkActive]="'active'">
+                    <li class="nav-item "  *ngIf=" !loggedInUser?.is_superuser " [routerLink]="['devices']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-mobile"></i>
                         <span class="nav-item-text"> Devices</span>
                     </li>
@@ -83,22 +83,22 @@
                         <span class="nav-item-text"> Profile</span>
                     </li>
 
-                    <li class="nav-item"  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['billing']" [routerLinkActive]="'active'">
+                    <li class="nav-item"  *ngIf=" !loggedInUser?.is_superuser " [routerLink]="['billing']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-money-bill-alt"></i>
                         <span class="nav-item-text"> Billing</span>
                     </li>
 
-                    <li class="nav-item"  *ngIf=" !logged_in_user?.is_superuser " [routerLink]="['business']" [routerLinkActive]="'active'">
+                    <li class="nav-item"  *ngIf=" !loggedInUser?.is_superuser " [routerLink]="['business']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-building"></i>
                         <span class="nav-item-text"> Business Info</span>
                     </li>
 
-                    <li class="nav-item" *ngIf="!logged_in_user?.is_superuser" [routerLink]="['device-status']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="!loggedInUser?.is_superuser" [routerLink]="['device-status']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-clipboard-check"></i>
                         <span class="nav-item-text"> Add Device Status</span>
                     </li>
 
-                    <li class="nav-item" *ngIf="!logged_in_user?.is_superuser" [routerLink]="['notifications']" [routerLinkActive]="'active'">
+                    <li class="nav-item" *ngIf="!loggedInUser?.is_superuser" [routerLink]="['notifications']" [routerLinkActive]="'active'">
                         <i class="fas fa-fw fa-bell"></i>
                         <span class="nav-item-text"> Notifications</span>
                         <!-- <span class="dot ml-2 text-center text-white" id="notification-red">1</span> -->
@@ -110,11 +110,11 @@
                     </li>
 
                     <li class="nav-item">
-                        <div *ngIf="!is_impersonating" [routerLink]="['logout']">
+                        <div *ngIf="!isImpersonating" [routerLink]="['logout']">
                             <i class="fas fa-fw fa-sign-out-alt"></i>
                             <span class="nav-item-text"> Logout</span>
                         </div>
-                        <div *ngIf="is_impersonating" (click)="endImpersonation()">
+                        <div *ngIf="isImpersonating" (click)="endImpersonation()">
                             <i class="fas fa-fw fa-eye-slash"></i>
                             <span class="nav-item-text"> Back to Own Dashboard </span>
                         </div>

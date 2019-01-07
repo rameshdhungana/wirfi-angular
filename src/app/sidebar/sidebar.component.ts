@@ -20,8 +20,8 @@ export class SidebarComponent implements OnInit {
     @Input() isCollapseContent;
     @Output() isCollapseContentChange = new EventEmitter();
 
-    logged_in_user: any;
-    is_impersonating;
+    loggedInUser: any;
+    isImpersonating;
     URL = environment.API_URL;
     image;
     notificationCount = 0;
@@ -36,12 +36,12 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.authService.ImpersonateObs().subscribe(
             res => {
-                this.is_impersonating = res;
+                this.isImpersonating = res;
             }
         );
         this.authService.me().subscribe(response => {
-            this.logged_in_user = response['data'];
-            this.image = this.sanitization.bypassSecurityTrustStyle(`url(${this.URL}${this.logged_in_user['profile']['profile_picture']})`);
+            this.loggedInUser = response['data'];
+            this.image = this.sanitization.bypassSecurityTrustStyle(`url(${this.URL}${this.loggedInUser['profile']['profile_picture']})`);
         });
     }
 
@@ -62,7 +62,7 @@ export class SidebarComponent implements OnInit {
                 this.authService.me();
                 this.authService.ImpersonateObs().subscribe(
                     res => {
-                        this.router.navigateByUrl('admin-dashboard');
+                        this.router.navigateByUrl('');
                     }
                 );
             }

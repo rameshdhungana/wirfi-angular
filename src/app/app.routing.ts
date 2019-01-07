@@ -33,7 +33,7 @@ import { UsersListComponent } from './super-admin/users-list/users-list.componen
 import { SlashUrlComponent } from './slash-url/slash-url.component';
 import { UserCreateComponent } from './super-admin/user-create/user-create.component';
 import { DeviceStatusComponent } from './device-status/device-status.component';
-import {PlanRouteComponent} from "./devices/plan-route/plan-route.component";
+import {PlanRouteComponent} from './devices/plan-route/plan-route.component';
 
 
 const routes: Routes = [
