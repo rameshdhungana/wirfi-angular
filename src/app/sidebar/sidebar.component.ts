@@ -4,6 +4,7 @@ import {environment} from '../../environments/environment';
 import { ImpersonateService } from '../_services/impersonate.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PusherService } from '../_services/pusher.service';
 
 
 export class AppModule {
@@ -21,16 +22,19 @@ export class SidebarComponent implements OnInit {
     @Output() isCollapseContentChange = new EventEmitter();
 
     loggedInUser: any;
+    channel: any;
     isImpersonating;
     URL = environment.API_URL;
     image;
     notificationCount = 0;
+    notificationMessage: any;
 
     constructor(
         private authService: AuthenticationService,
         private impersonateService: ImpersonateService,
         private router: Router,
-        private sanitization: DomSanitizer
+        private sanitization: DomSanitizer,
+        private pusherService: PusherService
     ) {}
 
     ngOnInit() {
@@ -42,6 +46,15 @@ export class SidebarComponent implements OnInit {
         this.authService.me().subscribe(response => {
             this.loggedInUser = response['data'];
             this.image = this.sanitization.bypassSecurityTrustStyle(`url(${this.URL}${this.loggedInUser['profile']['profile_picture']})`);
+
+            // pusher
+            this.channel = this.pusherService.getPusher().subscribe(this.loggedInUser.email);
+            this.channel.bind('status-change', data => {
+                this.notificationCount = data.count;
+                this.notificationMessage = data.message;
+                console.log(this.notificationCount);
+                console.log(this.notificationMessage);
+            });
         });
     }
 
