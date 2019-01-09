@@ -5,10 +5,10 @@ import * as Pusher from 'pusher-js';
   providedIn: 'root'
 })
 export class PusherService {
-  private _pusher;
+  public _pusher;
 
   constructor() {
-    this._pusher = new Pusher('acd2ed37fe2a7fe77dcc', {
+    this._pusher = new Pusher('bedffa99f95575cb78ef', {
       cluster: 'ap2',
       encrypted: true
     });

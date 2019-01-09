@@ -14,7 +14,7 @@ export class DeviceDetailComponent implements OnInit {
     public device_data: any;
     lat: number;
     lng: number;
-    enable: boolean;
+    // enable: boolean;
     loading = false;
     days = {
         1: 'Sunday',
@@ -54,23 +54,22 @@ export class DeviceDetailComponent implements OnInit {
 
         this.deviceService.getDevice(this.device_id).subscribe(
             response => {
-                console.log(response['data']);
                 this.device_data = response['data'];
                 this.lat = response['data']['latitude'];
                 this.lng = response['data']['longitude'];
-                this.enable = response['data']['device_settings']['priority_settings']['priority'];
+                // this.enable = response['data']['device_settings']['priority_settings']['priority'];
                 this.loading = true;
         });
     }
 
-    onClickMe() {
-        this.deviceService.togglePriority(this.device_id, {'priority': this.enable}).subscribe(
-            (response) => {
-                console.log(response);
-                this.messageService.add(response['message']);
-            }
-        );
-    }
+    // onClickMe() {
+    //     this.deviceService.togglePriority(this.device_id, {'priority': this.enable}).subscribe(
+    //         (response) => {
+    //             console.log(response);
+    //             this.messageService.add(response['message']);
+    //         }
+    //     );
+    // }
 
     copyDeviceInfo() {
         const googleLink = 'https://maps.google.com/?q=' + this.lat.toString() + ',' + this.lng.toString();
