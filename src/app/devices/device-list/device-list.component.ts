@@ -12,6 +12,7 @@ import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddNetworkSettingComponent} from '../network-setting/add-network-setting/add-network-setting.component';
 import {DeleteNetworkSettingComponent} from '../network-setting/delete-network-setting/delete-network-setting.component';
 import { DeviceDeleteComponent } from '../device-delete/device-delete.component';
+import { MessageService } from '../../_services/message.service';
 
 
 enum sortParams {
@@ -51,8 +52,11 @@ export class DeviceListComponent implements OnInit {
 
     public status_dict: any;
 
-    constructor(private deviceService: DeviceService,
-                private dialogService: MaterialDialogService) {
+    constructor(
+        private deviceService: DeviceService,
+        private messageService: MessageService,
+        private dialogService: MaterialDialogService
+    ) {
         this.sortParams = sortParams;
         this.filterParams = filterParams;
     }
@@ -117,7 +121,11 @@ export class DeviceListComponent implements OnInit {
             'width': 'auto'
         };
         this.dialogService.openDialog(MuteDeviceComponent, data, modalSize);
-
+        this.dialogService.currentDialog.afterClosed().subscribe(
+            res => {
+                this.getDeviceList();
+            }
+        );
     }
 
     sleepDevicePopUp(device_id, sleep_status, sleep_start_date, sleep_duration) {
@@ -132,7 +140,20 @@ export class DeviceListComponent implements OnInit {
             'width': 'auto'
         };
         this.dialogService.openDialog(SleepDeviceComponent, data, modalSize);
+        this.dialogService.currentDialog.afterClosed().subscribe(
+            res => {
+                this.getDeviceList();
+            }
+        );
+    }
 
+    onTogglePriority(deviceId, priority) {
+        this.deviceService.togglePriority(deviceId, {'priority': priority}).subscribe(
+            (response) => {
+                this.getDeviceList();
+                this.messageService.add(response['message']);
+            }
+        );
     }
 
     deleteDevice(device) {
@@ -162,7 +183,6 @@ export class DeviceListComponent implements OnInit {
             'width': 'auto'
         };
         this.dialogService.openDialog(AddNetworkSettingComponent, data, modalSize);
-
     }
 
     deleteNetworkPopUp(device_id, secondary_network) {
