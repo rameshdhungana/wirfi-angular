@@ -5,6 +5,8 @@ import { ImpersonateService } from '../_services/impersonate.service';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PusherService } from '../_services/pusher.service';
+import { MessageService } from '../_services/message.service';
+import { NotificationService } from '../_services/notification.service';
 
 
 export class AppModule {
@@ -34,7 +36,9 @@ export class SidebarComponent implements OnInit {
         private impersonateService: ImpersonateService,
         private router: Router,
         private sanitization: DomSanitizer,
-        private pusherService: PusherService
+        private pusherService: PusherService,
+        private messageService: MessageService,
+        private notificationService: NotificationService
     ) {}
 
     ngOnInit() {
@@ -43,19 +47,31 @@ export class SidebarComponent implements OnInit {
                 this.isImpersonating = res;
             }
         );
+
+        this.notificationService.getAllNotification().subscribe(
+            notifications => {
+                this.notificationCount = notifications['data']['notifications'][0]['notifications'].length
+                                            + notifications['data']['notifications'][1]['notifications'].length;
+            }
+        );
+
         this.authService.me().subscribe(response => {
             this.loggedInUser = response['data'];
             this.image = this.sanitization.bypassSecurityTrustStyle(`url(${this.URL}${this.loggedInUser['profile']['profile_picture']})`);
 
             // pusher
-            this.channel = this.pusherService.getPusher().subscribe(this.loggedInUser.email);
-            this.channel.bind('status-change', data => {
+            this.channel = this.pusherService._pusher.subscribe(this.loggedInUser.email);
+            this.channel.bind('status-change', (data: any) => {
                 this.notificationCount = data.count;
-                this.notificationMessage = data.message;
-                console.log(this.notificationCount);
-                console.log(this.notificationMessage);
+                const notification = data.message;
+                this.notificationMessage = "Device '" + notification.device.name + "': " + notification.message;
+                this.messageService.add(this.notificationMessage);
             });
         });
+    }
+
+    resetCount() {
+        this.notificationCount = 0;
     }
 
     ShowText() {
