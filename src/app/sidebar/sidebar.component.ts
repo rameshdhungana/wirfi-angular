@@ -60,11 +60,11 @@ export class SidebarComponent implements OnInit {
             this.image = this.sanitization.bypassSecurityTrustStyle(`url(${this.URL}${this.loggedInUser['profile']['profile_picture']})`);
 
             // pusher
-            this.channel = this.pusherService._pusher.subscribe(this.loggedInUser.email);
+            this.channel = this.pusherService._pusher.subscribe(String(this.loggedInUser.id));
             this.channel.bind('status-change', (data: any) => {
                 this.notificationCount = data.count;
                 const notification = data.message;
-                this.notificationMessage = "Device '" + notification.device.name + "': " + notification.message;
+                this.notificationMessage = 'Device \'' + notification.device.name + '\': ' + notification.message;
                 this.messageService.add(this.notificationMessage);
             });
         });
