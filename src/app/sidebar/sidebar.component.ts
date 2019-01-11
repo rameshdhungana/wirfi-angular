@@ -67,6 +67,12 @@ export class SidebarComponent implements OnInit {
                 this.notificationMessage = 'Device \'' + notification.device.name + '\': ' + notification.message;
                 this.messageService.add(this.notificationMessage);
             });
+            this.channel.bind('priority-device', (data: any) => {
+                this.notificationCount = data.count;
+                const notification = data.message;
+                this.notificationMessage = 'Device \'' + notification.device.name + '\': ' + notification.message;
+                this.messageService.add(this.notificationMessage);
+            });
         });
     }
 
