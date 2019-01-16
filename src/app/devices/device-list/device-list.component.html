@@ -195,10 +195,10 @@
                                         </h5>
                                     </a>
                                     <p class="card-text"><span>{{device.address}}</span></p>
-                                    <div *ngIf="(device.device_status | json) != '{}'">
-                                        <h6 class="card-title"><span>{{status_dict[device?.device_status?.status]}} &#9679; {{device?.device_status?.timestamp | timeAgo}}</span>
+                                    <div *ngIf="(device.device_status | json) != '[]'">
+                                        <h6 class="card-title"><span>{{status_dict[device?.device_status[device?.device_status.length - 1]?.status]}} &#9679; {{device?.device_status[device?.device_status.length - 1]?.timestamp | timeAgo}}</span>
                                         </h6>
-                                        Last updated: {{device?.device_status?.timestamp | datetimeformat}}<br>
+                                        Last updated: {{device?.device_status[device?.device_status.length - 1]?.timestamp | datetimeformat}}<br>
                                     </div>
 
                                     <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;

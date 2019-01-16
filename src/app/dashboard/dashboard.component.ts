@@ -194,10 +194,6 @@ export class DashboardComponent implements OnInit {
                         'status': 2
                     },
                     {
-                        'date': '07:15:00',
-                        'status': 6
-                    },
-                    {
                         'date': '07:45:00',
                         'status': 2
                     },
