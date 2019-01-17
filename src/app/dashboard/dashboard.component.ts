@@ -11,38 +11,40 @@ import * as cloneDeep from 'lodash/cloneDeep';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-    donut_chart: Array<any>;
-    doughnut_filter_data = [
-        {
-            'status': 'ONLINE',
-            'value': 0
-        },
-        {
-            'status': 'CELL',
-            'value': 0
-        },
-        {
-            'status': 'WEAK SIGNAL',
-            'value': 0
-        },
-        {
-            'status': 'MISSED A PING',
-            'value': 0
-        },
-        {
-            'status': 'OFFLINE',
-            'value': 0
-        },
-        {
-            'status': 'ASLEEP',
-            'value': 0
-        }
-    ];
+    donut_chart: {string: Array<{'status': string, 'value': number}>};
+    doughnut_filter_data: Array<{'status': string, 'value': number, 'color': string}>;
+
+    // doughnut_filter_data = [
+    //     {
+    //         'status': 'ONLINE',
+    //         'value': 0
+    //     },
+    //     {
+    //         'status': 'CELL',
+    //         'value': 0
+    //     },
+    //     {
+    //         'status': 'WEAK SIGNAL',
+    //         'value': 0
+    //     },
+    //     {
+    //         'status': 'MISSED A PING',
+    //         'value': 0
+    //     },
+    //     {
+    //         'status': 'OFFLINE',
+    //         'value': 0
+    //     },
+    //     {
+    //         'status': 'ASLEEP',
+    //         'value': 0
+    //     }
+    // ];
 
     doughnut_filter_data_toggle = cloneDeep(this.doughnut_filter_data);
 
-    industry_types_line_graph = [];
-    industry_types_doughnut_graph = [];
+    // industry_types_line_graph = [];
+    industry_types: Array<string>;
     filter_data = {};
 
     value_of_checkbox = [];
@@ -227,15 +229,20 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this.dashboardservice.getDashboard().subscribe(response => {
             this.donut_chart = response['data']['donut_chart'];
+            console.log(this.donut_chart);
+            this.doughnut_filter_data = response['data']['donut_data_format'];
+            this.industry_types = response['data']['industry_type'];
+
             const ctx = document.getElementById('doughnut_chart');
 
-            for (const key in response['data']['industry_type']) {
-                if (response['data']['industry_type'][key]) {
-                    this.industry_types_doughnut_graph.push(
-                        response['data']['industry_type'][key]
-                    );
-                }
-            }
+            // for (const key in response['data']['industry_type']) {
+            //     if (response['data']['industry_type'][key]) {
+            //         this.industry_types.push(
+            //             response['data']['industry_type'][key]
+            //         );
+            //     }
+            // }
+
             this.sumDonutChart(this.donut_chart);
             this.createDoughnutChart(ctx, this.doughnut_filter_data);
         });
@@ -243,17 +250,15 @@ export class DashboardComponent implements OnInit {
         this.dashboardservice.getDeviceLocation().subscribe(locationResponse => {
             this.deviceLocations = locationResponse;
             console.log('this is the list of the devices loccation', this.deviceLocations);
-
-
         });
     }
 
     ngAfterViewInit() {
-        for (const industry_type in this.data_new) {
-            if (this.data_new[industry_type]) {
-                this.industry_types_line_graph.push(industry_type);
-            }
-        }
+        // for (const industry_type in this.data_new) {
+        //     if (this.data_new[industry_type]) {
+        //         this.industry_types_line_graph.push(industry_type);
+        //     }
+        // }
         const cloneobj = cloneDeep(this.data_new);
         this.createLineGraph(cloneobj);
     }
