@@ -12,8 +12,4 @@ export class DashboardService {
     getDashboard() {
         return this.http.get('dashboard/');
     }
-
-    getDeviceLocation() {
-       return this.http.get('device/locations/');
-    }
 }
