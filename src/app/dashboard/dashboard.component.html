@@ -23,11 +23,13 @@
 
                 <div class=" col-sm-6 col-md-3 text-white">
                     <ul style="list-style: none;">
-                        <li class="pt-1 pb-2">
-                            <span class="dot status_dot" style="background-color: #4aec26;"></span>
-                            {{doughnut_filter_data[0].value}} ONLINE
+                        <li class="pt-1 pb-2" *ngFor="let data of doughnut_filter_data">
+                            <span class="dot status_dot"
+                                [ngStyle]="{'background-color': data.color}"
+                            ></span>
+                            {{data.value}} {{data.status}}
                         </li>
-                        <li class="pt-1 pb-2">
+                        <!-- <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: #5576e4;"></span>
                             {{doughnut_filter_data[1].value}} USING CELLULAR
                         </li>
@@ -46,7 +48,7 @@
                         <li class="pt-1 pb-2">
                             <span class="dot status_dot" style="background-color: gray;"></span>
                             {{doughnut_filter_data[5].value}} ASLEEP
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
