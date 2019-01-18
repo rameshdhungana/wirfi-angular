@@ -34,27 +34,30 @@
                     <button mat-button [matMenuTriggerFor]="filterOptions">Filter &#x25BE;</button>
 
                     <mat-menu #filterOptions="matMenu" [overlapTrigger]="false">
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear<span
-                                *ngIf="presetFilterValue.value.filter_type==filterParams['Clear']"
-                                class="float-right"><i
-                                class="fa fa-check "></i></span></button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority<span
-                                *ngIf="presetFilterValue.value.filter_type==filterParams['Priority']"
-                                class="float-right"><i
-                                class="fa fa-check "></i></span></button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems<span
-                                *ngIf="presetFilterValue.value.filter_type==filterParams['Problems']"
-                                class="float-right"><i
-                                class="fa fa-check "></i></span></button>
-                        <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise<span
-                                *ngIf="presetFilterValue.value.filter_type==filterParams['Franchise']"
-                                class="float-right"><i
-                                class="fa fa-check "></i></span></button>
-                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry<span
-                                *ngIf="presetFilterValue.value.filter_type==filterParams['Industry']"
-                                class="float-right"><i
-                                class="fa fa-check "></i></span>
-
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Clear']" class="float-right">
+                                <i class="fa fa-check "></i>
+                            </span>
+                        </button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Priority']" class="float-right">
+                                <i class="fa fa-check "></i>
+                            </span>
+                        </button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Problems']" class="float-right">
+                                <i class="fa fa-check "></i>
+                            </span>
+                        </button>
+                        <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Franchise']" class="float-right">
+                            <i class="fa fa-check "></i>
+                            </span>
+                        </button>
+                        <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Industry']" class="float-right">
+                                <i class="fa fa-check "></i>
+                            </span>
                         </button>
                     </mat-menu>
 
@@ -157,8 +160,9 @@
 
 
                                             <span class="add-icon-network"
-                                                  (click)="device.device_network?.primary_network?manageNetworkPopUp(device.id,true,device.device_network.primary_network):manageNetworkPopUp(device.id,true,null)"> <i
-                                                    [ngClass]="device.device_network?.primary_network?'fa fa-fw fa-pencil-alt':'fa fa-fw fa-plus-circle'"></i></span>
+                                                  (click)="device.device_network?.primary_network?manageNetworkPopUp(device.id,true,device.device_network.primary_network):manageNetworkPopUp(device.id,true,null)"> 
+                                                <i [ngClass]="device.device_network?.primary_network?'fa fa-fw fa-pencil-alt':'fa fa-fw fa-plus-circle'"></i>
+                                            </span>
 
                                         </div>
 
