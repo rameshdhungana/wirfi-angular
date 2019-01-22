@@ -213,9 +213,12 @@ export class DashboardComponent implements OnInit {
                         if (deviceStatusData) {
 
                             // change data
+                            console.log(deviceStatusData, 'device DATA');
                             const lineGraphData: Array<any> = this.manipulateGraphData(
                                 deviceStatusData
                             );
+
+                            console.log(lineGraphData, 'GRaph data');
 
                             // format the data
                             lineGraphData.forEach(function (d) {
@@ -236,10 +239,12 @@ export class DashboardComponent implements OnInit {
                             // Add the X Axis
                             svg
                                 .append('g')
+                                .attr('class', 'axis')
                                 .attr('transform', 'translate(0,' + height + ')')
                                 .call(
                                     d3
                                         .axisBottom(x)
+                                        .ticks(8)
                                         .tickSize(-height)
                                         .tickFormat(d3.timeFormat('%H %p'))
                                 );
@@ -249,6 +254,7 @@ export class DashboardComponent implements OnInit {
                             // only ticks that returned true for the filter will be included
                             // in the rest of the method calls:
                                 .select('line') // grab the tick line
+                                .data(lineGraphData).enter()
                                 .attr('class', 'quadrantBorder') // style with a custom class and CSS
                                 .style('stroke-width', 0.2) // or style directly with attributes or inline styles
                                 .style('stroke', '#dcdcdc');
@@ -453,8 +459,6 @@ export class DashboardComponent implements OnInit {
                 'status': firstData['status']
             });
         }
-
-        console.log(returnData, '*** Fuck ***');
 
         return returnData;
     }
