@@ -11,105 +11,96 @@ import * as cloneDeep from 'lodash/cloneDeep';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-    donut_chart: {string: Array<{'status': string, 'value': number}>};
+    // donut chart variables
+    donutChart: {string: Array<{'status': string, 'value': number}>};
     doughnutFilterData: Array<{'status': string, 'value': number, 'color': string}>;
-
-    // doughnutFilterData = [
-    //     {
-    //         'status': 'ONLINE',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'CELL',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'WEAK SIGNAL',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'MISSED A PING',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'OFFLINE',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'ASLEEP',
-    //         'value': 0
-    //     }
-    // ];
-
-    doughnutFilterData_toggle = cloneDeep(this.doughnutFilterData);
+    doughnutFilterDataToggle = cloneDeep(this.doughnutFilterData);
+    private noOfDevices = 0;
 
     industryTypes: Array<string>;
-    filter_data = {};
 
-    value_of_checkbox = [];
+    // line graph variables
+    lineChartData: {string: Array<{
+        'name': string,
+        'data': Array<{
+            'status': number,
+            'timestamp': string
+        }>
+    }>};
+    filterDataLineGraph = {};
+    filteredData: object;
+    nowDateTime = new Date();  // current date and time
+
+    // device location variables
+    deviceLocations: Array<{
+        'id': number,
+        'name': string,
+        'latitude': number,
+        'longitude': number
+    }>;;
+    lat: number = 26.890959;
+    long: number = -80.116577;
 
     data_new = {
         // 'type1': [
         //     {
-        //         'device_name': 'device1',
-        //         'address': 'address',
+        //         'name': 'device1',
         //         'data': [
         //             {
-        //                 'date': '01:00:00',
+        //                 'timestamp': '01:00:00',
         //                 'status': 4
         //             },
         //             {
-        //                 'date': '02:00:00',
+        //                 'timestamp': '02:00:00',
         //                 'status': 2
         //             },
         //             {
-        //                 'date': '03:00:00',
+        //                 'timestamp': '03:00:00',
         //                 'status': 3
         //             },
         //             {
-        //                 'date': '04:00:00',
+        //                 'timestamp': '04:00:00',
         //                 'status': 4
         //             },
         //             {
-        //                 'date': '05:00:00',
+        //                 'timestamp': '05:00:00',
         //                 'status': 5
         //             },
         //             {
-        //                 'date': '06:00:00',
+        //                 'timestamp': '06:00:00',
         //                 'status': 6
         //             },
         //             {
-        //                 'date': '06:10:00',
+        //                 'timestamp': '06:10:00',
         //                 'status': 2
         //             },
         //             {
-        //                 'date': '09:01:00',
+        //                 'timestamp': '09:01:00',
         //                 'status': 2
         //             }
         //         ]
         //     },
         //     {
-        //         'device_name': 'device2',
-        //         'address': 'address',
+        //         'name': 'device2',
         //         'data': [
         //             {
-        //                 'date': '01:00:00',
+        //                 'timestamp': '01:00:00',
         //                 'status': 6
         //             },
         //             {
-        //                 'date': '03:00:00',
+        //                 'timestamp': '03:00:00',
         //                 'status': 3
         //             },
         //             {
-        //                 'date': '05:00:00',
+        //                 'timestamp': '05:00:00',
         //                 'status': 5
         //             },
         //             {
-        //                 'date': '08:00:00',
+        //                 'timestamp': '08:00:00',
         //                 'status': 6
         //             },
         //             {
-        //                 'date': '09:01:00',
+        //                 'timestamp': '09:01:00',
         //                 'status': 6
         //             }
         //         ]
@@ -117,107 +108,98 @@ export class DashboardComponent implements OnInit {
         // ],
         type2: [
             {
-                'device_name': 'device3',
-                'address': 'address',
+                'name': 'device3',
                 'data': [
                     {
-                        'date': '11:00:00',
+                        'timestamp': '11:00:00',
                         'status': 1
                     },
                     {
-                        'date': '12:00:00',
+                        'timestamp': '12:00:00',
                         'status': 2
                     },
                     {
-                        'date': '13:00:00',
+                        'timestamp': '13:00:00',
                         'status': 3
                     },
                     {
-                        'date': '14:00:00',
+                        'timestamp': '14:00:00',
                         'status': 5
                     },
                     {
-                        'date': '15:00:00',
+                        'timestamp': '15:00:00',
                         'status': 3
                     },
                     {
-                        'date': '16:00:00',
+                        'timestamp': '16:00:00',
                         'status': 6
                     },
                     {
-                        'date': '17:00:00',
+                        'timestamp': '17:00:00',
                         'status': 2
                     },
                     {
-                        'date': '19:50:00',
+                        'timestamp': '19:50:00',
                         'status': 2
                     }
                 ]
             },
             {
-                'device_name': 'device4',
-                'address': 'address',
+                'name': 'device4',
                 'data': [
                     {
-                        'date': '11:00:00',
+                        'timestamp': '11:00:00',
                         'status': 5
                     },
                     {
-                        'date': '12:00:00',
+                        'timestamp': '12:00:00',
                         'status': 1
                     },
                     {
-                        'date': '12:15:00',
+                        'timestamp': '12:15:00',
                         'status': 2
                     },
                     {
-                        'date': '12:30:00',
+                        'timestamp': '12:30:00',
                         'status': 1
                     },
                     {
-                        'date': '13:00:00',
+                        'timestamp': '13:00:00',
                         'status': 4
                     },
                     {
-                        'date': '14:00:00',
+                        'timestamp': '14:00:00',
                         'status': 2
                     },
                     {
-                        'date': '15:00:00',
+                        'timestamp': '15:00:00',
                         'status': 1
                     },
                     {
-                        'date': '16:00:00',
+                        'timestamp': '16:00:00',
                         'status': 3
                     },
                     {
-                        'date': '17:00:00',
+                        'timestamp': '17:00:00',
                         'status': 2
                     },
                     {
-                        'date': '17:45:00',
+                        'timestamp': '17:45:00',
                         'status': 2
                     },
 
                     {
-                        'date': '18:00:00',
+                        'timestamp': '18:00:00',
                         'status': 4
                     },
                     {
-                        'date': '19:50:00',
+                        'timestamp': '19:50:00',
                         'status': 4
                     }
                 ]
             }
         ]
     };
-
-    filtered_data: object;
-    private no_of_devices = 0;
-    public deviceLocations;
-    lat: number = 26.890959;
-    long: number = -80.116577;
-
 
     constructor(
         private googleapiService: GoogleApiService,
@@ -226,7 +208,8 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.dashboardservice.getDashboard().subscribe(response => {
-            this.donut_chart = response['data']['donut_chart'];
+            this.lineChartData = response['data']['line_graph']
+            this.donutChart = response['data']['donut_chart'];
             this.doughnutFilterData = response['data']['donut_data_format'];
             this.industryTypes = response['data']['industry_type'];
             this.deviceLocations = response['data']['device_location'];
@@ -245,8 +228,11 @@ export class DashboardComponent implements OnInit {
             //     }
             // }
 
-            this.sumDonutChart(this.donut_chart);
+            this.sumDonutChart(this.donutChart);
             this.createDoughnutChart(ctx, this.doughnutFilterData);
+
+            // const cloneLineData = cloneDeep(this.lineChartData);
+            // this.createLineGraph(cloneLineData);
         });
     }
 
@@ -260,29 +246,98 @@ export class DashboardComponent implements OnInit {
         this.createLineGraph(cloneobj);
     }
 
-    noOfDevice(data) {
-        this.no_of_devices = 0;
-        for (const key_device in data) {
-            if (data[key_device]) {
-                this.no_of_devices = this.no_of_devices + data[key_device].value;
+    // Doughtnut chart count devices
+    countNoOfDevice(data) {
+        this.noOfDevices = 0;
+        for (const deviceKey in data) {
+            if (data[deviceKey]) {
+                this.noOfDevices = this.noOfDevices + data[deviceKey].value;
             }
         }
     }
 
+    // draw doughnut chart
+    createDoughnutChart(node, data) {
+        d3.select('#doughnut_chart svg').remove();
+        const width = 180;
+        const height = 180;
+        const radius = Math.min(width, height) / 2;
+        const color = d3
+            .scaleOrdinal()
+            .range(['#4aec26', '#5576e4', '#f0fc00', '#faac00', '#dd0000', 'gray']);
+
+        const arc = d3
+            .arc<any>()
+            .outerRadius(radius - 10)
+            .innerRadius(radius - 15);
+
+        const pie = d3
+            .pie<any>()
+            .padAngle(0.03)
+            .sort(null)
+            .value(function (d) {
+                return d.value;
+            });
+
+        const canvas = d3
+            .select(node)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        const group = canvas
+            .append('g')
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+        const arcs = group
+            .selectAll<any, any>('.arc')
+            .data(pie(data))
+            .enter()
+            .append('g')
+            .attr('class', 'arc');
+
+        arcs
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', function (d: any): any {
+                return color(d.data.status);
+            });
+
+        canvas
+            .append('text')
+            .attr('transform', function (d) {
+                return 'translate(' + (width / 2 - 15) + ',' + height / 2 + ')';
+            })
+            .attr('fill', 'white')
+            .text(this.noOfDevices)
+            .style('font-size', '35px')
+            .style('font-weight', 'bold');
+
+        canvas
+            .append('text')
+            .attr('transform', function (d) {
+                return 'translate(' + (width / 2 - 38) + ',' + (height / 2 + 40) + ')';
+            })
+            .attr('fill', 'gray')
+            .text('DEVICES')
+            .style('font-size', '18px');
+    }
+
+    // sums up all
     sumDonutChart(data) {
-        this.filtered_data = {};
+        // this.filteredData = {};
         for (const key in data) {
             if (data[key]) {
-                for (const key_device in data[key]) {
-                    if (data[key][key_device]) {
-                        this.doughnutFilterData[key_device].value =
-                            this.doughnutFilterData[key_device].value +
-                            data[key][key_device].value;
+                for (const deviceKey in data[key]) {
+                    if (data[key][deviceKey]) {
+                        this.doughnutFilterData[deviceKey].value =
+                            this.doughnutFilterData[deviceKey].value +
+                            data[key][deviceKey].value;
                     }
                 }
             }
         }
-        this.noOfDevice(this.doughnutFilterData);
+        this.countNoOfDevice(this.doughnutFilterData);
     }
 
     createLineGraph(data) {
@@ -298,7 +353,7 @@ export class DashboardComponent implements OnInit {
             '#b10015',
             '#83858c'
         ];
-        this.filtered_data = data;
+        this.filteredData = data;
 
         // set the ranges
         const x = d3.scaleTime().range([0, width]);
@@ -444,10 +499,10 @@ export class DashboardComponent implements OnInit {
         //     }
         // }
 
-        for (const index_industry in this.filtered_data) {
-            if (this.filtered_data[index_industry]) {
+        for (const index_industry in this.filteredData) {
+            if (this.filteredData[index_industry]) {
 
-                const device_data = this.filtered_data[index_industry];
+                const device_data = this.filteredData[index_industry];
                 for (const index in device_data) {
                     if (device_data[index]) {
 
@@ -455,13 +510,13 @@ export class DashboardComponent implements OnInit {
                         if (device_status_data) {
 
                             // change data
-                            const line_graph_data = this.manipulate_graph_data(
+                            const line_graph_data = this.manipulateGraphData(
                                 device_status_data
                             );
 
                             // format the data
                             line_graph_data.forEach(function (d) {
-                                d['date'] = d['date'];
+                                d['timestamp'] = d['timestamp'];
                                 d['status_1'] = d['status'] - 0.5;
                             });
 
@@ -470,7 +525,7 @@ export class DashboardComponent implements OnInit {
                             // Scale the range of the data
                             x.domain(
                                 d3.extent<any, any>(device_status_data, function (d) {
-                                    return d['date'];
+                                    return d['timestamp'];
                                 })
                             );
                             y.domain([0, 6]);
@@ -510,7 +565,7 @@ export class DashboardComponent implements OnInit {
                                         .duration(200)
                                         .style('opacity', 0.9);
                                     div
-                                        .html(device_data[index].device_name)
+                                        .html(device_data[index].name)
                                         .style('left', d3.event.pageX + 'px')
                                         .style('top', d3.event.pageY - 28 + 'px');
 
@@ -536,7 +591,7 @@ export class DashboardComponent implements OnInit {
                                         .line<any>()
                                         .curve(d3.curveLinear)
                                         .x(function (d) {
-                                            return x(d['date']);
+                                            return x(d['timestamp']);
                                         })
                                         .y(function (d) {
                                             return y(d['status_1']);
@@ -550,33 +605,33 @@ export class DashboardComponent implements OnInit {
     }
 
     // change line_graph data
-    manipulate_graph_data(data) {
+    manipulateGraphData(data) {
         const parseTime = d3.timeParse('%H:%M:%S');
         const return_data = [];
 
         const data_length = data.length;
         const first_data = data[0];
         const last_data = data[data_length - 1];
-        first_data['date'] = parseTime(first_data['date']);
-        last_data['date'] = parseTime(last_data['date']);
+        first_data['timestamp'] = parseTime(first_data['timestamp']);
+        last_data['timestamp'] = parseTime(last_data['timestamp']);
         return_data.push(first_data);
 
         for (let i = 1; i < data_length - 1; i++) {
             const prev_data = data[i - 1];
-            const current_date = parseTime(data[i]['date']);
+            const current_timestamp = parseTime(data[i]['timestamp']);
             const current_status = data[i]['status'];
 
             // point 1
-            let current_date1 = cloneDeep(current_date);
+            let current_timestamp1 = cloneDeep(current_timestamp);
             const point_1 = {
-                'date': new Date(current_date1.setMinutes(current_date1.getMinutes() - 4)),
+                'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() - 4)),
                 'status': prev_data['status']
             };
 
             // point 6
-            current_date1 = cloneDeep(current_date);
+            current_timestamp1 = cloneDeep(current_timestamp);
             const point_6 = {
-                'date': new Date(current_date1.setMinutes(current_date1.getMinutes() + 4)),
+                'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() + 4)),
                 'status': current_status
             };
 
@@ -584,55 +639,55 @@ export class DashboardComponent implements OnInit {
 
             if (prev_data['status'] > current_status) {
                 // point 2
-                current_date1 = cloneDeep(current_date);
+                current_timestamp1 = cloneDeep(current_timestamp);
                 point_2 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() - 2)),
+                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() - 2)),
                     'status': prev_data['status'] - 0.05
                 };
 
                 // point 5
-                current_date1 = cloneDeep(current_date);
+                current_timestamp1 = cloneDeep(current_timestamp);
                 point_5 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() + 2)),
+                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() + 2)),
                     'status': current_status + 0.05
                 };
 
                 // point 3
                 point_3 = {
-                    'date': current_date,
+                    'timestamp': current_timestamp,
                     'status': prev_data['status'] - 0.2
                 };
 
                 // point 4
                 point_4 = {
-                    'date': current_date,
+                    'timestamp': current_timestamp,
                     'status': current_status + 0.2
                 };
 
             } else {
                 // point 2
-                current_date1 = cloneDeep(current_date);
+                current_timestamp1 = cloneDeep(current_timestamp);
                 point_2 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() - 2)),
+                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() - 2)),
                     'status': prev_data['status'] + 0.05
                 };
 
                 // point 5
-                current_date1 = cloneDeep(current_date);
+                current_timestamp1 = cloneDeep(current_timestamp);
                 point_5 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() + 2)),
+                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() + 2)),
                     'status': current_status - 0.05
                 };
 
                 // point 3
                 point_3 = {
-                    'date': current_date,
+                    'timestamp': current_timestamp,
                     'status': prev_data['status'] + 0.2
                 };
 
                 // point 4
                 point_4 = {
-                    'date': current_date,
+                    'timestamp': current_timestamp,
                     'status': current_status - 0.2
                 };
             }
@@ -647,38 +702,38 @@ export class DashboardComponent implements OnInit {
     toggleFeatureDoughnut(item, datavalue) {
         const ctx = document.getElementById('doughnut_chart');
         if (datavalue === true) {
-            for (const key in this.donut_chart[item]) {
-                if (this.donut_chart[item][key]) {
-                    this.doughnutFilterData_toggle[key].value =
-                        this.doughnutFilterData_toggle[key].value +
-                        this.donut_chart[item][key].value;
+            for (const key in this.donutChart[item]) {
+                if (this.donutChart[item][key]) {
+                    this.doughnutFilterDataToggle[key].value =
+                        this.doughnutFilterDataToggle[key].value +
+                        this.donutChart[item][key].value;
                 }
             }
         } else {
-            for (const key in this.donut_chart[item]) {
-                if (this.donut_chart[item][key]) {
-                    this.doughnutFilterData_toggle[key].value =
-                        this.doughnutFilterData_toggle[key].value -
-                        this.donut_chart[item][key].value;
+            for (const key in this.donutChart[item]) {
+                if (this.donutChart[item][key]) {
+                    this.doughnutFilterDataToggle[key].value =
+                        this.doughnutFilterDataToggle[key].value -
+                        this.donutChart[item][key].value;
                 }
             }
         }
 
-        this.noOfDevice(this.doughnutFilterData_toggle);
-        this.createDoughnutChart(ctx, this.doughnutFilterData_toggle);
+        this.countNoOfDevice(this.doughnutFilterDataToggle);
+        this.createDoughnutChart(ctx, this.doughnutFilterDataToggle);
     }
 
     toggleFeature(item, datavalue) {
         if (datavalue === true) {
-            this.filter_data[item] = cloneDeep(this.data_new[item]);
+            this.filterDataLineGraph[item] = cloneDeep(this.data_new[item]);
         } else {
-            delete this.filter_data[item];
+            delete this.filterDataLineGraph[item];
         }
-        if (Object.keys(this.filter_data).length === 0) {
+        if (Object.keys(this.filterDataLineGraph).length === 0) {
             const cloneObj = cloneDeep(this.data_new);
             this.createLineGraph(cloneObj);
         } else {
-            this.createLineGraph(this.filter_data);
+            this.createLineGraph(this.filterDataLineGraph);
         }
     }
 
@@ -690,70 +745,6 @@ export class DashboardComponent implements OnInit {
             });
     }
 
-    // doughnut chart
-    createDoughnutChart(node, data) {
-        d3.select('#doughnut_chart svg').remove();
-        const width = 180;
-        const height = 180;
-        const radius = Math.min(width, height) / 2;
-        const color = d3
-            .scaleOrdinal()
-            .range(['#4aec26', '#5576e4', '#f0fc00', '#faac00', '#dd0000', 'gray']);
 
-        const arc = d3
-            .arc<any>()
-            .outerRadius(radius - 10)
-            .innerRadius(radius - 15);
 
-        const pie = d3
-            .pie<any>()
-            .padAngle(0.03)
-            .sort(null)
-            .value(function (d) {
-                return d.value;
-            });
-
-        const canvas = d3
-            .select(node)
-            .append('svg')
-            .attr('width', width)
-            .attr('height', height);
-
-        const group = canvas
-            .append('g')
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-
-        const arcs = group
-            .selectAll<any, any>('.arc')
-            .data(pie(data))
-            .enter()
-            .append('g')
-            .attr('class', 'arc');
-
-        arcs
-            .append('path')
-            .attr('d', arc)
-            .attr('fill', function (d: any): any {
-                return color(d.data.status);
-            });
-
-        canvas
-            .append('text')
-            .attr('transform', function (d) {
-                return 'translate(' + (width / 2 - 15) + ',' + height / 2 + ')';
-            })
-            .attr('fill', 'white')
-            .text(this.no_of_devices)
-            .style('font-size', '35px')
-            .style('font-weight', 'bold');
-
-        canvas
-            .append('text')
-            .attr('transform', function (d) {
-                return 'translate(' + (width / 2 - 38) + ',' + (height / 2 + 40) + ')';
-            })
-            .attr('fill', 'gray')
-            .text('DEVICES')
-            .style('font-size', '18px');
-    }
 }
