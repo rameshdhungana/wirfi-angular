@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
         'name': string,
         'latitude': number,
         'longitude': number
-    }>;;
+    }>;
     lat: number = 26.890959;
     long: number = -80.116577;
 
@@ -323,7 +323,7 @@ export class DashboardComponent implements OnInit {
             .style('font-size', '18px');
     }
 
-    // sums up all
+    // sums up all status data from different industry types of initial data
     sumDonutChart(data) {
         // this.filteredData = {};
         for (const key in data) {
@@ -340,6 +340,32 @@ export class DashboardComponent implements OnInit {
         this.countNoOfDevice(this.doughnutFilterData);
     }
 
+    // selects checked industry type and sums up status data.
+    toggleFeatureDoughnut(item, datavalue) {
+        const ctx = document.getElementById('doughnut_chart');
+        if (datavalue === true) {
+            for (const key in this.donutChart[item]) {
+                if (this.donutChart[item][key]) {
+                    this.doughnutFilterDataToggle[key].value =
+                        this.doughnutFilterDataToggle[key].value +
+                        this.donutChart[item][key].value;
+                }
+            }
+        } else {
+            for (const key in this.donutChart[item]) {
+                if (this.donutChart[item][key]) {
+                    this.doughnutFilterDataToggle[key].value =
+                        this.doughnutFilterDataToggle[key].value -
+                        this.donutChart[item][key].value;
+                }
+            }
+        }
+
+        this.countNoOfDevice(this.doughnutFilterDataToggle);
+        this.createDoughnutChart(ctx, this.doughnutFilterDataToggle);
+    }
+
+    // create Line Graph
     createLineGraph(data) {
         d3.select('#line_chart svg').remove();
         const margin = {top: 0, right: 20, bottom: 30, left: 20};
@@ -604,34 +630,34 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    // change line_graph data
+    // change line graph data [decrease status value by 0.5 to display in the middle of quadrant and add 6 points]
     manipulateGraphData(data) {
         const parseTime = d3.timeParse('%H:%M:%S');
-        const return_data = [];
+        const returnData = [];
 
         const data_length = data.length;
         const first_data = data[0];
         const last_data = data[data_length - 1];
         first_data['timestamp'] = parseTime(first_data['timestamp']);
         last_data['timestamp'] = parseTime(last_data['timestamp']);
-        return_data.push(first_data);
+        returnData.push(first_data);
 
         for (let i = 1; i < data_length - 1; i++) {
             const prev_data = data[i - 1];
-            const current_timestamp = parseTime(data[i]['timestamp']);
+            const currentTimestamp = parseTime(data[i]['timestamp']);
             const current_status = data[i]['status'];
 
             // point 1
-            let current_timestamp1 = cloneDeep(current_timestamp);
+            let currentTimestamp1 = cloneDeep(currentTimestamp);
             const point_1 = {
-                'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() - 4)),
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - 4)),
                 'status': prev_data['status']
             };
 
             // point 6
-            current_timestamp1 = cloneDeep(current_timestamp);
+            currentTimestamp1 = cloneDeep(currentTimestamp);
             const point_6 = {
-                'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() + 4)),
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + 4)),
                 'status': current_status
             };
 
@@ -639,91 +665,67 @@ export class DashboardComponent implements OnInit {
 
             if (prev_data['status'] > current_status) {
                 // point 2
-                current_timestamp1 = cloneDeep(current_timestamp);
+                currentTimestamp1 = cloneDeep(currentTimestamp);
                 point_2 = {
-                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() - 2)),
+                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - 2)),
                     'status': prev_data['status'] - 0.05
                 };
 
                 // point 5
-                current_timestamp1 = cloneDeep(current_timestamp);
+                currentTimestamp1 = cloneDeep(currentTimestamp);
                 point_5 = {
-                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() + 2)),
+                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + 2)),
                     'status': current_status + 0.05
                 };
 
                 // point 3
                 point_3 = {
-                    'timestamp': current_timestamp,
+                    'timestamp': currentTimestamp,
                     'status': prev_data['status'] - 0.2
                 };
 
                 // point 4
                 point_4 = {
-                    'timestamp': current_timestamp,
+                    'timestamp': currentTimestamp,
                     'status': current_status + 0.2
                 };
 
             } else {
                 // point 2
-                current_timestamp1 = cloneDeep(current_timestamp);
+                currentTimestamp1 = cloneDeep(currentTimestamp);
                 point_2 = {
-                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() - 2)),
+                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - 2)),
                     'status': prev_data['status'] + 0.05
                 };
 
                 // point 5
-                current_timestamp1 = cloneDeep(current_timestamp);
+                currentTimestamp1 = cloneDeep(currentTimestamp);
                 point_5 = {
-                    'timestamp': new Date(current_timestamp1.setMinutes(current_timestamp1.getMinutes() + 2)),
+                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + 2)),
                     'status': current_status - 0.05
                 };
 
                 // point 3
                 point_3 = {
-                    'timestamp': current_timestamp,
+                    'timestamp': currentTimestamp,
                     'status': prev_data['status'] + 0.2
                 };
 
                 // point 4
                 point_4 = {
-                    'timestamp': current_timestamp,
+                    'timestamp': currentTimestamp,
                     'status': current_status - 0.2
                 };
             }
 
-            return_data.push(point_1, point_2, point_3, point_4, point_5, point_6);
+            returnData.push(point_1, point_2, point_3, point_4, point_5, point_6);
         }
 
-        return_data.push(last_data);
-        return return_data;
+        returnData.push(last_data);
+        return returnData;
     }
 
-    toggleFeatureDoughnut(item, datavalue) {
-        const ctx = document.getElementById('doughnut_chart');
-        if (datavalue === true) {
-            for (const key in this.donutChart[item]) {
-                if (this.donutChart[item][key]) {
-                    this.doughnutFilterDataToggle[key].value =
-                        this.doughnutFilterDataToggle[key].value +
-                        this.donutChart[item][key].value;
-                }
-            }
-        } else {
-            for (const key in this.donutChart[item]) {
-                if (this.donutChart[item][key]) {
-                    this.doughnutFilterDataToggle[key].value =
-                        this.doughnutFilterDataToggle[key].value -
-                        this.donutChart[item][key].value;
-                }
-            }
-        }
-
-        this.countNoOfDevice(this.doughnutFilterDataToggle);
-        this.createDoughnutChart(ctx, this.doughnutFilterDataToggle);
-    }
-
-    toggleFeature(item, datavalue) {
+    toggleFeatureLineGraph(item, datavalue) {
         if (datavalue === true) {
             this.filterDataLineGraph[item] = cloneDeep(this.data_new[item]);
         } else {
@@ -744,7 +746,5 @@ export class DashboardComponent implements OnInit {
             .subscribe(response => {
             });
     }
-
-
 
 }
