@@ -459,8 +459,6 @@ export class DashboardComponent implements OnInit {
                                 device_status_data
                             );
 
-                            console.log(lineGraphData, 'GRaph data');
-
                             // format the data
                             line_graph_data.forEach(function (d) {
                                 d['date'] = d['date'];
@@ -495,7 +493,6 @@ export class DashboardComponent implements OnInit {
                             // only ticks that returned true for the filter will be included
                             // in the rest of the method calls:
                                 .select('line') // grab the tick line
-                                .data(lineGraphData).enter()
                                 .attr('class', 'quadrantBorder') // style with a custom class and CSS
                                 .style('stroke-width', 0.2) // or style directly with attributes or inline styles
                                 .style('stroke', '#dcdcdc');
