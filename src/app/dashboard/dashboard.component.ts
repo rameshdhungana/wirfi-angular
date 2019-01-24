@@ -139,7 +139,7 @@ export class DashboardComponent implements OnInit {
                         'status': 2
                     },
                     {
-                        'timestamp': '19:50:00',
+                        'timestamp': '19:10:00',
                         'status': 2
                     }
                 ]
@@ -176,24 +176,23 @@ export class DashboardComponent implements OnInit {
                         'status': 1
                     },
                     {
-                        'timestamp': '16:00:00',
-                        'status': 3
-                    },
-                    {
                         'timestamp': '17:00:00',
-                        'status': 2
+                        'status': 4
                     },
                     {
                         'timestamp': '17:45:00',
+                        'status': 3
+                    },
+                    {
+                        'timestamp': '17:50:00',
                         'status': 2
                     },
-
                     {
                         'timestamp': '18:00:00',
                         'status': 4
                     },
                     {
-                        'timestamp': '19:50:00',
+                        'timestamp': '19:10:00',
                         'status': 4
                     }
                 ]
@@ -208,7 +207,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.dashboardservice.getDashboard().subscribe(response => {
-            this.lineChartData = response['data']['line_graph']
+            this.lineChartData = response['data']['line_graph'];
             this.donutChart = response['data']['donut_chart'];
             this.doughnutFilterData = response['data']['donut_data_format'];
             this.industryTypes = response['data']['industry_type'];
@@ -259,8 +258,8 @@ export class DashboardComponent implements OnInit {
     // draw doughnut chart
     createDoughnutChart(node, data) {
         d3.select('#doughnut_chart svg').remove();
-        const width = 180;
-        const height = 180;
+        const width = 175;
+        const height = 175;
         const radius = Math.min(width, height) / 2;
         const color = d3
             .scaleOrdinal()
@@ -369,7 +368,7 @@ export class DashboardComponent implements OnInit {
     createLineGraph(data) {
         d3.select('#line_chart svg').remove();
         const margin = {top: 0, right: 20, bottom: 30, left: 20};
-        const width = 650 - margin.left - margin.right;
+        const width = 600 - margin.left - margin.right;
         const height = 240 - margin.top - margin.bottom;
         const status_colors = [
             '#1e7431',
@@ -564,7 +563,7 @@ export class DashboardComponent implements OnInit {
                                     d3
                                         .axisBottom(x)
                                         .tickSize(-height)
-                                        .tickFormat(d3.timeFormat('%H %p'))
+                                        .tickFormat(d3.timeFormat('%H:%M'))
                                 );
 
                             // draw line on tick
@@ -647,76 +646,62 @@ export class DashboardComponent implements OnInit {
             const currentTimestamp = parseTime(data[i]['timestamp']);
             const current_status = data[i]['status'];
 
+            // get time difference between previous, current and next status change
+            const prevTimeDiff = new Date(currentTimestamp).getTime() - new Date(parseTime(prev_data['timestamp'])).getTime();
+            const nextTimeDiff = new Date(parseTime(data[i + 1]['timestamp'])).getTime() - new Date(currentTimestamp).getTime();
+
+            // check if time difference between two statuses is less than 11 minutes,
+            // get points in difference of 2 and 1 minutes else 4 and 2 minutes
+            const p1Time = (prevTimeDiff < 660000) ? 2 : 4;
+            const p6Time = (nextTimeDiff < 660000) ? 2 : 4;
+
+            const p2Time = (prevTimeDiff < 660000) ? 1 : 2;
+            const p5Time = (nextTimeDiff < 660000) ? 1 : 2;
+
+            // check if status raises or declines
+            const statusDecline = prev_data['status'] > current_status;
+
             // point 1
             let currentTimestamp1 = cloneDeep(currentTimestamp);
             const point_1 = {
-                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - 4)),
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - p1Time)),
                 'status': prev_data['status']
             };
 
             // point 6
             currentTimestamp1 = cloneDeep(currentTimestamp);
             const point_6 = {
-                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + 4)),
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + p6Time)),
                 'status': current_status
             };
 
             let point_2, point_3, point_4, point_5 = {};
 
-            if (prev_data['status'] > current_status) {
-                // point 2
-                currentTimestamp1 = cloneDeep(currentTimestamp);
-                point_2 = {
-                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - 2)),
-                    'status': prev_data['status'] - 0.05
-                };
+            // point 2
+            currentTimestamp1 = cloneDeep(currentTimestamp);
+            point_2 = {
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - p2Time)),
+                'status': statusDecline ? prev_data['status'] - 0.05 : prev_data['status'] + 0.05
+            };
 
-                // point 5
-                currentTimestamp1 = cloneDeep(currentTimestamp);
-                point_5 = {
-                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + 2)),
-                    'status': current_status + 0.05
-                };
+            // point 5
+            currentTimestamp1 = cloneDeep(currentTimestamp);
+            point_5 = {
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + p5Time)),
+                'status': statusDecline ? current_status + 0.05 : current_status - 0.05
+            };
 
-                // point 3
-                point_3 = {
-                    'timestamp': currentTimestamp,
-                    'status': prev_data['status'] - 0.2
-                };
+            // point 3
+            point_3 = {
+                'timestamp': currentTimestamp,
+                'status': statusDecline ? prev_data['status'] - 0.2 : prev_data['status'] + 0.2
+            };
 
-                // point 4
-                point_4 = {
-                    'timestamp': currentTimestamp,
-                    'status': current_status + 0.2
-                };
-
-            } else {
-                // point 2
-                currentTimestamp1 = cloneDeep(currentTimestamp);
-                point_2 = {
-                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - 2)),
-                    'status': prev_data['status'] + 0.05
-                };
-
-                // point 5
-                currentTimestamp1 = cloneDeep(currentTimestamp);
-                point_5 = {
-                    'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + 2)),
-                    'status': current_status - 0.05
-                };
-
-                // point 3
-                point_3 = {
-                    'timestamp': currentTimestamp,
-                    'status': prev_data['status'] + 0.2
-                };
-
-                // point 4
-                point_4 = {
-                    'timestamp': currentTimestamp,
-                    'status': current_status - 0.2
-                };
-            }
+            // point 4
+            point_4 = {
+                'timestamp': currentTimestamp,
+                'status': statusDecline ? current_status + 0.2 : current_status - 0.2
+            };
 
             returnData.push(point_1, point_2, point_3, point_4, point_5, point_6);
         }
@@ -725,6 +710,7 @@ export class DashboardComponent implements OnInit {
         return returnData;
     }
 
+    // filter line graph
     toggleFeatureLineGraph(item, datavalue) {
         if (datavalue === true) {
             this.filterDataLineGraph[item] = cloneDeep(this.data_new[item]);
