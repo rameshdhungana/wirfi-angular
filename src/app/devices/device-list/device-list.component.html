@@ -1,6 +1,6 @@
 <div class="container-fluid device-container">
     <div class="row pt-4 ">
-    
+
         <div class="col-md-12  text-white" style="position: relative;">
             <div class="row">
 
@@ -35,27 +35,32 @@
 
                     <mat-menu #filterOptions="matMenu" [overlapTrigger]="false">
                         <button mat-menu-item (click)="changeFilterParams(filterParams['Clear'])">Clear
-                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Clear']" class="float-right">
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Clear']"
+                                  class="float-right">
                                 <i class="fa fa-check "></i>
                             </span>
                         </button>
                         <button mat-menu-item (click)="changeFilterParams(filterParams['Priority'])">Priority
-                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Priority']" class="float-right">
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Priority']"
+                                  class="float-right">
                                 <i class="fa fa-check "></i>
                             </span>
                         </button>
                         <button mat-menu-item (click)="changeFilterParams(filterParams['Problems'])">Problems
-                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Problems']" class="float-right">
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Problems']"
+                                  class="float-right">
                                 <i class="fa fa-check "></i>
                             </span>
                         </button>
                         <button mat-menu-item (click)="changeFilterParams(filterParams['Franchise'])">Franchise
-                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Franchise']" class="float-right">
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Franchise']"
+                                  class="float-right">
                             <i class="fa fa-check "></i>
                             </span>
                         </button>
                         <button mat-menu-item [matMenuTriggerFor]="types_of_industry">Industry
-                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Industry']" class="float-right">
+                            <span *ngIf="presetFilterValue.value.filter_type==filterParams['Industry']"
+                                  class="float-right">
                                 <i class="fa fa-check "></i>
                             </span>
                         </button>
@@ -115,7 +120,7 @@
                                     </div>
 
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="device-dropdown">
-                                        <button  *ngIf="device?.device_settings?.mute_settings; else firstTimeCreated"
+                                        <button *ngIf="device?.device_settings?.mute_settings; else firstTimeCreated"
                                                 class="dropdown-item"
                                                 (click)="muteDevicePopUp(device.id, !device?.device_settings?.mute_settings?.is_muted, device?.device_settings?.mute_settings?.mute_start, device?.device_settings?.mute_settings?.mute_duration)">
                                             {{device?.device_settings?.mute_settings?.is_muted ?'UnMute':'Mute'}}
@@ -125,19 +130,22 @@
                                             <button class="dropdown-item" (click)="muteDevicePopUp(device.id, true)">
                                                 Mute
                                             </button>
-                                        </ng-template>                        
+                                        </ng-template>
 
                                         <button class="dropdown-item" style="margin-right: 55px; cursor:default;"
                                                 (click)="sleepDevicePopUp(device.id, !device?.device_settings?.sleep_settings?.is_asleep, device?.device_settings?.sleep_settings?.sleep_start, device?.device_settings?.sleep_settings?.sleep_duration)">
                                             {{device.device_settings?.sleep_settings?.is_asleep? 'Awake': 'Sleep'}}
                                         </button>
 
-                                        <button class="dropdown-item" (click)="onTogglePriority(device.id, !device.device_settings.priority_settings.priority)">
+                                        <button class="dropdown-item"
+                                                (click)="onTogglePriority(device.id, !device.device_settings.priority_settings.priority)">
                                             <span>Prioritize</span>
                                             <span class="ml-5 pl-4">
-                                                <i class="ml-3 fa fa-fw fa-toggle-on fa-lg" style="color: green;" *ngIf="device.device_settings.priority_settings.priority">
+                                                <i class="ml-3 fa fa-fw fa-toggle-on fa-lg" style="color: green;"
+                                                   *ngIf="device.device_settings.priority_settings.priority">
                                                 </i>
-                                                <i class="ml-3 fa fa-fw fa-toggle-off fa-lg" style="color: gray;" *ngIf="!device.device_settings.priority_settings.priority">
+                                                <i class="ml-3 fa fa-fw fa-toggle-off fa-lg" style="color: gray;"
+                                                   *ngIf="!device.device_settings.priority_settings.priority">
                                                 </i>
                                             </span>
                                         </button>
@@ -150,39 +158,51 @@
                                             </span>
                                         </button>
 
-                                    
-                                        <div style="position:relative; cursor:default;">
+                                        <div *ngIf="device.device_network?.primary_network;else setupDeviceDiv">
+                                            <div style="position:relative; cursor:default;">
 
-                                            <button class="dropdown-item"
-                                                    style=" margin-right: 55px;cursor:default !important;">
-                                                Primary Network
-                                            </button>
+                                                <button class="dropdown-item"
+                                                        style=" margin-right: 55px;cursor:default !important;">
+                                                    Primary Network
+                                                </button>
 
 
-                                            <span class="add-icon-network"
-                                                  (click)="device.device_network?.primary_network?manageNetworkPopUp(device.id,true,device.device_network.primary_network):manageNetworkPopUp(device.id,true,null)"> 
+                                                <span class="add-icon-network"
+                                                      (click)="device.device_network?.primary_network?manageNetworkPopUp(device.id,true,device.device_network.primary_network):manageNetworkPopUp(device.id,true,null)">
                                                 <i [ngClass]="device.device_network?.primary_network?'fa fa-fw fa-pencil-alt':'fa fa-fw fa-plus-circle'"></i>
                                             </span>
 
-                                        </div>
+                                            </div>
 
-                                        <div style="position:relative;">
-                                            <button class="dropdown-item"
-                                                    style=" margin-right: 55px;cursor:default !important;">
-                                                Secondary Network
-                                            </button>
+                                            <div style="position:relative;">
+                                                <button class="dropdown-item"
+                                                        style=" margin-right: 55px;cursor:default !important;">
+                                                    Secondary Network
+                                                </button>
 
-                                            <span class="add-icon-network"
-                                                  (click)="device.device_network?.secondary_network?manageNetworkPopUp(device.id,false,device.device_network.secondary_network):manageNetworkPopUp(device.id,false,null)"> 
+                                                <span class="add-icon-network"
+                                                      (click)="device.device_network?.secondary_network?manageNetworkPopUp(device.id,false,device.device_network.secondary_network):manageNetworkPopUp(device.id,false,null)">
                                                 <i [ngClass]="device.device_network?.secondary_network?'fa fa-fw fa-pencil-alt':' fa fa-fw fa-plus-circle'"></i>
                                             </span>
-                                            <span *ngIf="device.device_network?.secondary_network"
-                                                  (click)="deleteNetworkPopUp(device.id,device.device_network.secondary_network)"
-                                                  class="delete-icon-network ml-3 mr-2">
+                                                <span *ngIf="device.device_network?.secondary_network"
+                                                      (click)="deleteNetworkPopUp(device.id,device.device_network.secondary_network)"
+                                                      class="delete-icon-network ml-3 mr-2">
                                                 <i class="fa fa-fw fa-trash "></i>
                                             </span>
 
+                                            </div>
                                         </div>
+                                        <ng-template #setupDeviceDiv>
+                                            <div style="position:relative; cursor:default;">
+
+                                                <a class="dropdown-item" href="{{WIRFI_DEVICE_ACCESS_URL}}"
+                                                   style=" margin-right: 55px;cursor:default !important;">
+                                                    Setup Device
+                                                </a>
+
+
+                                            </div>
+                                        </ng-template>
                                     </div>
                                 </div>
 
@@ -202,7 +222,8 @@
                                     <div *ngIf="(device.device_status | json) != '[]'">
                                         <h6 class="card-title"><span>{{status_dict[device?.device_status[device?.device_status.length - 1]?.status]}} &#9679; {{device?.device_status[device?.device_status.length - 1]?.timestamp | timeAgo}}</span>
                                         </h6>
-                                        Last updated: {{device?.device_status[device?.device_status.length - 1]?.timestamp | datetimeformat}}<br>
+                                        Last updated: {{device?.device_status[device?.device_status.length -
+                                        1]?.timestamp | datetimeformat}}<br>
                                     </div>
 
                                     <i class="fas fa-wifi fa-wifi-off"></i>&nbsp;

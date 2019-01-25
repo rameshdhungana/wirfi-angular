@@ -11,8 +11,8 @@ import {SleepDeviceComponent} from '../sleep-device/sleep-device.component';
 import {NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
 import {AddNetworkSettingComponent} from '../network-setting/add-network-setting/add-network-setting.component';
 import {DeleteNetworkSettingComponent} from '../network-setting/delete-network-setting/delete-network-setting.component';
-import { DeviceDeleteComponent } from '../device-delete/device-delete.component';
-import { MessageService } from '../../_services/message.service';
+import {DeviceDeleteComponent} from '../device-delete/device-delete.component';
+import {MessageService} from '../../_services/message.service';
 
 
 enum sortParams {
@@ -40,6 +40,7 @@ enum filterParams {
 export class DeviceListComponent implements OnInit {
     public allDeviceList: any;
     public API_URL = environment.API_URL;
+    public WIRFI_DEVICE_ACCESS_URL = environment.WIRFI_DEVICE_ACCESS_URL;
     public deviceList = new BehaviorSubject<Array<any>>([]);
     // public deviceList = new Subject<Array<any>>();
     public presetFilterValue = new BehaviorSubject(new PresetFilter());
@@ -52,11 +53,9 @@ export class DeviceListComponent implements OnInit {
 
     public status_dict: any;
 
-    constructor(
-        private deviceService: DeviceService,
-        private messageService: MessageService,
-        private dialogService: MaterialDialogService
-    ) {
+    constructor(private deviceService: DeviceService,
+                private messageService: MessageService,
+                private dialogService: MaterialDialogService) {
         this.sortParams = sortParams;
         this.filterParams = filterParams;
     }
@@ -329,6 +328,7 @@ export class DeviceListComponent implements OnInit {
         this.reOrderDeviceList();
     }
 
+
     reOrderDeviceList() {
         const presetValues = JSON.parse(localStorage.getItem('presetFilterSaved'));
         const filterType = presetValues['filter_type'] ? presetValues['filter_type'] : '';
@@ -387,4 +387,5 @@ export class DeviceListComponent implements OnInit {
             }
         }
     }
+
 }
