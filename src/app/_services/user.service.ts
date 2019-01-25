@@ -26,4 +26,8 @@ export class UserService {
     createUser(data) {
         return this.http.post(`users/`, data);
     }
+
+    toggleUserPushNotifications(user_id, data) {
+        return this.http.post(`user/${user_id}/toggle_push_notifications/`, data);
+    }
 }
