@@ -111,35 +111,35 @@ export class DashboardComponent implements OnInit {
                 'name': 'device3',
                 'data': [
                     {
-                        'timestamp': '11:00:00',
+                        'timestamp': '2019-01-24T11:00:00Z',
                         'status': 1
                     },
                     {
-                        'timestamp': '12:00:00',
+                        'timestamp': '2019-01-24T12:00:00Z',
                         'status': 2
                     },
                     {
-                        'timestamp': '13:00:00',
+                        'timestamp': '2019-01-24T13:00:00Z',
                         'status': 3
                     },
                     {
-                        'timestamp': '14:00:00',
+                        'timestamp': '2019-01-24T14:00:00Z',
                         'status': 5
                     },
                     {
-                        'timestamp': '15:00:00',
+                        'timestamp': '2019-01-24T15:00:00Z',
                         'status': 3
                     },
                     {
-                        'timestamp': '16:00:00',
+                        'timestamp': '2019-01-24T16:00:00Z',
                         'status': 6
                     },
                     {
-                        'timestamp': '17:00:00',
+                        'timestamp': '2019-01-24T17:00:00Z',
                         'status': 2
                     },
                     {
-                        'timestamp': '19:10:00',
+                        'timestamp': '2019-01-24T19:10:00Z',
                         'status': 2
                     }
                 ]
@@ -148,51 +148,31 @@ export class DashboardComponent implements OnInit {
                 'name': 'device4',
                 'data': [
                     {
-                        'timestamp': '11:00:00',
+                        'timestamp': '2019-01-24T11:00:00Z',
                         'status': 5
                     },
                     {
-                        'timestamp': '12:00:00',
-                        'status': 1
-                    },
-                    {
-                        'timestamp': '12:15:00',
-                        'status': 2
-                    },
-                    {
-                        'timestamp': '12:30:00',
-                        'status': 1
-                    },
-                    {
-                        'timestamp': '13:00:00',
+                        'timestamp': '2019-01-24T13:20:00Z',
                         'status': 4
                     },
                     {
-                        'timestamp': '14:00:00',
-                        'status': 2
-                    },
-                    {
-                        'timestamp': '15:00:00',
+                        'timestamp': '2019-01-24T13:45:00Z',
                         'status': 1
                     },
                     {
-                        'timestamp': '17:00:00',
-                        'status': 4
-                    },
-                    {
-                        'timestamp': '17:45:00',
-                        'status': 3
-                    },
-                    {
-                        'timestamp': '17:50:00',
+                        'timestamp': '2019-01-24T15:50:00Z',
                         'status': 2
                     },
                     {
-                        'timestamp': '18:00:00',
+                        'timestamp': '2019-01-24T16:00:00Z',
+                        'status': 1
+                    },
+                    {
+                        'timestamp': '2019-01-24T18:00:00Z',
                         'status': 4
                     },
                     {
-                        'timestamp': '19:10:00',
+                        'timestamp': '2019-01-24T19:10:00Z',
                         'status': 4
                     }
                 ]
@@ -571,6 +551,7 @@ export class DashboardComponent implements OnInit {
                             // only ticks that returned true for the filter will be included
                             // in the rest of the method calls:
                                 .select('line') // grab the tick line
+                                .attr('tick', 10)
                                 .attr('class', 'quadrantBorder') // style with a custom class and CSS
                                 .style('stroke-width', 0.2) // or style directly with attributes or inline styles
                                 .style('stroke', '#dcdcdc');
@@ -631,7 +612,7 @@ export class DashboardComponent implements OnInit {
 
     // change line graph data [decrease status value by 0.5 to display in the middle of quadrant and add 6 points]
     manipulateGraphData(data) {
-        const parseTime = d3.timeParse('%H:%M:%S');
+        const parseTime = d3.timeParse('%Y-%m-%dT%H:%M:%SZ');
         const returnData = [];
 
         const data_length = data.length;
