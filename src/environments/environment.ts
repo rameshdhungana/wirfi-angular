@@ -6,7 +6,8 @@ export const environment = {
     production: false,
     API_URL: 'http://127.0.0.1:8000/',
 
-    MAP_URL: 'https://maps.googleapis.com/maps/api/geocode/'
+    MAP_URL: 'https://maps.googleapis.com/maps/api/geocode/',
+    WIRFI_DEVICE_ACCESS_URL: 'http://192.168.1.1/cgi-bin/login.html'
 
     // API_URL: 'http://api.wirfi.testiw.codesamaj.com/'
 
