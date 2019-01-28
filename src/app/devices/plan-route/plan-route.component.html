@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row m-1 mt-3">
         <div class="col-12">
-            <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="4">
+            <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="true" [zoom]="12">
                 <agm-marker *ngFor="let location of deviceLocationList;let i =index"
                             [latitude]="location.latitude"
                             [iconUrl]="{url: location?.is_selected?'../../assets/images/red-selected-marker.png':'../../assets/images/red-default-marker.png'}"

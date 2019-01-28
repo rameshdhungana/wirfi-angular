@@ -8,8 +8,8 @@ import {GoogleMapsAPIWrapper} from '@agm/core';
     styleUrls: ['./plan-route.component.css']
 })
 export class PlanRouteComponent implements OnInit {
-    lat: number = 26.890959;
-    lng: number = -80.116577;
+    lat: number;
+    lng: number;
     planRouteLatLngList = [];
     routeCounter = [];
     public deviceLocationList: any;
@@ -25,11 +25,15 @@ export class PlanRouteComponent implements OnInit {
 
     ngOnInit() {
 
-        this.dashBoardSerVice.getDeviceLocation().subscribe(locationResponse => {
+        this.dashBoardSerVice.getDashboard().subscribe(locationResponse => {
             // used for initializtion of device locations, and will not be altered
-            this.deviceLocations = locationResponse;
+            this.deviceLocations = locationResponse['data']['device_location'];
+
+            this.lat = this.deviceLocations[0]['latitude'];
+            this.lng = this.deviceLocations[0]['longitude'];
+
             // this will be altered , the property will be added and changed for choosing the image type(selected or non selected type)
-            this.deviceLocationList = locationResponse;
+            this.deviceLocationList = locationResponse['data']['device_location'];
             for (const device of this.deviceLocationList) {
                 device.is_selected = false;
             }

@@ -1,62 +1,40 @@
 <div class="container-fluid p-0">
-    <div class=" device-container mx-5">
+    <div class=" device-container mx-4">
         <div class="my-3">
             <div class="row">
                 <!-- <fieldset class="text-white mx-5">
-                    <label *ngFor="let item of industry_types_doughnut_graph">
+                    <label *ngFor="let item of industryTypes">
                         <input type="checkbox" [(ngModel)]="value_of_checkbox[item]"
-                                (change)="toggleFeatureDoughnut(item,$event.target.checked)"/> {{item}}
+                                (change)="toggleFeatureDoughnut(item, $event.target.checked)"/> {{item}}
                     </label>
                 </fieldset> -->
 
-                <div class="col-12 text-white">
+                <div class="col-12 text-white pl-4">
                     <h5>Network Status </h5>
                 </div>
             </div>
 
             <div class="row mb-2">
-                <div class="col-sm-6 col-md-2">
-                    <div class="doughnut_chart pl-2" id="doughnut_chart">
+                <div class="col-sm-6 col-md-2 pl-2">
+                    <div class="doughnut_chart pt-2 pl-2 pr-5" id="doughnut_chart">
 
                     </div>
                 </div>
 
-                <div class=" col-sm-6 col-md-3 text-white">
+                <div class=" col-sm-6 col-md-3 text-white pr-0 pl-4">
                     <ul style="list-style: none;">
-                        <li class="pt-1 pb-2" *ngFor="let data of doughnut_filter_data">
-                            <span class="dot status_dot"
-                                [ngStyle]="{'background-color': data.color}"
-                            ></span>
+                        <li class="pt-1 pb-2" *ngFor="let data of doughnutFilterData">
+                            <span class="dot status_dot" [ngStyle]="{'background-color': data.color}"></span>
                             {{data.value}} {{data.status}}
                         </li>
-                        <!-- <li class="pt-1 pb-2">
-                            <span class="dot status_dot" style="background-color: #5576e4;"></span>
-                            {{doughnut_filter_data[1].value}} USING CELLULAR
-                        </li>
-                        <li class="pt-1 pb-2">
-                            <span class="dot status_dot" style="background-color: #f0fc00;"></span>
-                            {{doughnut_filter_data[2].value}} WITH POOR SIGNAL
-                        </li>
-                        <li class="pt-1 pb-2">
-                            <span class="dot status_dot" style="background-color: #faac00;"></span>
-                            {{doughnut_filter_data[3].value}} MISSED PING
-                        </li>
-                        <li class="pt-1 pb-2">
-                            <span class="dot status_dot" style="background-color: #dd0000;"></span>
-                            {{doughnut_filter_data[4].value}} OFFLINE
-                        </li>
-                        <li class="pt-1 pb-2">
-                            <span class="dot status_dot" style="background-color: gray;"></span>
-                            {{doughnut_filter_data[5].value}} ASLEEP
-                        </li> -->
                     </ul>
                 </div>
 
-                <div class="col-md-7" id="deviceLineChart">
+                <div class="col-md-7 px-2" id="deviceLineChart">
                     <!-- <fieldset class="text-white">
-                        <label *ngFor="let item of industry_types_line_graph">
+                        <label *ngFor="let item of industryTypes">
                             <input type="checkbox" [(ngModel)]="value_of_checkbox[item]"
-                                (change)="toggleFeature(item,$event.target.checked)"/> {{item}}
+                                (change)="toggleFeatureLineGraph(item, $event.target.checked)"/> {{item}}
                         </label>
                     </fieldset> -->
                     <div class="linec_chart" id="line_chart">
@@ -67,11 +45,10 @@
             </div>
         </div>
 
-
         <div class="row m-1 mt-5 mb-5" >
             <div class="col-md-8 p-0">
                 <div class="card">
-                    <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="4">
+                    <agm-map [latitude]="lat" [longitude]="long" [scrollwheel]="true" [zoom]="12">
                         <agm-marker *ngFor="let location of deviceLocations" [latitude]="location.latitude" [iconUrl]=""
                                     [longitude]="location.longitude">
                         </agm-marker>
