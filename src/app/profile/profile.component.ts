@@ -42,18 +42,25 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    restorePushNotificationsStatus() {
+        this.person.profile.push_notifications = !this.person.profile.push_notifications;
+    }
+
     onPushNotificationToggle() {
         const data = {
             'push_notifications': this.person.profile.push_notifications
         };
         this.userService.toggleUserPushNotifications(this.person.id, data)
-            .subscribe( response => {
+            .subscribe(
+                response => {
                 if (response['code'] === 1) {
                     this.person.profile.push_notifications = response['data'].push_notifications;
                 } else {
-                    this.person.profile.push_notifications = !this.person.profile.push_notifications;
+                    this.restorePushNotificationsStatus();
                 }
-            });
+            },
+                error => {
+                    this.restorePushNotificationsStatus();
+                });
     }
-
 }
