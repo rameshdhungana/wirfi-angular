@@ -32,9 +32,9 @@ export class ChangepasswordComponent implements OnInit {
                             this.messageService.add('Password must be 8 characters long with at least 1 number or 1 special character');
                         }
                     },
-                (error) => {
-                     this.messageService.add('Invalid Old Password');
-            }
+                    (error) => {
+                        this.messageService.add('Invalid Old Password');
+                    }
                 );
         }
     }
