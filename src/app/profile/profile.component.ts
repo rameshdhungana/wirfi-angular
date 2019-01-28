@@ -4,6 +4,7 @@ import {AuthenticationService} from '../_services/authentication.service';
 import {BussinessService} from '../_services/bussiness.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import {UserService} from '../_services/user.service';
+import {MessageService} from '../_services/message.service';
 
 @Component({
     selector: 'app-profile',
@@ -21,7 +22,8 @@ export class ProfileComponent implements OnInit {
         private authService: AuthenticationService,
         private businessService: BussinessService,
         private sanitization: DomSanitizer,
-        private userService: UserService
+        private userService: UserService,
+        private messageService: MessageService
     ) { }
 
     ngOnInit() {
@@ -55,6 +57,7 @@ export class ProfileComponent implements OnInit {
                 response => {
                 if (response['code'] === 1) {
                     this.person.profile.push_notifications = response['data'].push_notifications;
+                    this.messageService.add(response['message']);
                 } else {
                     this.restorePushNotificationsStatus();
                 }
