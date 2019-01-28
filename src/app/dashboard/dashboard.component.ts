@@ -11,105 +11,96 @@ import * as cloneDeep from 'lodash/cloneDeep';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-    donut_chart: {string: Array<{'status': string, 'value': number}>};
+    // donut chart variables
+    donutChart: {string: Array<{'status': string, 'value': number}>};
     doughnutFilterData: Array<{'status': string, 'value': number, 'color': string}>;
-
-    // doughnutFilterData = [
-    //     {
-    //         'status': 'ONLINE',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'CELL',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'WEAK SIGNAL',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'MISSED A PING',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'OFFLINE',
-    //         'value': 0
-    //     },
-    //     {
-    //         'status': 'ASLEEP',
-    //         'value': 0
-    //     }
-    // ];
-
-    doughnutFilterData_toggle = cloneDeep(this.doughnutFilterData);
+    doughnutFilterDataToggle = cloneDeep(this.doughnutFilterData);
+    private noOfDevices = 0;
 
     industryTypes: Array<string>;
-    filter_data = {};
 
-    value_of_checkbox = [];
+    // line graph variables
+    lineChartData: {string: Array<{
+        'name': string,
+        'data': Array<{
+            'status': number,
+            'timestamp': string
+        }>
+    }>};
+    filterDataLineGraph = {};
+    filteredData: object;
+    nowDateTime = new Date();  // current date and time
+
+    // device location variables
+    deviceLocations: Array<{
+        'id': number,
+        'name': string,
+        'latitude': number,
+        'longitude': number
+    }>;
+    lat: number = 26.890959;
+    long: number = -80.116577;
 
     data_new = {
         // 'type1': [
         //     {
-        //         'device_name': 'device1',
-        //         'address': 'address',
+        //         'name': 'device1',
         //         'data': [
         //             {
-        //                 'date': '01:00:00',
+        //                 'timestamp': '01:00:00',
         //                 'status': 4
         //             },
         //             {
-        //                 'date': '02:00:00',
+        //                 'timestamp': '02:00:00',
         //                 'status': 2
         //             },
         //             {
-        //                 'date': '03:00:00',
+        //                 'timestamp': '03:00:00',
         //                 'status': 3
         //             },
         //             {
-        //                 'date': '04:00:00',
+        //                 'timestamp': '04:00:00',
         //                 'status': 4
         //             },
         //             {
-        //                 'date': '05:00:00',
+        //                 'timestamp': '05:00:00',
         //                 'status': 5
         //             },
         //             {
-        //                 'date': '06:00:00',
+        //                 'timestamp': '06:00:00',
         //                 'status': 6
         //             },
         //             {
-        //                 'date': '06:10:00',
+        //                 'timestamp': '06:10:00',
         //                 'status': 2
         //             },
         //             {
-        //                 'date': '09:01:00',
+        //                 'timestamp': '09:01:00',
         //                 'status': 2
         //             }
         //         ]
         //     },
         //     {
-        //         'device_name': 'device2',
-        //         'address': 'address',
+        //         'name': 'device2',
         //         'data': [
         //             {
-        //                 'date': '01:00:00',
+        //                 'timestamp': '01:00:00',
         //                 'status': 6
         //             },
         //             {
-        //                 'date': '03:00:00',
+        //                 'timestamp': '03:00:00',
         //                 'status': 3
         //             },
         //             {
-        //                 'date': '05:00:00',
+        //                 'timestamp': '05:00:00',
         //                 'status': 5
         //             },
         //             {
-        //                 'date': '08:00:00',
+        //                 'timestamp': '08:00:00',
         //                 'status': 6
         //             },
         //             {
-        //                 'date': '09:01:00',
+        //                 'timestamp': '09:01:00',
         //                 'status': 6
         //             }
         //         ]
@@ -117,107 +108,77 @@ export class DashboardComponent implements OnInit {
         // ],
         type2: [
             {
-                'device_name': 'device3',
-                'address': 'address',
+                'name': 'device3',
                 'data': [
                     {
-                        'date': '11:00:00',
+                        'timestamp': '2019-01-24T11:00:00Z',
                         'status': 1
                     },
                     {
-                        'date': '12:00:00',
+                        'timestamp': '2019-01-24T12:00:00Z',
                         'status': 2
                     },
                     {
-                        'date': '13:00:00',
+                        'timestamp': '2019-01-24T13:00:00Z',
                         'status': 3
                     },
                     {
-                        'date': '14:00:00',
+                        'timestamp': '2019-01-24T14:00:00Z',
                         'status': 5
                     },
                     {
-                        'date': '15:00:00',
+                        'timestamp': '2019-01-24T15:00:00Z',
                         'status': 3
                     },
                     {
-                        'date': '16:00:00',
+                        'timestamp': '2019-01-24T16:00:00Z',
                         'status': 6
                     },
                     {
-                        'date': '17:00:00',
+                        'timestamp': '2019-01-24T17:00:00Z',
                         'status': 2
                     },
                     {
-                        'date': '19:50:00',
+                        'timestamp': '2019-01-24T19:10:00Z',
                         'status': 2
                     }
                 ]
             },
             {
-                'device_name': 'device4',
-                'address': 'address',
+                'name': 'device4',
                 'data': [
                     {
-                        'date': '11:00:00',
+                        'timestamp': '2019-01-24T11:00:00Z',
                         'status': 5
                     },
                     {
-                        'date': '12:00:00',
-                        'status': 1
-                    },
-                    {
-                        'date': '12:15:00',
-                        'status': 2
-                    },
-                    {
-                        'date': '12:30:00',
-                        'status': 1
-                    },
-                    {
-                        'date': '13:00:00',
+                        'timestamp': '2019-01-24T13:20:00Z',
                         'status': 4
                     },
                     {
-                        'date': '14:00:00',
-                        'status': 2
-                    },
-                    {
-                        'date': '15:00:00',
+                        'timestamp': '2019-01-24T13:45:00Z',
                         'status': 1
                     },
                     {
-                        'date': '16:00:00',
-                        'status': 3
-                    },
-                    {
-                        'date': '17:00:00',
+                        'timestamp': '2019-01-24T15:50:00Z',
                         'status': 2
                     },
                     {
-                        'date': '17:45:00',
-                        'status': 2
+                        'timestamp': '2019-01-24T16:00:00Z',
+                        'status': 1
                     },
-
                     {
-                        'date': '18:00:00',
+                        'timestamp': '2019-01-24T18:00:00Z',
                         'status': 4
                     },
                     {
-                        'date': '19:50:00',
+                        'timestamp': '2019-01-24T19:10:00Z',
                         'status': 4
                     }
                 ]
             }
         ]
     };
-
-    filtered_data: object;
-    private no_of_devices = 0;
-    public deviceLocations;
-    lat: number = 26.890959;
-    long: number = -80.116577;
-
 
     constructor(
         private googleapiService: GoogleApiService,
@@ -226,7 +187,8 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.dashboardservice.getDashboard().subscribe(response => {
-            this.donut_chart = response['data']['donut_chart'];
+            this.lineChartData = response['data']['line_graph'];
+            this.donutChart = response['data']['donut_chart'];
             this.doughnutFilterData = response['data']['donut_data_format'];
             this.industryTypes = response['data']['industry_type'];
             this.deviceLocations = response['data']['device_location'];
@@ -245,50 +207,148 @@ export class DashboardComponent implements OnInit {
             //     }
             // }
 
-            this.sumDonutChart(this.donut_chart);
+            this.sumDonutChart(this.donutChart);
             this.createDoughnutChart(ctx, this.doughnutFilterData);
+
+            const cloneLineData = cloneDeep(this.lineChartData);
+            this.createLineGraph(cloneLineData);
         });
     }
 
-    ngAfterViewInit() {
-        // for (const industry_type in this.data_new) {
-        //     if (this.data_new[industry_type]) {
-        //         this.industryTypes_line_graph.push(industry_type);
-        //     }
-        // }
-        const cloneobj = cloneDeep(this.data_new);
-        this.createLineGraph(cloneobj);
-    }
+    // ngAfterViewInit() {
+    //     // for (const industry_type in this.data_new) {
+    //     //     if (this.data_new[industry_type]) {
+    //     //         this.industryTypes_line_graph.push(industry_type);
+    //     //     }
+    //     // }
+    //     const cloneobj = cloneDeep(this.data_new);
+    //     this.createLineGraph(cloneobj);
+    // }
 
-    noOfDevice(data) {
-        this.no_of_devices = 0;
-        for (const key_device in data) {
-            if (data[key_device]) {
-                this.no_of_devices = this.no_of_devices + data[key_device].value;
+    // Doughtnut chart count devices
+    countNoOfDevice(data) {
+        this.noOfDevices = 0;
+        for (const deviceKey in data) {
+            if (data[deviceKey]) {
+                this.noOfDevices = this.noOfDevices + data[deviceKey].value;
             }
         }
     }
 
+    // draw doughnut chart
+    createDoughnutChart(node, data) {
+        d3.select('#doughnut_chart svg').remove();
+        const width = 175;
+        const height = 175;
+        const radius = Math.min(width, height) / 2;
+        const color = d3
+            .scaleOrdinal()
+            .range(['#4aec26', '#5576e4', '#f0fc00', '#faac00', '#dd0000', 'gray']);
+
+        const arc = d3
+            .arc<any>()
+            .outerRadius(radius - 10)
+            .innerRadius(radius - 15);
+
+        const pie = d3
+            .pie<any>()
+            .padAngle(0.03)
+            .sort(null)
+            .value(function (d) {
+                return d.value;
+            });
+
+        const canvas = d3
+            .select(node)
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+
+        const group = canvas
+            .append('g')
+            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+
+        const arcs = group
+            .selectAll<any, any>('.arc')
+            .data(pie(data))
+            .enter()
+            .append('g')
+            .attr('class', 'arc');
+
+        arcs
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', function (d: any): any {
+                return color(d.data.status);
+            });
+
+        canvas
+            .append('text')
+            .attr('transform', function (d) {
+                return 'translate(' + (width / 2 - 15) + ',' + height / 2 + ')';
+            })
+            .attr('fill', 'white')
+            .text(this.noOfDevices)
+            .style('font-size', '35px')
+            .style('font-weight', 'bold');
+
+        canvas
+            .append('text')
+            .attr('transform', function (d) {
+                return 'translate(' + (width / 2 - 38) + ',' + (height / 2 + 40) + ')';
+            })
+            .attr('fill', 'gray')
+            .text('DEVICES')
+            .style('font-size', '18px');
+    }
+
+    // sums up all status data from different industry types of initial data
     sumDonutChart(data) {
-        this.filtered_data = {};
+        // this.filteredData = {};
         for (const key in data) {
             if (data[key]) {
-                for (const key_device in data[key]) {
-                    if (data[key][key_device]) {
-                        this.doughnutFilterData[key_device].value =
-                            this.doughnutFilterData[key_device].value +
-                            data[key][key_device].value;
+                for (const deviceKey in data[key]) {
+                    if (data[key][deviceKey]) {
+                        this.doughnutFilterData[deviceKey].value =
+                            this.doughnutFilterData[deviceKey].value +
+                            data[key][deviceKey].value;
                     }
                 }
             }
         }
-        this.noOfDevice(this.doughnutFilterData);
+        this.countNoOfDevice(this.doughnutFilterData);
     }
 
+    // selects checked industry type and sums up status data.
+    toggleFeatureDoughnut(item, datavalue) {
+        const ctx = document.getElementById('doughnut_chart');
+        if (datavalue === true) {
+            for (const key in this.donutChart[item]) {
+                if (this.donutChart[item][key]) {
+                    this.doughnutFilterDataToggle[key].value =
+                        this.doughnutFilterDataToggle[key].value +
+                        this.donutChart[item][key].value;
+                }
+            }
+        } else {
+            for (const key in this.donutChart[item]) {
+                if (this.donutChart[item][key]) {
+                    this.doughnutFilterDataToggle[key].value =
+                        this.doughnutFilterDataToggle[key].value -
+                        this.donutChart[item][key].value;
+                }
+            }
+        }
+
+        this.countNoOfDevice(this.doughnutFilterDataToggle);
+        this.createDoughnutChart(ctx, this.doughnutFilterDataToggle);
+    }
+
+    // create Line Graph
     createLineGraph(data) {
         d3.select('#line_chart svg').remove();
         const margin = {top: 0, right: 20, bottom: 30, left: 20};
-        const width = 650 - margin.left - margin.right;
+        const width = 600 - margin.left - margin.right;
         const height = 240 - margin.top - margin.bottom;
         const status_colors = [
             '#1e7431',
@@ -298,7 +358,7 @@ export class DashboardComponent implements OnInit {
             '#b10015',
             '#83858c'
         ];
-        this.filtered_data = data;
+        this.filteredData = data;
 
         // set the ranges
         const x = d3.scaleTime().range([0, width]);
@@ -444,10 +504,10 @@ export class DashboardComponent implements OnInit {
         //     }
         // }
 
-        for (const index_industry in this.filtered_data) {
-            if (this.filtered_data[index_industry]) {
+        for (const index_industry in this.filteredData) {
+            if (this.filteredData[index_industry]) {
 
-                const device_data = this.filtered_data[index_industry];
+                const device_data = this.filteredData[index_industry];
                 for (const index in device_data) {
                     if (device_data[index]) {
 
@@ -455,13 +515,13 @@ export class DashboardComponent implements OnInit {
                         if (device_status_data) {
 
                             // change data
-                            const line_graph_data = this.manipulate_graph_data(
+                            const line_graph_data = this.manipulateGraphData(
                                 device_status_data
                             );
 
                             // format the data
                             line_graph_data.forEach(function (d) {
-                                d['date'] = d['date'];
+                                d['timestamp'] = d['timestamp'];
                                 d['status_1'] = d['status'] - 0.5;
                             });
 
@@ -470,7 +530,7 @@ export class DashboardComponent implements OnInit {
                             // Scale the range of the data
                             x.domain(
                                 d3.extent<any, any>(device_status_data, function (d) {
-                                    return d['date'];
+                                    return d['timestamp'];
                                 })
                             );
                             y.domain([0, 6]);
@@ -485,7 +545,7 @@ export class DashboardComponent implements OnInit {
                                         .axisBottom(x)
                                         .ticks(8)
                                         .tickSize(-height)
-                                        .tickFormat(d3.timeFormat('%H %p'))
+                                        .tickFormat(d3.timeFormat('%H:%M'))
                                 );
 
                             // draw line on tick
@@ -493,6 +553,7 @@ export class DashboardComponent implements OnInit {
                             // only ticks that returned true for the filter will be included
                             // in the rest of the method calls:
                                 .select('line') // grab the tick line
+                                .attr('tick', 10)
                                 .attr('class', 'quadrantBorder') // style with a custom class and CSS
                                 .style('stroke-width', 0.2) // or style directly with attributes or inline styles
                                 .style('stroke', '#dcdcdc');
@@ -512,7 +573,7 @@ export class DashboardComponent implements OnInit {
                                         .duration(200)
                                         .style('opacity', 0.9);
                                     div
-                                        .html(device_data[index].device_name)
+                                        .html(device_data[index].name)
                                         .style('left', d3.event.pageX + 'px')
                                         .style('top', d3.event.pageY - 28 + 'px');
 
@@ -538,7 +599,7 @@ export class DashboardComponent implements OnInit {
                                         .line<any>()
                                         .curve(d3.curveLinear)
                                         .x(function (d) {
-                                            return x(d['date']);
+                                            return x(d['timestamp']);
                                         })
                                         .y(function (d) {
                                             return y(d['status_1']);
@@ -551,136 +612,99 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    // change line_graph data
-    manipulate_graph_data(data) {
-        const parseTime = d3.timeParse('%H:%M:%S');
-        const return_data = [];
+    // change line graph data [decrease status value by 0.5 to display in the middle of quadrant and add 6 points]
+    manipulateGraphData(data) {
+        const parseTime = d3.timeParse('%Y-%m-%dT%H:%M:%SZ');
+        const returnData = [];
 
-        const data_length = data.length;
+        const dataLength = data.length;
         const first_data = data[0];
-        const last_data = data[data_length - 1];
-        first_data['date'] = parseTime(first_data['date']);
-        last_data['date'] = parseTime(last_data['date']);
-        return_data.push(first_data);
+        const last_data = data[dataLength - 1];
+        first_data['timestamp'] = parseTime(first_data['timestamp']);
+        last_data['timestamp'] = parseTime(last_data['timestamp']);
+        returnData.push(first_data);
 
-        for (let i = 1; i < data_length - 1; i++) {
+        for (let i = 1; i < dataLength - 1; i++) {
             const prev_data = data[i - 1];
-            const current_date = parseTime(data[i]['date']);
+            const currentTimestamp = parseTime(data[i]['timestamp']);
             const current_status = data[i]['status'];
 
+            // get time difference between previous, current and next status change
+            const prevTimeDiff = new Date(currentTimestamp).getTime() - new Date(parseTime(prev_data['timestamp'])).getTime();
+            const nextTimeDiff = new Date(parseTime(data[i + 1]['timestamp'])).getTime() - new Date(currentTimestamp).getTime();
+
+            // check if time difference between two statuses is less than 11 minutes,
+            // get points in difference of 2 and 1 minutes else 4 and 2 minutes
+            const p1Time = (prevTimeDiff < 660000) ? 2 : 4;
+            const p6Time = (nextTimeDiff < 660000) ? 2 : 4;
+
+            const p2Time = (prevTimeDiff < 660000) ? 1 : 2;
+            const p5Time = (nextTimeDiff < 660000) ? 1 : 2;
+
+            // check if status raises or declines
+            const statusDecline = prev_data['status'] > current_status;
+
             // point 1
-            let current_date1 = cloneDeep(current_date);
+            let currentTimestamp1 = cloneDeep(currentTimestamp);
             const point_1 = {
-                'date': new Date(current_date1.setMinutes(current_date1.getMinutes() - 4)),
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - p1Time)),
                 'status': prev_data['status']
             };
 
             // point 6
-            current_date1 = cloneDeep(current_date);
+            currentTimestamp1 = cloneDeep(currentTimestamp);
             const point_6 = {
-                'date': new Date(current_date1.setMinutes(current_date1.getMinutes() + 4)),
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + p6Time)),
                 'status': current_status
             };
 
             let point_2, point_3, point_4, point_5 = {};
 
-            if (prev_data['status'] > current_status) {
-                // point 2
-                current_date1 = cloneDeep(current_date);
-                point_2 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() - 2)),
-                    'status': prev_data['status'] - 0.05
-                };
+            // point 2
+            currentTimestamp1 = cloneDeep(currentTimestamp);
+            point_2 = {
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() - p2Time)),
+                'status': statusDecline ? prev_data['status'] - 0.05 : prev_data['status'] + 0.05
+            };
 
-                // point 5
-                current_date1 = cloneDeep(current_date);
-                point_5 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() + 2)),
-                    'status': current_status + 0.05
-                };
+            // point 5
+            currentTimestamp1 = cloneDeep(currentTimestamp);
+            point_5 = {
+                'timestamp': new Date(currentTimestamp1.setMinutes(currentTimestamp1.getMinutes() + p5Time)),
+                'status': statusDecline ? current_status + 0.05 : current_status - 0.05
+            };
 
-                // point 3
-                point_3 = {
-                    'date': current_date,
-                    'status': prev_data['status'] - 0.2
-                };
+            // point 3
+            point_3 = {
+                'timestamp': currentTimestamp,
+                'status': statusDecline ? prev_data['status'] - 0.2 : prev_data['status'] + 0.2
+            };
 
-                // point 4
-                point_4 = {
-                    'date': current_date,
-                    'status': current_status + 0.2
-                };
+            // point 4
+            point_4 = {
+                'timestamp': currentTimestamp,
+                'status': statusDecline ? current_status + 0.2 : current_status - 0.2
+            };
 
-            } else {
-                // point 2
-                current_date1 = cloneDeep(current_date);
-                point_2 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() - 2)),
-                    'status': prev_data['status'] + 0.05
-                };
-
-                // point 5
-                current_date1 = cloneDeep(current_date);
-                point_5 = {
-                    'date': new Date(current_date1.setMinutes(current_date1.getMinutes() + 2)),
-                    'status': current_status - 0.05
-                };
-
-                // point 3
-                point_3 = {
-                    'date': current_date,
-                    'status': prev_data['status'] + 0.2
-                };
-
-                // point 4
-                point_4 = {
-                    'date': current_date,
-                    'status': current_status - 0.2
-                };
-            }
-
-            return_data.push(point_1, point_2, point_3, point_4, point_5, point_6);
+            returnData.push(point_1, point_2, point_3, point_4, point_5, point_6);
         }
 
-        return_data.push(last_data);
-        return return_data;
+        returnData.push(last_data);
+        return returnData;
     }
 
-    toggleFeatureDoughnut(item, datavalue) {
-        const ctx = document.getElementById('doughnut_chart');
+    // filter line graph
+    toggleFeatureLineGraph(item, datavalue) {
         if (datavalue === true) {
-            for (const key in this.donut_chart[item]) {
-                if (this.donut_chart[item][key]) {
-                    this.doughnutFilterData_toggle[key].value =
-                        this.doughnutFilterData_toggle[key].value +
-                        this.donut_chart[item][key].value;
-                }
-            }
+            this.filterDataLineGraph[item] = cloneDeep(this.data_new[item]);
         } else {
-            for (const key in this.donut_chart[item]) {
-                if (this.donut_chart[item][key]) {
-                    this.doughnutFilterData_toggle[key].value =
-                        this.doughnutFilterData_toggle[key].value -
-                        this.donut_chart[item][key].value;
-                }
-            }
+            delete this.filterDataLineGraph[item];
         }
-
-        this.noOfDevice(this.doughnutFilterData_toggle);
-        this.createDoughnutChart(ctx, this.doughnutFilterData_toggle);
-    }
-
-    toggleFeature(item, datavalue) {
-        if (datavalue === true) {
-            this.filter_data[item] = cloneDeep(this.data_new[item]);
-        } else {
-            delete this.filter_data[item];
-        }
-        if (Object.keys(this.filter_data).length === 0) {
+        if (Object.keys(this.filterDataLineGraph).length === 0) {
             const cloneObj = cloneDeep(this.data_new);
             this.createLineGraph(cloneObj);
         } else {
-            this.createLineGraph(this.filter_data);
+            this.createLineGraph(this.filterDataLineGraph);
         }
     }
 
@@ -692,70 +716,4 @@ export class DashboardComponent implements OnInit {
             });
     }
 
-    // doughnut chart
-    createDoughnutChart(node, data) {
-        d3.select('#doughnut_chart svg').remove();
-        const width = 180;
-        const height = 180;
-        const radius = Math.min(width, height) / 2;
-        const color = d3
-            .scaleOrdinal()
-            .range(['#4aec26', '#5576e4', '#f0fc00', '#faac00', '#dd0000', 'gray']);
-
-        const arc = d3
-            .arc<any>()
-            .outerRadius(radius - 10)
-            .innerRadius(radius - 15);
-
-        const pie = d3
-            .pie<any>()
-            .padAngle(0.03)
-            .sort(null)
-            .value(function (d) {
-                return d.value;
-            });
-
-        const canvas = d3
-            .select(node)
-            .append('svg')
-            .attr('width', width)
-            .attr('height', height);
-
-        const group = canvas
-            .append('g')
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-
-        const arcs = group
-            .selectAll<any, any>('.arc')
-            .data(pie(data))
-            .enter()
-            .append('g')
-            .attr('class', 'arc');
-
-        arcs
-            .append('path')
-            .attr('d', arc)
-            .attr('fill', function (d: any): any {
-                return color(d.data.status);
-            });
-
-        canvas
-            .append('text')
-            .attr('transform', function (d) {
-                return 'translate(' + (width / 2 - 15) + ',' + height / 2 + ')';
-            })
-            .attr('fill', 'white')
-            .text(this.no_of_devices)
-            .style('font-size', '35px')
-            .style('font-weight', 'bold');
-
-        canvas
-            .append('text')
-            .attr('transform', function (d) {
-                return 'translate(' + (width / 2 - 38) + ',' + (height / 2 + 40) + ')';
-            })
-            .attr('fill', 'gray')
-            .text('DEVICES')
-            .style('font-size', '18px');
-    }
 }

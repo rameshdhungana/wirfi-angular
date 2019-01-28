@@ -1,27 +1,27 @@
 <div class="container-fluid p-0">
-    <div class=" device-container mx-5">
+    <div class=" device-container mx-4">
         <div class="my-3">
             <div class="row">
                 <!-- <fieldset class="text-white mx-5">
                     <label *ngFor="let item of industryTypes">
                         <input type="checkbox" [(ngModel)]="value_of_checkbox[item]"
-                                (change)="toggleFeatureDoughnut(item,$event.target.checked)"/> {{item}}
+                                (change)="toggleFeatureDoughnut(item, $event.target.checked)"/> {{item}}
                     </label>
                 </fieldset> -->
 
-                <div class="col-12 text-white">
+                <div class="col-12 text-white pl-4">
                     <h5>Network Status </h5>
                 </div>
             </div>
 
             <div class="row mb-2">
-                <div class="col-sm-6 col-md-2">
-                    <div class="doughnut_chart pl-2" id="doughnut_chart">
+                <div class="col-sm-6 col-md-2 pl-2">
+                    <div class="doughnut_chart pt-2 pl-2 pr-5" id="doughnut_chart">
 
                     </div>
                 </div>
 
-                <div class=" col-sm-6 col-md-3 text-white">
+                <div class=" col-sm-6 col-md-3 text-white pr-0 pl-4">
                     <ul style="list-style: none;">
                         <li class="pt-1 pb-2" *ngFor="let data of doughnutFilterData">
                             <span class="dot status_dot" [ngStyle]="{'background-color': data.color}"></span>
@@ -30,11 +30,11 @@
                     </ul>
                 </div>
 
-                <div class="col-md-7" id="deviceLineChart">
+                <div class="col-md-7 px-2" id="deviceLineChart">
                     <!-- <fieldset class="text-white">
                         <label *ngFor="let item of industryTypes">
                             <input type="checkbox" [(ngModel)]="value_of_checkbox[item]"
-                                (change)="toggleFeature(item,$event.target.checked)"/> {{item}}
+                                (change)="toggleFeatureLineGraph(item, $event.target.checked)"/> {{item}}
                         </label>
                     </fieldset> -->
                     <div class="linec_chart" id="line_chart">
