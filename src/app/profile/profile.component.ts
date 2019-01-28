@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
         const data = {
             'push_notifications': this.person.profile.push_notifications
         };
-        this.userService.toggleUserPushNotifications(this.person.id, data)
+        this.userService.toggleUserPushNotifications(data)
             .subscribe(
                 response => {
                 if (response['code'] === 1) {
