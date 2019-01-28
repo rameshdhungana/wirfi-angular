@@ -210,20 +210,20 @@ export class DashboardComponent implements OnInit {
             this.sumDonutChart(this.donutChart);
             this.createDoughnutChart(ctx, this.doughnutFilterData);
 
-            // const cloneLineData = cloneDeep(this.lineChartData);
-            // this.createLineGraph(cloneLineData);
+            const cloneLineData = cloneDeep(this.lineChartData);
+            this.createLineGraph(cloneLineData);
         });
     }
 
-    ngAfterViewInit() {
-        // for (const industry_type in this.data_new) {
-        //     if (this.data_new[industry_type]) {
-        //         this.industryTypes_line_graph.push(industry_type);
-        //     }
-        // }
-        const cloneobj = cloneDeep(this.data_new);
-        this.createLineGraph(cloneobj);
-    }
+    // ngAfterViewInit() {
+    //     // for (const industry_type in this.data_new) {
+    //     //     if (this.data_new[industry_type]) {
+    //     //         this.industryTypes_line_graph.push(industry_type);
+    //     //     }
+    //     // }
+    //     const cloneobj = cloneDeep(this.data_new);
+    //     this.createLineGraph(cloneobj);
+    // }
 
     // Doughtnut chart count devices
     countNoOfDevice(data) {
@@ -615,14 +615,14 @@ export class DashboardComponent implements OnInit {
         const parseTime = d3.timeParse('%Y-%m-%dT%H:%M:%SZ');
         const returnData = [];
 
-        const data_length = data.length;
+        const dataLength = data.length;
         const first_data = data[0];
-        const last_data = data[data_length - 1];
+        const last_data = data[dataLength - 1];
         first_data['timestamp'] = parseTime(first_data['timestamp']);
         last_data['timestamp'] = parseTime(last_data['timestamp']);
         returnData.push(first_data);
 
-        for (let i = 1; i < data_length - 1; i++) {
+        for (let i = 1; i < dataLength - 1; i++) {
             const prev_data = data[i - 1];
             const currentTimestamp = parseTime(data[i]['timestamp']);
             const current_status = data[i]['status'];
