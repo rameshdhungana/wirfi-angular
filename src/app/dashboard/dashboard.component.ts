@@ -12,7 +12,7 @@ import * as cloneDeep from 'lodash/cloneDeep';
 })
 export class DashboardComponent implements OnInit {
     // donut chart variables
-    donutChart: {string: Array<{'status': string, 'value': number}>};
+    donutChart: {string: Array<{'status': string, 'value': number, 'color': string}>};
     doughnutFilterData: Array<{'status': string, 'value': number, 'color': string}>;
     doughnutFilterDataToggle = cloneDeep(this.doughnutFilterData);
     private noOfDevices = 0;
