@@ -149,7 +149,7 @@ import { DeviceDeleteComponent } from './devices/device-delete/device-delete.com
         DataTableModule,
         NgxMaskModule.forRoot(),
         AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyDe5eC8KdePOw2FkctkofxgbuA4FBZdie4',
+            apiKey: 'AIzaSyDUnI3gSnEipfkj-GyFM_I-RXrsF0wb2Ys',
             libraries: ['places',
                 'geometry']
         }),
