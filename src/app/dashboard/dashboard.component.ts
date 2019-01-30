@@ -12,7 +12,7 @@ import * as cloneDeep from 'lodash/cloneDeep';
 })
 export class DashboardComponent implements OnInit {
     // donut chart variables
-    donutChart: {string: Array<{'status': string, 'value': number}>};
+    donutChart: {string: Array<{'status': string, 'value': number, 'color': string}>};
     doughnutFilterData: Array<{'status': string, 'value': number, 'color': string}>;
     doughnutFilterDataToggle = cloneDeep(this.doughnutFilterData);
     private noOfDevices = 0;
@@ -40,145 +40,6 @@ export class DashboardComponent implements OnInit {
     }>;
     lat: number = 26.890959;
     long: number = -80.116577;
-
-    data_new = {
-        // 'type1': [
-        //     {
-        //         'name': 'device1',
-        //         'data': [
-        //             {
-        //                 'timestamp': '01:00:00',
-        //                 'status': 4
-        //             },
-        //             {
-        //                 'timestamp': '02:00:00',
-        //                 'status': 2
-        //             },
-        //             {
-        //                 'timestamp': '03:00:00',
-        //                 'status': 3
-        //             },
-        //             {
-        //                 'timestamp': '04:00:00',
-        //                 'status': 4
-        //             },
-        //             {
-        //                 'timestamp': '05:00:00',
-        //                 'status': 5
-        //             },
-        //             {
-        //                 'timestamp': '06:00:00',
-        //                 'status': 6
-        //             },
-        //             {
-        //                 'timestamp': '06:10:00',
-        //                 'status': 2
-        //             },
-        //             {
-        //                 'timestamp': '09:01:00',
-        //                 'status': 2
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         'name': 'device2',
-        //         'data': [
-        //             {
-        //                 'timestamp': '01:00:00',
-        //                 'status': 6
-        //             },
-        //             {
-        //                 'timestamp': '03:00:00',
-        //                 'status': 3
-        //             },
-        //             {
-        //                 'timestamp': '05:00:00',
-        //                 'status': 5
-        //             },
-        //             {
-        //                 'timestamp': '08:00:00',
-        //                 'status': 6
-        //             },
-        //             {
-        //                 'timestamp': '09:01:00',
-        //                 'status': 6
-        //             }
-        //         ]
-        //     }
-        // ],
-        type2: [
-            {
-                'name': 'device3',
-                'data': [
-                    {
-                        'timestamp': '2019-01-24T11:00:00Z',
-                        'status': 1
-                    },
-                    {
-                        'timestamp': '2019-01-24T12:00:00Z',
-                        'status': 2
-                    },
-                    {
-                        'timestamp': '2019-01-24T13:00:00Z',
-                        'status': 3
-                    },
-                    {
-                        'timestamp': '2019-01-24T14:00:00Z',
-                        'status': 5
-                    },
-                    {
-                        'timestamp': '2019-01-24T15:00:00Z',
-                        'status': 3
-                    },
-                    {
-                        'timestamp': '2019-01-24T16:00:00Z',
-                        'status': 6
-                    },
-                    {
-                        'timestamp': '2019-01-24T17:00:00Z',
-                        'status': 2
-                    },
-                    {
-                        'timestamp': '2019-01-24T19:10:00Z',
-                        'status': 2
-                    }
-                ]
-            },
-            {
-                'name': 'device4',
-                'data': [
-                    {
-                        'timestamp': '2019-01-24T11:00:00Z',
-                        'status': 5
-                    },
-                    {
-                        'timestamp': '2019-01-24T13:20:00Z',
-                        'status': 4
-                    },
-                    {
-                        'timestamp': '2019-01-24T13:45:00Z',
-                        'status': 1
-                    },
-                    {
-                        'timestamp': '2019-01-24T15:50:00Z',
-                        'status': 2
-                    },
-                    {
-                        'timestamp': '2019-01-24T16:00:00Z',
-                        'status': 1
-                    },
-                    {
-                        'timestamp': '2019-01-24T18:00:00Z',
-                        'status': 4
-                    },
-                    {
-                        'timestamp': '2019-01-24T19:10:00Z',
-                        'status': 4
-                    }
-                ]
-            }
-        ]
-    };
 
     constructor(
         private googleapiService: GoogleApiService,
@@ -241,9 +102,9 @@ export class DashboardComponent implements OnInit {
         const width = 175;
         const height = 175;
         const radius = Math.min(width, height) / 2;
-        const color = d3
-            .scaleOrdinal()
-            .range(['#4aec26', '#5576e4', '#f0fc00', '#faac00', '#dd0000', 'gray']);
+        // const color = d3
+        //     .scaleOrdinal()
+        //     .range(['#4aec26', '#5576e4', '#f0fc00', '#faac00', '#dd0000', '#808080']);
 
         const arc = d3
             .arc<any>()
@@ -279,7 +140,7 @@ export class DashboardComponent implements OnInit {
             .append('path')
             .attr('d', arc)
             .attr('fill', function (d: any): any {
-                return color(d.data.status);
+                return d.data.color;
             });
 
         canvas
@@ -529,7 +390,7 @@ export class DashboardComponent implements OnInit {
                             const color = d3.scaleOrdinal(d3.schemeCategory10);
                             // Scale the range of the data
                             x.domain(
-                                d3.extent<any, any>(device_status_data, function (d) {
+                                d3.extent<any, any>(line_graph_data, function (d) {
                                     return d['timestamp'];
                                 })
                             );
@@ -545,7 +406,7 @@ export class DashboardComponent implements OnInit {
                                         .axisBottom(x)
                                         .ticks(8)
                                         .tickSize(-height)
-                                        .tickFormat(d3.timeFormat('%H:%M'))
+                                        .tickFormat(d3.timeFormat('%H %p'))
                                 );
 
                             // draw line on tick
@@ -614,7 +475,7 @@ export class DashboardComponent implements OnInit {
 
     // change line graph data [decrease status value by 0.5 to display in the middle of quadrant and add 6 points]
     manipulateGraphData(data) {
-        const parseTime = d3.timeParse('%Y-%m-%dT%H:%M:%SZ');
+        const parseTime = d3.utcParse('%Y-%m-%dT%H:%M:%SZ');
         const returnData = [];
 
         const dataLength = data.length;
@@ -696,12 +557,12 @@ export class DashboardComponent implements OnInit {
     // filter line graph
     toggleFeatureLineGraph(item, datavalue) {
         if (datavalue === true) {
-            this.filterDataLineGraph[item] = cloneDeep(this.data_new[item]);
+            this.filterDataLineGraph[item] = cloneDeep(this.lineChartData[item]);
         } else {
             delete this.filterDataLineGraph[item];
         }
         if (Object.keys(this.filterDataLineGraph).length === 0) {
-            const cloneObj = cloneDeep(this.data_new);
+            const cloneObj = cloneDeep(this.lineChartData);
             this.createLineGraph(cloneObj);
         } else {
             this.createLineGraph(this.filterDataLineGraph);
