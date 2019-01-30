@@ -48,18 +48,18 @@ export class SleepDeviceComponent implements OnInit {
     }
 
     sleepDevice(device_id, is_asleep, data: NgForm) {
-        console.log(data.value);
+        let payload = {};
 
         if (data.value) {
             const values = data.value;
             if (values.options === '3') {
-                const payload = {
+                payload = {
                     'sleep_duration': -1,
                     'is_asleep': is_asleep
                 };
             } else if (values.options === '1') {
                 const duration_minute = data.value['device_sleep_time']['hour'] * 60 + data.value['device_sleep_time']['minute'];
-                const payload = {
+                payload = {
                     'sleep_duration': duration_minute,
                     'is_asleep': is_asleep
                 };
@@ -71,7 +71,7 @@ export class SleepDeviceComponent implements OnInit {
                 const endDateTime = new Date(sleepLimit);
                 const timeDiff = moment.duration(moment(endDateTime).diff(moment(this.nowDateTime)));
                 const duration_minute = timeDiff.asMinutes().toFixed();
-                const payload = {
+                payload = {
                     'sleep_duration': duration_minute,
                     'is_asleep': is_asleep
                 };
