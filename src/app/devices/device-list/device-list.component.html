@@ -158,51 +158,39 @@
                                             </span>
                                         </button>
 
-                                        <div *ngIf="device.device_network?.primary_network;else setupDeviceDiv">
-                                            <div style="position:relative; cursor:default;">
+                                        <div style="position:relative; cursor:default;">
 
-                                                <button class="dropdown-item"
-                                                        style=" margin-right: 55px;cursor:default !important;">
-                                                    Primary Network
-                                                </button>
+                                            <button class="dropdown-item"
+                                                    style=" margin-right: 55px;cursor:default !important;">
+                                                Primary Network
+                                            </button>
 
 
-                                                <span class="add-icon-network"
-                                                      (click)="device.device_network?.primary_network?manageNetworkPopUp(device.id,true,device.device_network.primary_network):manageNetworkPopUp(device.id,true,null)">
+                                            <span class="add-icon-network"
+                                                  (click)="device.device_network?.primary_network?manageNetworkPopUp(device.id,true,device.device_network.primary_network):manageNetworkPopUp(device.id,true,null)">
                                                 <i [ngClass]="device.device_network?.primary_network?'fa fa-fw fa-pencil-alt':'fa fa-fw fa-plus-circle'"></i>
                                             </span>
 
-                                            </div>
+                                        </div>
 
-                                            <div style="position:relative;">
-                                                <button class="dropdown-item"
-                                                        style=" margin-right: 55px;cursor:default !important;">
-                                                    Secondary Network
-                                                </button>
+                                        <div style="position:relative;">
+                                            <button class="dropdown-item"
+                                                    style=" margin-right: 55px;cursor:default !important;">
+                                                Secondary Network
+                                            </button>
 
-                                                <span class="add-icon-network"
-                                                      (click)="device.device_network?.secondary_network?manageNetworkPopUp(device.id,false,device.device_network.secondary_network):manageNetworkPopUp(device.id,false,null)">
+                                            <span class="add-icon-network"
+                                                  (click)="device.device_network?.secondary_network?manageNetworkPopUp(device.id,false,device.device_network.secondary_network):manageNetworkPopUp(device.id,false,null)">
                                                 <i [ngClass]="device.device_network?.secondary_network?'fa fa-fw fa-pencil-alt':' fa fa-fw fa-plus-circle'"></i>
                                             </span>
-                                                <span *ngIf="device.device_network?.secondary_network"
-                                                      (click)="deleteNetworkPopUp(device.id,device.device_network.secondary_network)"
-                                                      class="delete-icon-network ml-3 mr-2">
+                                            <span *ngIf="device.device_network?.secondary_network"
+                                                  (click)="deleteNetworkPopUp(device.id,device.device_network.secondary_network)"
+                                                  class="delete-icon-network ml-3 mr-2">
                                                 <i class="fa fa-fw fa-trash "></i>
                                             </span>
 
-                                            </div>
                                         </div>
-                                        <ng-template #setupDeviceDiv>
-                                            <div style="position:relative; cursor:default;">
 
-                                                <a class="dropdown-item" href="{{WIRFI_DEVICE_ACCESS_URL}}"
-                                                   style=" margin-right: 55px;cursor:default !important;">
-                                                    Setup Device
-                                                </a>
-
-
-                                            </div>
-                                        </ng-template>
                                     </div>
                                 </div>
 
