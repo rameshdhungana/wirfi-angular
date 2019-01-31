@@ -13,6 +13,7 @@ import {AddNetworkSettingComponent} from '../network-setting/add-network-setting
 import {DeleteNetworkSettingComponent} from '../network-setting/delete-network-setting/delete-network-setting.component';
 import {DeviceDeleteComponent} from '../device-delete/device-delete.component';
 import {MessageService} from '../../_services/message.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 enum sortParams {
@@ -53,9 +54,12 @@ export class DeviceListComponent implements OnInit {
 
     public status_dict: any;
 
-    constructor(private deviceService: DeviceService,
-                private messageService: MessageService,
-                private dialogService: MaterialDialogService) {
+    constructor(
+        private deviceService: DeviceService,
+        private messageService: MessageService,
+        private dialogService: MaterialDialogService,
+        private sanitization: DomSanitizer
+    ) {
         this.sortParams = sortParams;
         this.filterParams = filterParams;
     }
@@ -68,6 +72,9 @@ export class DeviceListComponent implements OnInit {
         this.deviceService.getDeviceList().subscribe(response => {
 
             this.allDeviceList = response['data']['device'];
+            for (const device of this.allDeviceList) {
+                device.machine_photo = this.sanitization.bypassSecurityTrustStyle(`url(${this.API_URL}${device.machine_photo})`);
+            }
             this.industry_type = response['data']['industry_type'];
             this.status_dict = response['data']['status_dict'];
 
